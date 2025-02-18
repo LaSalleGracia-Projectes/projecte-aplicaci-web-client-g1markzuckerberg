@@ -1,7 +1,7 @@
 import React from 'react';
-import './NextRound.css';
+import '../styles/globals.css';
 
-const NextRound = () => {
+export default function NextRound() {
     return (
         <section id="next-round">
             <div className="container">
@@ -14,6 +14,4 @@ const NextRound = () => {
             </div>
         </section>
     );
-};
-
-export default NextRound;
+}

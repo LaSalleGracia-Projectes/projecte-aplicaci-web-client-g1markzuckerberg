@@ -1,7 +1,7 @@
 import React from 'react';
-import './TopScorersAssists.css';
+import '../styles/globals.css';
 
-const TopScorersAssists = () => {
+export default function TopScorersAssists() {
     return (
         <section id="top-scorers-assists">
             <div className="container">
@@ -16,7 +16,7 @@ const TopScorersAssists = () => {
                         </ul>
                     </div>
                     <div className="image">
-                        <img src="imagen.jpg" alt="Imagen Central" />
+                        <img src="/imagen.jpg" alt="Imagen Central" />
                     </div>
                     <div className="assists">
                         <h3>Asistencias</h3>
@@ -30,6 +30,4 @@ const TopScorersAssists = () => {
             </div>
         </section>
     );
-};
-
-export default TopScorersAssists;
+}
