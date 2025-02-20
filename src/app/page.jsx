@@ -4,6 +4,9 @@ import footer from "@/components/footer-fantasy";
 
 export default function Home() {
   return (
-    header()
+    <>
+      {header()}
+      {footer()}
+    </>
   );
 }
