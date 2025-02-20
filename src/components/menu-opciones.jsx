@@ -27,8 +27,8 @@ export default function Navbar({ currentPage }) {
               <Image
                 src={`/images/${item.label.toLowerCase()}-icon.png`} // Ajusta las rutas de tus íconos
                 alt={item.label}
-                width={20}
-                height={20}
+                width={40}
+                height={40}
               />
               <span>{item.label}</span>
             </Link>
