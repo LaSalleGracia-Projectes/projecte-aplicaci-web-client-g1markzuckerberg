@@ -14,7 +14,6 @@ export default function Jornada() {
           minHeight: "100%",
         }}
       >
-        <h1 className="text-3xl font-bold mb-4 text-gray-900">Bienvenido a Mi Aplicación</h1>
         <p className="text-lg text-gray-700">
         </p>
       </div>
