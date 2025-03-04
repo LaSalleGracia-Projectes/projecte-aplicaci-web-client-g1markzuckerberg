@@ -14,7 +14,7 @@ export default function BurgerMenuContent({ onClose }) {
       <div className="mb-4 border-b border-gray-700 pb-2">
         <p className="text-lg font-semibold">{user.name}</p>
         <p className="text-sm text-gray-400">{user.email}</p>
-        <Link href="/ajustes">
+        <Link href="/components/ajustes/">
           <img src='/images/ajustes.png' alt='ajustes' className="w-4 h-4 ml-auto cursor-pointer">
           </img>
         </Link>

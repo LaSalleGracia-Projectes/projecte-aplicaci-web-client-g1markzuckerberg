@@ -1,18 +1,26 @@
 import React from 'react';
-import headerFantasy from './headerFantasy';
+import Layout from '@/components/layout';
 
 export default function ajustes() {
     const opciones = [
-        { img: "/images/icon1.png", text: "Texto 1" },
-        { img: "/images/icon2.png", text: "Texto 2" },
-        { img: "/images/icon3.png", text: "Texto 3" },
-        { img: "/images/icon4.png", text: "Texto 4" },
-      ];
-return (
-    <Layout currentPage="Ajustes"> {/* Pasamos "Ajustes" */}
-    <div className="flex flex-col items-center justify-center h-screen">
+        { img: "/images/user.png", text: "Equipo" },
+        { img: "/images/gestion.png", text: "Gestion de ligas" },
+        { img: "/images/proteccion.png", text: "Usuario" },
+        { img: "/images/interfaz.png", text: "Interfaz" },
+    ];
 
-    </div>
-    </Layout>
-);
+    return (
+        <Layout currentPage="Ajustes">
+            <div className="h-screen flex items-center justify-center">
+                <div className="grid grid-cols-2 gap-8 w-full max-w-2xl h-[90vh]">
+                    {opciones.map((opcion, index) => (
+                        <div key={index} className="flex flex-col items-center justify-center bg-gray-200 p-6 rounded-2xl shadow-lg">
+                            <img src={opcion.img} alt={opcion.text} className="w-16 h-16 mb-2" />
+                            <p className="text-lg font-semibold">{opcion.text}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </Layout>
+    );
 }
