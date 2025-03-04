@@ -16,8 +16,8 @@ export default function Ajustes() {
 
     const opciones = [
         { img: "/images/user.png", text: "Equipo", action: () => openPopup("Información sobre el equipo.") },
-        { img: "/images/gestion.png", text: "Gestion de ligas", action: "/gestion-ligas" },
-        { img: "/images/proteccion.png", text: "Usuario", action: "/cuenta" },
+        { img: "/images/gestion.png", text: "Gestion de ligas", action: "/components/gestion_ligas" },
+        { img: "/images/proteccion.png", text: "Usuario", action: "/components/cuenta" },
         { img: "/images/interfaz.png", text: "Interfaz", action: () => openPopup("Datos sobre los nuevos burger-menu.") },
     ];
 
