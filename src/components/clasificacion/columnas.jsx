@@ -26,6 +26,7 @@ export default function PlayerInfoPage() {
             <div className="ml-4 flex-1">
               <p className="text-lg font-semibold">{player.name}</p>
             </div>
+            <img src="/images/vertical.png" alt="barra vertical" className="h-8"/>
             <p className="text-xl font-bold text-blue-500">{player.score}</p>
           </div>
         ))}
