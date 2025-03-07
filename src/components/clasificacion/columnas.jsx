@@ -12,8 +12,9 @@ export default function PlayerInfoPage() {
       {/* Sección izquierda con imagen y descripción */}
       <div className="col-span-1 flex flex-col items-center">
         <Image src="/images/team.png" alt="Equipo" width={200} height={200} className="rounded-lg" />
+        <h2 className="text-2xl font-bold mt-4">Liga 1</h2>
         <p className="mt-4 text-gray-600 text-center">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vehicula ligula eget augue.
+          8346734242
         </p>
       </div>
       

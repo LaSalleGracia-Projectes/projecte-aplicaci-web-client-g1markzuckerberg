@@ -31,6 +31,9 @@ export default function BurgerMenuContent({ onClose }) {
           ))}
         </ul>
       </div>
+      <button className="w-full bg-blue-500 text-white py-2 rounded-md mt-4 hover:bg-blue-700">
+        + Añadir Liga
+      </button>
       <Link href="/info-ayuda" className="block text-center text-sm text-blue-400 mt-3 hover:underline">
         Información y Ayuda
       </Link>
