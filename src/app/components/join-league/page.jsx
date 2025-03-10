@@ -2,9 +2,11 @@ import Link from "next/link"
 import { Button } from "@/components/ui"
 import { Input } from "@/components/ui"
 import { ArrowLeft } from "lucide-react"
+import Layout2 from "@/components/layout2"
 
 export default function JoinLeague() {
   return (
+    <Layout2>
     <div className="flex flex-col items-center justify-center p-4 min-h-[calc(100vh-128px)]">
       <div className="w-full max-w-md space-y-6 bg-white p-6 rounded-lg shadow-sm">
         <div className="flex items-center gap-4">
@@ -22,6 +24,7 @@ export default function JoinLeague() {
         <Button className="w-full bg-[#e5e5ea] text-black hover:bg-[#d2d2d2]">UNIRSE A LIGA</Button>
       </div>
     </div>
+    </Layout2>
   )
 }
 
