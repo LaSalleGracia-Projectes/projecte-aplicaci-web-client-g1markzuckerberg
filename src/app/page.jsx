@@ -10,10 +10,6 @@ export default function Home() {
     <main className="min-h-screen bg-[#d9d9d9]">
       {/* First Screen */}
       <div className="flex min-h-screen flex-col">
-        <header className="bg-[#787878] py-4">
-          <h1 className="text-center text-3xl font-normal">FantasyDraft</h1>
-        </header>
-
         <div className="flex-1 flex flex-col items-center justify-center px-4 py-8 space-y-6">
           <div className="w-full max-w-[240px] aspect-[4/3] bg-[#e5e5ea]" />
 
@@ -83,28 +79,6 @@ export default function Home() {
             </div>
           </Card>
         </div>
-
-        <footer className="bg-[#787878] p-4">
-          <div className="flex justify-between items-center max-w-7xl mx-auto">
-            <div className="flex items-center gap-2">
-              <Globe className="h-4 w-4" />
-              <span>Español</span>
-              <ChevronDown className="h-4 w-4" />
-            </div>
-            <div className="flex gap-4 text-sm">
-              <a href="#" className="hover:underline">
-                Política de Privacidad
-              </a>
-              <a href="#" className="hover:underline">
-                Contacto
-              </a>
-              <a href="#" className="hover:underline">
-                Configuración de Cookies
-              </a>
-            </div>
-            <div className="text-sm">© Noviembre 2024 Mark Zuckerberg S.L.</div>
-          </div>
-        </footer>
       </div>
     </main>
     </Layout2>
