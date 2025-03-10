@@ -62,7 +62,7 @@ export default function Ajustes() {
     {
       img: "/images/interfaz.png",
       text: "Interfaz",
-      action: () => openPopup("Datos sobre los nuevos burger-menu."),
+      action: "/components/interfaz",
     },
   ]
 
