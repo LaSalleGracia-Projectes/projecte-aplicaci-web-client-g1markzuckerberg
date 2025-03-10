@@ -3,8 +3,8 @@
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui"
+import { Input } from "@/components/ui"
 import { Eye, EyeOff } from "lucide-react"
 import Layout2 from "@/components/layout2"
 
@@ -40,6 +40,12 @@ export default function Register() {
                 {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </button>
             </div>
+            <ul className="text-xs text-gray-600 space-y-1 list-disc pl-4">
+                <li>Debe incluir una mayúscula</li>
+                <li>Debe incluir números</li>
+                <li>Debe contener al menos un carácter especial</li>
+                <li>La contraseña debe ser de al menos 8 caracteres</li>
+            </ul>
           </div>
 
           <div className="space-y-2">
