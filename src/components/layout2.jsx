@@ -1,7 +1,6 @@
 // components/Layout.js
-import Header from "@/components/header-fantasy";
+import Header from "@/components/header2";
 import Footer from "@/components/footer-fantasy";
-import Navbar from "@/components/menu-opciones";
 
 export default function Layout({ children, currentPage }) {
   return (
