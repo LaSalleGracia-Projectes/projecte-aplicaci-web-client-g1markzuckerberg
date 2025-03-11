@@ -10,7 +10,7 @@ const sections = [
     title: "Contacto",
     content: (
       <div className="space-y-4">
-        <p>Email: contacto@empresa.com</p>
+        <p>Email: fantasydraft@empresa.com</p>
         <p>Teléfono: +34 900 123 456</p>
         <p>Dirección: Calle calle, 12, Barcelona</p>
         <p>Horario de atención:</p>
@@ -43,9 +43,8 @@ const sections = [
     title: "Sobre nosotros",
     content: (
       <div className="space-y-4">
-        <p>Somos una empresa líder en el sector deportivo, dedicada a soluciones innovadoras en gestión de equipos y competiciones.</p>
+        <p>Somos una empresa en crecimiento en el sector deportivo y de fantasy.</p>
         <h4 className="font-medium">Nuestra misión:</h4>
-        <p>Facilitar la organización y gestión de eventos deportivos.</p>
         <h4 className="font-medium">Valores:</h4>
         <ul className="list-disc pl-5">
           <li>Innovación continua</li>
@@ -61,7 +60,6 @@ const sections = [
     title: "Conoce nuestra API",
     content: (
       <div className="space-y-4">
-        <p>Nuestra API permite integrar todas las funcionalidades de la plataforma en tus aplicaciones.</p>
         <h4 className="font-medium">Características principales:</h4>
         <ul className="list-disc pl-5">
           <li>Autenticación OAuth 2.0</li>
