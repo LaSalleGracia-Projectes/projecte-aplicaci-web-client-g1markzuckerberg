@@ -12,7 +12,7 @@ const sections = [
       <div className="space-y-4">
         <p>Email: contacto@empresa.com</p>
         <p>Teléfono: +34 900 123 456</p>
-        <p>Dirección: Calle Principal 123, 28001 Madrid</p>
+        <p>Dirección: Calle calle, 12, Barcelona</p>
         <p>Horario de atención:</p>
         <ul className="list-disc pl-5">
           <li>Lunes a Viernes: 9:00 - 18:00</li>
