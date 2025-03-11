@@ -1,13 +1,20 @@
 // pages/index.js
 import Layout from "@/components/layout";
+import Image from "next/image";
 
 export default function Jornada() {
   return (
     <Layout currentPage="Jornada"> {/* Pasamos "Inicio" */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold mb-4 text-gray-900">Bienvenido a Mi Aplicación</h1>
+      <div
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-screen bg-cover bg-center"
+        style={{
+          backgroundImage: 'url("/images/campo.png")',
+          backgroundSize: "contain",
+          backgroundRepeat: "no-repeat",
+          minHeight: "100%",
+        }}
+      >
         <p className="text-lg text-gray-700">
-          Esta es la página de inicio de nuestra aplicación.
         </p>
       </div>
     </Layout>

@@ -1,3 +1,3 @@
 'use client';
-import { Card, CardBody, Input, Textarea, Button, Typography, CardFooter, List, ListItem, IconButton, Drawer, Select, Option } from "@material-tailwind/react";
-export { Card, CardBody, Input, Textarea, Button, Typography, CardFooter, List, ListItem, IconButton, Drawer, Select, Option };
+import { Card, CardBody, Input, Textarea, Button, Typography, CardFooter, List, ListItem, IconButton, Drawer, Select, Option, Label, Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, CardContent, CardHeader, CardTitle, Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@material-tailwind/react";
+export { Card, CardBody, Input, Textarea, Button, Typography, CardFooter, List, ListItem, IconButton, Drawer, Select, Option, Label, Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, CardContent, CardHeader, CardTitle, Accordion, AccordionContent, AccordionItem, AccordionTrigger };
