@@ -7,9 +7,11 @@ import { Input } from "@/components/ui"
 import { Textarea } from "@/components/ui"
 import { ArrowLeft, Download } from "lucide-react"
 import Layout2 from "@/components/layout2"
+import { useRouter } from "next/navigation"
 
 export default function CreateLeague() {
   const [showPassword, setShowPassword] = useState(false)
+  const router = useRouter()
 
   return (
         <Layout2>
@@ -43,7 +45,9 @@ export default function CreateLeague() {
           </div>
         </div>
 
-        <Button className="w-full bg-[#e5e5ea] text-black hover:bg-[#d2d2d2]">CREAR LIGA</Button>
+        <Button className="w-full bg-[#e5e5ea] text-black hover:bg-[#d2d2d2]"
+        onClick={() => router.push("/components/home_logged")}
+        >CREAR LIGA</Button>
       </div>
     </div>
     </Layout2>

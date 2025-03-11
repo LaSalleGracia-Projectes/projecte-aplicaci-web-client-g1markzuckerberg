@@ -1,15 +1,17 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui"
 import { Input } from "@/components/ui"
-import { Eye, EyeOff, Mail, Lock } from "lucide-react"
+import { Eye, EyeOff } from "lucide-react"
 import Layout2 from "@/components/layout2"
 
 export default function Login2() {
   const [showPassword, setShowPassword] = useState(false)
+  const router = useRouter()
 
   return (
     <Layout2>
@@ -18,31 +20,36 @@ export default function Login2() {
           <div className="w-full aspect-[4/3] bg-[#e5e5ea] mb-6" />
 
           <div className="space-y-4">
-          <div className="space-y-2">
-            <label htmlFor="email" className="text-sm font-medium">
-              Correo
-            </label>
-            <Input id="email" type="email" />
-          </div>
+            <div className="space-y-2">
+              <label htmlFor="email" className="text-sm font-medium">
+                Correo
+              </label>
+              <Input id="email" type="email" />
+            </div>
 
             <div className="space-y-2">
-            <label htmlFor="password" className="text-sm font-medium">
-              Contraseña
-            </label>
-            <div className="relative">
-              <Input id="password" type={showPassword ? "text" : "password"} />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2"
-              >
-                {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-              </button>
+              <label htmlFor="password" className="text-sm font-medium">
+                Contraseña
+              </label>
+              <div className="relative">
+                <Input id="password" type={showPassword ? "text" : "password"} />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2"
+                >
+                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
+              </div>
             </div>
           </div>
-          </div>
 
-          <Button className="w-full bg-[#e5e5ea] text-black hover:bg-[#d2d2d2]">INICIAR SESIÓN</Button>
+          <Button
+            className="w-full bg-[#e5e5ea] text-black hover:bg-[#d2d2d2]"
+            onClick={() => router.push("/components/home_logged")} 
+          >
+            INICIAR SESIÓN
+          </Button>
 
           <div className="text-center">
             <button className="text-sm hover:underline">Olvidé mi contraseña</button>
@@ -67,9 +74,12 @@ export default function Login2() {
           </div>
 
           <div className="text-center text-sm">
-            <Link href="/register" className="text-blue-600 hover:underline">
+            <button
+              className="text-blue-600 hover:underline"
+              onClick={() => router.push("/components/register")}
+            >
               ¿No tienes cuenta? Regístrate
-            </Link>
+            </button>
           </div>
         </div>
       </div>

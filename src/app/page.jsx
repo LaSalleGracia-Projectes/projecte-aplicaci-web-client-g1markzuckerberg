@@ -1,6 +1,6 @@
 import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
+import { Button } from "@/components/ui"
+import { Card } from "@/components/ui"
 import { Globe, ChevronDown } from "lucide-react"
 import Layout2 from "@/components/layout2"
 
@@ -34,28 +34,6 @@ export default function Home() {
             </button>
           </div>
         </div>
-
-        <footer className="bg-[#787878] p-4">
-          <div className="flex justify-between items-center max-w-7xl mx-auto">
-            <div className="flex items-center gap-2">
-              <Globe className="h-4 w-4" />
-              <span>Español</span>
-              <ChevronDown className="h-4 w-4" />
-            </div>
-            <div className="flex gap-4 text-sm">
-              <a href="#" className="hover:underline">
-                Política de Privacidad
-              </a>
-              <a href="#" className="hover:underline">
-                Contacto
-              </a>
-              <a href="#" className="hover:underline">
-                Configuración de Cookies
-              </a>
-            </div>
-            <div className="text-sm">© Noviembre 2024 Mark Zuckerberg S.L.</div>
-          </div>
-        </footer>
       </div>
 
       {/* Second Screen */}
