@@ -28,7 +28,7 @@ export default function Cuenta() {
               </div>
               <div>
                 <label className="text-sm font-medium">Fecha de nacimiento</label>
-                <Input type="text" placeholder="DD/MM/AAAA" maxLength="10" />
+                <Input type="date" />
               </div>
               <div className="pt-6">
                 <Typography variant="h6">Eliminación de cuenta</Typography>
