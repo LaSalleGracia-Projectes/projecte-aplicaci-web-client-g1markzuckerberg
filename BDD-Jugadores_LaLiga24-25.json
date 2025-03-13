@@ -1,0 +1,4832 @@
+[
+    {
+        "_id": 37584217,
+        "teamId": 83,
+        "positionId": 26,
+        "displayName": "Marc Casadó",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/25/37584217.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 469717,
+        "teamId": 83,
+        "positionId": 25,
+        "displayName": "Ronald Araújo",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/21/469717.png",
+        "estrellas": 3
+
+    },
+    {
+        "_id": 37512281,
+        "teamId": 83,
+        "positionId": 27,
+        "displayName": "Pau Víctor",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/25/37512281.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 805,
+        "teamId": 83,
+        "positionId": 24,
+        "displayName": "Wojciech Szczęsny",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/5/805.png",
+        "estrellas": 4
+    },
+    {
+        "_id": 337394,
+        "teamId": 83,
+        "positionId": 25,
+        "displayName": "Jules Koundé",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/18/337394.png",
+        "estrellas": 4
+    },
+    {
+        "_id": 37357510,
+        "teamId": 83,
+        "positionId": 25,
+        "displayName": "Gerard Martín",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/6/37357510.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 74060,
+        "teamId": 83,
+        "positionId": 26,
+        "displayName": "Dani Olmo",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/12/74060.png",
+        "estrellas": 4
+    },
+    {
+        "_id": 37656169,
+        "teamId": 83,
+        "positionId": 25,
+        "displayName": "Hector Fort",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/9/37656169.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 4460,
+        "teamId": 83,
+        "positionId": 25,
+        "displayName": "Andreas Christensen",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/12/4460.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37316480,
+        "teamId": 83,
+        "positionId": 25,
+        "displayName": "Alejandro Balde",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/0/37316480.png",
+        "estrellas": 4
+    },
+    {
+        "_id": 37656790,
+        "teamId": 83,
+        "positionId": 25,
+        "displayName": "Pau Cubarsí",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/22/37656790.png",
+        "estrellas": 4
+    },
+    {
+        "_id": 185923,
+        "teamId": 83,
+        "positionId": 25,
+        "displayName": "Iñigo Martínez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/3/185923.png",
+        "estrellas": 4
+    },
+    {
+        "_id": 26536,
+        "teamId": 83,
+        "positionId": 26,
+        "displayName": "Frenkie de Jong",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/8/26536.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 31000,
+        "teamId": 83,
+        "positionId": 27,
+        "displayName": "Robert Lewandowski",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/24/31000.png",
+        "estrellas": 5
+    },
+    {
+        "_id": 448389,
+        "teamId": 83,
+        "positionId": 27,
+        "displayName": "Ferran Torres",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/5/448389.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37710798,
+        "teamId": 83,
+        "positionId": 26,
+        "displayName": "Marc Bernal",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/14/37710798.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 160258,
+        "teamId": 83,
+        "positionId": 27,
+        "displayName": "Raphinha",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/2/160258.png",
+        "estrellas": 5
+    },
+    {
+        "_id": 4545389,
+        "teamId": 83,
+        "positionId": 25,
+        "displayName": "Eric García",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/13/4545389.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37527162,
+        "teamId": 83,
+        "positionId": 26,
+        "displayName": "Pablo Torre",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/26/37527162.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 31284,
+        "teamId": 83,
+        "positionId": 24,
+        "displayName": "Marc-André ter Stegen",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/20/31284.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37596363,
+        "teamId": 83,
+        "positionId": 26,
+        "displayName": "Fermín López",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/11/37596363.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 529415,
+        "teamId": 83,
+        "positionId": 24,
+        "displayName": "Iñaki Peña",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/7/529415.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37459030,
+        "teamId": 83,
+        "positionId": 26,
+        "displayName": "Gavi",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/22/37459030.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37656179,
+        "teamId": 83,
+        "positionId": 27,
+        "displayName": "Lamine Yamal",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/19/37656179.png",
+        "estrellas": 5
+    },
+    {
+        "_id": 23269740,
+        "teamId": 83,
+        "positionId": 27,
+        "displayName": "Ansu Fati",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/12/23269740.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37288001,
+        "teamId": 83,
+        "positionId": 26,
+        "displayName": "Pedri",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/1/37288001.png",
+        "estrellas": 5
+    },
+    {
+        "_id": 268,
+        "teamId": 3468,
+        "positionId": 26,
+        "displayName": "Luka Modrić",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/12/268.png",
+        "estrellas": 4
+    },
+    {
+        "_id": 98903,
+        "teamId": 3468,
+        "positionId": 25,
+        "displayName": "Ferland Mendy",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/23/98903.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37547467,
+        "teamId": 3468,
+        "positionId": 26,
+        "displayName": "Arda Güler",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/11/37547467.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37632012,
+        "teamId": 3468,
+        "positionId": 26,
+        "displayName": "Pol Fortuny",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/12/37632012.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37656778,
+        "teamId": 3468,
+        "positionId": 24,
+        "displayName": "Fran Gonzalez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/10/37656778.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37584704,
+        "teamId": 3468,
+        "positionId": 25,
+        "displayName": "David Jiménez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/0/37584704.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37656203,
+        "teamId": 3468,
+        "positionId": 24,
+        "displayName": "Sergio Mestre",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/11/37656203.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37656089,
+        "teamId": 3468,
+        "positionId": 25,
+        "displayName": "Jacobo Naveros",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/25/37656089.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37529826,
+        "teamId": 3468,
+        "positionId": 25,
+        "displayName": "Lorenzo Aguado",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/2/37529826.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37624126,
+        "teamId": 3468,
+        "positionId": 25,
+        "displayName": "Youssef Lekhedim",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/30/37624126.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37732355,
+        "teamId": 3468,
+        "positionId": 25,
+        "displayName": "Diego Aguado",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/3/37732355.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 186543,
+        "teamId": 3468,
+        "positionId": 25,
+        "displayName": "Lucas Vázquez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/15/186543.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37656783,
+        "teamId": 3468,
+        "positionId": 26,
+        "displayName": "Chema Andrés",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/15/37656783.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37656784,
+        "teamId": 3468,
+        "positionId": 26,
+        "displayName": "Hugo de Llanos",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/16/37656784.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37593253,
+        "teamId": 3468,
+        "positionId": 27,
+        "displayName": "Gonzalo García",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/5/37593253.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37719967,
+        "teamId": 3468,
+        "positionId": 27,
+        "displayName": "Daniel Yañez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/31/37719967.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37595819,
+        "teamId": 3468,
+        "positionId": 27,
+        "displayName": "Víctor Muñoz",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/11/37595819.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 537666,
+        "teamId": 3468,
+        "positionId": 25,
+        "displayName": "Fran García",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/2/537666.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 32536,
+        "teamId": 3468,
+        "positionId": 25,
+        "displayName": "Jesús Vallejo",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/24/32536.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 23688922,
+        "teamId": 3468,
+        "positionId": 26,
+        "displayName": "Eduardo Camavinga",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/26/23688922.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 5270371,
+        "teamId": 3468,
+        "positionId": 26,
+        "displayName": "Aurélien Tchouaméni",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/3/5270371.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 600687,
+        "teamId": 3468,
+        "positionId": 27,
+        "displayName": "Vinícius Júnior",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/15/600687.png",
+        "estrellas": 5
+    },
+    {
+        "_id": 340342,
+        "teamId": 3468,
+        "positionId": 26,
+        "displayName": "Brahim Díaz",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/22/340342.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 31647,
+        "teamId": 3468,
+        "positionId": 25,
+        "displayName": "Daniel Carvajal",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/31/31647.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37738171,
+        "teamId": 3468,
+        "positionId": 25,
+        "displayName": "Mario Rivas",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37647009,
+        "teamId": 3468,
+        "positionId": 27,
+        "displayName": "Endrick",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/1/37647009.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 96611,
+        "teamId": 3468,
+        "positionId": 27,
+        "displayName": "Kylian Mbappé",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/3/96611.png",
+        "estrellas": 5
+    },
+    {
+        "_id": 7346228,
+        "teamId": 3468,
+        "positionId": 27,
+        "displayName": "Rodrygo",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/20/7346228.png",
+        "estrellas": 5
+    },
+    {
+        "_id": 37596373,
+        "teamId": 3468,
+        "positionId": 25,
+        "displayName": "Raúl Asencio",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/21/37596373.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 460160,
+        "teamId": 3468,
+        "positionId": 25,
+        "displayName": "Éder Militão",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/0/460160.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 31837,
+        "teamId": 3468,
+        "positionId": 25,
+        "displayName": "Antonio Rüdiger",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/29/31837.png",
+        "estrellas": 4
+    },
+    {
+        "_id": 260862,
+        "teamId": 3468,
+        "positionId": 26,
+        "displayName": "Federico Valverde",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/30/260862.png",
+        "estrellas": 5
+    },
+    {
+        "_id": 31288,
+        "teamId": 3468,
+        "positionId": 25,
+        "displayName": "David Alaba",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/24/31288.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 1314,
+        "teamId": 3468,
+        "positionId": 24,
+        "displayName": "Thibaut Courtois",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/2/1314.png",
+        "estrellas": 4
+    },
+    {
+        "_id": 205983,
+        "teamId": 3468,
+        "positionId": 24,
+        "displayName": "Andriy Lunin",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/31/205983.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37255840,
+        "teamId": 3468,
+        "positionId": 26,
+        "displayName": "Jude Bellingham",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/0/37255840.png",
+        "estrellas": 5
+    },
+    {
+        "_id": 186734,
+        "teamId": 3468,
+        "positionId": 26,
+        "displayName": "Dani Ceballos",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/14/186734.png",
+        "estrellas": 4
+    },
+    {
+        "_id": 96247,
+        "teamId": 7980,
+        "positionId": 26,
+        "displayName": "Thomas Lemar",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/23/96247.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 185571,
+        "teamId": 7980,
+        "positionId": 26,
+        "displayName": "Koke",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/3/185571.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 186795,
+        "teamId": 7980,
+        "positionId": 26,
+        "displayName": "Marcos Llorente",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/11/186795.png",
+        "estrellas": 4
+    },
+    {
+        "_id": 163108,
+        "teamId": 7980,
+        "positionId": 25,
+        "displayName": "Reinildo Isnard Mandava",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/4/163108.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 25514,
+        "teamId": 7980,
+        "positionId": 27,
+        "displayName": "Alexander Sørloth",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/10/25514.png",
+        "estrellas": 4
+    },
+    {
+        "_id": 186675,
+        "teamId": 7980,
+        "positionId": 27,
+        "displayName": "Ángel Correa",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/19/186675.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 159276,
+        "teamId": 7980,
+        "positionId": 24,
+        "displayName": "Jan Oblak",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/12/159276.png",
+        "estrellas": 4
+    },
+    {
+        "_id": 333616,
+        "teamId": 7980,
+        "positionId": 24,
+        "displayName": "Juan Musso",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/16/333616.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37423008,
+        "teamId": 7980,
+        "positionId": 26,
+        "displayName": "Pablo Barrios",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/0/37423008.png",
+        "estrellas": 4
+    },
+    {
+        "_id": 37577657,
+        "teamId": 7980,
+        "positionId": 26,
+        "displayName": "Giuliano Simeone",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/25/37577657.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 186514,
+        "teamId": 7980,
+        "positionId": 25,
+        "displayName": "José María Giménez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/18/186514.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 455900,
+        "teamId": 7980,
+        "positionId": 25,
+        "displayName": "Nahuel Molina",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/28/455900.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 1494245,
+        "teamId": 7980,
+        "positionId": 26,
+        "displayName": "Conor Gallagher",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/5/1494245.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 60270,
+        "teamId": 7980,
+        "positionId": 25,
+        "displayName": "Axel Witsel",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/14/60270.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 129798,
+        "teamId": 7980,
+        "positionId": 26,
+        "displayName": "Rodrigo de Paul",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/6/129798.png",
+        "estrellas": 5
+    },
+    {
+        "_id": 4536517,
+        "teamId": 7980,
+        "positionId": 26,
+        "displayName": "Rodrigo Riquelme",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/5/4536517.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 463850,
+        "teamId": 7980,
+        "positionId": 27,
+        "displayName": "Samuel Lino",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/10/463850.png",
+        "estrellas": 4
+    },
+    {
+        "_id": 185658,
+        "teamId": 7980,
+        "positionId": 27,
+        "displayName": "Antoine Griezmann",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/26/185658.png",
+        "estrellas": 5
+    },
+    {
+        "_id": 21394947,
+        "teamId": 7980,
+        "positionId": 27,
+        "displayName": "Julián Álvarez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/3/21394947.png",
+        "estrellas": 5
+    },
+    {
+        "_id": 96741,
+        "teamId": 7980,
+        "positionId": 25,
+        "displayName": "Clément Lenglet",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/5/96741.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 190049,
+        "teamId": 7980,
+        "positionId": 25,
+        "displayName": "Javi Galán",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/1/190049.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 1330,
+        "teamId": 7980,
+        "positionId": 25,
+        "displayName": "César Azpilicueta",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/18/1330.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 100580,
+        "teamId": 7980,
+        "positionId": 25,
+        "displayName": "Robin Le Normand",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/4/100580.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37715786,
+        "teamId": 13258,
+        "positionId": 27,
+        "displayName": "Aingeru Olabarrieta",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png"
+    },
+    {
+        "_id": 37645211,
+        "teamId": 13258,
+        "positionId": 27,
+        "displayName": "Endika Buján",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png"
+    },
+    {
+        "_id": 187035,
+        "teamId": 13258,
+        "positionId": 25,
+        "displayName": "Yeray Álvarez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/27/187035.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 3510288,
+        "teamId": 13258,
+        "positionId": 25,
+        "displayName": "Daniel Vivian",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/16/3510288.png",
+        "estrellas": 4
+    },
+    {
+        "_id": 186801,
+        "teamId": 13258,
+        "positionId": 27,
+        "displayName": "Iñaki Williams",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/17/186801.png"
+        ,
+        "estrellas": 4
+    },
+    {
+        "_id": 37714620,
+        "teamId": 13258,
+        "positionId": 26,
+        "displayName": "Peio Canales",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/28/37714620.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37592130,
+        "teamId": 13258,
+        "positionId": 25,
+        "displayName": "Adama Boiro",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/2/37592130.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 22158925,
+        "teamId": 13258,
+        "positionId": 26,
+        "displayName": "Oihan Sancet",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/13/22158925.png",
+        "estrellas": 4
+    },
+    {
+        "_id": 190168,
+        "teamId": 13258,
+        "positionId": 27,
+        "displayName": "Gorka Guruzeta",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/24/190168.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 447226,
+        "teamId": 13258,
+        "positionId": 25,
+        "displayName": "Andoni Gorosabel",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/26/447226.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37297544,
+        "teamId": 13258,
+        "positionId": 27,
+        "displayName": "Nico Williams",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/8/37297544.png",
+        "estrellas": 4
+    },
+    {
+        "_id": 37590339,
+        "teamId": 13258,
+        "positionId": 26,
+        "displayName": "Unai Gómez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/3/37590339.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 186924,
+        "teamId": 13258,
+        "positionId": 26,
+        "displayName": "Mikel Vesga",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/12/186924.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 185272,
+        "teamId": 13258,
+        "positionId": 25,
+        "displayName": "Óscar de Marcos",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/24/185272.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 25922178,
+        "teamId": 13258,
+        "positionId": 26,
+        "displayName": "Beñat Prados",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/2/25922178.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 8204,
+        "teamId": 13258,
+        "positionId": 25,
+        "displayName": "Yuri Berchiche",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/12/8204.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 186705,
+        "teamId": 13258,
+        "positionId": 25,
+        "displayName": "Íñigo Lekue",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/17/186705.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 447240,
+        "teamId": 13258,
+        "positionId": 25,
+        "displayName": "Unai Núñez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/8/447240.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37289307,
+        "teamId": 13258,
+        "positionId": 27,
+        "displayName": "Álvaro Djaló",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/27/37289307.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 186063,
+        "teamId": 13258,
+        "positionId": 26,
+        "displayName": "Iñigo Ruiz de Galarreta",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/15/186063.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 34422783,
+        "teamId": 13258,
+        "positionId": 26,
+        "displayName": "Mikel Jauregizar",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/31/34422783.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 187215,
+        "teamId": 13258,
+        "positionId": 24,
+        "displayName": "Unai Simón",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/15/187215.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 187032,
+        "teamId": 13258,
+        "positionId": 27,
+        "displayName": "Álex Berenguer",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/24/187032.png",
+        "estrellas": 4
+    },
+    {
+        "_id": 25922183,
+        "teamId": 13258,
+        "positionId": 24,
+        "displayName": "Julen Agirrezabala",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/7/25922183.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 24081488,
+        "teamId": 13258,
+        "positionId": 25,
+        "displayName": "Aitor Paredes",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/16/24081488.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37544434,
+        "teamId": 13258,
+        "positionId": 27,
+        "displayName": "Maroan Sannadi",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37459024,
+        "teamId": 3477,
+        "positionId": 27,
+        "displayName": "Ilias Akhomach",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/16/37459024.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 1396,
+        "teamId": 3477,
+        "positionId": 27,
+        "displayName": "Ayoze Pérez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/20/1396.png",
+        "estrellas": 4
+    },
+    {
+        "_id": 12394069,
+        "teamId": 3477,
+        "positionId": 25,
+        "displayName": "Logan Costa",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/21/12394069.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 96656,
+        "teamId": 3477,
+        "positionId": 27,
+        "displayName": "Nicolas Pépé",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/16/96656.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37544311,
+        "teamId": 3477,
+        "positionId": 25,
+        "displayName": "Willy Kambwala",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/23/37544311.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 129502,
+        "teamId": 3477,
+        "positionId": 25,
+        "displayName": "Raúl Albiol",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/30/129502.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37537789,
+        "teamId": 3477,
+        "positionId": 24,
+        "displayName": "Luiz Júnior",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/29/37537789.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 26328601,
+        "teamId": 3477,
+        "positionId": 25,
+        "displayName": "Sergi Cardona",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/25/26328601.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37714190,
+        "teamId": 3477,
+        "positionId": 25,
+        "displayName": "Pau Navarro",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 537203,
+        "teamId": 3477,
+        "positionId": 24,
+        "displayName": "Diego Conde",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/19/537203.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 1988,
+        "teamId": 3477,
+        "positionId": 26,
+        "displayName": "Dani Parejo",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/4/1988.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37590847,
+        "teamId": 3477,
+        "positionId": 27,
+        "displayName": "Thierno Barry",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 185579,
+        "teamId": 3477,
+        "positionId": 25,
+        "displayName": "Kiko Femenía",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/11/185579.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 1849,
+        "teamId": 3477,
+        "positionId": 25,
+        "displayName": "Eric Bailly",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/25/1849.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 433169,
+        "teamId": 3477,
+        "positionId": 26,
+        "displayName": "Pape Gueye",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/17/433169.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 7745874,
+        "teamId": 3477,
+        "positionId": 24,
+        "displayName": "Iker Álvarez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 189585,
+        "teamId": 3477,
+        "positionId": 26,
+        "displayName": "Santi Comesaña",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/17/189585.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 4439,
+        "teamId": 3477,
+        "positionId": 26,
+        "displayName": "Denis Suárez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/23/4439.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 7698436,
+        "teamId": 3477,
+        "positionId": 26,
+        "displayName": "Alejandro Baena",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/4/7698436.png",
+        "estrellas": 5
+    },
+    {
+        "_id": 335705,
+        "teamId": 3477,
+        "positionId": 25,
+        "displayName": "Juan Foyth",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/25/335705.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 8062,
+        "teamId": 3477,
+        "positionId": 25,
+        "displayName": "Alfonso Pedraza",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/30/8062.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 186552,
+        "teamId": 3477,
+        "positionId": 27,
+        "displayName": "Gerard Moreno",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/24/186552.png",
+        "estrellas": 4
+    },
+    {
+        "_id": 24468970,
+        "teamId": 3477,
+        "positionId": 26,
+        "displayName": "Yéremy Pino",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/10/24468970.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 31238822,
+        "teamId": 3477,
+        "positionId": 26,
+        "displayName": "Tajon Buchanan",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/6/31238822.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 21803152,
+        "teamId": 377,
+        "positionId": 25,
+        "displayName": "Josep Chavarría",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/16/21803152.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37762894,
+        "teamId": 377,
+        "positionId": 25,
+        "displayName": "Marco de las Sias",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 186907,
+        "teamId": 377,
+        "positionId": 27,
+        "displayName": "Sergi Guardiola",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/27/186907.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 2510817,
+        "teamId": 377,
+        "positionId": 26,
+        "displayName": "Óscar Valentín",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/1/2510817.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 186710,
+        "teamId": 377,
+        "positionId": 26,
+        "displayName": "Gerard Gumbau",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/22/186710.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 333778,
+        "teamId": 377,
+        "positionId": 24,
+        "displayName": "Augusto Batalla",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/18/333778.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 437094,
+        "teamId": 377,
+        "positionId": 24,
+        "displayName": "Dani Cárdenas",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/6/437094.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 186322,
+        "teamId": 377,
+        "positionId": 26,
+        "displayName": "Unai López",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/18/186322.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 383223,
+        "teamId": 377,
+        "positionId": 26,
+        "displayName": "Isi Palazón",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/23/383223.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 10319453,
+        "teamId": 377,
+        "positionId": 26,
+        "displayName": "Randy Nteka",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/29/10319453.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37316498,
+        "teamId": 377,
+        "positionId": 24,
+        "displayName": "Juanpe",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37584215,
+        "teamId": 377,
+        "positionId": 25,
+        "displayName": "Pelayo Fernández",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/23/37584215.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 96158,
+        "teamId": 377,
+        "positionId": 26,
+        "displayName": "Óscar Trejo",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/30/96158.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 96002,
+        "teamId": 377,
+        "positionId": 25,
+        "displayName": "Florian Lejeune",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/2/96002.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 260833,
+        "teamId": 377,
+        "positionId": 25,
+        "displayName": "Alfonso Espino",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/1/260833.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 445829,
+        "teamId": 377,
+        "positionId": 26,
+        "displayName": "Pedro Díaz",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/5/445829.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37560672,
+        "teamId": 377,
+        "positionId": 27,
+        "displayName": "Etienne Eto'o Pineda",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png"
+    },
+    {
+        "_id": 186513,
+        "teamId": 377,
+        "positionId": 27,
+        "displayName": "Adrián Embarba",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/17/186513.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 7698443,
+        "teamId": 377,
+        "positionId": 27,
+        "displayName": "Sergio Camello",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/11/7698443.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 187092,
+        "teamId": 377,
+        "positionId": 26,
+        "displayName": "Joni Montiel",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/20/187092.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 189260,
+        "teamId": 377,
+        "positionId": 25,
+        "displayName": "Aridane Hernández",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/12/189260.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 2511096,
+        "teamId": 377,
+        "positionId": 26,
+        "displayName": "Ismaila Ciss",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/24/2511096.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 9308118,
+        "teamId": 377,
+        "positionId": 25,
+        "displayName": "Andrei Rațiu",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/22/9308118.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 186358,
+        "teamId": 377,
+        "positionId": 26,
+        "displayName": "Álvaro García",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/22/186358.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 96719,
+        "teamId": 377,
+        "positionId": 25,
+        "displayName": "Iván Balliu",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/15/96719.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 84558,
+        "teamId": 377,
+        "positionId": 25,
+        "displayName": "Abdul Mumin",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/14/84558.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 447094,
+        "teamId": 377,
+        "positionId": 27,
+        "displayName": "Jorge de Frutos",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/22/447094.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37685107,
+        "teamId": 377,
+        "positionId": 24,
+        "displayName": "Miguel Benedí",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37762893,
+        "teamId": 377,
+        "positionId": 24,
+        "displayName": "Adrián Molina",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 186560,
+        "teamId": 377,
+        "positionId": 27,
+        "displayName": "Raúl de Tomás",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/0/186560.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37680048,
+        "teamId": 594,
+        "positionId": 25,
+        "displayName": "Jon Martin",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/16/37680048.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 34573363,
+        "teamId": 594,
+        "positionId": 27,
+        "displayName": "Orri Steinn Óskarsson",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/19/34573363.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 187110,
+        "teamId": 594,
+        "positionId": 24,
+        "displayName": "Álex Remiro",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/6/187110.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 27440827,
+        "teamId": 594,
+        "positionId": 27,
+        "displayName": "Ander Barrenetxea",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/27/27440827.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 25162,
+        "teamId": 594,
+        "positionId": 27,
+        "displayName": "Sheraldo Becker",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/10/25162.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 186932,
+        "teamId": 594,
+        "positionId": 27,
+        "displayName": "Mikel Oyarzabal",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/20/186932.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 22136693,
+        "teamId": 594,
+        "positionId": 26,
+        "displayName": "Jon Ander Olasagasti",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/21/22136693.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 187232,
+        "teamId": 594,
+        "positionId": 25,
+        "displayName": "Álvaro Odriozola",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/0/187232.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 22528446,
+        "teamId": 594,
+        "positionId": 26,
+        "displayName": "Luka Sučić",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/30/22528446.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37344218,
+        "teamId": 594,
+        "positionId": 26,
+        "displayName": "Arsen Zakharyan",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/26/37344218.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 187170,
+        "teamId": 594,
+        "positionId": 25,
+        "displayName": "Igor Zubeldia",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/2/187170.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 32819168,
+        "teamId": 594,
+        "positionId": 26,
+        "displayName": "Beñat Turrientes",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/0/32819168.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 62181,
+        "teamId": 594,
+        "positionId": 25,
+        "displayName": "Hamari Traoré",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/5/62181.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37316739,
+        "teamId": 594,
+        "positionId": 24,
+        "displayName": "Unai Marrero",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/3/37316739.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 16837815,
+        "teamId": 594,
+        "positionId": 25,
+        "displayName": "Jon Pacheco",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/23/16837815.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 186753,
+        "teamId": 594,
+        "positionId": 25,
+        "displayName": "Aritz Elustondo",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/1/186753.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 24468965,
+        "teamId": 594,
+        "positionId": 25,
+        "displayName": "Javi López",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/5/24468965.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 516291,
+        "teamId": 594,
+        "positionId": 25,
+        "displayName": "Nayef Aguerd",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/3/516291.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 530762,
+        "teamId": 594,
+        "positionId": 26,
+        "displayName": "Martín Zubimendi",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/10/530762.png",
+        "estrellas": 5
+    },
+    {
+        "_id": 37546475,
+        "teamId": 594,
+        "positionId": 26,
+        "displayName": "Pablo Marín",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/11/37546475.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 436921,
+        "teamId": 594,
+        "positionId": 26,
+        "displayName": "Brais Méndez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/25/436921.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 4536537,
+        "teamId": 594,
+        "positionId": 25,
+        "displayName": "Sergio Gómez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/25/4536537.png",
+        "estrellas": 4
+    },
+    {
+        "_id": 4243068,
+        "teamId": 594,
+        "positionId": 25,
+        "displayName": "Aihen Muñoz",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/28/4243068.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 525790,
+        "teamId": 594,
+        "positionId": 27,
+        "displayName": "Takefusa Kubo",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/30/525790.png",
+        "estrellas": 4
+    },
+    {
+        "_id": 37422925,
+        "teamId": 594,
+        "positionId": 25,
+        "displayName": "Jon Aramburu",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/13/37422925.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 4545529,
+        "teamId": 231,
+        "positionId": 27,
+        "displayName": "Bryan Gil",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/25/4545529.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 219920,
+        "teamId": 231,
+        "positionId": 26,
+        "displayName": "Arthur",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/16/219920.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 1737,
+        "teamId": 231,
+        "positionId": 27,
+        "displayName": "Cristhian Stuani",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/9/1737.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37541244,
+        "teamId": 231,
+        "positionId": 25,
+        "displayName": "Arnau Martínez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/28/37541244.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 411876,
+        "teamId": 231,
+        "positionId": 26,
+        "displayName": "Yangel Herrera",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/4/411876.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 185941,
+        "teamId": 231,
+        "positionId": 27,
+        "displayName": "Portu",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/21/185941.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37563866,
+        "teamId": 231,
+        "positionId": 26,
+        "displayName": "Jhon Solís",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/26/37563866.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 186502,
+        "teamId": 231,
+        "positionId": 24,
+        "displayName": "Juan Carlos",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/6/186502.png"
+    },
+    {
+        "_id": 21427729,
+        "teamId": 231,
+        "positionId": 26,
+        "displayName": "Iván Martín",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/17/21427729.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 26491,
+        "teamId": 231,
+        "positionId": 27,
+        "displayName": "Arnaut Danjuma",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/27/26491.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 1505,
+        "teamId": 231,
+        "positionId": 26,
+        "displayName": "Oriol Romeu",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/1/1505.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37332131,
+        "teamId": 231,
+        "positionId": 25,
+        "displayName": "Alejandro Francés",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/3/37332131.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 26031,
+        "teamId": 231,
+        "positionId": 26,
+        "displayName": "Donny van de Beek",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/15/26031.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 529420,
+        "teamId": 231,
+        "positionId": 27,
+        "displayName": "Abel Ruíz",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/12/529420.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37778893,
+        "teamId": 231,
+        "positionId": 24,
+        "displayName": "Pau Fonallet García",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37680593,
+        "teamId": 231,
+        "positionId": 24,
+        "displayName": "Lucas García",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37710189,
+        "teamId": 231,
+        "positionId": 24,
+        "displayName": "Krapyvtsov Vladyslav Andreyovych",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/13/37710189.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37672366,
+        "teamId": 231,
+        "positionId": 25,
+        "displayName": "Marc Aznar",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37676503,
+        "teamId": 231,
+        "positionId": 25,
+        "displayName": "Antal Yaakobishvili",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/23/37676503.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37664250,
+        "teamId": 231,
+        "positionId": 27,
+        "displayName": "Juan Arango",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/26/37664250.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37718009,
+        "teamId": 231,
+        "positionId": 26,
+        "displayName": "Enric Garcia",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37553160,
+        "teamId": 231,
+        "positionId": 27,
+        "displayName": "Dawda Camara",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/8/37553160.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 4536496,
+        "teamId": 231,
+        "positionId": 27,
+        "displayName": "Bojan Miovski",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/16/4536496.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37549877,
+        "teamId": 231,
+        "positionId": 26,
+        "displayName": "Yáser Asprilla",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/21/37549877.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 205635,
+        "teamId": 231,
+        "positionId": 27,
+        "displayName": "Viktor Tsygankov",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/3/205635.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37779597,
+        "teamId": 231,
+        "positionId": 24,
+        "displayName": "Jordi Bilali Danso",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37631211,
+        "teamId": 231,
+        "positionId": 25,
+        "displayName": "Oriol Comas",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 1411,
+        "teamId": 231,
+        "positionId": 24,
+        "displayName": "Paulo Gazzaniga",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/3/1411.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37593159,
+        "teamId": 231,
+        "positionId": 26,
+        "displayName": "Gabriel Misehouy",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/7/37593159.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 187878,
+        "teamId": 231,
+        "positionId": 25,
+        "displayName": "Juanpe",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/6/187878.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 970,
+        "teamId": 231,
+        "positionId": 25,
+        "displayName": "Daley Blind",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/10/970.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 129727,
+        "teamId": 231,
+        "positionId": 25,
+        "displayName": "David López",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/31/129727.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 80902,
+        "teamId": 231,
+        "positionId": 25,
+        "displayName": "Ladislav Krejčí",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/6/80902.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37671513,
+        "teamId": 231,
+        "positionId": 27,
+        "displayName": "Min-su Kim",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/25/37671513.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37722018,
+        "teamId": 231,
+        "positionId": 24,
+        "displayName": "Aleksandar Andreev",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37596376,
+        "teamId": 231,
+        "positionId": 25,
+        "displayName": "Ferrán Ruiz",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/24/37596376.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37581917,
+        "teamId": 231,
+        "positionId": 26,
+        "displayName": "Ricard Artero",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/29/37581917.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37591589,
+        "teamId": 231,
+        "positionId": 26,
+        "displayName": "Raúl Martínez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37661770,
+        "teamId": 231,
+        "positionId": 27,
+        "displayName": "Jastin García",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/10/37661770.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37737497,
+        "teamId": 231,
+        "positionId": 27,
+        "displayName": "Papa Dame Ba",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 7698423,
+        "teamId": 231,
+        "positionId": 25,
+        "displayName": "Miguel Gutiérrez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/23/7698423.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 8092941,
+        "teamId": 459,
+        "positionId": 26,
+        "displayName": "Jon Moncayola",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/13/8092941.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 188218,
+        "teamId": 459,
+        "positionId": 27,
+        "displayName": "Kike Barja",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/26/188218.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 16476323,
+        "teamId": 459,
+        "positionId": 25,
+        "displayName": "Jorge Herrando",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/3/16476323.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37316385,
+        "teamId": 459,
+        "positionId": 24,
+        "displayName": "Pablo Valencia",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/1/37316385.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 186878,
+        "teamId": 459,
+        "positionId": 25,
+        "displayName": "Unai García",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/30/186878.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 364986,
+        "teamId": 459,
+        "positionId": 25,
+        "displayName": "Juan Cruz",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/26/364986.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37249198,
+        "teamId": 459,
+        "positionId": 26,
+        "displayName": "Pablo Ibáñez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/14/37249198.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 186427,
+        "teamId": 459,
+        "positionId": 25,
+        "displayName": "Rubén Peña",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/27/186427.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 189296,
+        "teamId": 459,
+        "positionId": 24,
+        "displayName": "Sergio Herrera",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/16/189296.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 2510665,
+        "teamId": 459,
+        "positionId": 25,
+        "displayName": "Jesús Areso",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/9/2510665.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37596365,
+        "teamId": 459,
+        "positionId": 24,
+        "displayName": "D. Stamatakis",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 447278,
+        "teamId": 459,
+        "positionId": 25,
+        "displayName": "Alejandro Catena",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/14/447278.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 32031674,
+        "teamId": 459,
+        "positionId": 25,
+        "displayName": "Abel Bretones",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/26/32031674.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 188626,
+        "teamId": 459,
+        "positionId": 26,
+        "displayName": "Lucas Torró",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/18/188626.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37649077,
+        "teamId": 459,
+        "positionId": 26,
+        "displayName": "Asier Osambela",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 36085251,
+        "teamId": 459,
+        "positionId": 26,
+        "displayName": "Aimar Oroz",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/3/36085251.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 35281051,
+        "teamId": 459,
+        "positionId": 27,
+        "displayName": "Raúl García de Haro",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/27/35281051.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37371160,
+        "teamId": 459,
+        "positionId": 26,
+        "displayName": "Iker Muñoz",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/24/37371160.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37544065,
+        "teamId": 459,
+        "positionId": 27,
+        "displayName": "Bryan Zaragoza",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/1/37544065.png",
+        "estrellas": 4
+    },
+    {
+        "_id": 186173,
+        "teamId": 459,
+        "positionId": 26,
+        "displayName": "Moi Gómez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/29/186173.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 186123,
+        "teamId": 459,
+        "positionId": 24,
+        "displayName": "Aitor Fernández",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/11/186123.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 28575647,
+        "teamId": 459,
+        "positionId": 25,
+        "displayName": "Flavien Boyomo",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/31/28575647.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 34700,
+        "teamId": 459,
+        "positionId": 27,
+        "displayName": "Ante Budimir",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/12/34700.png",
+        "estrellas": 5
+    },
+    {
+        "_id": 37706395,
+        "teamId": 459,
+        "positionId": 27,
+        "displayName": "Carlos Lumbreras",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 189385,
+        "teamId": 459,
+        "positionId": 27,
+        "displayName": "José Manuel Arnáiz",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/9/189385.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37596369,
+        "teamId": 459,
+        "positionId": 25,
+        "displayName": "Diego Espejo",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/17/37596369.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 186329,
+        "teamId": 459,
+        "positionId": 26,
+        "displayName": "Rubén García",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/25/186329.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 186177,
+        "teamId": 645,
+        "positionId": 27,
+        "displayName": "Abdón Prats",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/1/186177.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 36481676,
+        "teamId": 645,
+        "positionId": 26,
+        "displayName": "Samú Costa",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/12/36481676.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 22126606,
+        "teamId": 645,
+        "positionId": 27,
+        "displayName": "Valery Fernández",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/14/22126606.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37593798,
+        "teamId": 645,
+        "positionId": 25,
+        "displayName": "David López",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37404802,
+        "teamId": 645,
+        "positionId": 27,
+        "displayName": "Chiquinho",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/2/37404802.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 96740,
+        "teamId": 645,
+        "positionId": 26,
+        "displayName": "Sergi Darder",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/4/96740.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 132406,
+        "teamId": 645,
+        "positionId": 25,
+        "displayName": "Martin Valjent",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/22/132406.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 2823394,
+        "teamId": 645,
+        "positionId": 25,
+        "displayName": "José Copete",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/2/2823394.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 21427714,
+        "teamId": 645,
+        "positionId": 26,
+        "displayName": "Robert Navarro",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/2/21427714.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 186437,
+        "teamId": 645,
+        "positionId": 25,
+        "displayName": "Johan Mojica",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/5/186437.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 262216,
+        "teamId": 645,
+        "positionId": 27,
+        "displayName": "Cyle Larin",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/8/262216.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 448342,
+        "teamId": 645,
+        "positionId": 26,
+        "displayName": "Manu Morlanes",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/22/448342.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 187210,
+        "teamId": 645,
+        "positionId": 25,
+        "displayName": "Toni Lato",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/10/187210.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 4536535,
+        "teamId": 645,
+        "positionId": 25,
+        "displayName": "Mateu Morey",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/23/4536535.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 2987,
+        "teamId": 645,
+        "positionId": 26,
+        "displayName": "Omar Mascarell",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/11/2987.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 380232,
+        "teamId": 645,
+        "positionId": 26,
+        "displayName": "Dani Rodríguez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/8/380232.png",
+        "estrellas": 4
+    },
+    {
+        "_id": 49353,
+        "teamId": 645,
+        "positionId": 27,
+        "displayName": "Vedat Muriqi",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/9/49353.png",
+        "estrellas": 4
+    },
+    {
+        "_id": 2060,
+        "teamId": 645,
+        "positionId": 25,
+        "displayName": "Pablo Maffeo",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/12/2060.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 181184,
+        "teamId": 645,
+        "positionId": 24,
+        "displayName": "Dominik Greif",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/0/181184.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 186662,
+        "teamId": 645,
+        "positionId": 25,
+        "displayName": "Antonio Raíllo",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/6/186662.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 5967970,
+        "teamId": 645,
+        "positionId": 24,
+        "displayName": "Leo Román",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/2/5967970.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 185715,
+        "teamId": 645,
+        "positionId": 24,
+        "displayName": "Iván Cuéllar",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/19/185715.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 35342,
+        "teamId": 645,
+        "positionId": 27,
+        "displayName": "Takuma Asano",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/14/35342.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 20708455,
+        "teamId": 645,
+        "positionId": 26,
+        "displayName": "Antonio Sánchez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/7/20708455.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37588124,
+        "teamId": 485,
+        "positionId": 24,
+        "displayName": "Guilherme Fernandes",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37722327,
+        "teamId": 485,
+        "positionId": 27,
+        "displayName": "Jesús Rodriguez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 1899,
+        "teamId": 485,
+        "positionId": 25,
+        "displayName": "Héctor Bellerín",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/11/1899.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 186595,
+        "teamId": 485,
+        "positionId": 25,
+        "displayName": "Diego Llorente",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/3/186595.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 97664,
+        "teamId": 485,
+        "positionId": 26,
+        "displayName": "Giovani Lo Celso",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/0/97664.png",
+        "estrellas": 4
+    },
+    {
+        "_id": 96109,
+        "teamId": 485,
+        "positionId": 25,
+        "displayName": "Youssouf Sabaly",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/13/96109.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 61186,
+        "teamId": 485,
+        "positionId": 26,
+        "displayName": "William Carvalho",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/2/61186.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37533505,
+        "teamId": 485,
+        "positionId": 26,
+        "displayName": "Sergi Altimira",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/1/37533505.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37722328,
+        "teamId": 485,
+        "positionId": 27,
+        "displayName": "Pablo García",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 240195,
+        "teamId": 485,
+        "positionId": 27,
+        "displayName": "Cucho Hernández",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/3/240195.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 31653,
+        "teamId": 485,
+        "positionId": 25,
+        "displayName": "Ricardo Rodríguez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/5/31653.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 185972,
+        "teamId": 485,
+        "positionId": 26,
+        "displayName": "Isco",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/20/185972.png",
+        "estrellas": 4
+    },
+    {
+        "_id": 37622162,
+        "teamId": 485,
+        "positionId": 25,
+        "displayName": "Nobel Mendy",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37657582,
+        "teamId": 485,
+        "positionId": 26,
+        "displayName": "Carlos Guirao",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 1251,
+        "teamId": 485,
+        "positionId": 24,
+        "displayName": "Adrián",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/3/1251.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37537603,
+        "teamId": 485,
+        "positionId": 25,
+        "displayName": "Sergio Arribas",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37614324,
+        "teamId": 485,
+        "positionId": 25,
+        "displayName": "Xavier Pleguezuelo",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37529827,
+        "teamId": 485,
+        "positionId": 25,
+        "displayName": "Lucas Alcazar",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/3/37529827.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 337432,
+        "teamId": 485,
+        "positionId": 25,
+        "displayName": "Romain Perraud",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/24/337432.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 8043762,
+        "teamId": 485,
+        "positionId": 24,
+        "displayName": "Francisco Vieites",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/18/8043762.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37738518,
+        "teamId": 485,
+        "positionId": 24,
+        "displayName": "Manu González",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37664661,
+        "teamId": 485,
+        "positionId": 24,
+        "displayName": "Germán García",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37614325,
+        "teamId": 485,
+        "positionId": 26,
+        "displayName": "Dani Pérez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37402346,
+        "teamId": 485,
+        "positionId": 25,
+        "displayName": "Natan",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/10/37402346.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37599292,
+        "teamId": 485,
+        "positionId": 27,
+        "displayName": "Vitor Roque",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/28/37599292.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37297124,
+        "teamId": 485,
+        "positionId": 27,
+        "displayName": "Abdessamad Ezzalzouli",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/4/37297124.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 95269,
+        "teamId": 485,
+        "positionId": 27,
+        "displayName": "Cédric Bakambu",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/5/95269.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 186815,
+        "teamId": 485,
+        "positionId": 26,
+        "displayName": "Pablo Fornals",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/31/186815.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 213486,
+        "teamId": 485,
+        "positionId": 27,
+        "displayName": "Chimy Ávila",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/14/213486.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 12393293,
+        "teamId": 485,
+        "positionId": 27,
+        "displayName": "Antony",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/13/12393293.png",
+        "estrellas": 4
+    },
+    {
+        "_id": 37690104,
+        "teamId": 485,
+        "positionId": 26,
+        "displayName": "Mateo Flores",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37718859,
+        "teamId": 485,
+        "positionId": 25,
+        "displayName": "Pablo Busto",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37592956,
+        "teamId": 485,
+        "positionId": 27,
+        "displayName": "Angel Ortiz",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37261342,
+        "teamId": 485,
+        "positionId": 26,
+        "displayName": "Johnny",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/30/37261342.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 32399,
+        "teamId": 485,
+        "positionId": 25,
+        "displayName": "Marc Bartra",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/15/32399.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 448107,
+        "teamId": 485,
+        "positionId": 25,
+        "displayName": "Aitor Ruibal",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/11/448107.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37674289,
+        "teamId": 485,
+        "positionId": 26,
+        "displayName": "Carlos Reina",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 186922,
+        "teamId": 485,
+        "positionId": 26,
+        "displayName": "Marc Roca",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/10/186922.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 189286,
+        "teamId": 36,
+        "positionId": 26,
+        "displayName": "Fran Beltrán",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/6/189286.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37528864,
+        "teamId": 36,
+        "positionId": 26,
+        "displayName": "Williot Swedberg",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/0/37528864.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37543405,
+        "teamId": 36,
+        "positionId": 25,
+        "displayName": "Carlos Domínguez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/13/37543405.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 27048372,
+        "teamId": 36,
+        "positionId": 26,
+        "displayName": "Iker Losada",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 160199,
+        "teamId": 36,
+        "positionId": 26,
+        "displayName": "Franco Cervi",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/7/160199.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 186864,
+        "teamId": 36,
+        "positionId": 27,
+        "displayName": "Borja Iglesias",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/16/186864.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 5641027,
+        "teamId": 36,
+        "positionId": 24,
+        "displayName": "Marc Vidal",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/3/5641027.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37459017,
+        "teamId": 36,
+        "positionId": 24,
+        "displayName": "César Fernández",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/9/37459017.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37652784,
+        "teamId": 36,
+        "positionId": 25,
+        "displayName": "Javi Rodríguez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 447491,
+        "teamId": 36,
+        "positionId": 27,
+        "displayName": "Alfon González",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/3/447491.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 190919,
+        "teamId": 36,
+        "positionId": 25,
+        "displayName": "Carl Starfelt",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/7/190919.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37586673,
+        "teamId": 36,
+        "positionId": 25,
+        "displayName": "Yoel Lago",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 16144769,
+        "teamId": 36,
+        "positionId": 24,
+        "displayName": "Coke Carrillo",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/1/16144769.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 177766,
+        "teamId": 36,
+        "positionId": 25,
+        "displayName": "Mihailo Ristić",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/6/177766.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37586671,
+        "teamId": 36,
+        "positionId": 26,
+        "displayName": "Hugo Álvarez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/15/37586671.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 6006071,
+        "teamId": 36,
+        "positionId": 25,
+        "displayName": "Sergio Carreira",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/23/6006071.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37585284,
+        "teamId": 36,
+        "positionId": 27,
+        "displayName": "Pablo Durán",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 24799857,
+        "teamId": 36,
+        "positionId": 26,
+        "displayName": "Ilaix Moriba",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/17/24799857.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37569279,
+        "teamId": 36,
+        "positionId": 26,
+        "displayName": "Hugo Sotelo",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/31/37569279.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 1128,
+        "teamId": 36,
+        "positionId": 25,
+        "displayName": "Marcos Alonso",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/8/1128.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37591583,
+        "teamId": 36,
+        "positionId": 26,
+        "displayName": "Miguel Román",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 1352,
+        "teamId": 36,
+        "positionId": 25,
+        "displayName": "Javier Manquillo",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/8/1352.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37616238,
+        "teamId": 36,
+        "positionId": 27,
+        "displayName": "Jones El-Abdellaoui",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/14/37616238.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37543407,
+        "teamId": 36,
+        "positionId": 26,
+        "displayName": "Damián Rodríguez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 537595,
+        "teamId": 36,
+        "positionId": 25,
+        "displayName": "Óscar Mingueza",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/27/537595.png",
+        "estrellas": 4
+    },
+    {
+        "_id": 800,
+        "teamId": 36,
+        "positionId": 27,
+        "displayName": "Iago Aspas",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/0/800.png",
+        "estrellas": 4
+    },
+    {
+        "_id": 185723,
+        "teamId": 36,
+        "positionId": 24,
+        "displayName": "Vicente Guaita",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/27/185723.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37663391,
+        "teamId": 36,
+        "positionId": 26,
+        "displayName": "Fer López",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 219799,
+        "teamId": 36,
+        "positionId": 26,
+        "displayName": "Jailson",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/23/219799.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 186961,
+        "teamId": 36,
+        "positionId": 24,
+        "displayName": "Iván Villar",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/17/186961.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37592569,
+        "teamId": 36,
+        "positionId": 25,
+        "displayName": "Martin Conde",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37590629,
+        "teamId": 676,
+        "positionId": 26,
+        "displayName": "Stanis Idumbo Muzambo",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/5/37590629.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 35270577,
+        "teamId": 676,
+        "positionId": 27,
+        "displayName": "Leandro Antonetti",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37592682,
+        "teamId": 676,
+        "positionId": 25,
+        "displayName": "Diego Hormigo",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/10/37592682.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 538907,
+        "teamId": 676,
+        "positionId": 26,
+        "displayName": "Albert Sambi Lokonga",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/27/538907.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 4165,
+        "teamId": 676,
+        "positionId": 26,
+        "displayName": "Suso",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/5/4165.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 186412,
+        "teamId": 676,
+        "positionId": 26,
+        "displayName": "Saúl Ñíguez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/12/186412.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 32769,
+        "teamId": 676,
+        "positionId": 26,
+        "displayName": "Djibril Sow",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/1/32769.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37296353,
+        "teamId": 676,
+        "positionId": 25,
+        "displayName": "Juanlu Sánchez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/1/37296353.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 24071,
+        "teamId": 676,
+        "positionId": 26,
+        "displayName": "Nemanja Gudelj",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/7/24071.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 455799,
+        "teamId": 676,
+        "positionId": 27,
+        "displayName": "Chidera Ejuke",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/23/455799.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37402078,
+        "teamId": 676,
+        "positionId": 25,
+        "displayName": "José Ángel Carmona",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/30/37402078.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 22169317,
+        "teamId": 676,
+        "positionId": 27,
+        "displayName": "Akor Adams",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/5/22169317.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37316859,
+        "teamId": 676,
+        "positionId": 27,
+        "displayName": "Mateo Mejia",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37586263,
+        "teamId": 676,
+        "positionId": 24,
+        "displayName": "Matías Árbol",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/23/37586263.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37546904,
+        "teamId": 676,
+        "positionId": 24,
+        "displayName": "Rafa Romero",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/24/37546904.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37592680,
+        "teamId": 676,
+        "positionId": 25,
+        "displayName": "Darío Benavides",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/8/37592680.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37596392,
+        "teamId": 676,
+        "positionId": 26,
+        "displayName": "Alberto Collado",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/8/37596392.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37592685,
+        "teamId": 676,
+        "positionId": 26,
+        "displayName": "Pablo Rivera Cruz",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/13/37592685.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37553227,
+        "teamId": 676,
+        "positionId": 25,
+        "displayName": "Kike Salas",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/11/37553227.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 1478864,
+        "teamId": 676,
+        "positionId": 26,
+        "displayName": "Ruben Vargas",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/16/1478864.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 10279739,
+        "teamId": 676,
+        "positionId": 25,
+        "displayName": "Loïc Badé",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/27/10279739.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37297313,
+        "teamId": 676,
+        "positionId": 27,
+        "displayName": "Isaac Romero",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/1/37297313.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37590292,
+        "teamId": 676,
+        "positionId": 26,
+        "displayName": "Manu Bueno",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/20/37590292.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 32471,
+        "teamId": 676,
+        "positionId": 24,
+        "displayName": "Ørjan Nyland",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/23/32471.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 23269646,
+        "teamId": 676,
+        "positionId": 25,
+        "displayName": "Tanguy Nianzou",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/14/23269646.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 22168912,
+        "teamId": 676,
+        "positionId": 26,
+        "displayName": "Lucien Agoumé",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/16/22168912.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 27440264,
+        "teamId": 676,
+        "positionId": 27,
+        "displayName": "Gerard Fernández",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/8/27440264.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37563612,
+        "teamId": 676,
+        "positionId": 24,
+        "displayName": "Alberto Flores",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/28/37563612.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37556995,
+        "teamId": 676,
+        "positionId": 27,
+        "displayName": "Isra Dominguez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/3/37556995.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37774860,
+        "teamId": 676,
+        "positionId": 27,
+        "displayName": "Alvaro Garcia-Pascual",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37262701,
+        "teamId": 676,
+        "positionId": 25,
+        "displayName": "Ramón Martínez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37595913,
+        "teamId": 676,
+        "positionId": 25,
+        "displayName": "Andres Castrin",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 219730,
+        "teamId": 676,
+        "positionId": 25,
+        "displayName": "Marcão",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/18/219730.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 187068,
+        "teamId": 676,
+        "positionId": 24,
+        "displayName": "Álvaro Fernández",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/28/187068.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 532358,
+        "teamId": 676,
+        "positionId": 25,
+        "displayName": "Adrià Pedrosa",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/6/532358.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 62871,
+        "teamId": 676,
+        "positionId": 27,
+        "displayName": "Dodi Lukebakio",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/23/62871.png",
+        "estrellas": 4
+    },
+    {
+        "_id": 37614738,
+        "teamId": 106,
+        "positionId": 25,
+        "displayName": "Luca Löhr",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37316612,
+        "teamId": 106,
+        "positionId": 26,
+        "displayName": "Ramón Terrats",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/4/37316612.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 32100,
+        "teamId": 106,
+        "positionId": 25,
+        "displayName": "Juan Bernat",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/4/32100.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37440751,
+        "teamId": 106,
+        "positionId": 27,
+        "displayName": "Abdoulaye Keita",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 34873979,
+        "teamId": 106,
+        "positionId": 27,
+        "displayName": "Bertuğ Özgür Yıldırım",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/27/34873979.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37678216,
+        "teamId": 106,
+        "positionId": 26,
+        "displayName": "Christantus Uche",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 63020,
+        "teamId": 106,
+        "positionId": 25,
+        "displayName": "Djené",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/12/63020.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 333414,
+        "teamId": 106,
+        "positionId": 25,
+        "displayName": "Fabrizio Angileri",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/6/333414.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 20315950,
+        "teamId": 106,
+        "positionId": 24,
+        "displayName": "Jiří Letáček",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37710320,
+        "teamId": 106,
+        "positionId": 24,
+        "displayName": "Jorge Benito",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37601803,
+        "teamId": 106,
+        "positionId": 27,
+        "displayName": "Álvaro Rodríguez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/11/37601803.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37715813,
+        "teamId": 106,
+        "positionId": 25,
+        "displayName": "Ismael Bekhoucha",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 186954,
+        "teamId": 106,
+        "positionId": 25,
+        "displayName": "Diego Rico",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/10/186954.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 537056,
+        "teamId": 106,
+        "positionId": 27,
+        "displayName": "Carles Pérez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/0/537056.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 186587,
+        "teamId": 106,
+        "positionId": 24,
+        "displayName": "David Soria",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/27/186587.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37911615,
+        "teamId": 106,
+        "positionId": 27,
+        "displayName": "Martin Cuellar",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 540208,
+        "teamId": 106,
+        "positionId": 25,
+        "displayName": "Juan Berrocal",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/16/540208.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 530758,
+        "teamId": 106,
+        "positionId": 26,
+        "displayName": "Álex Sola",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/6/530758.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37619814,
+        "teamId": 106,
+        "positionId": 26,
+        "displayName": "Yellu Santiago",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/6/37619814.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37769397,
+        "teamId": 106,
+        "positionId": 24,
+        "displayName": "Diego Ferrer",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37750089,
+        "teamId": 106,
+        "positionId": 26,
+        "displayName": "Alberto Risco",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 445827,
+        "teamId": 106,
+        "positionId": 25,
+        "displayName": "Juan Iglesias",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/3/445827.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 160247,
+        "teamId": 106,
+        "positionId": 25,
+        "displayName": "Domingos Duarte",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/23/160247.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37736756,
+        "teamId": 106,
+        "positionId": 24,
+        "displayName": "Djordjije Medenica",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 1281,
+        "teamId": 106,
+        "positionId": 25,
+        "displayName": "Allan Nyom",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/1/1281.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37591135,
+        "teamId": 106,
+        "positionId": 25,
+        "displayName": "Gorka Rivera",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37564744,
+        "teamId": 106,
+        "positionId": 27,
+        "displayName": "Coba Gomes Da Costa",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37392875,
+        "teamId": 106,
+        "positionId": 25,
+        "displayName": "David Arguelles",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/11/37392875.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 96874,
+        "teamId": 106,
+        "positionId": 26,
+        "displayName": "Mauro Arambarri",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/10/96874.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 382624,
+        "teamId": 106,
+        "positionId": 26,
+        "displayName": "Luis Milla",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/0/382624.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37316517,
+        "teamId": 106,
+        "positionId": 27,
+        "displayName": "Peter González",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/5/37316517.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 258137,
+        "teamId": 106,
+        "positionId": 25,
+        "displayName": "Omar Alderete",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/25/258137.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 32744,
+        "teamId": 106,
+        "positionId": 27,
+        "displayName": "Borja Mayoral",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/8/32744.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 1410,
+        "teamId": 106,
+        "positionId": 27,
+        "displayName": "Juanmi",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/2/1410.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 23269679,
+        "teamId": 2921,
+        "positionId": 27,
+        "displayName": "Fábio Silva",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/15/23269679.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37380649,
+        "teamId": 2921,
+        "positionId": 26,
+        "displayName": "Alberto Moleiro",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/9/37380649.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37564315,
+        "teamId": 2921,
+        "positionId": 26,
+        "displayName": "Dário Essugo",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/27/37564315.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37716791,
+        "teamId": 2921,
+        "positionId": 24,
+        "displayName": "Álvaro Killane",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37735945,
+        "teamId": 2921,
+        "positionId": 26,
+        "displayName": "A. Bassinga",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37774087,
+        "teamId": 2921,
+        "positionId": 24,
+        "displayName": "Víctor Puig",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37911673,
+        "teamId": 2921,
+        "positionId": 24,
+        "displayName": "Israel Mora",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37681492,
+        "teamId": 2921,
+        "positionId": 27,
+        "displayName": "Sergio Ruiz",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37768070,
+        "teamId": 2921,
+        "positionId": 25,
+        "displayName": "Valentín Pezzolesi",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 190863,
+        "teamId": 2921,
+        "positionId": 26,
+        "displayName": "Viti Rozada",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/15/190863.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37779584,
+        "teamId": 2921,
+        "positionId": 26,
+        "displayName": "Sergio Viera",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37784307,
+        "teamId": 2921,
+        "positionId": 25,
+        "displayName": "Valentino",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37565733,
+        "teamId": 2921,
+        "positionId": 25,
+        "displayName": "Saliou",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37716795,
+        "teamId": 2921,
+        "positionId": 27,
+        "displayName": "Elías Romero",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 5332181,
+        "teamId": 2921,
+        "positionId": 25,
+        "displayName": "A. Pelmard",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/21/5332181.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 821,
+        "teamId": 2921,
+        "positionId": 26,
+        "displayName": "A. Januzaj",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/21/821.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 188155,
+        "teamId": 2921,
+        "positionId": 27,
+        "displayName": "Marc Cardona",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/27/188155.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 12066426,
+        "teamId": 2921,
+        "positionId": 26,
+        "displayName": "Kirian Rodríguez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/26/12066426.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 4746,
+        "teamId": 2921,
+        "positionId": 27,
+        "displayName": "O. McBurnie",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/10/4746.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 173047,
+        "teamId": 2921,
+        "positionId": 25,
+        "displayName": "S. McKenna",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/23/173047.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 1356,
+        "teamId": 2921,
+        "positionId": 26,
+        "displayName": "José Campaña",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/12/1356.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 187163,
+        "teamId": 2921,
+        "positionId": 26,
+        "displayName": "Javi Muñoz",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/27/187163.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 186474,
+        "teamId": 2921,
+        "positionId": 27,
+        "displayName": "Sandro Ramírez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/10/186474.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37710081,
+        "teamId": 2921,
+        "positionId": 25,
+        "displayName": "Juanma Herzog",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/1/37710081.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 187234,
+        "teamId": 2921,
+        "positionId": 26,
+        "displayName": "Benito Ramírez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/2/187234.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 2846756,
+        "teamId": 2921,
+        "positionId": 25,
+        "displayName": "Álex Suárez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/4/2846756.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 11323002,
+        "teamId": 2921,
+        "positionId": 26,
+        "displayName": "E. Loiodice",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/26/11323002.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 32041240,
+        "teamId": 2921,
+        "positionId": 25,
+        "displayName": "Mika Mármol",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/24/32041240.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 188713,
+        "teamId": 2921,
+        "positionId": 27,
+        "displayName": "Jaime Mata",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/9/188713.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 23278692,
+        "teamId": 2921,
+        "positionId": 25,
+        "displayName": "Marvin Park",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/4/23278692.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 3181384,
+        "teamId": 2921,
+        "positionId": 26,
+        "displayName": "Manu Fuster",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/8/3181384.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 23742,
+        "teamId": 2921,
+        "positionId": 24,
+        "displayName": "J. Cillessen",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/30/23742.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 188453,
+        "teamId": 2921,
+        "positionId": 25,
+        "displayName": "Álex Muñoz",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 75085,
+        "teamId": 2921,
+        "positionId": 24,
+        "displayName": "D. Horkaš",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37565677,
+        "teamId": 2921,
+        "positionId": 26,
+        "displayName": "Stefan Bajčetić",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/13/37565677.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37568657,
+        "teamId": 528,
+        "positionId": 27,
+        "displayName": "Roberto Fernández",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37662728,
+        "teamId": 528,
+        "positionId": 27,
+        "displayName": "Omar Sadik",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 9950234,
+        "teamId": 528,
+        "positionId": 26,
+        "displayName": "José Gragera",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/26/9950234.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 30446852,
+        "teamId": 528,
+        "positionId": 26,
+        "displayName": "Urko González",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/4/30446852.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 185573,
+        "teamId": 528,
+        "positionId": 25,
+        "displayName": "Leandro Cabrera",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/5/185573.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37336430,
+        "teamId": 528,
+        "positionId": 24,
+        "displayName": "Angel Fortuno",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/14/37336430.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 30851996,
+        "teamId": 528,
+        "positionId": 27,
+        "displayName": "Jofre Carreras",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37543901,
+        "teamId": 528,
+        "positionId": 25,
+        "displayName": "Omar El Hilali",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/29/37543901.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37568165,
+        "teamId": 528,
+        "positionId": 27,
+        "displayName": "Alejo Véliz",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/5/37568165.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 186450,
+        "teamId": 528,
+        "positionId": 25,
+        "displayName": "Sergi Gómez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/18/186450.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 188057,
+        "teamId": 528,
+        "positionId": 26,
+        "displayName": "Edu Expósito",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/25/188057.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 187248,
+        "teamId": 528,
+        "positionId": 25,
+        "displayName": "Álvaro Tejero",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/16/187248.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 25169144,
+        "teamId": 528,
+        "positionId": 25,
+        "displayName": "Pablo Ramón",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/24/25169144.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 16475841,
+        "teamId": 528,
+        "positionId": 24,
+        "displayName": "Joan García",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/1/16475841.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 186941,
+        "teamId": 528,
+        "positionId": 24,
+        "displayName": "Fernando Pacheco",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/29/186941.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 31626779,
+        "teamId": 528,
+        "positionId": 25,
+        "displayName": "Carlos Romero",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/27/31626779.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 449298,
+        "teamId": 528,
+        "positionId": 26,
+        "displayName": "Álvaro Aguado",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/18/449298.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 186694,
+        "teamId": 528,
+        "positionId": 27,
+        "displayName": "Pere Milla",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/6/186694.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37716722,
+        "teamId": 528,
+        "positionId": 26,
+        "displayName": "Rafael Bauza",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37260212,
+        "teamId": 528,
+        "positionId": 27,
+        "displayName": "Walid Cheddira",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/20/37260212.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 445831,
+        "teamId": 528,
+        "positionId": 25,
+        "displayName": "Fernando Calero",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/7/445831.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 82032,
+        "teamId": 528,
+        "positionId": 26,
+        "displayName": "Alex Král",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/16/82032.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 70428,
+        "teamId": 528,
+        "positionId": 25,
+        "displayName": "Brian Oliván",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/28/70428.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37554185,
+        "teamId": 528,
+        "positionId": 27,
+        "displayName": "Antoniu Roca",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37565080,
+        "teamId": 528,
+        "positionId": 26,
+        "displayName": "Justin Smith",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 532364,
+        "teamId": 528,
+        "positionId": 26,
+        "displayName": "Pol Lozano",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/12/532364.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 3156875,
+        "teamId": 528,
+        "positionId": 25,
+        "displayName": "Marash Kumbulla",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/11/3156875.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 448290,
+        "teamId": 528,
+        "positionId": 27,
+        "displayName": "Javi Puado",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/2/448290.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 100604,
+        "teamId": 844,
+        "positionId": 26,
+        "displayName": "Yvan Neyou",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/28/100604.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 5641100,
+        "teamId": 844,
+        "positionId": 26,
+        "displayName": "Seydouba Cisse",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 455901,
+        "teamId": 844,
+        "positionId": 26,
+        "displayName": "Julián Chicco",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 7330512,
+        "teamId": 844,
+        "positionId": 27,
+        "displayName": "Luís Henriques de Barros Lopes",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 73552,
+        "teamId": 844,
+        "positionId": 25,
+        "displayName": "Borna Barišić",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/16/73552.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 186463,
+        "teamId": 844,
+        "positionId": 27,
+        "displayName": "Munir El Haddadi",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/31/186463.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 188910,
+        "teamId": 844,
+        "positionId": 25,
+        "displayName": "Jorge Sáenz",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/14/188910.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37585292,
+        "teamId": 844,
+        "positionId": 24,
+        "displayName": "Alvin",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 22169115,
+        "teamId": 844,
+        "positionId": 26,
+        "displayName": "Roberto López",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/27/22169115.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 25278,
+        "teamId": 844,
+        "positionId": 26,
+        "displayName": "Renato Tapia",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/30/25278.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 189353,
+        "teamId": 844,
+        "positionId": 24,
+        "displayName": "Juan Soriano",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/9/189353.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 540248,
+        "teamId": 844,
+        "positionId": 25,
+        "displayName": "Javier Hernández",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/24/540248.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 187935,
+        "teamId": 844,
+        "positionId": 27,
+        "displayName": "Dani Raba",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/31/187935.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37529833,
+        "teamId": 844,
+        "positionId": 26,
+        "displayName": "Fer Rodríguez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37912893,
+        "teamId": 844,
+        "positionId": 24,
+        "displayName": "Guillermo Ruiz",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37654842,
+        "teamId": 844,
+        "positionId": 26,
+        "displayName": "Hugo Solozábal",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37787213,
+        "teamId": 844,
+        "positionId": 27,
+        "displayName": "Suleiman El Haddadi Mohamed",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37726303,
+        "teamId": 844,
+        "positionId": 27,
+        "displayName": "Adrián Rosell",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37562613,
+        "teamId": 844,
+        "positionId": 27,
+        "displayName": "Piri",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 33213465,
+        "teamId": 844,
+        "positionId": 25,
+        "displayName": "Adrià Altimira",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/25/33213465.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 33186404,
+        "teamId": 844,
+        "positionId": 27,
+        "displayName": "Diego Garcia",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 177188,
+        "teamId": 844,
+        "positionId": 26,
+        "displayName": "Darko Brašanac",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/4/177188.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 6403,
+        "teamId": 844,
+        "positionId": 24,
+        "displayName": "Marko Dmitrović",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/3/6403.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 4091,
+        "teamId": 844,
+        "positionId": 25,
+        "displayName": "Matija Nastasić",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/27/4091.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 189986,
+        "teamId": 844,
+        "positionId": 25,
+        "displayName": "Sergio González",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 23697481,
+        "teamId": 844,
+        "positionId": 25,
+        "displayName": "Iker Bachiller",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37563940,
+        "teamId": 844,
+        "positionId": 25,
+        "displayName": "Joao Urbáez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 98079,
+        "teamId": 844,
+        "positionId": 25,
+        "displayName": "Valentin Rosier",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/31/98079.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 537208,
+        "teamId": 844,
+        "positionId": 26,
+        "displayName": "Óscar Rodríguez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/24/537208.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 17177580,
+        "teamId": 844,
+        "positionId": 26,
+        "displayName": "Juan Cruz",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/12/17177580.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 446364,
+        "teamId": 844,
+        "positionId": 27,
+        "displayName": "Miguel de la Fuente",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/28/446364.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 448328,
+        "teamId": 844,
+        "positionId": 25,
+        "displayName": "Enric Franquesa",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/8/448328.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 5007,
+        "teamId": 214,
+        "positionId": 27,
+        "displayName": "Sergi Canós",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/15/5007.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 22126554,
+        "teamId": 214,
+        "positionId": 26,
+        "displayName": "Iván Jaime",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/26/22126554.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 1494663,
+        "teamId": 214,
+        "positionId": 25,
+        "displayName": "Max Aarons",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/7/1494663.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 14685650,
+        "teamId": 214,
+        "positionId": 24,
+        "displayName": "Giorgi Mamardashvili",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/18/14685650.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 540261,
+        "teamId": 214,
+        "positionId": 25,
+        "displayName": "Thierry Correia",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/5/540261.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 186965,
+        "teamId": 214,
+        "positionId": 27,
+        "displayName": "Rafa Mir",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/21/186965.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 5641028,
+        "teamId": 214,
+        "positionId": 26,
+        "displayName": "Hugo Guillamón",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/4/5641028.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 162932,
+        "teamId": 214,
+        "positionId": 26,
+        "displayName": "André Almeida",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/20/162932.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 186337,
+        "teamId": 214,
+        "positionId": 25,
+        "displayName": "José Luis Gayà",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/1/186337.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 186619,
+        "teamId": 214,
+        "positionId": 24,
+        "displayName": "Jaume Doménech",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/27/186619.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 23278660,
+        "teamId": 214,
+        "positionId": 25,
+        "displayName": "Jesús Vázquez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/4/23278660.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 23278664,
+        "teamId": 214,
+        "positionId": 26,
+        "displayName": "Fran Pérez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/8/23278664.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 96887,
+        "teamId": 214,
+        "positionId": 25,
+        "displayName": "Mouctar Diakhaby",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/23/96887.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 187167,
+        "teamId": 214,
+        "positionId": 26,
+        "displayName": "Pepelu",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/31/187167.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 142175,
+        "teamId": 214,
+        "positionId": 24,
+        "displayName": "Stole Dimitrievski",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/31/142175.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 130120,
+        "teamId": 214,
+        "positionId": 27,
+        "displayName": "Umar Sadiq",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/8/130120.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37624127,
+        "teamId": 214,
+        "positionId": 25,
+        "displayName": "Yarek Gasiorowski",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/31/37624127.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 445425,
+        "teamId": 214,
+        "positionId": 27,
+        "displayName": "Luis Rioja",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/17/445425.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 95680,
+        "teamId": 214,
+        "positionId": 25,
+        "displayName": "Dimitri Foulquier",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/0/95680.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37608123,
+        "teamId": 214,
+        "positionId": 27,
+        "displayName": "Martín Tejón",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37592228,
+        "teamId": 214,
+        "positionId": 25,
+        "displayName": "Cristhian Mosquera",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/4/37592228.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37316483,
+        "teamId": 214,
+        "positionId": 27,
+        "displayName": "Diego López",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/3/37316483.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37571011,
+        "teamId": 214,
+        "positionId": 26,
+        "displayName": "Javier Guerra",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/3/37571011.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37347355,
+        "teamId": 214,
+        "positionId": 26,
+        "displayName": "Enzo Barrenechea",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/27/37347355.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 6970659,
+        "teamId": 214,
+        "positionId": 27,
+        "displayName": "Hugo Duro",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/3/6970659.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37592231,
+        "teamId": 214,
+        "positionId": 25,
+        "displayName": "César Tárrega",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 2775,
+        "teamId": 2975,
+        "positionId": 27,
+        "displayName": "Kike García",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/23/2775.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 23269641,
+        "teamId": 2975,
+        "positionId": 25,
+        "displayName": "Manuel Sánchez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/9/23269641.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 187098,
+        "teamId": 2975,
+        "positionId": 26,
+        "displayName": "Carles Aleñá",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/26/187098.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 187160,
+        "teamId": 2975,
+        "positionId": 27,
+        "displayName": "Asier Villalibre",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/24/187160.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37647013,
+        "teamId": 2975,
+        "positionId": 24,
+        "displayName": "Grégoire Swiderski",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/5/37647013.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37616149,
+        "teamId": 2975,
+        "positionId": 26,
+        "displayName": "Daouda Doumbia",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37332132,
+        "teamId": 2975,
+        "positionId": 25,
+        "displayName": "Alejandro Jay",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 443792,
+        "teamId": 2975,
+        "positionId": 25,
+        "displayName": "Nahuel Tenaglia",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/16/443792.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 333993,
+        "teamId": 2975,
+        "positionId": 27,
+        "displayName": "Tomás Conechny",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/9/333993.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 4545461,
+        "teamId": 2975,
+        "positionId": 26,
+        "displayName": "Antonio Blanco",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/21/4545461.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 261130,
+        "teamId": 2975,
+        "positionId": 26,
+        "displayName": "Carlos Benavídez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/10/261130.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 188031,
+        "teamId": 2975,
+        "positionId": 26,
+        "displayName": "Jon Guridi",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/31/188031.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 21781710,
+        "teamId": 2975,
+        "positionId": 25,
+        "displayName": "Abdelkabir Abqar",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/14/21781710.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 22536031,
+        "teamId": 2975,
+        "positionId": 25,
+        "displayName": "Moussa Diarra",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/31/22536031.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 25548784,
+        "teamId": 2975,
+        "positionId": 24,
+        "displayName": "Adrián Rodríguez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/16/25548784.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37550914,
+        "teamId": 2975,
+        "positionId": 25,
+        "displayName": "Adrián Pica",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37569176,
+        "teamId": 2975,
+        "positionId": 25,
+        "displayName": "Eneko Ortiz",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37578413,
+        "teamId": 2975,
+        "positionId": 27,
+        "displayName": "Carlos Martín",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/13/37578413.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 447166,
+        "teamId": 2975,
+        "positionId": 26,
+        "displayName": "Ander Guevara",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/30/447166.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 186391,
+        "teamId": 2975,
+        "positionId": 26,
+        "displayName": "Joan Jordán",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/23/186391.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 155976,
+        "teamId": 2975,
+        "positionId": 25,
+        "displayName": "Aleksandar Sedlar",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/8/155976.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 27048381,
+        "teamId": 2975,
+        "positionId": 24,
+        "displayName": "Jesús Owono",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/29/27048381.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37716642,
+        "teamId": 2975,
+        "positionId": 25,
+        "displayName": "Egoitz Muñoz",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37316454,
+        "teamId": 2975,
+        "positionId": 27,
+        "displayName": "Hugo Novoa Ramos",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/6/37316454.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 187158,
+        "teamId": 2975,
+        "positionId": 24,
+        "displayName": "Antonio Sivera",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/22/187158.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37653777,
+        "teamId": 2975,
+        "positionId": 27,
+        "displayName": "Julen Lartitegi",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 522619,
+        "teamId": 2975,
+        "positionId": 25,
+        "displayName": "Facundo Garcés",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 10692,
+        "teamId": 2975,
+        "positionId": 27,
+        "displayName": "Toni Martínez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/4/10692.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37567261,
+        "teamId": 2975,
+        "positionId": 25,
+        "displayName": "Santiago Mouriño",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/29/37567261.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 4977687,
+        "teamId": 2975,
+        "positionId": 27,
+        "displayName": "Carlos Vicente",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/23/4977687.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 37596425,
+        "teamId": 2975,
+        "positionId": 27,
+        "displayName": "Pau Cabanes De La Torre",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37601802,
+        "teamId": 361,
+        "positionId": 26,
+        "displayName": "Mario Martin",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/10/37601802.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 189707,
+        "teamId": 361,
+        "positionId": 25,
+        "displayName": "Luis Pérez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/11/189707.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37650058,
+        "teamId": 361,
+        "positionId": 25,
+        "displayName": "Adam Aznou",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/10/37650058.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 32378,
+        "teamId": 361,
+        "positionId": 26,
+        "displayName": "Florian Grillitsch",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/26/32378.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 368786,
+        "teamId": 361,
+        "positionId": 25,
+        "displayName": "Antonio Candela",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/18/368786.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 198562,
+        "teamId": 361,
+        "positionId": 25,
+        "displayName": "Eray Cömert",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/2/198562.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37589995,
+        "teamId": 361,
+        "positionId": 26,
+        "displayName": "Chuky",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 23223420,
+        "teamId": 361,
+        "positionId": 25,
+        "displayName": "Cenk Özkaçar",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/28/23223420.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37624132,
+        "teamId": 361,
+        "positionId": 25,
+        "displayName": "Koke Iglesias",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 447554,
+        "teamId": 361,
+        "positionId": 27,
+        "displayName": "Marcos André",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/2/447554.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 31226216,
+        "teamId": 361,
+        "positionId": 26,
+        "displayName": "Tamás Nikitscher",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/8/31226216.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 22897102,
+        "teamId": 361,
+        "positionId": 24,
+        "displayName": "Karl Hein",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/14/22897102.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 62786,
+        "teamId": 361,
+        "positionId": 26,
+        "displayName": "Selim Amallah",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/2/62786.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 191303,
+        "teamId": 361,
+        "positionId": 25,
+        "displayName": "Joseph Aidoo",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/7/191303.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 62989,
+        "teamId": 361,
+        "positionId": 27,
+        "displayName": "Mamadou Sylla",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/13/62989.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 37554531,
+        "teamId": 361,
+        "positionId": 25,
+        "displayName": "David Torres",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/3/37554531.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 25548783,
+        "teamId": 361,
+        "positionId": 27,
+        "displayName": "Juanmi Latasa",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/15/25548783.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 4265,
+        "teamId": 361,
+        "positionId": 26,
+        "displayName": "Kenedy",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/9/4265.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 159671,
+        "teamId": 361,
+        "positionId": 27,
+        "displayName": "Darwin Machís",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/23/159671.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37584695,
+        "teamId": 361,
+        "positionId": 24,
+        "displayName": "Arnau Rafús",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/23/37584695.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37590334,
+        "teamId": 361,
+        "positionId": 25,
+        "displayName": "Raúl Chasco",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37423169,
+        "teamId": 361,
+        "positionId": 26,
+        "displayName": "Mario Maroto",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/1/37423169.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 37718924,
+        "teamId": 361,
+        "positionId": 27,
+        "displayName": "Adrián Arnu",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 189956,
+        "teamId": 361,
+        "positionId": 26,
+        "displayName": "Anuar",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/4/189956.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 447134,
+        "teamId": 361,
+        "positionId": 25,
+        "displayName": "Javi Sánchez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/30/447134.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 187216,
+        "teamId": 361,
+        "positionId": 26,
+        "displayName": "Iván Sánchez",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/16/187216.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 32819166,
+        "teamId": 361,
+        "positionId": 27,
+        "displayName": "Raúl Moro",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/30/32819166.png",
+        "estrellas": 3
+    },
+    {
+        "_id": 74887,
+        "teamId": 361,
+        "positionId": 26,
+        "displayName": "Stanko Jurić",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/placeholder.png",
+        "estrellas": 2
+    },
+    {
+        "_id": 187680,
+        "teamId": 361,
+        "positionId": 27,
+        "displayName": "Amath Ndiaye",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/0/187680.png",
+        "estrellas": 1
+    },
+    {
+        "_id": 162208,
+        "teamId": 361,
+        "positionId": 24,
+        "displayName": "André Ferreira",
+        "imagePath": "https://cdn.sportmonks.com/images/soccer/players/0/162208.png",
+        "estrellas": 1
+    }
+]
