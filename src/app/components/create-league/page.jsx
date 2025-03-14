@@ -17,7 +17,7 @@ export default function CreateLeague() {
     <div className="flex flex-col items-center justify-center p-4 min-h-[calc(100vh-128px)]">
       <div className="w-full max-w-md space-y-6 bg-white p-6 rounded-lg shadow-sm">
         <div className="flex items-center gap-4">
-          <Link href="/choose-league" className="text-gray-600 hover:text-gray-900">
+          <Link href="/components/choose-league" className="text-gray-600 hover:text-gray-900">
             <ArrowLeft className="h-6 w-6" />
           </Link>
           <h2 className="text-xl font-medium">CREAR LIGA</h2>
