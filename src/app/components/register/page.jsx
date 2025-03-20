@@ -12,7 +12,47 @@ import Layout2 from "@/components/layout2"
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-  const router = useRouter() // ✅ Initialize the router
+  const [email, setEmail] = useState("")
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
+  const [error, setError] = useState("")
+  const [loading, setLoading] = useState(false)
+
+  const router = useRouter()
+
+  const handleRegister = async () => {
+    setError("")
+    if (password !== confirmPassword) {
+      setError("Las contraseñas no coinciden.")
+      return
+    }
+
+    try {
+      setLoading(true)
+      const res = await fetch("/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ correo: email, username, password }),
+      })
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        throw new Error(data.error || "Error al registrar usuario")
+      }
+
+      localStorage.setItem("token", data.token)
+
+      router.push("/components/home_logged")
+    } catch (error) {
+      setError(error.message)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <Layout2>
@@ -25,7 +65,14 @@ export default function Register() {
               <label htmlFor="email" className="text-sm font-medium">
                 Correo
               </label>
-              <Input id="email" type="email" />
+              <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="username" className="text-sm font-medium">
+                Nombre de usuario
+              </label>
+              <Input id="username" type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
             </div>
 
             <div className="space-y-2">
@@ -33,7 +80,12 @@ export default function Register() {
                 Contraseña
               </label>
               <div className="relative">
-                <Input id="password" type={showPassword ? "text" : "password"} />
+                <Input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
@@ -42,12 +94,6 @@ export default function Register() {
                   {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
               </div>
-              <ul className="text-xs text-gray-600 space-y-1 list-disc pl-4">
-                <li>Debe incluir una mayúscula</li>
-                <li>Debe incluir números</li>
-                <li>Debe contener al menos un carácter especial</li>
-                <li>La contraseña debe ser de al menos 8 caracteres</li>
-              </ul>
             </div>
 
             <div className="space-y-2">
@@ -55,7 +101,12 @@ export default function Register() {
                 Repetir contraseña
               </label>
               <div className="relative">
-                <Input id="confirm-password" type={showConfirmPassword ? "text" : "password"} />
+                <Input
+                  id="confirm-password"
+                  type={showConfirmPassword ? "text" : "password"}
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
@@ -67,12 +118,14 @@ export default function Register() {
             </div>
           </div>
 
-          {/* ✅ Fixed Button with router */}
+          {error && <p className="text-red-500 text-sm">{error}</p>}
+
           <Button
             className="w-full bg-[#e5e5ea] text-black hover:bg-[#d2d2d2]"
-            onClick={() => router.push("/components/home_logged")}
+            onClick={handleRegister}
+            disabled={loading}
           >
-            REGÍSTRATE
+            {loading ? "Registrando..." : "REGÍSTRATE"}
           </Button>
 
           <div className="text-center space-y-4">
@@ -93,7 +146,6 @@ export default function Register() {
             </button>
           </div>
 
-          {/* ✅ Fixed Link without inline onClick */}
           <div className="text-center text-sm">
             <Link href="/login" className="text-blue-600 hover:underline">
               Ya tengo cuenta
