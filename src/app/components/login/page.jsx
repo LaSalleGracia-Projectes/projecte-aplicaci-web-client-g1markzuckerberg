@@ -3,15 +3,44 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
-import Link from "next/link"
 import { Button } from "@/components/ui"
 import { Input } from "@/components/ui"
 import { Eye, EyeOff } from "lucide-react"
 import Layout2 from "@/components/layout2"
 
-export default function Login2() {
+export default function Login() {
   const [showPassword, setShowPassword] = useState(false)
+  const [correo, setCorreo] = useState("")
+  const [password, setPassword] = useState("")
+  const [error, setError] = useState("")
   const router = useRouter()
+
+  const handleLogin = async () => {
+    setError("")
+
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ correo, password }), // <-- Aquí se usa "correo"
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        setError(data.error || "Error al iniciar sesión")
+        return
+      }
+
+      // Guardar tokens en localStorage
+      localStorage.setItem("webToken", data.tokens.webToken)
+      localStorage.setItem("refreshWebToken", data.tokens.refreshWebToken)
+
+      router.push("/components/home_logged")
+    } catch (error) {
+      setError("Error en el servidor")
+    }
+  }
 
   return (
     <Layout2>
@@ -21,10 +50,15 @@ export default function Login2() {
 
           <div className="space-y-4">
             <div className="space-y-2">
-              <label htmlFor="email" className="text-sm font-medium">
+              <label htmlFor="correo" className="text-sm font-medium">
                 Correo
               </label>
-              <Input id="email" type="email" />
+              <Input
+                id="correo"
+                type="email"
+                value={correo}
+                onChange={(e) => setCorreo(e.target.value)}
+              />
             </div>
 
             <div className="space-y-2">
@@ -32,7 +66,12 @@ export default function Login2() {
                 Contraseña
               </label>
               <div className="relative">
-                <Input id="password" type={showPassword ? "text" : "password"} />
+                <Input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
@@ -44,9 +83,11 @@ export default function Login2() {
             </div>
           </div>
 
+          {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+
           <Button
             className="w-full bg-[#e5e5ea] text-black hover:bg-[#d2d2d2]"
-            onClick={() => router.push("/components/home_logged")} 
+            onClick={handleLogin}
           >
             INICIAR SESIÓN
           </Button>
