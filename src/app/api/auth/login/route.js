@@ -2,7 +2,7 @@ import { NextResponse } from "next/server"
 
 export async function POST(req) {
   try {
-    const { correo, password } = await req.json() // <-- Se usa "correo" en vez de "email"
+    const { correo, password } = await req.json()
 
     if (!correo || !password) {
       return NextResponse.json({ error: "Todos los campos son obligatorios" }, { status: 400 })
