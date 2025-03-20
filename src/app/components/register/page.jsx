@@ -22,37 +22,41 @@ export default function Register() {
   const router = useRouter()
 
   const handleRegister = async () => {
-    setError("")
+    setError("");
     if (password !== confirmPassword) {
-      setError("Las contraseñas no coinciden.")
-      return
+      setError("Las contraseñas no coinciden.");
+      return;
     }
-
+  
     try {
-      setLoading(true)
-      const res = await fetch("/api/register", {
+      setLoading(true);
+      const res = await fetch("http://localhost:3000/api/v1/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ correo: email, username, password }),
-      })
-
-      const data = await res.json()
-
+        body: JSON.stringify({
+          correo: email,
+          username,
+          password,
+          repeatPassword: confirmPassword,
+        }),
+      });
+  
+      const data = await res.json();
+  
       if (!res.ok) {
-        throw new Error(data.error || "Error al registrar usuario")
+        throw new Error(data.error || "Error al registrar usuario");
       }
-
-      localStorage.setItem("token", data.token)
-
-      router.push("/components/home_logged")
+  
+      localStorage.setItem("token", data.token);
+      router.push("/components/home_logged");
     } catch (error) {
-      setError(error.message)
+      setError(error.message);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };  
 
   return (
     <Layout2>
@@ -94,6 +98,11 @@ export default function Register() {
                   {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
               </div>
+              <ul className="text-xs text-gray-600 space-y-1 list-disc pl-4">
+                <li>Debe incluir una mayúscula</li>
+                <li>Debe incluir números</li>
+                <li>La contraseña debe ser de al menos 8 caracteres</li>
+              </ul>
             </div>
 
             <div className="space-y-2">
