@@ -3,6 +3,7 @@
 import Layout from "@/components/layout"
 import { Accordion, AccordionHeader, AccordionBody, Button } from "@material-tailwind/react"
 import { useState } from "react"
+import AuthGuard from "@/components/authGuard/authGuard"
 
 const sections = [
   {
@@ -84,33 +85,35 @@ export default function Info() {
   }
 
   return (
-    <Layout>
-      <div className="flex flex-col items-center justify-center min-h-screen p-4">
-        <div className="w-full max-w-2xl space-y-6">
-          {sections.map(({ value, title, content }) => (
-            <Accordion key={value} open={open === value}>
-              <AccordionHeader 
-                onClick={() => handleOpen(value)} 
-                className="flex items-center justify-between w-full px-4 py-3 bg-gray-100 rounded-lg cursor-pointer"
-              >
-                <span className="text-lg font-medium">{title}</span>
-                <div className="ml-auto"> {/* Empuja la imagen totalmente a la derecha */}
-                  <img 
-                    src={open === value ? "/images/replegar.png" : "/images/desplegable.png"} 
-                    alt={open === value ? "Replegar" : "Desplegar"} 
-                    className="w-6 h-6"
-                  />
-                </div>
-              </AccordionHeader>
-              <AccordionBody className="px-4 py-3">{content}</AccordionBody>
-            </Accordion>
-          ))}
+    <AuthGuard>
+      <Layout>
+        <div className="flex flex-col items-center justify-center min-h-screen p-4">
+          <div className="w-full max-w-2xl space-y-6">
+            {sections.map(({ value, title, content }) => (
+              <Accordion key={value} open={open === value}>
+                <AccordionHeader 
+                  onClick={() => handleOpen(value)} 
+                  className="flex items-center justify-between w-full px-4 py-3 bg-gray-100 rounded-lg cursor-pointer"
+                >
+                  <span className="text-lg font-medium">{title}</span>
+                  <div className="ml-auto"> {/* Empuja la imagen totalmente a la derecha */}
+                    <img 
+                      src={open === value ? "/images/replegar.png" : "/images/desplegable.png"} 
+                      alt={open === value ? "Replegar" : "Desplegar"} 
+                      className="w-6 h-6"
+                    />
+                  </div>
+                </AccordionHeader>
+                <AccordionBody className="px-4 py-3">{content}</AccordionBody>
+              </Accordion>
+            ))}
 
-          <Button color="red" className="w-full mt-8" onClick={() => console.log("Cerrar sesión clicked")}>
-            Cerrar Sesión
-          </Button>
+            <Button color="red" className="w-full mt-8" onClick={() => console.log("Cerrar sesión clicked")}>
+              Cerrar Sesión
+            </Button>
+          </div>
         </div>
-      </div>
-    </Layout>
+      </Layout>
+    </AuthGuard>
   )
 }
