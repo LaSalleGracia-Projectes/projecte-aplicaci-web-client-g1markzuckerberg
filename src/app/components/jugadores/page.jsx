@@ -1,6 +1,4 @@
-// pages/index.js
 import Layout from "@/components/layout";
-import Image from "next/image";
 import AuthGuard from "@/components/authGuard/authGuard";
 
 export default function Jugadores() {

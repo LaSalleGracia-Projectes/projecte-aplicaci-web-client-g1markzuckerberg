@@ -1,10 +1,8 @@
 "use client"
 
-import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui"
 import { Input } from "@/components/ui"
-import { Textarea } from "@/components/ui"
 import { ArrowLeft, Download } from "lucide-react"
 import Layout2 from "@/components/layout2"
 import { useRouter } from "next/navigation"

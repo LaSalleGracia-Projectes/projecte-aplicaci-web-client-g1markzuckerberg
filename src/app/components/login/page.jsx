@@ -105,7 +105,7 @@ export default function Login() {
             <p>Inicia sesión con:</p>
             <button className="p-2 border rounded-md mx-auto block">
               <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Untitled-v6zqTeTlQ21tVc0cuHzCv5eadUosMZ.png"
+                src="/images/google.png"
                 alt="Google Sign In"
                 width={32}
                 height={32}

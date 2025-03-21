@@ -1,4 +1,3 @@
-// pages/index.js
 import Layout from "@/components/layout";
 import LeagueMessage from "@/components/home_log/mensajes";
 import AuthGuard from "@/components/authGuard/authGuard";
