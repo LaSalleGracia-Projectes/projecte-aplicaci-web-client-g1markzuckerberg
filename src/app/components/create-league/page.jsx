@@ -1,15 +1,52 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { Button } from "@/components/ui"
-import { Input } from "@/components/ui"
-import { ArrowLeft, Download } from "lucide-react"
-import Layout2 from "@/components/layout2"
-import { useRouter } from "next/navigation"
-import AuthGuard from "@/components/authGuard/authGuard"
+import Link from "next/link";
+import { Button } from "@/components/ui";
+import { Input } from "@/components/ui";
+import { ArrowLeft, Download } from "lucide-react";
+import Layout2 from "@/components/layout2";
+import { useRouter } from "next/navigation";
+import AuthGuard from "@/components/authGuard/authGuard";
+import { useState } from "react";
 
 export default function CreateLeague() {
-  const router = useRouter()
+  const router = useRouter();
+  const [name, setName] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false); // Nuevo estado para evitar doble envío
+
+  const handleCreateLeague = async () => {
+    setError("");
+    setLoading(true); // Iniciar el estado de carga
+    try {
+      const token = localStorage.getItem("webToken"); // Asegurar que usamos el mismo token en todo el sistema
+      if (!token) {
+        setError("No estás autenticado.");
+        setLoading(false);
+        return;
+      }
+
+      const res = await fetch("http://localhost:3000/api/v1/liga/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ name }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || "Error al crear la liga");
+      }
+
+      router.push("/components/home_logged");
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false); // Finalizar el estado de carga
+    }
+  };
 
   return (
     <AuthGuard>
@@ -23,12 +60,20 @@ export default function CreateLeague() {
               <h2 className="text-xl font-medium">CREAR LIGA</h2>
             </div>
 
+            {error && <p className="text-red-500 text-sm">{error}</p>}
+
             <div className="space-y-4">
               <div className="space-y-2">
                 <label htmlFor="name" className="text-sm font-medium">
                   Nombre de la liga:
                 </label>
-                <Input id="name" type="text" />
+                <Input
+                  id="name"
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  disabled={loading} // Deshabilitar input durante carga
+                />
               </div>
 
               <div className="space-y-2">
@@ -44,13 +89,16 @@ export default function CreateLeague() {
               </div>
             </div>
 
-            <Button className="w-full bg-[#e5e5ea] text-black hover:bg-[#d2d2d2]"
-            onClick={() => router.push("/components/home_logged")}
-            >CREAR LIGA</Button>
+            <Button
+              className="w-full bg-[#e5e5ea] text-black hover:bg-[#d2d2d2]"
+              onClick={handleCreateLeague}
+              disabled={loading} // Deshabilitar botón mientras se carga
+            >
+              {loading ? "Creando..." : "CREAR LIGA"}
+            </Button>
           </div>
         </div>
       </Layout2>
     </AuthGuard>
-  )
+  );
 }
-
