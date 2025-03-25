@@ -4,6 +4,7 @@ import { useState } from "react"
 import Layout from "@/components/layout"
 import Link from "next/link"
 import { ImageIcon, Trash2 } from "lucide-react"
+import AuthGuard from "@/components/authGuard/authGuard"
 
 export default function Ajustes() {
   const [isOpen, setIsOpen] = useState(false)
@@ -67,7 +68,8 @@ export default function Ajustes() {
   ]
 
   return (
-    <Layout currentPage="Ajustes">
+    <AuthGuard>
+      <Layout currentPage="Ajustes">
       <div className="h-screen flex items-center justify-center">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full max-w-2xl h-[90vh] p-4">
           {opciones.map((opcion, index) =>
@@ -177,17 +179,18 @@ export default function Ajustes() {
               <div>
                 <h2 className="text-xl font-bold mb-4">Información</h2>
                 <p className="mb-4">{popupContent}</p>
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
-                >
-                  Cerrar
-                </button>
-              </div>
-            )}
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+                  >
+                    Cerrar
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      )}
-    </Layout>
+        )}
+      </Layout>
+    </AuthGuard>
   )
 }

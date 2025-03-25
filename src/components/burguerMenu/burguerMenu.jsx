@@ -8,7 +8,37 @@ const user = {
 };
 
 export default function BurgerMenuContent({ onClose }) {
-  const router = useRouter(); // ✅ Se inicializa el router
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      const token = localStorage.getItem("webToken"); // Obtener el token almacenado
+
+      const response = await fetch("/api/auth/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        console.error("Error al cerrar sesión:", data.error);
+        return;
+      }
+
+      // Eliminar tokens del almacenamiento local
+      localStorage.removeItem("webToken");
+      localStorage.removeItem("refreshWebToken");
+
+      // Redirigir al usuario a la página de inicio
+      router.push("/");
+    } catch (error) {
+      console.error("Error en el servidor:", error);
+    }
+  };
 
   return (
     <div className="w-64 bg-gray-900 text-white p-4 rounded-lg shadow-lg">
@@ -22,20 +52,17 @@ export default function BurgerMenuContent({ onClose }) {
           <img src="/images/ajustes.png" alt="ajustes" className="w-4 h-4 cursor-pointer" />
         </Link>
       </div>
-      
+
       {/* Ligas */}
       <div className="mb-4">
         <p className="font-semibold mb-2">Ligas:</p>
         <ul className="space-y-1">
           {user.leagues.map((league, index) => (
-            <li key={index} className="text-sm bg-gray-800 p-2 rounded-md">
-              {league}
-            </li>
+            <li key={index} className="text-sm bg-gray-800 p-2 rounded-md">{league}</li>
           ))}
         </ul>
       </div>
 
-      {/* ✅ Botón corregido para redirigir a "join-league" */}
       <button
         className="w-full bg-blue-500 text-white py-2 rounded-md mt-4 hover:bg-blue-700"
         onClick={() => router.push("/components/choose-league")}
@@ -48,7 +75,10 @@ export default function BurgerMenuContent({ onClose }) {
       </Link>
 
       {/* Botón de cerrar sesión */}
-      <button className="w-full bg-red-500 text-white py-2 rounded-md mt-4 hover:bg-red-700">
+      <button
+        className="w-full bg-red-500 text-white py-2 rounded-md mt-4 hover:bg-red-700"
+        onClick={handleLogout} // Llama a la función de logout
+      >
         Cerrar sesión
       </button>
     </div>
