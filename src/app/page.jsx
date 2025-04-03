@@ -1,227 +1,350 @@
 'use client';
 
-import Image from "next/image";
-import { Button } from "@/components/ui";
-import { Card } from "@/components/ui";
-import { useRouter } from "next/navigation";
-import Layout2 from "@/components/layout2";
-import { Globe, ChevronDown } from "lucide-react"
+import React from 'react';
+import { 
+  Box, 
+  Typography, 
+  Button, 
+  Container, 
+  Grid, 
+  Paper, 
+  Divider,
+  Avatar,
+  IconButton,
+  styled
+} from '@mui/material';
+import LanguageIcon from '@mui/icons-material/Language';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import PersonIcon from '@mui/icons-material/Person';
 
-export default function Home() {
-  const router = useRouter();
+// Componentes estilizados
+const TeamLogo = styled(Box)(({ theme }) => ({
+  width: 40,
+  height: 40,
+  border: '1px solid #d9d9d9',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  position: 'relative',
+  '&::before, &::after': {
+    content: '""',
+    position: 'absolute',
+    width: '100%',
+    height: 1,
+    backgroundColor: '#d9d9d9',
+  },
+  '&::before': {
+    transform: 'rotate(45deg)',
+  },
+  '&::after': {
+    transform: 'rotate(-45deg)',
+  }
+}));
+
+const PlaceholderImage = styled(Box)(({ theme }) => ({
+  width: '100%',
+  height: 130,
+  border: '1px solid #c4c4c4',
+  position: 'relative',
+  '&::before, &::after': {
+    content: '""',
+    position: 'absolute',
+    width: '100%',
+    height: 1,
+    backgroundColor: '#c4c4c4',
+    top: '50%',
+    left: 0,
+  },
+  '&::before': {
+    transform: 'rotate(45deg)',
+  },
+  '&::after': {
+    transform: 'rotate(-45deg)',
+  }
+}));
+
+const NavButton = styled(Button)(({ theme, active }) => ({
+  textTransform: 'none',
+  padding: '8px 4px',
+  backgroundColor: active ? '#eeeeee' : 'transparent',
+  color: '#000000',
+  '&:hover': {
+    backgroundColor: active ? '#eeeeee' : 'rgba(0, 0, 0, 0.04)',
+  },
+  borderRadius: 0,
+  fontSize: '0.75rem',
+}));
+
+const LanguageButton = styled(Button)(({ theme }) => ({
+  backgroundColor: '#787878',
+  color: 'white',
+  textTransform: 'none',
+  padding: '4px 8px',
+  '&:hover': {
+    backgroundColor: '#666666',
+  },
+  borderRadius: 4,
+  fontSize: '0.75rem',
+}));
+
+const FooterLink = styled(Typography)(({ theme }) => ({
+  color: 'white',
+  fontSize: '0.75rem',
+  cursor: 'pointer',
+  '&:hover': {
+    textDecoration: 'underline',
+  },
+}));
+
+export default function Page() {
+  // Datos de ejemplo
+  const leftMatches = [
+    { team1: "Equipo 1", team2: "Equipo 2" },
+    { team1: "Equipo 3", team2: "Equipo 4" },
+    { team1: "Equipo 5", team2: "Equipo 6" },
+    { team1: "Equipo 7", team2: "Equipo 8" },
+    { team1: "Equipo 9", team2: "Equipo 10" },
+  ];
+
+  const rightMatches = [
+    { team1: "Equipo 11", team2: "Equipo 12" },
+    { team1: "Equipo 13", team2: "Equipo 14" },
+    { team1: "Equipo 15", team2: "Equipo 16" },
+    { team1: "Equipo 17", team2: "Equipo 18" },
+    { team1: "Equipo 19", team2: "Equipo 20" },
+  ];
+
+  const goalScorers = [
+    { name: "Jugador1", value: 14 },
+    { name: "Jugador2", value: 8 },
+    { name: "Jugador3", value: 7 },
+  ];
+
+  const assistProviders = [
+    { name: "Jugador1", value: 7 },
+    { name: "Jugador2", value: 6 },
+    { name: "Jugador3", value: 5 },
+  ];
 
   return (
-    <Layout2>
-      <div className="flex flex-col min-h-screen bg-[#eeeeee]">
-      
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', bgcolor: '#eeeeee' }}>
+      {/* Header */}
+      <Box sx={{ bgcolor: '#d9d9d9', py: 2, textAlign: 'center' }}>
+        <Typography variant="h4" fontWeight="bold" color="#000000">
+          FantasyDraft
+        </Typography>
+      </Box>
 
       {/* Banner */}
-      <div className="relative bg-white w-full h-64 border-b border-[#d9d9d9]">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-full h-full relative">
-            {/* Diagonal lines */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-full h-0.5 bg-[#d9d9d9] rotate-45 origin-center" />
-              <div className="w-full h-0.5 bg-[#d9d9d9] -rotate-45 origin-center" />
-            </div>
-          </div>
-        </div>
-      </div>
+      <Box sx={{ position: 'relative', bgcolor: 'white', width: '100%', height: 250, borderBottom: '1px solid #d9d9d9' }}>
+        <Box sx={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Box sx={{ width: '100%', height: '100%', position: 'relative' }}>
+            <Box sx={{ 
+              position: 'absolute', 
+              inset: 0, 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              '&::before, &::after': {
+                content: '""',
+                position: 'absolute',
+                width: '100%',
+                height: 1,
+                backgroundColor: '#d9d9d9',
+              },
+              '&::before': {
+                transform: 'rotate(45deg)',
+              },
+              '&::after': {
+                transform: 'rotate(-45deg)',
+              }
+            }} />
+          </Box>
+        </Box>
+      </Box>
 
       {/* Call to action */}
-      <div className="bg-[#d9d9d9] py-12 flex justify-center">
-        <button className="bg-white px-8 py-3 rounded-md text-[#000000] font-medium border border-[#c4c4c4]">
+      <Box sx={{ bgcolor: '#d9d9d9', py: 6, display: 'flex', justifyContent: 'center' }}>
+        <Button 
+          variant="contained" 
+          sx={{ 
+            bgcolor: 'white', 
+            color: '#000000', 
+            px: 4, 
+            py: 1.5, 
+            borderRadius: 1,
+            border: '1px solid #c4c4c4',
+            boxShadow: 'none',
+            '&:hover': {
+              bgcolor: '#f5f5f5',
+              boxShadow: 'none',
+            }
+          }}
+        >
           COMENZAR A JUGAR
-        </button>
-      </div>
+        </Button>
+      </Box>
 
       {/* Next matchday section */}
-      <div className="py-8 px-4 bg-white">
-        <h2 className="text-xl font-semibold text-center mb-2 text-[#000000]">PRÓXIMA JORNADA</h2>
-        <div className="w-full max-w-3xl mx-auto h-px bg-[#d9d9d9] mb-6 text-[#000000]"></div>
+      <Box sx={{ py: 4, px: 2, bgcolor: 'white' }}>
+        <Typography variant="h6" fontWeight="600" textAlign="center" mb={1}>
+          PRÓXIMA JORNADA
+        </Typography>
+        <Divider sx={{ maxWidth: '600px', mx: 'auto', mb: 3 }} />
 
         {/* Matches grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-5xl mx-auto text-[#000000]">
-          {/* Left column */}
-          <div className="space-y-4 text-[#000000]">
-            {[
-              { team1: "Equipo 1", team2: "Equipo 2" },
-              { team1: "Equipo 3", team2: "Equipo 4" },
-              { team1: "Equipo 5", team2: "Equipo 6" },
-              { team1: "Equipo 7", team2: "Equipo 8" },
-              { team1: "Equipo 9", team2: "Equipo 10" },
-            ].map((match, index) => (
-              <div key={index} className="flex items-center justify-between bg-[#f5f5f5] p-3 rounded-sm text-[#000000]">
-                <div className="flex items-center text-[#000000]">
-                  <div className="w-10 h-10 border border-[#d9d9d9] flex items-center justify-center text-[#000000]">
-                    <div className="w-8 h-8 relative text-[#000000]">
-                      <div className="absolute inset-0 flex items-center justify-center text-[#000000]">
-                        <div className="w-full h-0.5 bg-[#d9d9d9] rotate-45 origin-center text-[#000000]" />
-                        <div className="w-full h-0.5 bg-[#d9d9d9] -rotate-45 origin-center text-[#000000]" />
-                      </div>
-                    </div>
-                  </div>
-                  <span className="ml-2 font-medium text-[#000000]">{match.team1}</span>
-                </div>
-                <span className="mx-2 text-sm font-medium text-[#000000]">vs</span>
-                <div className="flex items-centertext-[#000000]">
-                  <span className="mr-2 font-medium text-[#000000]">{match.team2}</span>
-                  <div className="w-10 h-10 border border-[#d9d9d9] flex items-center justify-center text-[#000000]">
-                    <div className="w-8 h-8 relative text-[#000000]">
-                      <div className="absolute inset-0 flex items-center justify-center text-[#000000]">
-                        <div className="w-full h-0.5 bg-[#d9d9d9] rotate-45 origin-center text-[#000000]" />
-                        <div className="w-full h-0.5 bg-[#d9d9d9] -rotate-45 origin-center text-[#000000]" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+        <Container maxWidth="lg">
+          <Grid container spacing={2}>
+            {/* Left column */}
+            <Grid item xs={12} md={6}>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                {leftMatches.map((match, index) => (
+                  <Paper key={index} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', p: 1.5, bgcolor: '#f5f5f5', boxShadow: 'none' }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                      <TeamLogo />
+                      <Typography sx={{ ml: 1, fontWeight: 500 }}>{match.team1}</Typography>
+                    </Box>
+                    <Typography sx={{ mx: 1, fontSize: '0.875rem', fontWeight: 500 }}>vs</Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                      <Typography sx={{ mr: 1, fontWeight: 500 }}>{match.team2}</Typography>
+                      <TeamLogo />
+                    </Box>
+                  </Paper>
+                ))}
+              </Box>
+            </Grid>
 
-          {/* Right column */}
-          <div className="space-y-4 text-[#000000]">
-            {[
-              { team1: "Equipo 11", team2: "Equipo 12" },
-              { team1: "Equipo 13", team2: "Equipo 14" },
-              { team1: "Equipo 15", team2: "Equipo 16" },
-              { team1: "Equipo 17", team2: "Equipo 18" },
-              { team1: "Equipo 19", team2: "Equipo 20" },
-            ].map((match, index) => (
-              <div key={index} className="flex items-center justify-between bg-[#f5f5f5] p-3 rounded-sm">
-                <div className="flex items-center">
-                  <div className="w-10 h-10 border border-[#d9d9d9] flex items-center justify-center">
-                    <div className="w-8 h-8 relative">
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-full h-0.5 bg-[#d9d9d9] rotate-45 origin-center" />
-                        <div className="w-full h-0.5 bg-[#d9d9d9] -rotate-45 origin-center" />
-                      </div>
-                    </div>
-                  </div>
-                  <span className="ml-2 font-medium">{match.team1}</span>
-                </div>
-                <span className="mx-2 text-sm font-medium">vs</span>
-                <div className="flex items-center">
-                  <span className="mr-2 font-medium">{match.team2}</span>
-                  <div className="w-10 h-10 border border-[#d9d9d9] flex items-center justify-center">
-                    <div className="w-8 h-8 relative">
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-full h-0.5 bg-[#d9d9d9] rotate-45 origin-center" />
-                        <div className="w-full h-0.5 bg-[#d9d9d9] -rotate-45 origin-center" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+            {/* Right column */}
+            <Grid item xs={12} md={6}>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                {rightMatches.map((match, index) => (
+                  <Paper key={index} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', p: 1.5, bgcolor: '#f5f5f5', boxShadow: 'none' }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                      <TeamLogo />
+                      <Typography sx={{ ml: 1, fontWeight: 500 }}>{match.team1}</Typography>
+                    </Box>
+                    <Typography sx={{ mx: 1, fontSize: '0.875rem', fontWeight: 500 }}>vs</Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                      <Typography sx={{ mr: 1, fontWeight: 500 }}>{match.team2}</Typography>
+                      <TeamLogo />
+                    </Box>
+                  </Paper>
+                ))}
+              </Box>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
 
       {/* Stats section */}
-      <div className="bg-[#d9d9d9] py-8 px-4 text-[#000000]">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 text-[#000000]">
-          {/* Goal scorers */}
-          <div>
-            <h3 className="text-lg font-semibold mb-4 text-[#000000]">Goleadores</h3>
-            <div className="space-y-2 text-[#000000]">
-              {[
-                { name: "Jugador1", value: 14 },
-                { name: "Jugador2", value: 8 },
-                { name: "Jugador3", value: 7 },
-              ].map((player, index) => (
-                <div key={index} className="flex items-center bg-[#eeeeee] rounded-md p-2">
-                  <div className="w-8 h-8 bg-[#c4c4c4] rounded-full flex items-center justify-center mr-2">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21"
-                        stroke="#787878"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z"
-                        stroke="#787878"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </div>
-                  <span className="flex-grow">{player.name}</span>
-                  <div className="flex items-center">
-                    <span className="text-xs mr-1 text-[#787878]">G</span>
-                    <span className="font-semibold">{player.value}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+      <Box sx={{ bgcolor: '#d9d9d9', py: 4, px: 2 }}>
+        <Container maxWidth="lg">
+          <Grid container spacing={3}>
+            {/* Goal scorers */}
+            <Grid item xs={12} md={4}>
+              <Typography variant="h6" fontWeight="600" mb={2}>
+                Goleadores
+              </Typography>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                {goalScorers.map((player, index) => (
+                  <Paper key={index} sx={{ display: 'flex', alignItems: 'center', p: 1, bgcolor: '#eeeeee', boxShadow: 'none', borderRadius: 1 }}>
+                    <Avatar sx={{ width: 32, height: 32, mr: 1, bgcolor: '#c4c4c4' }}>
+                      <PersonIcon sx={{ color: '#787878', fontSize: 16 }} />
+                    </Avatar>
+                    <Typography sx={{ flexGrow: 1 }}>{player.name}</Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                      <Typography sx={{ fontSize: '0.75rem', mr: 0.5, color: '#787878' }}>G</Typography>
+                      <Typography fontWeight="600">{player.value}</Typography>
+                    </Box>
+                  </Paper>
+                ))}
+              </Box>
+            </Grid>
 
-          {/* Center image */}
-          <div className="flex items-center justify-center">
-            <div className="w-full h-32 relative">
-              <div className="absolute inset-0 flex items-center justify-center border border-[#c4c4c4]">
-                <div className="w-full h-0.5 bg-[#c4c4c4] rotate-45 origin-center" />
-                <div className="w-full h-0.5 bg-[#c4c4c4] -rotate-45 origin-center" />
-              </div>
-            </div>
-          </div>
+            {/* Center image */}
+            <Grid item xs={12} md={4} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <PlaceholderImage />
+            </Grid>
 
-          {/* Assist providers */}
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Asistidores</h3>
-            <div className="space-y-2">
-              {[
-                { name: "Jugador1", value: 7 },
-                { name: "Jugador2", value: 6 },
-                { name: "Jugador3", value: 5 },
-              ].map((player, index) => (
-                <div key={index} className="flex items-center bg-[#eeeeee] rounded-md p-2">
-                  <div className="w-8 h-8 bg-[#c4c4c4] rounded-full flex items-center justify-center mr-2">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21"
-                        stroke="#787878"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z"
-                        stroke="#787878"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </div>
-                  <span className="flex-grow">{player.name}</span>
-                  <div className="flex items-center">
-                    <span className="text-xs mr-1 text-[#787878]">A</span>
-                    <span className="font-semibold">{player.value}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
+            {/* Assist providers */}
+            <Grid item xs={12} md={4}>
+              <Typography variant="h6" fontWeight="600" mb={2}>
+                Asistidores
+              </Typography>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                {assistProviders.map((player, index) => (
+                  <Paper key={index} sx={{ display: 'flex', alignItems: 'center', p: 1, bgcolor: '#eeeeee', boxShadow: 'none', borderRadius: 1 }}>
+                    <Avatar sx={{ width: 32, height: 32, mr: 1, bgcolor: '#c4c4c4' }}>
+                      <PersonIcon sx={{ color: '#787878', fontSize: 16 }} />
+                    </Avatar>
+                    <Typography sx={{ flexGrow: 1 }}>{player.name}</Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                      <Typography sx={{ fontSize: '0.75rem', mr: 0.5, color: '#787878' }}>A</Typography>
+                      <Typography fontWeight="600">{player.value}</Typography>
+                    </Box>
+                  </Paper>
+                ))}
+              </Box>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
 
       {/* Navigation */}
-      <div className="bg-white py-2 border-t border-[#d9d9d9]">
-        <div className="max-w-5xl mx-auto grid grid-cols-5 text-center text-sm">
-          <button className="py-2 px-1 bg-[#eeeeee]">Página principal</button>
-          <button className="py-2 px-1">Resultados</button>
-          <button className="py-2 px-1">Liga</button>
-          <button className="py-2 px-1">Clasificación</button>
-          <button className="py-2 px-1">Mi plantilla</button>
-        </div>
-      </div>
+      <Box sx={{ bgcolor: 'white', py: 1, borderTop: '1px solid #d9d9d9' }}>
+        <Container maxWidth="lg">
+          <Grid container>
+            <Grid item xs={12/5}>
+              <NavButton fullWidth active>Página principal</NavButton>
+            </Grid>
+            <Grid item xs={12/5}>
+              <NavButton fullWidth>Resultados</NavButton>
+            </Grid>
+            <Grid item xs={12/5}>
+              <NavButton fullWidth>Liga</NavButton>
+            </Grid>
+            <Grid item xs={12/5}>
+              <NavButton fullWidth>Clasificación</NavButton>
+            </Grid>
+            <Grid item xs={12/5}>
+              <NavButton fullWidth>Mi plantilla</NavButton>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
 
-    
-    </div>
-    </Layout2>
+      {/* Footer */}
+      <Box sx={{ bgcolor: '#181818', color: 'white', py: 1.5, mt: 'auto' }}>
+        <Container maxWidth="lg">
+          <Box sx={{ 
+            display: 'flex', 
+            flexDirection: { xs: 'column', md: 'row' }, 
+            justifyContent: 'space-between', 
+            alignItems: { xs: 'center', md: 'center' },
+            gap: { xs: 1, md: 0 }
+          }}>
+            <Box sx={{ mb: { xs: 1, md: 0 } }}>
+              <LanguageButton startIcon={<LanguageIcon fontSize="small" />} endIcon={<KeyboardArrowDownIcon fontSize="small" />}>
+                Español
+              </LanguageButton>
+            </Box>
+            <Box sx={{ 
+              display: 'flex', 
+              gap: 2, 
+              mb: { xs: 1, md: 0 },
+              flexWrap: 'wrap',
+              justifyContent: 'center'
+            }}>
+              <FooterLink>Política de Privacidad</FooterLink>
+              <FooterLink>Contacto</FooterLink>
+              <FooterLink>Configuración de Cookies</FooterLink>
+            </Box>
+            <Typography sx={{ color: '#949494', fontSize: '0.75rem' }}>
+              © Noviembre 2024 Mark Zuckerberg S.L
+            </Typography>
+          </Box>
+        </Container>
+      </Box>
+    </Box>
   );
 }
