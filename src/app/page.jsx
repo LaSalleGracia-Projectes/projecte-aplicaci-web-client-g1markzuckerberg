@@ -5,12 +5,14 @@ import { Button } from "@/components/ui";
 import { Card } from "@/components/ui";
 import { useRouter } from "next/navigation";
 import Layout2 from "@/components/layout2";
+import AuthGuard from "@/components/authGuard/authGuard";
 
-export default function Home() {
-  const router = useRouter();
+export default function league() {
+  const router = useRouter(); 
 
   return (
-    <Layout2>
+    <AuthGuard>
+      <Layout2>
       <div className="min-h-screen flex flex-col">
         <div className="flex-1 flex flex-col items-center justify-center p-4">
           <Card className="w-full max-w-2xl p-8 space-y-8">
@@ -25,19 +27,19 @@ export default function Home() {
                 Unirte a una liga
               </Button>
 
-              {/* ✅ Redirige a create-league */}
-              <Button
-                variant="outline"
-                className="h-32 text-lg flex flex-col gap-4"
-                onClick={() => router.push("/components/create-league")}
-              >
-                <div className="w-16 h-16 bg-[#e5e5ea]" />
-                Crear una liga
-              </Button>
-            </div>
-          </Card>
+                <Button
+                  variant="outline"
+                  className="h-32 text-lg flex flex-col gap-4"
+                  onClick={() => router.push("/components/create-league")}
+                >
+                  <div className="w-16 h-16 bg-[#e5e5ea]" />
+                  Crear una liga
+                </Button>
+              </div>
+            </Card>
+          </div>
         </div>
-      </div>
-    </Layout2>
+      </Layout2>
+    </AuthGuard>
   );
 }
