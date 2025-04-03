@@ -290,28 +290,7 @@ export default function Page() {
         </Container>
       </Box>
 
-      {/* Navigation */}
-      <Box sx={{ bgcolor: 'white', py: 1, borderTop: '1px solid #d9d9d9' }}>
-        <Container maxWidth="lg">
-          <Grid container>
-            <Grid item xs={12/5}>
-              <NavButton fullWidth active>Página principal</NavButton>
-            </Grid>
-            <Grid item xs={12/5}>
-              <NavButton fullWidth>Resultados</NavButton>
-            </Grid>
-            <Grid item xs={12/5}>
-              <NavButton fullWidth>Liga</NavButton>
-            </Grid>
-            <Grid item xs={12/5}>
-              <NavButton fullWidth>Clasificación</NavButton>
-            </Grid>
-            <Grid item xs={12/5}>
-              <NavButton fullWidth>Mi plantilla</NavButton>
-            </Grid>
-          </Grid>
-        </Container>
-      </Box>
+      
 
       {/* Footer */}
       <Box sx={{ bgcolor: '#181818', color: 'white', py: 1.5, mt: 'auto' }}>
