@@ -15,3 +15,15 @@ export default function Header() {
     </header>
   );
 }
+
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+
+export default function Header() {
+  return (
+    <header className="p-4 bg-gray-800 text-white">
+      <h1>Nike FC</h1>
+      <LanguageSwitcher />
+    </header>
+  );
+}
+

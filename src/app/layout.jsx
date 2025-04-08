@@ -27,3 +27,29 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+
+import { NextIntlProvider } from "next-intl";
+import { notFound } from "next/navigation";
+
+export function generateStaticParams() {
+  return [{ locale: "es" }, { locale: "en" }];
+}
+
+export default function RootLayout({ children, params }) {
+  let messages;
+  try {
+    messages = require(`../locales/${params.locale}.json`);
+  } catch (error) {
+    notFound();
+  }
+
+  return (
+    <html lang={params.locale}>
+      <body>
+        <NextIntlProvider messages={messages} locale={params.locale}>
+          {children}
+        </NextIntlProvider>
+      </body>
+    </html>
+  );
+}

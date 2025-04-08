@@ -16,6 +16,7 @@ import {
 import LanguageIcon from '@mui/icons-material/Language';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import PersonIcon from '@mui/icons-material/Person';
+import { useTranslations } from "next-intl";
 
 // Componentes estilizados
 const TeamLogo = styled(Box)(({ theme }) => ({
