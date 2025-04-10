@@ -1,18 +1,42 @@
+'use client';
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-const user = {
-  name: "Juan Pérez",
-  email: "juan.perez@example.com",
-  leagues: ["Liga 1", "Liga 2", "Liga 3"],
-};
-
 export default function BurgerMenuContent({ onClose }) {
   const router = useRouter();
+  const [user, setUser] = useState(null); // Estado para el usuario
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const token = localStorage.getItem("webToken");
+        const response = await fetch("http://localhost:3000/api/v1/user/me", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          console.error("Error al obtener el usuario:", data.error);
+          return;
+        }
+
+        setUser(data.user); // Guarda los datos reales del usuario
+      } catch (error) {
+        console.error("Error al obtener los datos del usuario:", error);
+      }
+    };
+
+    fetchUser();
+  }, []);
 
   const handleLogout = async () => {
     try {
-      const token = localStorage.getItem("webToken"); // Obtener el token almacenado
+      const token = localStorage.getItem("webToken");
 
       const response = await fetch("/api/auth/logout", {
         method: "POST",
@@ -29,24 +53,30 @@ export default function BurgerMenuContent({ onClose }) {
         return;
       }
 
-      // Eliminar tokens del almacenamiento local
       localStorage.removeItem("webToken");
       localStorage.removeItem("refreshWebToken");
 
-      // Redirigir al usuario a la página de inicio
       router.push("/");
     } catch (error) {
       console.error("Error en el servidor:", error);
     }
   };
 
+  if (!user) {
+    return (
+      <div className="w-64 bg-gray-900 text-white p-4 rounded-lg shadow-lg">
+        <p>Cargando usuario...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="w-64 bg-gray-900 text-white p-4 rounded-lg shadow-lg">
       {/* Información del usuario */}
       <div className="mb-4 border-b border-gray-700 pb-2 flex items-center">
         <div>
-          <p className="text-lg font-semibold">{user.name}</p>
-          <p className="text-sm text-gray-400">{user.email}</p>
+          <p className="text-lg font-semibold">{user.username}</p>
+          <p className="text-sm text-gray-400">{user.correo}</p>
         </div>
         <Link href="/components/ajustes" className="ml-auto">
           <img src="/images/ajustes.png" alt="ajustes" className="w-4 h-4 cursor-pointer" />
@@ -57,9 +87,9 @@ export default function BurgerMenuContent({ onClose }) {
       <div className="mb-4">
         <p className="font-semibold mb-2">Ligas:</p>
         <ul className="space-y-1">
-          {user.leagues.map((league, index) => (
+          {user.leagues?.map((league, index) => (
             <li key={index} className="text-sm bg-gray-800 p-2 rounded-md">{league}</li>
-          ))}
+          )) || <p className="text-sm text-gray-400">No hay ligas.</p>}
         </ul>
       </div>
 
@@ -74,10 +104,9 @@ export default function BurgerMenuContent({ onClose }) {
         Información y Ayuda
       </Link>
 
-      {/* Botón de cerrar sesión */}
       <button
         className="w-full bg-red-500 text-white py-2 rounded-md mt-4 hover:bg-red-700"
-        onClick={handleLogout} // Llama a la función de logout
+        onClick={handleLogout}
       >
         Cerrar sesión
       </button>

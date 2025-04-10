@@ -8,18 +8,21 @@ import Layout2 from "@/components/layout2";
 import { useRouter } from "next/navigation";
 import AuthGuard from "@/components/authGuard/authGuard";
 import { useState } from "react";
+import { useLeague } from "@/context/LeagueContext";
 
 export default function CreateLeague() {
   const router = useRouter();
+  const { setLeague } = useLeague();
   const [name, setName] = useState("");
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false); // Nuevo estado para evitar doble envío
+  const [loading, setLoading] = useState(false);
 
   const handleCreateLeague = async () => {
     setError("");
-    setLoading(true); // Iniciar el estado de carga
+    setLoading(true);
+    
     try {
-      const token = localStorage.getItem("webToken"); // Asegurar que usamos el mismo token en todo el sistema
+      const token = localStorage.getItem("webToken");
       if (!token) {
         setError("No estás autenticado.");
         setLoading(false);
@@ -40,11 +43,19 @@ export default function CreateLeague() {
         throw new Error(data.error || "Error al crear la liga");
       }
 
+      // Get the created league data with the code
+      const responseData = await res.json();
+      
+      // Save the league to context and localStorage
+      if (responseData.liga) {
+        setLeague(responseData.liga);
+      }
+
       router.push("/components/home_logged");
     } catch (err) {
       setError(err.message);
     } finally {
-      setLoading(false); // Finalizar el estado de carga
+      setLoading(false);
     }
   };
 
@@ -72,7 +83,7 @@ export default function CreateLeague() {
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  disabled={loading} // Deshabilitar input durante carga
+                  disabled={loading}
                 />
               </div>
 
@@ -92,7 +103,7 @@ export default function CreateLeague() {
             <Button
               className="w-full bg-[#e5e5ea] text-black hover:bg-[#d2d2d2]"
               onClick={handleCreateLeague}
-              disabled={loading} // Deshabilitar botón mientras se carga
+              disabled={loading}
             >
               {loading ? "Creando..." : "CREAR LIGA"}
             </Button>
