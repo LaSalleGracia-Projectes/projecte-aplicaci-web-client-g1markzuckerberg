@@ -11,37 +11,40 @@ export default function AuthGuard({ children }) {
   useEffect(() => {
     const verifyToken = async () => {
       const token = localStorage.getItem("webToken")
-
+      console.log("Token encontrado en localStorage:", token)
+  
       if (!token) {
         router.push("/components/login")
         return
       }
-
+  
       try {
-        // Puedes hacer una llamada a tu API para verificar que el token sea válido
         const res = await fetch("/api/auth/validate", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         })
-
+  
         if (!res.ok) {
+          console.log("Token inválido")
           localStorage.removeItem("webToken")
           router.push("/components/login")
         } else {
+          console.log("Token válido")
           setIsAuthenticated(true)
         }
       } catch (error) {
-        console.error("Error validando el token:", error)
+        console.error("Error al validar el token:", error)
         localStorage.removeItem("webToken")
         router.push("/components/login")
       } finally {
         setLoading(false)
       }
     }
-
+  
     verifyToken()
   }, [router])
+  
 
   if (loading) {
     return <p className="text-center mt-20 text-lg">Verificando sesión...</p>
