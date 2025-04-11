@@ -15,6 +15,7 @@ import {
 } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import Layout from '@/components/layout2';
+import { useRouter } from 'next/navigation';
 
 // Componentes estilizados
 const TeamLogo = styled(Box)(({ theme }) => ({
@@ -96,6 +97,8 @@ const FooterLink = styled(Typography)(({ theme }) => ({
 }));
 
 export default function Page() {
+  const router = useRouter(); 
+  
   // Datos de ejemplo
   const leftMatches = [
     { team1: "Equipo 1", team2: "Equipo 2" },
@@ -173,6 +176,7 @@ export default function Page() {
                   boxShadow: 'none',
                 }
               }}
+              onClick={() => router.push("/components/login")}
             >
               COMENZAR A JUGAR
             </Button>

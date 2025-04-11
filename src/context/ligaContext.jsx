@@ -1,19 +1,17 @@
-// context/LeagueContext.js
 import { createContext, useContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-// Create the League context
-const LeagueContext = createContext();
+const LigaContext = createContext();
 
-export function LeagueProvider({ children }) {
-  const [currentLeague, setCurrentLeague] = useState(null);
+export function LigaProvider({ children }) {
+  const [currentLiga, setCurrentLiga] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const router = useRouter();
 
-  // Load league on initial mount
+  // Load liga on initial mount
   useEffect(() => {
-    const loadLeague = async () => {
+    const loadLiga = async () => {
       try {
         // Get token, return early if not logged in
         const token = localStorage.getItem('webToken');
@@ -22,56 +20,56 @@ export function LeagueProvider({ children }) {
           return;
         }
 
-        // Check if we have a saved league code in localStorage
-        const savedLeagueCode = localStorage.getItem('currentLeagueCode');
+        // Check if we have a saved liga code in localStorage
+        const savedLigaCode = localStorage.getItem('currentLigaCode');
         
-        if (savedLeagueCode) {
-          // Fetch league details using the code
-          const response = await fetch(`http://localhost:3000/api/v1/liga/getByCode/${savedLeagueCode}`, {
+        if (savedLigaCode) {
+          // Fetch liga details using the code
+          const response = await fetch(`http://localhost:3000/api/v1/liga/getByCode/${savedLigaCode}`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           });
 
           if (response.ok) {
-            const leagueData = await response.json();
-            setCurrentLeague(leagueData);
+            const ligaData = await response.json();
+            setCurrentLiga(ligaData);
           } else {
-            // If league not found, clear saved code
-            localStorage.removeItem('currentLeagueCode');
-            console.error('Saved league not found');
+            // If liga not found, clear saved code
+            localStorage.removeItem('currentLigaCode');
+            console.error('Saved liga not found');
           }
         }
       } catch (err) {
-        console.error('Error loading league:', err);
-        setError('Failed to load league information');
+        console.error('Error loading liga:', err);
+        setError('Failed to load liga information');
       } finally {
         setLoading(false);
       }
     };
 
-    loadLeague();
+    loadLiga();
   }, []);
 
-  // Function to set a new current league
-  const setLeague = (league) => {
-    if (league && league.code) {
+  // Function to set a new current liga
+  const setLiga = (liga) => {
+    if (liga && liga.code) {
       // Save to state
-      setCurrentLeague(league);
+      setCurrentLiga(liga);
       
       // Save code to localStorage for persistence
-      localStorage.setItem('currentLeagueCode', league.code);
+      localStorage.setItem('currentLigaCode', liga.code);
     }
   };
 
-  // Function to clear current league
-  const clearLeague = () => {
-    setCurrentLeague(null);
-    localStorage.removeItem('currentLeagueCode');
+  // Function to clear current liga
+  const clearLiga = () => {
+    setCurrentLiga(null);
+    localStorage.removeItem('currentLigaCode');
   };
 
-  // Function to get league details by code
-  const getLeagueByCode = async (code) => {
+  // Function to get liga details by code
+  const getLigaByCode = async (code) => {
     try {
       setLoading(true);
       const token = localStorage.getItem('webToken');
@@ -89,9 +87,9 @@ export function LeagueProvider({ children }) {
         throw new Error('No se pudo obtener la información de la liga');
       }
 
-      const leagueData = await response.json();
-      setLeague(leagueData);
-      return leagueData;
+      const ligaData = await response.json();
+      setLiga(ligaData);
+      return ligaData;
     } catch (err) {
       setError(err.message);
       throw err;
@@ -101,26 +99,26 @@ export function LeagueProvider({ children }) {
   };
 
   return (
-    <LeagueContext.Provider 
+    <LigaContext.Provider 
       value={{ 
-        currentLeague, 
-        setLeague, 
-        clearLeague, 
-        getLeagueByCode,
+        currentLiga, 
+        setLiga, 
+        clearLiga, 
+        getLigaByCode,
         loading,
         error
       }}
     >
       {children}
-    </LeagueContext.Provider>
+    </LigaContext.Provider>
   );
 }
 
-// Custom hook to use the league context
-export function useLeague() {
-  const context = useContext(LeagueContext);
+// Custom hook to use the liga context
+export function useLiga() {
+  const context = useContext(LigaContext);
   if (context === undefined) {
-    throw new Error('useLeague must be used within a LeagueProvider');
+    throw new Error('useLiga must be used within a LigaProvider');
   }
   return context;
 }

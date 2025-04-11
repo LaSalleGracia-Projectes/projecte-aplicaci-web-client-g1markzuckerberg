@@ -6,32 +6,39 @@ import { useRouter } from "next/navigation";
 
 export default function BurgerMenuContent({ onClose }) {
   const router = useRouter();
-  const [user, setUser] = useState(null); // Estado para el usuario
+  const [user, setUser] = useState(null);
+  const [leagues, setLeagues] = useState();
 
   useEffect(() => {
-    const fetchUser = async () => {
+    const token = localStorage.getItem("webToken");
+
+    const fetchUserData = async () => {
       try {
-        const token = localStorage.getItem("webToken");
-        const response = await fetch("http://localhost:3000/api/v1/user/me", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const [userRes, leaguesRes] = await Promise.all([
+          fetch("http://localhost:3000/api/v1/user/me", {
+            headers: { Authorization: `Bearer ${token}` },
+          }),
+          fetch("http://localhost:3000/api/v1/user/leagues", {
+            headers: { Authorization: `Bearer ${token}` },
+          }),
+        ]);
 
-        const data = await response.json();
+        const userData = await userRes.json();
+        const leaguesData = await leaguesRes.json();
 
-        if (!response.ok) {
-          console.error("Error al obtener el usuario:", data.error);
+        if (!userRes.ok || !leaguesRes.ok) {
+          console.error("Error al obtener datos:", userData.error || leaguesData.error);
           return;
         }
 
-        setUser(data.user); // Guarda los datos reales del usuario
+        setUser(userData.user);
+        setLeagues(leaguesData.leagues || []);
       } catch (error) {
-        console.error("Error al obtener los datos del usuario:", error);
+        console.error("Error al obtener datos del usuario:", error);
       }
     };
 
-    fetchUser();
+    fetchUserData();
   }, []);
 
   const handleLogout = async () => {
@@ -86,11 +93,17 @@ export default function BurgerMenuContent({ onClose }) {
       {/* Ligas */}
       <div className="mb-4">
         <p className="font-semibold mb-2">Ligas:</p>
-        <ul className="space-y-1">
-          {user.leagues?.map((league, index) => (
-            <li key={index} className="text-sm bg-gray-800 p-2 rounded-md">{league}</li>
-          )) || <p className="text-sm text-gray-400">No hay ligas.</p>}
-        </ul>
+        {leagues.length > 0 ? (
+          <ul className="space-y-1">
+            {leagues.map((league, index) => (
+              <li key={index} className="text-sm bg-gray-800 p-2 rounded-md">
+                {league.nombre || league.name || `Liga ${index + 1}`}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-sm text-gray-400">No hay ligas registradas.</p>
+        )}
       </div>
 
       <button
