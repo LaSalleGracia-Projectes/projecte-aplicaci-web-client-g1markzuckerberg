@@ -3,11 +3,14 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useLiga } from "@/context/ligaContext";
 
 export default function BurgerMenuContent({ onClose }) {
   const router = useRouter();
+  const { setLiga: cambiarLiga } = useLiga();
+
   const [user, setUser] = useState(null);
-  const [leagues, setLeagues] = useState();
+  const [leagues, setLeagues] = useState([]);
 
   useEffect(() => {
     const token = localStorage.getItem("webToken");
@@ -41,6 +44,17 @@ export default function BurgerMenuContent({ onClose }) {
     fetchUserData();
   }, []);
 
+  const handleSelectLeague = (league) => {
+    if (!league?.id) {
+      console.warn("Liga sin ID:", league);
+      return;
+    }
+
+    cambiarLiga(league); // ✅ Usamos la función renombrada
+    onClose?.();
+    router.push("/components/home_logged");
+  };
+
   const handleLogout = async () => {
     try {
       const token = localStorage.getItem("webToken");
@@ -62,6 +76,7 @@ export default function BurgerMenuContent({ onClose }) {
 
       localStorage.removeItem("webToken");
       localStorage.removeItem("refreshWebToken");
+      localStorage.removeItem("currentLigaCode"); // ✅ limpiar también la liga
 
       router.push("/");
     } catch (error) {
@@ -79,7 +94,6 @@ export default function BurgerMenuContent({ onClose }) {
 
   return (
     <div className="w-64 bg-gray-900 text-white p-4 rounded-lg shadow-lg">
-      {/* Información del usuario */}
       <div className="mb-4 border-b border-gray-700 pb-2 flex items-center">
         <div>
           <p className="text-lg font-semibold">{user.username}</p>
@@ -96,7 +110,11 @@ export default function BurgerMenuContent({ onClose }) {
         {leagues.length > 0 ? (
           <ul className="space-y-1">
             {leagues.map((league, index) => (
-              <li key={index} className="text-sm bg-gray-800 p-2 rounded-md">
+              <li
+                key={index}
+                className="text-sm bg-gray-800 p-2 rounded-md cursor-pointer hover:bg-gray-700"
+                onClick={() => handleSelectLeague(league)} // ✅ click selecciona liga
+              >
                 {league.nombre || league.name || `Liga ${index + 1}`}
               </li>
             ))}

@@ -1,5 +1,6 @@
+'use client';
+
 import { createContext, useContext, useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 
 const LigaContext = createContext();
 
@@ -7,42 +8,40 @@ export function LigaProvider({ children }) {
   const [currentLiga, setCurrentLiga] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const router = useRouter();
 
-  // Load liga on initial mount
   useEffect(() => {
     const loadLiga = async () => {
       try {
-        // Get token, return early if not logged in
+        // 💡 Solo en cliente
+        if (typeof window === "undefined") return;
+
         const token = localStorage.getItem('webToken');
         if (!token) {
           setLoading(false);
           return;
         }
 
-        // Check if we have a saved liga code in localStorage
-        const savedLigaCode = localStorage.getItem('currentLigaCode');
-        
-        if (savedLigaCode) {
-          // Fetch liga details using the code
-          const response = await fetch(`http://localhost:3000/api/v1/liga/getByCode/${savedLigaCode}`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-
-          if (response.ok) {
-            const ligaData = await response.json();
-            setCurrentLiga(ligaData);
-          } else {
-            // If liga not found, clear saved code
-            localStorage.removeItem('currentLigaCode');
-            console.error('Saved liga not found');
-          }
+        const savedLigaId = localStorage.getItem('currentLigaId');
+        if (!savedLigaId) {
+          setLoading(false);
+          return;
         }
+
+        const res = await fetch(`http://localhost:3000/api/v1/liga/${savedLigaId}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (!res.ok) {
+          console.error("Liga no encontrada");
+          localStorage.removeItem("currentLigaId");
+          return;
+        }
+
+        const ligaData = await res.json();
+        setCurrentLiga(ligaData);
       } catch (err) {
-        console.error('Error loading liga:', err);
-        setError('Failed to load liga information');
+        console.error("Error cargando liga:", err);
+        setError("No se pudo cargar la liga");
       } finally {
         setLoading(false);
       }
@@ -51,43 +50,35 @@ export function LigaProvider({ children }) {
     loadLiga();
   }, []);
 
-  // Function to set a new current liga
   const setLiga = (liga) => {
-    if (liga && liga.code) {
-      // Save to state
-      setCurrentLiga(liga);
-      
-      // Save code to localStorage for persistence
-      localStorage.setItem('currentLigaCode', liga.code);
+    if (!liga?.id) return;
+    setCurrentLiga(liga);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("currentLigaId", liga.id);
     }
   };
 
-  // Function to clear current liga
   const clearLiga = () => {
     setCurrentLiga(null);
-    localStorage.removeItem('currentLigaCode');
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("currentLigaId");
+    }
   };
 
-  // Function to get liga details by code
-  const getLigaByCode = async (code) => {
+  const getLigaById = async (id) => {
     try {
       setLoading(true);
-      const token = localStorage.getItem('webToken');
-      if (!token) {
-        throw new Error('No estás autenticado');
-      }
 
-      const response = await fetch(`http://localhost:3000/api/v1/liga/getByCode/${code}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      const token = localStorage.getItem("webToken");
+      if (!token) throw new Error("No autenticado");
+
+      const res = await fetch(`http://localhost:3000/api/v1/liga/code/${liga.id}`, {
+        headers: { Authorization: `Bearer ${token}` },
       });
 
-      if (!response.ok) {
-        throw new Error('No se pudo obtener la información de la liga');
-      }
+      if (!res.ok) throw new Error("No se pudo obtener la liga");
 
-      const ligaData = await response.json();
+      const ligaData = await res.json();
       setLiga(ligaData);
       return ligaData;
     } catch (err) {
@@ -99,14 +90,14 @@ export function LigaProvider({ children }) {
   };
 
   return (
-    <LigaContext.Provider 
-      value={{ 
-        currentLiga, 
-        setLiga, 
-        clearLiga, 
-        getLigaByCode,
+    <LigaContext.Provider
+      value={{
+        currentLiga,
+        setLiga,
+        clearLiga,
+        getLigaById,
         loading,
-        error
+        error,
       }}
     >
       {children}
@@ -114,11 +105,10 @@ export function LigaProvider({ children }) {
   );
 }
 
-// Custom hook to use the liga context
 export function useLiga() {
   const context = useContext(LigaContext);
   if (context === undefined) {
-    throw new Error('useLiga must be used within a LigaProvider');
+    throw new Error("useLiga debe usarse dentro de LigaProvider");
   }
   return context;
 }
