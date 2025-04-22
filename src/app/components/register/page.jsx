@@ -55,40 +55,8 @@ export default function Register() {
   };
 
   // Manejo del registro con Google
-  const handleGoogleSignIn = async () => {
-    try {
-      const res = await signIn("google", { redirect: false });
-
-      if (res?.ok) {
-        // Obtener datos de la sesión de NextAuth manualmente
-        const sessionRes = await fetch("/api/auth/session");
-        const session = await sessionRes.json();
-
-        if (session?.user) {
-          // Llamar a la API de registro con los datos de Google
-          const registerRes = await fetch("http://localhost:3000/api/v1/auth/signup", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              correo: session.user.email,
-              username: session.user.name,
-              password: "google_auth",
-            }),
-          });
-
-          const registerData = await registerRes.json();
-          if (registerRes.ok) {
-            localStorage.setItem("token", registerData.token);
-            router.push("/components/home_logged");
-          } else {
-            throw new Error(registerData.error || "Error al registrar con Google");
-          }
-        }
-      }
-    } catch (error) {
-      setError("Error al autenticar con Google");
-      console.error(error);
-    }
+  const handleGoogleRedirect = () => {
+    window.location.href = "http://localhost:3000/api/v1/auth/google/web"; // <-- Asegúrate que es tu backend real
   };
 
   return (
@@ -155,9 +123,10 @@ export default function Register() {
               <div className="h-px bg-[#7d7d7d] flex-1" />
             </div>
             <p>Registrate con:</p>
-            <button onClick={handleGoogleSignIn} className="p-2 border rounded-md mx-auto block">
+            <button onClick={handleGoogleRedirect} className="p-2 border rounded-md mx-auto block">
               <Image src="/images/google.png" alt="Google Sign In" width={32} height={32} className="mx-auto" />
             </button>
+
           </div>
 
           <div className="text-center text-sm">
