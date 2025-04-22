@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import AuthGuard from "@/components/authGuard/authGuard";
 import { useState } from "react";
 import { LigaProvider } from "@/context/ligaContext";
+import { useLeague } from "@/context/league-context"; // Importamos el hook
 
 // Separate the inner component that will use the hook
 function CreateLeagueContent() {
@@ -17,11 +18,13 @@ function CreateLeagueContent() {
   const [name, setName] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  
+  // Usamos el hook para acceder al contexto
+  const { setLeagueCode } = useLeague();
 
   const handleCreateLeague = async () => {
     setError("");
     setLoading(true);
-    
     try {
       const token = localStorage.getItem("webToken");
       if (!token) {
@@ -51,6 +54,10 @@ function CreateLeagueContent() {
       if (responseData.liga && responseData.liga.code) {
         localStorage.setItem('currentLigaCode', responseData.liga.code);
       }
+
+      const data = await res.json();
+      console.log("Liga creada con código:", data);
+      setLeagueCode(data.liga.code); // Asumimos que `data.liga.code` es el código de la liga creada
 
       router.push("/components/home_logged");
     } catch (err) {
@@ -85,6 +92,19 @@ function CreateLeagueContent() {
               disabled={loading}
             />
           </div>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <label htmlFor="name" className="text-sm font-medium">
+                  Nombre de la liga:
+                </label>
+                <Input
+                  id="name"
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  disabled={loading}
+                />
+              </div>
 
           <div className="space-y-2">
             <label className="text-sm font-medium block">Subir imagen de perfil de la liga:</label>
@@ -96,6 +116,14 @@ function CreateLeagueContent() {
                 Seleccionar imagen
               </Button>
             </div>
+
+            <Button
+              className="w-full bg-[#e5e5ea] text-black hover:bg-[#d2d2d2]"
+              onClick={handleCreateLeague}
+              disabled={loading}
+            >
+              {loading ? "Creando..." : "CREAR LIGA"}
+            </Button>
           </div>
         </div>
 

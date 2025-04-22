@@ -288,6 +288,5 @@ export default function Page() {
           </Box>
         </Box>
     </Layout>
-
   );
 }
