@@ -1,33 +1,33 @@
-"use client";
+"use client"
 
-import Link from "next/link";
-import { Button } from "@/components/ui";
-import { Input } from "@/components/ui";
-import { ArrowLeft, Download } from "lucide-react";
-import Layout2 from "@/components/layout2";
-import { useRouter } from "next/navigation";
-import AuthGuard from "@/components/authGuard/authGuard";
-import { useState } from "react";
-import { LigaProvider } from "@/context/ligaContext";
+import Link from "next/link"
+import { Button } from "@/components/ui"
+import { Input } from "@/components/ui"
+import { ArrowLeft, Download } from "lucide-react"
+import Layout2 from "@/components/layout2"
+import { useRouter } from "next/navigation"
+import AuthGuard from "@/components/authGuard/authGuard"
+import { useState } from "react"
+import { LigaProvider, useLiga } from "@/context/ligaContext"
 
 // Separate the inner component that will use the hook
 function CreateLeagueContent() {
-  const router = useRouter();
-  // We'll use local state for now and handle liga context later
-  const [name, setName] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const router = useRouter()
+  const { setLiga } = useLiga() // Use the context hook to access setLiga
+  const [name, setName] = useState("")
+  const [error, setError] = useState("")
+  const [loading, setLoading] = useState(false)
 
   const handleCreateLeague = async () => {
-    setError("");
-    setLoading(true);
-    
+    setError("")
+    setLoading(true)
+
     try {
-      const token = localStorage.getItem("webToken");
+      const token = localStorage.getItem("webToken")
       if (!token) {
-        setError("No estás autenticado.");
-        setLoading(false);
-        return;
+        setError("No estás autenticado.")
+        setLoading(false)
+        return
       }
 
       const res = await fetch("http://localhost:3000/api/v1/liga/create", {
@@ -37,28 +37,29 @@ function CreateLeagueContent() {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ name }),
-      });
+      })
 
       if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || "Error al crear la liga");
+        const data = await res.json()
+        throw new Error(data.error || "Error al crear la liga")
       }
 
       // Get the created liga data with the code
-      const responseData = await res.json();
-      
-      // Save the liga code to localStorage
-      if (responseData.liga && responseData.liga.code) {
-        localStorage.setItem('currentLigaCode', responseData.liga.code);
+      const responseData = await res.json()
+
+      // Save the liga to context using setLiga
+      if (responseData.liga) {
+        // This will set currentLiga in context and save the ID to localStorage
+        setLiga(responseData.liga)
       }
 
-      router.push("/components/home_logged");
+      router.push("/components/home_logged")
     } catch (err) {
-      setError(err.message);
+      setError(err.message)
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   return (
     <div className="flex flex-col items-center justify-center p-4 min-h-[calc(100vh-128px)]">
@@ -77,13 +78,7 @@ function CreateLeagueContent() {
             <label htmlFor="name" className="text-sm font-medium">
               Nombre de la liga:
             </label>
-            <Input
-              id="name"
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              disabled={loading}
-            />
+            <Input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} disabled={loading} />
           </div>
 
           <div className="space-y-2">
@@ -108,7 +103,7 @@ function CreateLeagueContent() {
         </Button>
       </div>
     </div>
-  );
+  )
 }
 
 // Main component that provides the context
@@ -121,5 +116,5 @@ export default function CreateLeague() {
         </Layout2>
       </AuthGuard>
     </LigaProvider>
-  );
+  )
 }
