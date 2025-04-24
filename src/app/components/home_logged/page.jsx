@@ -1,6 +1,7 @@
 import Layout from "@/components/layout";
 import LeagueMessage from "@/components/home_log/mensajes";
 import AuthGuard from "@/components/authGuard/authGuard";
+import Button from "@/components/ui"
 
 export default function Home() {
   return (
@@ -12,6 +13,11 @@ export default function Home() {
             <LeagueMessage type="leave" />
             <LeagueMessage type="position" participants={["Charlie"]} />
           </div>
+
+          <Button onClick={() => router.push("/backoffice")}>
+            Ir al Back Office
+          </Button>
+          
         </main>
       </Layout>
     </AuthGuard>
