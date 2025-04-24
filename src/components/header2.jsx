@@ -1,8 +1,5 @@
 'use client';
 import { useState } from "react";
-import { IconButton, Drawer } from "@/components/ui";
-import Image from "next/image";
-import BurgerMenuContent from "@/components/burguerMenu/burguerMenu";
 
 export default function Header() {
   const [open, setOpen] = useState(false);

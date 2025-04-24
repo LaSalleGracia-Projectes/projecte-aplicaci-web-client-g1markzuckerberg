@@ -1,18 +1,28 @@
-import { LeagueProvider } from "@/context/league-context";
-import "tailwindcss/tailwind.css";
+'use client';
 
-export default function Layout({ children }) {
+import "./globals.css";
+import { LigaProvider } from "@/context/ligaContext";
+import { Geist, Geist_Mono } from "next/font/google";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head>
-        <meta charSet="UTF-8" />
-      </head>
-      <body className="bg-gray-100 text-gray-900">
-        <LeagueProvider>
-          <div className="min-h-screen flex flex-col">
-            {children}
-          </div>
-        </LeagueProvider>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <LigaProvider> {/* ✅ Aquí envolvemos con el contexto */}
+          {children}
+        </LigaProvider>
       </body>
     </html>
   );

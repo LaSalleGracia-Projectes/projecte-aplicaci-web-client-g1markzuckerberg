@@ -3,8 +3,7 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
-import { Button } from "@/components/ui"
-import { Input } from "@/components/ui"
+import { Button, Input } from "@/components/ui"
 import { Eye, EyeOff } from "lucide-react"
 import Layout2 from "@/components/layout2"
 
@@ -13,10 +12,17 @@ export default function Login() {
   const [correo, setCorreo] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
+  const [loading, setLoading] = useState(false)
   const router = useRouter()
 
   const handleLogin = async () => {
+    if (!correo || !password) {
+      setError("Por favor completa todos los campos")
+      return
+    }
+
     setError("")
+    setLoading(true)
 
     try {
       const response = await fetch("/api/auth/login", {
@@ -29,16 +35,18 @@ export default function Login() {
 
       if (!response.ok) {
         setError(data.error || "Error al iniciar sesión")
+        setLoading(false)
         return
       }
 
-      // Guardar tokens en localStorage
       localStorage.setItem("webToken", data.tokens.webToken)
       localStorage.setItem("refreshWebToken", data.tokens.refreshWebToken)
 
       router.push("/components/home_logged")
     } catch (error) {
       setError("Error en el servidor")
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -50,9 +58,7 @@ export default function Login() {
 
           <div className="space-y-4">
             <div className="space-y-2">
-              <label htmlFor="correo" className="text-sm font-medium">
-                Correo
-              </label>
+              <label htmlFor="correo" className="text-sm font-medium">Correo</label>
               <Input
                 id="correo"
                 type="email"
@@ -62,9 +68,7 @@ export default function Login() {
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="password" className="text-sm font-medium">
-                Contraseña
-              </label>
+              <label htmlFor="password" className="text-sm font-medium">Contraseña</label>
               <div className="relative">
                 <Input
                   id="password"
@@ -88,8 +92,9 @@ export default function Login() {
           <Button
             className="w-full bg-[#e5e5ea] text-black hover:bg-[#d2d2d2]"
             onClick={handleLogin}
+            disabled={loading}
           >
-            INICIAR SESIÓN
+            {loading ? "Iniciando sesión..." : "INICIAR SESIÓN"}
           </Button>
 
           <div className="text-center">
