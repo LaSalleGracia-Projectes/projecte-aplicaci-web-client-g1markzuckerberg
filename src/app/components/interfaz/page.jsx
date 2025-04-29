@@ -121,6 +121,7 @@ export default function Info() {
           </div>
         </div>
       </Layout>
-    </AuthGuard>
+    </AuthGuard> 
   )
 }
+
