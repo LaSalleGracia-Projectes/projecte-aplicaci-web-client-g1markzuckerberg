@@ -14,9 +14,6 @@ export default function Home() {
             <LeagueMessage type="position" participants={["Charlie"]} />
           </div>
 
-          <Button onClick={() => router.push("/backoffice")}>
-            Ir al Back Office
-          </Button>
           
         </main>
       </Layout>
