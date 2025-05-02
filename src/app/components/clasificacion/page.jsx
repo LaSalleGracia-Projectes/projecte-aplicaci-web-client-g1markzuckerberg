@@ -23,6 +23,7 @@ function ClasificacionContent() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [copied, setCopied] = useState(false)
+  const [leaveError, setLeaveError] = useState(null)
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -42,36 +43,28 @@ function ClasificacionContent() {
 
         console.log("Fetching users for liga code:", currentLiga.code)
 
-        try {
-          const res = await fetch(`http://localhost:3000/api/v1/liga/users/${currentLiga.code}`, {
-            headers: { Authorization: `Bearer ${token}` },
-          })
+        const res = await fetch(`http://localhost:3000/api/v1/liga/users/${currentLiga.code}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
 
-          if (!res.ok) {
-            const errorData = await res.json().catch(() => ({}))
-            console.error("Error fetching users:", res.status, errorData)
-            throw new Error(errorData.error || `Error ${res.status}: No se pudieron obtener los usuarios de la liga`)
-          }
-
-          const data = await res.json()
-          console.log("Users data:", data)
-
-          // Sort users by points in descending order
-          const sortedUsers = (data.users || []).sort((a, b) => (b.points || 0) - (a.points || 0))
-
-          // Add position and trend indicators
-          const usersWithPosition = sortedUsers.map((user, index) => ({
-            ...user,
-            position: index + 1,
-            // This is a placeholder - in a real app you'd compare with previous week
-            trend: Math.floor(Math.random() * 3) - 1, // -1 (down), 0 (same), 1 (up)
-          }))
-
-          setUsers(usersWithPosition)
-        } catch (fetchError) {
-          console.error("Fetch error:", fetchError)
-          throw fetchError
+        if (!res.ok) {
+          const errorData = await res.json().catch(() => ({}))
+          console.error("Error fetching users:", res.status, errorData)
+          throw new Error(errorData.error || `Error ${res.status}: No se pudieron obtener los usuarios de la liga`)
         }
+
+        const data = await res.json()
+        console.log("Users data:", data)
+
+        const sortedUsers = (data.users || []).sort((a, b) => (b.points || 0) - (a.points || 0))
+
+        const usersWithPosition = sortedUsers.map((user, index) => ({
+          ...user,
+          position: index + 1,
+          trend: Math.floor(Math.random() * 3) - 1,
+        }))
+
+        setUsers(usersWithPosition)
       } catch (err) {
         console.error("Error in fetchUsers:", err)
         setError(err.message || "Error al cargar usuarios")
@@ -91,11 +84,38 @@ function ClasificacionContent() {
     }
   }
 
-  // Debug information for troubleshooting
-  console.log("Current Liga:", currentLiga)
-  console.log("Liga Loading:", ligaLoading)
-  console.log("Users Loading:", loading)
-  console.log("Error:", error)
+  const handleLeaveLeague = async () => {
+    if (!currentLiga?.id) {
+      setLeaveError("No se encontró la liga.")
+      return
+    }
+
+    try {
+      const token = localStorage.getItem("webToken")
+      if (!token) {
+        setLeaveError("No estás autenticado.")
+        return
+      }
+
+      const res = await fetch(`http://localhost:3000/api/v1/liga/leave/${currentLiga.id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}))
+        const errorMessage = errorData?.error || `Error ${res.status}: No se pudo abandonar la liga`
+        throw new Error(errorMessage)
+      }
+
+      window.location.href = "/components/choose-league"
+    } catch (err) {
+      console.error("Error al abandonar la liga:", err)
+      setLeaveError(err.message || "Error al intentar abandonar la liga")
+    }
+  }
 
   if (ligaLoading || loading) {
     return (
@@ -139,11 +159,15 @@ function ClasificacionContent() {
               </button>
             </div>
           </div>
-          <Button variant="outline" size="sm" className="gap-2">
-            <Share2 className="h-4 w-4" />
-            Compartir
+          <Button variant="destructive" size="sm" className="gap-2" onClick={handleLeaveLeague}>
+            Abandonar Liga
           </Button>
         </div>
+        {leaveError && (
+          <p className="text-sm text-red-500 mt-2">
+            {leaveError}
+          </p>
+        )}
         <div className="mt-4">
           <p className="text-sm text-gray-600">
             Jornada actual: <span className="font-medium">{currentLiga.created_jornada || "N/A"}</span>

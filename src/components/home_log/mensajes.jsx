@@ -1,20 +1,13 @@
-import { UserPlus, UserMinus, ArrowLeftRight, Trophy } from "lucide-react";
+import { UserPlus, UserMinus } from "lucide-react";
 
 const iconMap = {
   join: <UserPlus className="w-6 h-6 text-green-500" />,
-  leave: <UserMinus className="w-6 h-6 text-red-500" />,
-  position: <ArrowLeftRight className="w-6 h-6 text-blue-500" />,
+  kick: <UserMinus className="w-6 h-6 text-red-500" />,
+  change: <UserMinus className="w-6 h-6 text-blue-500" />,
 };
 
-const messageMap = {
-  join: () => `Te has unido a la liga.`,
-  leave: () => `Has abandonado la liga.`,
-  position: ([name]) => `${name} ha cambiado de posición.`,
-};
-
-export default function LeagueMessage({ type, participants = [] }) {
-  const icon = iconMap[type];
-  const message = messageMap[type](participants);
+export default function LeagueMessage({ type, message }) {
+  const icon = iconMap[type] || <UserMinus className="w-6 h-6 text-gray-500" />;
 
   return (
     <div className="relative border border-gray-300 rounded-lg p-6 shadow-sm mb-4">
