@@ -52,7 +52,6 @@ export default function Notificaciones() {
     if (lower.includes("posición") || lower.includes("cambio")) return "position";
     return "kick";
   };
-import Button from "@/components/ui"
 
   return (
     <AuthGuard>
@@ -77,12 +76,6 @@ import Button from "@/components/ui"
               )}
             </div>
           )}
-        <main className="p-8">
-          <div className="max-w-2xl mx-auto">
-            <LeagueMessage type="join" />
-            <LeagueMessage type="leave" />
-            <LeagueMessage type="position" participants={["Charlie"]} />
-          </div>
         </main>
       </Layout>
     </AuthGuard>
