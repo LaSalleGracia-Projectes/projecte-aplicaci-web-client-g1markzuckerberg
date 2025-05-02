@@ -21,20 +21,93 @@ export default function Jornada() {
   const fetchCurrentUser = async (token) => {
     try {
       console.log("Obteniendo información del usuario actual...")
+
+      // Try to get user from localStorage first as fallback
+      const cachedUser = localStorage.getItem("user")
+      let userFromCache = null
+
+      if (cachedUser) {
+        try {
+          userFromCache = JSON.parse(cachedUser)
+          console.log("Usuario recuperado de cache:", userFromCache)
+        } catch (e) {
+          console.warn("Error al parsear usuario de cache:", e)
+        }
+      }
+
+      // Attempt to fetch from API with timeout
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 5000) // 5 second timeout
+
       const userRes = await fetch("http://localhost:3000/api/v1/user/me", {
         headers: { Authorization: `Bearer ${token}` },
+        signal: controller.signal,
+      }).catch((err) => {
+        console.warn(`Error de conexión al obtener usuario: ${err.message}`)
+        return null
       })
 
-      if (!userRes.ok) {
-        console.error(`Error obteniendo usuario: ${userRes.status}`)
+      clearTimeout(timeoutId)
+
+      // If fetch failed or returned error, use cached user if available
+      if (!userRes || !userRes.ok) {
+        const status = userRes?.status
+        console.warn(`Error obteniendo usuario: ${status || "conexión fallida"}`)
+
+        if (userFromCache) {
+          console.log("Usando datos de usuario desde cache debido al error de conexión")
+          return userFromCache
+        }
+
+        // If no cached user, try to extract from token as last resort
+        if (token) {
+          try {
+            // JWT tokens are in format: header.payload.signature
+            const payload = token.split(".")[1]
+            if (payload) {
+              // Decode base64
+              const decodedPayload = JSON.parse(atob(payload))
+              if (decodedPayload.id) {
+                console.log("Extrayendo información básica de usuario desde token:", decodedPayload)
+                return {
+                  id: decodedPayload.id,
+                  username: decodedPayload.username || decodedPayload.email || "Usuario",
+                  // Add other fields that might be in the token
+                }
+              }
+            }
+          } catch (e) {
+            console.warn("Error al extraer información de usuario desde token:", e)
+          }
+        }
+
         return null
       }
 
       const userData = await userRes.json()
       console.log("Datos de usuario obtenidos:", userData)
+
+      // Cache the user data for future use
+      if (userData.user) {
+        localStorage.setItem("user", JSON.stringify(userData.user))
+      }
+
       return userData.user
     } catch (err) {
       console.error("Error obteniendo usuario:", err)
+
+      // Try to get user from localStorage as fallback
+      try {
+        const cachedUser = localStorage.getItem("user")
+        if (cachedUser) {
+          const userFromCache = JSON.parse(cachedUser)
+          console.log("Usando datos de usuario desde cache debido a error:", userFromCache)
+          return userFromCache
+        }
+      } catch (e) {
+        console.warn("Error al recuperar usuario de cache:", e)
+      }
+
       return null
     }
   }
@@ -296,6 +369,8 @@ export default function Jornada() {
           console.log("Usuario actual establecido:", user)
         } else {
           console.warn("No se pudo obtener la información del usuario")
+          // Continue with default user or anonymous mode
+          console.log("Continuando sin información de usuario específica")
         }
 
         // Obtener la jornada actual
