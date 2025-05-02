@@ -1,13 +1,13 @@
-import { UserPlus, UserMinus, ArrowLeftRight } from "lucide-react";
+import { UserPlus, UserMinus } from "lucide-react";
 
 const iconMap = {
   join: <UserPlus className="w-6 h-6 text-green-500" />,
-  leave: <UserMinus className="w-6 h-6 text-red-500" />,
-  position: <ArrowLeftRight className="w-6 h-6 text-blue-500" />,
+  kick: <UserMinus className="w-6 h-6 text-red-500" />,
+  change: <UserMinus className="w-6 h-6 text-blue-500" />,
 };
 
 export default function LeagueMessage({ type, message }) {
-  const icon = iconMap[type] || <ArrowLeftRight className="w-6 h-6 text-gray-500" />;
+  const icon = iconMap[type] || <UserMinus className="w-6 h-6 text-gray-500" />;
 
   return (
     <div className="relative border border-gray-300 rounded-lg p-6 shadow-sm mb-4">

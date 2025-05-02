@@ -50,7 +50,7 @@ export default function Notificaciones() {
     if (lower.includes("creado") || lower.includes("unido")) return "join";
     if (lower.includes("salido") || lower.includes("eliminado")) return "leave";
     if (lower.includes("posición") || lower.includes("cambio")) return "position";
-    return "info";
+    return "kick";
   };
 
   return (
