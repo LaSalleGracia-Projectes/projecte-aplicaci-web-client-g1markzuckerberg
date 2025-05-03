@@ -103,6 +103,21 @@ export default function RegisterPage() {
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                   />
+                    <div className="mt-2 text-xs text-gray-600 space-y-1">
+                      <p className={password.length >= 8 ? 'text-green-600' : 'text-red-500'}>
+                        • Al menos 8 caracteres
+                      </p>
+                      <p className={/[A-Z]/.test(password) ? 'text-green-600' : 'text-red-500'}>
+                        • Al menos una letra mayúscula
+                      </p>
+                      <p className={/[a-z]/.test(password) ? 'text-green-600' : 'text-red-500'}>
+                        • Al menos una letra minúscula
+                      </p>
+                      <p className={/\d/.test(password) ? 'text-green-600' : 'text-red-500'}>
+                        • Al menos un número
+                      </p>
+                    </div>
+
                   <button
                     type="button"
                     onClick={() => setShowPassword(v => !v)}

@@ -24,6 +24,8 @@ export default function Cuenta() {
     confirmPassword: "",
   })
 
+  const [correoConfirmacion, setCorreoConfirmacion] = useState("")
+
   const token = typeof window !== "undefined" ? localStorage.getItem("webToken") : null
 
   useEffect(() => {
@@ -126,6 +128,36 @@ export default function Cuenta() {
     }
   }
 
+  const handleDeleteAccount = async () => {
+    if (correoConfirmacion !== form.email) {
+      alert("El correo no coincide con el de tu cuenta.")
+      return
+    }
+
+    try {
+      const res = await fetch("http://localhost:3000/api/v1/auth/user/delete", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ correo: correoConfirmacion }),
+      })
+
+      if (res.ok) {
+        alert("Cuenta eliminada exitosamente.")
+        localStorage.removeItem("webToken")
+        window.location.href = "/" // Redirigir al home
+      } else {
+        const error = await res.json()
+        alert(error.error || "Error al eliminar la cuenta")
+      }
+    } catch (err) {
+      console.error("Error al eliminar cuenta:", err)
+      alert("Error de red")
+    }
+  }
+
   return (
     <AuthGuard>
       <Layout>
@@ -164,9 +196,22 @@ export default function Cuenta() {
                 <div className="pt-6">
                   <Typography variant="h6">Eliminación de cuenta</Typography>
                   <p className="text-sm text-gray-500">
-                    Esta acción es irreversible y eliminará todos tus datos.
+                    Esta acción es irreversible. Para eliminar tu cuenta, introduce tu correo electrónico y confirma.
                   </p>
-                  <Button color="red" className="w-full mt-3">ELIMINAR CUENTA</Button>
+                  <Input
+                    type="email"
+                    placeholder="Confirma tu correo"
+                    value={correoConfirmacion}
+                    onChange={(e) => setCorreoConfirmacion(e.target.value)}
+                    className="mt-2"
+                  />
+                  <Button
+                    color="red"
+                    className="w-full mt-3"
+                    onClick={handleDeleteAccount}
+                  >
+                    ELIMINAR CUENTA
+                  </Button>
                 </div>
               </CardBody>
             </Card>
