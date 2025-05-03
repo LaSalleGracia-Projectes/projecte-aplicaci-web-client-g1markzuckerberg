@@ -20,7 +20,7 @@ export default function Clasificacion() {
 }
 
 function ClasificacionContent() {
-  const { currentLiga, loading: ligaLoading, refreshLiga } = useLiga() // Añadir refreshLiga aquí
+  const { currentLiga, loading: ligaLoading, refreshLiga } = useLiga()
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -117,12 +117,17 @@ function ClasificacionContent() {
         const data = await res.json()
         console.log("Users data:", data)
 
-        const sortedUsers = (data.users || []).sort((a, b) => (b.points || 0) - (a.points || 0))
+        // Use data.users and extract points from puntos_acumulados
+        const usersWithPoints = (data.users || []).map(user => ({
+          ...user,
+          points: user.puntos_acumulados || 0  // Use puntos_acumulados for total points
+        }))
+
+        const sortedUsers = usersWithPoints.sort((a, b) => (b.points || 0) - (a.points || 0))
 
         const usersWithPosition = sortedUsers.map((user, index) => ({
           ...user,
-          position: index + 1,
-          trend: Math.floor(Math.random() * 3) - 1,
+          position: index + 1
         }))
 
         setUsers(usersWithPosition)
@@ -136,6 +141,8 @@ function ClasificacionContent() {
 
     fetchUsers()
   }, [currentLiga])
+
+  // No longer using trend calculation
 
   const copyCode = () => {
     if (currentLiga?.code) {
@@ -207,12 +214,18 @@ function ClasificacionContent() {
         }
         
         const data = await res.json()
-        const sortedUsers = (data.users || []).sort((a, b) => (b.points || 0) - (a.points || 0))
+        
+        // Use data.users and extract points from puntos_acumulados
+        const usersWithPoints = (data.users || []).map(user => ({
+          ...user,
+          points: user.puntos_acumulados || 0  // Use puntos_acumulados for total points
+        }))
+        
+        const sortedUsers = usersWithPoints.sort((a, b) => (b.points || 0) - (a.points || 0))
         
         const usersWithPosition = sortedUsers.map((user, index) => ({
           ...user,
-          position: index + 1,
-          trend: Math.floor(Math.random() * 3) - 1,
+          position: index + 1
         }))
         
         setUsers(usersWithPosition)
@@ -226,8 +239,7 @@ function ClasificacionContent() {
     fetchUsers()
   }
 
-  // Imagen placeholder por defecto
-  const defaultPlaceholder = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%23f0f0f0'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='8' text-anchor='middle' dominant-baseline='middle' fill='%23999'%3EUser%3C/text%3E%3C/svg%3E"
+  // Imagen placeholder por defecto (solo para la liga)
   const leaguePlaceholder = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23f0f0f0'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='12' text-anchor='middle' dominant-baseline='middle' fill='%23999'%3ELiga%3C/text%3E%3C/svg%3E"
 
   if (ligaLoading || loading) {
@@ -304,7 +316,7 @@ function ClasificacionContent() {
                 </Button>
               </>
             )}
-            <Button variant="destructive" size="sm" className="gap-2" onClick={handleLeaveLeague}>
+            <Button backgroundcolor="red" variant="destructive" size="sm" className="gap-2" onClick={handleLeaveLeague}>
               Abandonar Liga
             </Button>
           </div>
@@ -346,11 +358,12 @@ function ClasificacionContent() {
                     Jugador
                   </th>
                   <th className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Puntos
+                    Pts Totales
                   </th>
                   <th className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Tendencia
+                    Pts Jornada
                   </th>
+
                   {isCaptain && (
                     <th className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Acciones
@@ -366,35 +379,19 @@ function ClasificacionContent() {
                     </td>
                     <td className="px-4 py-4 whitespace-nowrap">
                       <div className="flex items-center">
-                        <div className="h-10 w-10 flex-shrink-0">
-                          <img
-                            className="h-10 w-10 rounded-full object-cover"
-                            src={user.imageUrl || defaultPlaceholder}
-                            alt={user.nombre || user.correo}
-                            onError={(e) => {
-                              e.target.onerror = null
-                              e.target.src = defaultPlaceholder
-                            }}
-                          />
-                        </div>
                         <div className="ml-4">
-                          <div className="text-sm font-medium text-gray-900">{user.nombre || user.correo}</div>
-                          {user.nombre && <div className="text-sm text-gray-500">{user.correo}</div>}
+                          <div className="text-sm font-medium text-gray-900">{user.username || user.correo}</div>
+                          {user.username && user.correo && <div className="text-sm text-gray-500">{user.correo}</div>}
                         </div>
                       </div>
                     </td>
                     <td className="px-4 py-4 whitespace-nowrap text-center">
-                      <div className="text-sm font-medium text-gray-900">{user.points || 0}</div>
+                      <div className="text-sm font-medium text-gray-900">{user.puntos_acumulados || 0}</div>
                     </td>
                     <td className="px-4 py-4 whitespace-nowrap text-center">
-                      {user.trend === 1 ? (
-                        <ArrowUp className="h-5 w-5 text-green-500 mx-auto" />
-                      ) : user.trend === -1 ? (
-                        <ArrowDown className="h-5 w-5 text-red-500 mx-auto" />
-                      ) : (
-                        <Minus className="h-5 w-5 text-gray-400 mx-auto" />
-                      )}
+                      <div className="text-sm font-medium text-gray-900">{user.puntos_jornada || 0}</div>
                     </td>
+
                     {isCaptain && user.id !== currentUserId && (
                       <td className="px-4 py-4 whitespace-nowrap text-center">
                         <button 
@@ -432,13 +429,13 @@ function ClasificacionContent() {
         <div className="bg-white rounded-lg shadow-sm p-4">
           <h3 className="text-sm font-medium text-gray-500 mb-1">Puntos máximos</h3>
           <p className="text-2xl font-bold">
-            {users.length > 0 ? Math.max(...users.map((user) => user.points || 0)) : 0}
+            {users.length > 0 ? Math.max(...users.map((user) => user.puntos_acumulados || 0)) : 0}
           </p>
         </div>
         <div className="bg-white rounded-lg shadow-sm p-4">
           <h3 className="text-sm font-medium text-gray-500 mb-1">Puntos promedio</h3>
           <p className="text-2xl font-bold">
-            {users.length > 0 ? Math.round(users.reduce((sum, user) => sum + (user.points || 0), 0) / users.length) : 0}
+            {users.length > 0 ? Math.round(users.reduce((sum, user) => sum + (user.puntos_acumulados || 0), 0) / users.length) : 0}
           </p>
         </div>
       </div>
