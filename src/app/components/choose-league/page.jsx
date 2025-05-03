@@ -1,14 +1,16 @@
-'use client';
+"use client"
 
-import { Button } from "@/components/ui";
-import { Card } from "@/components/ui";
-import { useRouter } from "next/navigation";
-import Layout2 from "@/components/layout2";
-import AuthGuard from "@/components/authGuard/authGuard";
-import { ArrowLeft } from "lucide-react";
+import { Button } from "@/components/ui"
+import { Card } from "@/components/ui"
+import { useRouter } from "next/navigation"
+import Layout2 from "@/components/layout2"
+import AuthGuard from "@/components/authGuard/authGuard"
+import { ArrowLeft } from "lucide-react"
+import { useLanguage } from "@/context/languageContext"
 
 export default function league() {
-  const router = useRouter(); 
+  const router = useRouter()
+  const { t } = useLanguage()
 
   return (
     <AuthGuard>
@@ -16,7 +18,6 @@ export default function league() {
         <div className="min-h-screen flex flex-col text-base sm:text-lg md:text-xl">
           <div className="flex-1 flex flex-col items-center justify-center p-4 sm:p-6">
             <Card className="w-full max-w-3xl p-6 sm:p-10 space-y-6 sm:space-y-10">
-
               {/* Flecha de regreso */}
               <div className="flex items-center gap-3">
                 <button
@@ -38,7 +39,7 @@ export default function league() {
                 >
                   <img src="/images/join-league.jpg" alt="icono join league" className="w-full h-full object-cover" />
                   <span className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white font-bold text-lg sm:text-xl text-center px-2">
-                    Unirte a una liga
+                    {t("league.joinLeague")}
                   </span>
                 </Button>
 
@@ -47,9 +48,13 @@ export default function league() {
                   className="relative h-36 sm:h-40 text-base flex flex-col p-0 overflow-hidden"
                   onClick={() => router.push("/components/create-league")}
                 >
-                  <img src="/images/create-league.jpg" alt="icono create league" className="w-full h-full object-cover" />
+                  <img
+                    src="/images/create-league.jpg"
+                    alt="icono create league"
+                    className="w-full h-full object-cover"
+                  />
                   <span className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white font-bold text-lg sm:text-xl text-center px-2">
-                    Crear una liga
+                    {t("league.createLeague")}
                   </span>
                 </Button>
               </div>
@@ -58,5 +63,5 @@ export default function league() {
         </div>
       </Layout2>
     </AuthGuard>
-  );
+  )
 }

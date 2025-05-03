@@ -120,7 +120,7 @@ export default function Jornada() {
 
     try {
       // Construir la URL con los parámetros
-      let url = `http://localhost:3000/api/v1/draft/getuserDraft?ligaId=${ligaId}&roundName=${jornadaValue}`
+      let url = `http://localhost:3000/api/v1/draft/getuserDraft?ligaId=${ligaId}`
 
       // Añadir userId a la URL si está presente
       if (userId) {

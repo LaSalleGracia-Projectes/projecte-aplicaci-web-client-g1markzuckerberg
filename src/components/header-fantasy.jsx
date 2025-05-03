@@ -1,21 +1,21 @@
-'use client';
-import { useState } from "react";
-import { IconButton, Drawer } from "@/components/ui";
-import Image from "next/image";
-import BurgerMenuContent from "@/components/burguerMenu/burguerMenu";
+"use client"
+import { useState } from "react"
+import { IconButton, Drawer } from "@/components/ui"
+import Image from "next/image"
+import BurgerMenuContent from "@/components/burguerMenu/burguerMenu"
+import { useLanguage } from "@/context/languageContext"
 
 export default function Header() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
+  const { t } = useLanguage()
 
-  const toggleDrawer = () => setOpen(!open);
+  const toggleDrawer = () => setOpen(!open)
 
   return (
     <header className="relative flex items-center justify-between px-4 py-3 bg-blue-500 text-white shadow-md w-full max-w-screen">
       {/* Título centrado en móviles */}
       <div className="absolute left-1/2 transform -translate-x-1/2">
-        <h1 className="text-lg sm:text-xl font-bold text-center whitespace-nowrap">
-          Fantasy Draft
-        </h1>
+        <h1 className="text-lg sm:text-xl font-bold text-center whitespace-nowrap">{t("header.title")}</h1>
       </div>
 
       {/* Botón de menú */}
@@ -24,14 +24,9 @@ export default function Header() {
       </IconButton>
 
       {/* Drawer lateral */}
-      <Drawer
-        open={open}
-        onClose={toggleDrawer}
-        className="p-4 w-64 sm:w-72 bg-white text-black shadow-lg"
-      >
+      <Drawer open={open} onClose={toggleDrawer} className="p-4 w-64 sm:w-72 bg-white text-black shadow-lg">
         <BurgerMenuContent onClose={toggleDrawer} />
       </Drawer>
     </header>
-  );
+  )
 }
-

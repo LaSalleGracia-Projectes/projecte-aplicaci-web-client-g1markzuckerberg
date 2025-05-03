@@ -1,0 +1,109 @@
+{
+    "common": {
+      "login": "Iniciar sesión",
+      "register": "Registrarse",
+      "logout": "Cerrar sesión",
+      "save": "Guardar",
+      "cancel": "Cancelar",
+      "back": "Volver",
+      "loading": "Cargando...",
+      "error": "Error",
+      "success": "Éxito",
+      "startPlaying": "COMENZAR A JUGAR",
+      "saveChanges": "GUARDAR CAMBIOS",
+      "changePassword": "CAMBIAR CONTRASEÑA",
+      "information": "Información",
+      "access": "Acceso",
+      "retry": "Reintentar",
+      "user": "Usuario",
+      "unknown": "Desconocido",
+      "notAuthenticated": "No estás autenticado",
+      "notAvailable": "No disponible"
+    },
+    "footer": {
+      "privacyPolicy": "Política de privacidad",
+      "contact": "Contacto",
+      "cookieSettings": "Configuración de cookies",
+      "copyright": "Noviembre 2024 | Mark Zuckerberg S.L"
+    },
+    "header": {
+      "title": "Fantasy Draft"
+    },
+    "menu": {
+      "home": "Inicio",
+      "classification": "Clasificación",
+      "matchday": "Jornada",
+      "players": "Jugadores"
+    },
+    "home": {
+      "nextMatchday": "PRÓXIMA JORNADA",
+      "vs": "vs",
+      "goalScorers": "Goleadores",
+      "assistProviders": "Asistidores",
+      "notifications": "Notificaciones",
+      "noNotifications": "No hay notificaciones.",
+      "showingRecentNotifications": "Mostrando solo las 10 notificaciones más recientes."
+    },
+    "league": {
+      "createLeague": "Crear una liga",
+      "joinLeague": "Unirte a una liga",
+      "leagueCode": "Código:",
+      "leaveLeague": "Abandonar Liga",
+      "editLeague": "Editar Liga",
+      "manageUsers": "Gestionar Jugadores",
+      "currentMatchday": "Jornada actual:",
+      "classification": "Clasificación",
+      "totalPlayers": "Total de jugadores",
+      "maxPoints": "Puntos máximos",
+      "avgPoints": "Puntos promedio"
+    },
+    "formation": {
+      "selectFormation": "Elige una formación para comenzar tu draft",
+      "formation": "Formación:",
+      "saveLineup": "Guardar Alineación",
+      "selectPlayer": "Seleccionar Jugador",
+      "noPlayersAvailable": "No hay jugadores disponibles para esta posición",
+      "draftCreated": "Ya tienes un draft creado para esta jornada."
+    },
+    "account": {
+      "team": "Equipo",
+      "leagueManagement": "Gestión de ligas",
+      "user": "Usuario",
+      "interface": "Interfaz",
+      "settings": "Ajustes",
+      "deleteAccount": "Eliminar cuenta",
+      "deleteAccountWarning": "Esta acción es irreversible. Para eliminar tu cuenta, introduce tu correo electrónico y confirma."
+    },
+    "interface": {
+      "contact": "Contacto",
+      "phone": "Teléfono",
+      "address": "Dirección",
+      "officeHours": "Horario de atención",
+      "mondayToFriday": "Lunes a Viernes",
+      "saturday": "Sábados",
+      "privacyPolicy": "Política de privacidad",
+      "privacyDescription": "En cumplimiento del RGPD, sus datos personales serán tratados para gestionar su cuenta y proporcionarle nuestros servicios.",
+      "dataUsage": "Uso de datos",
+      "accountManagement": "Gestión de cuenta de usuario",
+      "serviceComms": "Comunicaciones sobre el servicio",
+      "userExperience": "Mejora de la experiencia de usuario",
+      "statistics": "Análisis estadístico",
+      "aboutUs": "Sobre nosotros",
+      "companyDescription": "Somos una empresa en crecimiento en el sector deportivo y de fantasy.",
+      "ourMission": "Nuestra misión",
+      "values": "Valores",
+      "innovation": "Innovación continua",
+      "sportCommitment": "Compromiso con el deporte",
+      "serviceExcellence": "Excelencia en el servicio",
+      "transparency": "Transparencia",
+      "ourAPI": "Conoce nuestra API",
+      "mainFeatures": "Características principales",
+      "authentication": "Autenticación",
+      "fullDocumentation": "Documentación completa",
+      "support": "Soporte",
+      "moreInfo": "Más información en",
+      "collapse": "Replegar",
+      "expand": "Desplegar"
+    }
+  }
+  

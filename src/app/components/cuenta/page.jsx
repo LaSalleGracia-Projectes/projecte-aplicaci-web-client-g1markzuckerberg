@@ -1,19 +1,13 @@
-'use client'
+"use client"
 
 import { useState, useEffect } from "react"
 import Layout from "@/components/layout"
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Input,
-  Button,
-  Typography,
-} from "@/components/ui"
+import { Card, CardHeader, CardBody, CardFooter, Input, Button, Typography } from "@/components/ui"
 import AuthGuard from "@/components/authGuard/authGuard"
+import { useLanguage } from "@/context/languageContext"
 
 export default function Cuenta() {
+  const { t } = useLanguage()
   const [userData, setUserData] = useState(null)
   const [form, setForm] = useState({
     username: "",
@@ -160,13 +154,13 @@ export default function Cuenta() {
 
   return (
     <AuthGuard>
-      <Layout>
+      <Layout currentPage={t("account.user")}>
         <div className="flex flex-col items-center justify-center min-h-screen p-4">
           <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Información */}
             <Card className="w-full">
               <CardHeader className="bg-black text-white p-4 rounded-t-lg">
-                <Typography variant="h6">Información</Typography>
+                <Typography variant="h6">{t("common.information")}</Typography>
               </CardHeader>
               <CardBody className="space-y-4 bg-white p-6 rounded-b-lg">
                 <div>
@@ -191,15 +185,13 @@ export default function Cuenta() {
                 </div>
                 <div className="pt-4">
                   <Button onClick={handleUpdateGeneral} className="w-full bg-blue-500 text-white">
-                    GUARDAR CAMBIOS
+                    {t("common.saveChanges")}
                   </Button>
                 </div>
 
                 <div className="pt-6">
-                  <Typography variant="h6">Eliminación de cuenta</Typography>
-                  <p className="text-sm text-gray-500">
-                    Esta acción es irreversible. Para eliminar tu cuenta, introduce tu correo electrónico y confirma.
-                  </p>
+                  <Typography variant="h6">{t("account.deleteAccount")}</Typography>
+                  <p className="text-sm text-gray-500">{t("account.deleteAccountWarning")}</p>
                   <Input
                     type="email"
                     placeholder="Confirma tu correo"
@@ -207,12 +199,8 @@ export default function Cuenta() {
                     onChange={(e) => setCorreoConfirmacion(e.target.value)}
                     className="mt-2 w-full"
                   />
-                  <Button
-                    color="red"
-                    className="w-full mt-3"
-                    onClick={handleDeleteAccount}
-                  >
-                    ELIMINAR CUENTA
+                  <Button color="red" className="w-full mt-3" onClick={handleDeleteAccount}>
+                    {t("account.deleteAccount")}
                   </Button>
                 </div>
               </CardBody>
@@ -221,17 +209,12 @@ export default function Cuenta() {
             {/* Acceso */}
             <Card className="w-full">
               <CardHeader className="bg-black text-white p-4 rounded-t-lg">
-                <Typography variant="h6">Acceso</Typography>
+                <Typography variant="h6">{t("common.access")}</Typography>
               </CardHeader>
               <CardBody className="space-y-4 bg-white p-6 rounded-b-lg">
                 <div>
                   <label className="text-sm font-medium">Email (no editable)</label>
-                  <Input
-                    type="email"
-                    value={form.email}
-                    disabled
-                    className="w-full"
-                  />
+                  <Input type="email" value={form.email} disabled className="w-full" />
                 </div>
                 <div>
                   <label className="text-sm font-medium">Contraseña actual</label>
@@ -266,7 +249,7 @@ export default function Cuenta() {
               </CardBody>
               <CardFooter className="bg-white p-6 rounded-b-lg">
                 <Button onClick={handleUpdatePassword} className="w-full">
-                  CAMBIAR CONTRASEÑA
+                  {t("common.changePassword")}
                 </Button>
               </CardFooter>
             </Card>
