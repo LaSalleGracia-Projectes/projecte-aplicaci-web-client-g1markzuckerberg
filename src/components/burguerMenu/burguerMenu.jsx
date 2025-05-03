@@ -152,73 +152,80 @@ export default function BurgerMenuContent({ onClose }) {
   }
 
   return (
-    <div className="w-64 bg-gray-900 text-white p-4 rounded-lg shadow-lg">
-      <div className="mb-4 border-b border-gray-700 pb-2 flex items-center gap-2">
-        {userImageUrl ? (
-          <img
-            src={userImageUrl || "/placeholder.svg"}
-            alt="User avatar"
-            className="w-10 h-10 rounded-full object-cover"
-          />
-        ) : (
-          <div className="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center">
-            {user?.username?.charAt(0) || user?.correo?.charAt(0) || "U"}
-          </div>
-        )}
-        <div>
-          <p className="text-lg font-semibold">{user?.username || "Usuario"}</p>
-          <p className="text-sm text-gray-400">{user?.correo || ""}</p>
-        </div>
-        <Link href="/components/ajustes" className="ml-auto">
-          <img src="/images/ajustes.png" alt="ajustes" className="w-4 h-4 cursor-pointer" />
-        </Link>
+<div className="w-full max-w-xs bg-gray-900 text-white p-4 rounded-lg shadow-lg h-full flex flex-col overflow-y-auto">
+  <div className="mb-4 border-b border-gray-700 pb-2 flex items-center gap-3">
+    {userImageUrl ? (
+      <img
+        src={userImageUrl}
+        alt="User avatar"
+        className="w-10 h-10 rounded-full object-cover"
+      />
+    ) : (
+      <div className="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-lg">
+        {user?.username?.charAt(0) || user?.correo?.charAt(0) || "U"}
       </div>
-
-      <div className="mb-4">
-        <p className="font-semibold mb-2">Ligas:</p>
-        {leagues.length > 0 ? (
-          <ul className="space-y-1">
-            {leagues.map((league, index) => (
-              <li
-                key={league.id || index}
-                className={`text-sm p-2 rounded-md cursor-pointer ${
-                  currentLiga?.id === league.id ? "bg-blue-700" : "bg-gray-800 hover:bg-gray-700"
-                }`}
-                onClick={() => handleSelectLeague(league)}
-              >
-                {league.nombre || league.name || `Liga ${index + 1}`}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="text-sm text-gray-400">No hay ligas registradas.</p>
-        )}
-      </div>
-
-      <button
-        className="w-full bg-blue-500 text-white py-2 rounded-md mt-4 hover:bg-blue-700"
-        onClick={() => router.push("/components/choose-league")}
-      >
-        + Añadir Liga
-      </button>
-
-      <Link href="/components/backoffice">
-        <button
-          className="w-full bg-green-600 text-white py-2 rounded-md mt-4 hover:bg-green-800"
-          onClick={onClose}
-        >
-          Back Office
-        </button>
-      </Link>
-
-
-      <Link href="/components/contactForm" className="block text-center text-sm text-blue-400 mt-3 hover:underline">
-        Formulario de contacto
-      </Link>
-
-      <button className="w-full bg-red-500 text-white py-2 rounded-md mt-4 hover:bg-red-700" onClick={handleLogout}>
-        Cerrar sesión
-      </button>
+    )}
+    <div className="flex flex-col overflow-hidden">
+      <p className="text-base font-semibold truncate">{user?.username || "Usuario"}</p>
+      <p className="text-sm text-gray-400 truncate">{user?.correo || ""}</p>
     </div>
+    <Link href="/components/ajustes" className="ml-auto">
+      <img src="/images/ajustes.png" alt="ajustes" className="w-4 h-4 cursor-pointer" />
+    </Link>
+  </div>
+
+  <div className="mb-4">
+    <p className="font-semibold mb-2">Ligas:</p>
+    {leagues.length > 0 ? (
+      <ul className="space-y-2">
+        {leagues.map((league, index) => (
+          <li
+            key={league.id || index}
+            className={`text-sm px-3 py-2 rounded-md cursor-pointer ${
+              currentLiga?.id === league.id ? "bg-blue-700" : "bg-gray-800 hover:bg-gray-700"
+            }`}
+            onClick={() => handleSelectLeague(league)}
+          >
+            {league.nombre || league.name || `Liga ${index + 1}`}
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p className="text-sm text-gray-400">No hay ligas registradas.</p>
+    )}
+  </div>
+
+  <div className="space-y-3 mt-auto">
+    <button
+      className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-700 text-sm sm:text-base"
+      onClick={() => router.push("/components/choose-league")}
+    >
+      + Añadir Liga
+    </button>
+    <br/><br/>
+    <Link href="/components/backoffice">
+      <button
+        className="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-800 text-sm sm:text-base"
+        onClick={onClose}
+      >
+        Back Office
+      </button>
+    </Link>
+
+    <Link
+      href="/components/contactForm"
+      className="block text-center text-sm text-blue-400 hover:underline"
+    >
+      Formulario de contacto
+    </Link>
+
+    <button
+      className="w-full bg-red-500 text-white py-2 rounded-md hover:bg-red-700 text-sm sm:text-base"
+      onClick={handleLogout}
+    >
+      Cerrar sesión
+    </button>
+  </div>
+</div>
   )
 }

@@ -1,4 +1,3 @@
-// components/Layout.js
 import Header from "@/components/header2";
 import Footer from "@/components/footer-fantasy";
 
