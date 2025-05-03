@@ -76,7 +76,6 @@ export default function Notificaciones() {
               )}
             </div>
           )}
-        
         </main>
       </Layout>
     </AuthGuard>
