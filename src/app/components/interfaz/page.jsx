@@ -4,6 +4,7 @@ import Layout from "@/components/layout"
 import { Accordion, AccordionHeader, AccordionBody, Button } from "@material-tailwind/react"
 import { useState } from "react"
 import AuthGuard from "@/components/authGuard/authGuard"
+import { useRouter } from "next/navigation"
 
 const sections = [
   {
@@ -79,9 +80,15 @@ const sections = [
 
 export default function Info() {
   const [open, setOpen] = useState(null)
+  const router = useRouter()
 
   const handleOpen = (value) => {
     setOpen(open === value ? null : value)
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem("user") // o sessionStorage si es lo que usas
+    router.push("/") // Redirige a la página principal
   }
 
   return (
@@ -96,7 +103,7 @@ export default function Info() {
                   className="flex items-center justify-between w-full px-4 py-3 bg-gray-100 rounded-lg cursor-pointer"
                 >
                   <span className="text-lg font-medium">{title}</span>
-                  <div className="ml-auto"> {/* Empuja la imagen totalmente a la derecha */}
+                  <div className="ml-auto">
                     <img 
                       src={open === value ? "/images/replegar.png" : "/images/desplegable.png"} 
                       alt={open === value ? "Replegar" : "Desplegar"} 
@@ -108,12 +115,13 @@ export default function Info() {
               </Accordion>
             ))}
 
-            <Button color="red" className="w-full mt-8" onClick={() => console.log("Cerrar sesión clicked")}>
+            <Button color="red" className="w-full mt-8" onClick={handleLogout}>
               Cerrar Sesión
             </Button>
           </div>
         </div>
       </Layout>
-    </AuthGuard>
+    </AuthGuard> 
   )
 }
+

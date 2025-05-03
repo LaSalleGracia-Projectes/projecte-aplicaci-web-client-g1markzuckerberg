@@ -202,8 +202,18 @@ export default function BurgerMenuContent({ onClose }) {
         + Añadir Liga
       </button>
 
-      <Link href="/info-ayuda" className="block text-center text-sm text-blue-400 mt-3 hover:underline">
-        Información y Ayuda
+      <Link href="/components/backoffice">
+        <button
+          className="w-full bg-green-600 text-white py-2 rounded-md mt-4 hover:bg-green-800"
+          onClick={onClose}
+        >
+          Back Office
+        </button>
+      </Link>
+
+
+      <Link href="/components/contactForm" className="block text-center text-sm text-blue-400 mt-3 hover:underline">
+        Formulario de contacto
       </Link>
 
       <button className="w-full bg-red-500 text-white py-2 rounded-md mt-4 hover:bg-red-700" onClick={handleLogout}>

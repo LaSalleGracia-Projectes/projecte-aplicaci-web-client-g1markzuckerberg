@@ -4,8 +4,10 @@ import { useState, useEffect } from "react"
 import Layout from "@/components/layout"
 import AuthGuard from "@/components/authGuard/authGuard"
 import { useLiga } from "@/context/ligaContext"
-import { Share2, Copy, Trophy, ArrowUp, ArrowDown, Minus } from "lucide-react"
+import { Share2, Copy, Trophy, ArrowUp, ArrowDown, Minus, Edit, UserX, Users } from "lucide-react"
 import { Button } from "@/components/ui"
+import EditLigaDialog from "@/components/clasificacion/editLigaDialog"
+import KickUserDialog from "@/components/clasificacion/kickUserDialog"
 
 export default function Clasificacion() {
   return (
@@ -18,11 +20,71 @@ export default function Clasificacion() {
 }
 
 function ClasificacionContent() {
-  const { currentLiga, loading: ligaLoading } = useLiga()
+  const { currentLiga, loading: ligaLoading, refreshLiga } = useLiga() // Añadir refreshLiga aquí
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [copied, setCopied] = useState(false)
+  const [leaveError, setLeaveError] = useState(null)
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
+  const [isKickDialogOpen, setIsKickDialogOpen] = useState(false)
+  const [isCaptain, setIsCaptain] = useState(false)
+  const [currentUserId, setCurrentUserId] = useState(null)
+  const [leagueImageUrl, setLeagueImageUrl] = useState(null)
+  
+  // Fetch current user and check if is captain
+  useEffect(() => {
+    const fetchCurrentUser = async () => {
+      try {
+        const token = localStorage.getItem("webToken")
+        if (!token) return
+        
+        // Get current user ID from token
+        const userId = getUserIdFromToken(token)
+        setCurrentUserId(userId)
+        
+        if (userId && currentLiga?.id) {
+          const res = await fetch(`http://localhost:3000/api/v1/liga/${currentLiga.id}/user/${userId}`, {
+            headers: { 
+              Authorization: `Bearer ${token}` 
+            },
+          })
+          
+          if (res.ok) {
+            const data = await res.json()
+            setIsCaptain(data.user.is_capitan)
+          }
+        }
+      } catch (err) {
+        console.error("Error checking captain status:", err)
+      }
+    }
+    
+    fetchCurrentUser()
+  }, [currentLiga])
+  
+  // Fetch league image
+  useEffect(() => {
+    if (currentLiga?.id) {
+      setLeagueImageUrl(`http://localhost:3000/api/v1/liga/image/${currentLiga.id}`)
+    }
+  }, [currentLiga])
+
+  // Helper function to extract user ID from token
+  const getUserIdFromToken = (token) => {
+    try {
+      const base64Url = token.split('.')[1]
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
+      const jsonPayload = decodeURIComponent(atob(base64).split('').map(c => {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+      }).join(''))
+      
+      return JSON.parse(jsonPayload).id
+    } catch (error) {
+      console.error("Error extracting user ID from token:", error)
+      return null
+    }
+  }
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -42,36 +104,28 @@ function ClasificacionContent() {
 
         console.log("Fetching users for liga code:", currentLiga.code)
 
-        try {
-          const res = await fetch(`http://localhost:3000/api/v1/liga/users/${currentLiga.code}`, {
-            headers: { Authorization: `Bearer ${token}` },
-          })
+        const res = await fetch(`http://localhost:3000/api/v1/liga/users/${currentLiga.code}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
 
-          if (!res.ok) {
-            const errorData = await res.json().catch(() => ({}))
-            console.error("Error fetching users:", res.status, errorData)
-            throw new Error(errorData.error || `Error ${res.status}: No se pudieron obtener los usuarios de la liga`)
-          }
-
-          const data = await res.json()
-          console.log("Users data:", data)
-
-          // Sort users by points in descending order
-          const sortedUsers = (data.users || []).sort((a, b) => (b.points || 0) - (a.points || 0))
-
-          // Add position and trend indicators
-          const usersWithPosition = sortedUsers.map((user, index) => ({
-            ...user,
-            position: index + 1,
-            // This is a placeholder - in a real app you'd compare with previous week
-            trend: Math.floor(Math.random() * 3) - 1, // -1 (down), 0 (same), 1 (up)
-          }))
-
-          setUsers(usersWithPosition)
-        } catch (fetchError) {
-          console.error("Fetch error:", fetchError)
-          throw fetchError
+        if (!res.ok) {
+          const errorData = await res.json().catch(() => ({}))
+          console.error("Error fetching users:", res.status, errorData)
+          throw new Error(errorData.error || `Error ${res.status}: No se pudieron obtener los usuarios de la liga`)
         }
+
+        const data = await res.json()
+        console.log("Users data:", data)
+
+        const sortedUsers = (data.users || []).sort((a, b) => (b.points || 0) - (a.points || 0))
+
+        const usersWithPosition = sortedUsers.map((user, index) => ({
+          ...user,
+          position: index + 1,
+          trend: Math.floor(Math.random() * 3) - 1,
+        }))
+
+        setUsers(usersWithPosition)
       } catch (err) {
         console.error("Error in fetchUsers:", err)
         setError(err.message || "Error al cargar usuarios")
@@ -91,11 +145,90 @@ function ClasificacionContent() {
     }
   }
 
-  // Debug information for troubleshooting
-  console.log("Current Liga:", currentLiga)
-  console.log("Liga Loading:", ligaLoading)
-  console.log("Users Loading:", loading)
-  console.log("Error:", error)
+  const handleLeaveLeague = async () => {
+    if (!currentLiga?.id) {
+      setLeaveError("No se encontró la liga.")
+      return
+    }
+
+    try {
+      const token = localStorage.getItem("webToken")
+      if (!token) {
+        setLeaveError("No estás autenticado.")
+        return
+      }
+
+      const res = await fetch(`http://localhost:3000/api/v1/liga/leave/${currentLiga.id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}))
+        const errorMessage = errorData?.error || `Error ${res.status}: No se pudo abandonar la liga`
+        throw new Error(errorMessage)
+      }
+
+      window.location.href = "/components/choose-league"
+    } catch (err) {
+      console.error("Error al abandonar la liga:", err)
+      setLeaveError(err.message || "Error al intentar abandonar la liga")
+    }
+  }
+
+  const handleEditSuccess = () => {
+    // Utilizar refreshLiga para actualizar el contexto
+    if (refreshLiga) {
+      refreshLiga()
+    }
+  }
+  
+  const handleKickSuccess = () => {
+    // Actualizar la lista de usuarios después de expulsar a alguien
+    if (refreshLiga) {
+      refreshLiga()
+    }
+    
+    // Re-fetch users
+    const fetchUsers = async () => {
+      setLoading(true)
+      try {
+        const token = localStorage.getItem("webToken")
+        if (!token || !currentLiga?.code) return
+        
+        const res = await fetch(`http://localhost:3000/api/v1/liga/users/${currentLiga.code}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        
+        if (!res.ok) {
+          throw new Error("No se pudieron obtener los usuarios actualizados")
+        }
+        
+        const data = await res.json()
+        const sortedUsers = (data.users || []).sort((a, b) => (b.points || 0) - (a.points || 0))
+        
+        const usersWithPosition = sortedUsers.map((user, index) => ({
+          ...user,
+          position: index + 1,
+          trend: Math.floor(Math.random() * 3) - 1,
+        }))
+        
+        setUsers(usersWithPosition)
+      } catch (err) {
+        console.error("Error actualizando usuarios:", err)
+      } finally {
+        setLoading(false)
+      }
+    }
+    
+    fetchUsers()
+  }
+
+  // Imagen placeholder por defecto
+  const defaultPlaceholder = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%23f0f0f0'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='8' text-anchor='middle' dominant-baseline='middle' fill='%23999'%3EUser%3C/text%3E%3C/svg%3E"
+  const leaguePlaceholder = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23f0f0f0'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='12' text-anchor='middle' dominant-baseline='middle' fill='%23999'%3ELiga%3C/text%3E%3C/svg%3E"
 
   if (ligaLoading || loading) {
     return (
@@ -129,21 +262,58 @@ function ClasificacionContent() {
       {/* League Header */}
       <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
         <div className="flex justify-between items-center">
-          <div>
-            <h1 className="text-2xl font-bold">{currentLiga.name || currentLiga.nombre || "Mi Liga"}</h1>
-            <div className="flex items-center mt-2">
-              <p className="text-gray-600 mr-2">Código:</p>
-              <p className="font-medium">{currentLiga.code}</p>
-              <button onClick={copyCode} className="ml-2 text-gray-500 hover:text-gray-700" aria-label="Copiar código">
-                {copied ? <span className="text-green-500 text-sm">¡Copiado!</span> : <Copy className="h-4 w-4" />}
-              </button>
+          <div className="flex items-center">
+            {leagueImageUrl && (
+              <div className="mr-4">
+                <img 
+                  src={leagueImageUrl} 
+                  alt="Logo de la liga" 
+                  className="h-16 w-16 rounded-lg object-cover"
+                  onError={(e) => {
+                    e.target.onerror = null
+                    e.target.src = leaguePlaceholder
+                  }}
+                />
+              </div>
+            )}
+            <div>
+              <h1 className="text-2xl font-bold">{currentLiga.name || currentLiga.nombre || "Mi Liga"}</h1>
+              <div className="flex items-center mt-2">
+                <p className="text-gray-600 mr-2">Código:</p>
+                <p className="font-medium">{currentLiga.code}</p>
+                <button 
+                  onClick={copyCode} 
+                  className="ml-2 text-gray-500 hover:text-gray-700" 
+                  aria-label="Copiar código"
+                >
+                  {copied ? <span className="text-green-500 text-sm">¡Copiado!</span> : <Copy className="h-4 w-4" />}
+                </button>
+              </div>
             </div>
           </div>
-          <Button variant="outline" size="sm" className="gap-2">
-            <Share2 className="h-4 w-4" />
-            Compartir
-          </Button>
+          <div className="flex items-center gap-2">
+            {isCaptain && (
+              <>
+                <Button variant="outline" size="sm" className="gap-2" onClick={() => setIsEditDialogOpen(true)}>
+                  <Edit className="h-4 w-4" />
+                  Editar Liga
+                </Button>
+                <Button variant="outline" size="sm" className="gap-2" onClick={() => setIsKickDialogOpen(true)}>
+                  <Users className="h-4 w-4" />
+                  Gestionar Jugadores
+                </Button>
+              </>
+            )}
+            <Button variant="destructive" size="sm" className="gap-2" onClick={handleLeaveLeague}>
+              Abandonar Liga
+            </Button>
+          </div>
         </div>
+        {leaveError && (
+          <p className="text-sm text-red-500 mt-2">
+            {leaveError}
+          </p>
+        )}
         <div className="mt-4">
           <p className="text-sm text-gray-600">
             Jornada actual: <span className="font-medium">{currentLiga.created_jornada || "N/A"}</span>
@@ -181,6 +351,11 @@ function ClasificacionContent() {
                   <th className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Tendencia
                   </th>
+                  {isCaptain && (
+                    <th className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Acciones
+                    </th>
+                  )}
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
@@ -194,8 +369,12 @@ function ClasificacionContent() {
                         <div className="h-10 w-10 flex-shrink-0">
                           <img
                             className="h-10 w-10 rounded-full object-cover"
-                            src={user.imageUrl || "/placeholder.svg?height=40&width=40"}
+                            src={user.imageUrl || defaultPlaceholder}
                             alt={user.nombre || user.correo}
+                            onError={(e) => {
+                              e.target.onerror = null
+                              e.target.src = defaultPlaceholder
+                            }}
                           />
                         </div>
                         <div className="ml-4">
@@ -216,6 +395,26 @@ function ClasificacionContent() {
                         <Minus className="h-5 w-5 text-gray-400 mx-auto" />
                       )}
                     </td>
+                    {isCaptain && user.id !== currentUserId && (
+                      <td className="px-4 py-4 whitespace-nowrap text-center">
+                        <button 
+                          className="text-red-500 hover:text-red-700" 
+                          title="Expulsar de la liga"
+                          onClick={() => {
+                            setIsKickDialogOpen(true)
+                          }}
+                        >
+                          <UserX className="h-5 w-5" />
+                        </button>
+                      </td>
+                    )}
+                    {isCaptain && user.id === currentUserId && (
+                      <td className="px-4 py-4 whitespace-nowrap text-center">
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                          Capitán
+                        </span>
+                      </td>
+                    )}
                   </tr>
                 ))}
               </tbody>
@@ -243,6 +442,26 @@ function ClasificacionContent() {
           </p>
         </div>
       </div>
+
+      {/* Edit League Dialog Component */}
+      {isEditDialogOpen && (
+        <EditLigaDialog 
+          currentLiga={currentLiga}
+          onClose={() => setIsEditDialogOpen(false)}
+          onSuccess={handleEditSuccess}
+        />
+      )}
+      
+      {/* Kick Users Dialog Component */}
+      {isKickDialogOpen && (
+        <KickUserDialog 
+          users={users}
+          currentUserId={currentUserId}
+          ligaId={currentLiga.id}
+          onClose={() => setIsKickDialogOpen(false)}
+          onSuccess={handleKickSuccess}
+        />
+      )}
     </div>
   )
 }
