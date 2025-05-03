@@ -55,7 +55,8 @@
       "classification": "Classificació",
       "totalPlayers": "Total de jugadors",
       "maxPoints": "Punts màxims",
-      "avgPoints": "Punts mitjans"
+      "avgPoints": "Mitja de punts",
+      "managePlayers": "Gestió de jugadors"
     },
     "formation": {
       "selectFormation": "Tria una formació per començar el teu draft",

@@ -55,7 +55,8 @@
       "classification": "Clasificación",
       "totalPlayers": "Total de jugadores",
       "maxPoints": "Puntos máximos",
-      "avgPoints": "Puntos promedio"
+      "avgPoints": "Puntos promedios",
+      "managePlayers": "Gestionar jugadores"
     },
     "formation": {
       "selectFormation": "Elige una formación para comenzar tu draft",

@@ -55,7 +55,8 @@
       "classification": "Ranking",
       "totalPlayers": "Total players",
       "maxPoints": "Max points",
-      "avgPoints": "Average points"
+      "avgPoints": "Average points",
+      "managePlayers": "Manage players"
     },
     "formation": {
       "selectFormation": "Choose a formation to start your draft",

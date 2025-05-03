@@ -1,810 +1,366 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useState, useEffect } from "react"
 import Layout from "@/components/layout"
 import AuthGuard from "@/components/authGuard/authGuard"
 import { useLiga } from "@/context/ligaContext"
-import Formation433 from "@/components/formation/433component"
-import Formation343 from "@/components/formation/343component"
-import Formation442 from "@/components/formation/442component"
+import Formacion433 from "@/components/formaciones/formacion-433"
+import Formacion343 from "@/components/formaciones/formacion-343"
+import Formacion442 from "@/components/formaciones/formacion-442"
+import SeleccionFormacion from "@/components/jornada/seleccion-formacion"
+import EditorFormacion from "@/components/jornada/editor-formacion"
+import { useLanguage } from "@/context/languageContext"
 
 export default function Jornada() {
+  const { t } = useLanguage()
   const { currentLiga } = useLiga()
-  const [jornada, setJornada] = useState(null)
-  const [hasDraft, setHasDraft] = useState(false)
   const [loading, setLoading] = useState(true)
-  const [tempDraft, setTempDraft] = useState(null)
   const [error, setError] = useState(null)
-  const [currentUser, setCurrentUser] = useState(null)
+  const [plantilla, setPlantilla] = useState(null)
+  const [players, setPlayers] = useState([])
 
-  // Función para obtener el usuario actual
-  const fetchCurrentUser = async (token) => {
-    try {
-      console.log("Obteniendo información del usuario actual...")
+  // Estados para la creación de draft
+  const [creandoDraft, setCreandoDraft] = useState(false)
+  const [formacionSeleccionada, setFormacionSeleccionada] = useState(null)
+  const [tempDraft, setTempDraft] = useState(null)
+  const [guardandoDraft, setGuardandoDraft] = useState(false)
+  const [draftGuardado, setDraftGuardado] = useState(false)
 
-      // Try to get user from localStorage first as fallback
-      const cachedUser = localStorage.getItem("user")
-      let userFromCache = null
-
-      if (cachedUser) {
-        try {
-          userFromCache = JSON.parse(cachedUser)
-          console.log("Usuario recuperado de cache:", userFromCache)
-        } catch (e) {
-          console.warn("Error al parsear usuario de cache:", e)
-        }
-      }
-
-      // Attempt to fetch from API with timeout
-      const controller = new AbortController()
-      const timeoutId = setTimeout(() => controller.abort(), 5000) // 5 second timeout
-
-      const userRes = await fetch("http://localhost:3000/api/v1/user/me", {
-        headers: { Authorization: `Bearer ${token}` },
-        signal: controller.signal,
-      }).catch((err) => {
-        console.warn(`Error de conexión al obtener usuario: ${err.message}`)
-        return null
-      })
-
-      clearTimeout(timeoutId)
-
-      // If fetch failed or returned error, use cached user if available
-      if (!userRes || !userRes.ok) {
-        const status = userRes?.status
-        console.warn(`Error obteniendo usuario: ${status || "conexión fallida"}`)
-
-        if (userFromCache) {
-          console.log("Usando datos de usuario desde cache debido al error de conexión")
-          return userFromCache
-        }
-
-        // If no cached user, try to extract from token as last resort
-        if (token) {
-          try {
-            // JWT tokens are in format: header.payload.signature
-            const payload = token.split(".")[1]
-            if (payload) {
-              // Decode base64
-              const decodedPayload = JSON.parse(atob(payload))
-              if (decodedPayload.id) {
-                console.log("Extrayendo información básica de usuario desde token:", decodedPayload)
-                return {
-                  id: decodedPayload.id,
-                  username: decodedPayload.username || decodedPayload.email || "Usuario",
-                  // Add other fields that might be in the token
-                }
-              }
-            }
-          } catch (e) {
-            console.warn("Error al extraer información de usuario desde token:", e)
-          }
-        }
-
-        return null
-      }
-
-      const userData = await userRes.json()
-      console.log("Datos de usuario obtenidos:", userData)
-
-      // Cache the user data for future use
-      if (userData.user) {
-        localStorage.setItem("user", JSON.stringify(userData.user))
-      }
-
-      return userData.user
-    } catch (err) {
-      console.error("Error obteniendo usuario:", err)
-
-      // Try to get user from localStorage as fallback
-      try {
-        const cachedUser = localStorage.getItem("user")
-        if (cachedUser) {
-          const userFromCache = JSON.parse(cachedUser)
-          console.log("Usando datos de usuario desde cache debido a error:", userFromCache)
-          return userFromCache
-        }
-      } catch (e) {
-        console.warn("Error al recuperar usuario de cache:", e)
-      }
-
-      return null
-    }
-  }
-
-  // Función para verificar si existe un draft
-  const checkExistingDraft = async (ligaId, jornadaValue, token, userId = null) => {
-    console.log(
-      `Verificando draft existente para liga ${ligaId}, jornada ${jornadaValue}${userId ? `, usuario ${userId}` : ""}`,
-    )
-
-    try {
-      // Construir la URL con los parámetros
-      let url = `http://localhost:3000/api/v1/draft/getuserDraft?ligaId=${ligaId}`
-
-      // Añadir userId a la URL si está presente
-      if (userId) {
-        url += `&userId=${userId}`
-        console.log("Añadiendo userId a la petición:", userId)
-      }
-
-      console.log("URL de petición completa:", url)
-
-      const draftRes = await fetch(url, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-
-      if (!draftRes.ok) {
-        const status = draftRes.status
-        console.warn(`Error en respuesta al verificar draft: ${status}`)
-
-        // Properly handle 404 status
-        if (status === 404) {
-          console.log("No existe un draft para esta liga y jornada (404)")
-          return { found: false, data: null, notFound: true }
-        }
-
-        let errorText = ""
-        try {
-          const errorData = await draftRes.json()
-          errorText = errorData.error || (await draftRes.text())
-        } catch (e) {
-          errorText = "No se pudo obtener el texto del error"
-        }
-
-        console.error("Detalle del error:", errorText)
-
-        // Check for specific error message or code
-        if (
-          errorText.includes("No se encontró la plantilla") ||
-          (typeof errorText === "object" && errorText.code === "DRAFT_NOT_FOUND")
-        ) {
-          console.log("No existe un draft para esta liga y jornada (error específico)")
-          return { found: false, data: null, notFound: true }
-        }
-
-        return { found: false, data: null, error: { status, text: errorText } }
-      }
-
-      const draftData = await draftRes.json()
-      console.log("Respuesta del draft:", draftData)
-
-      if (draftData?.plantilla) {
-        // Verificar si hay una plantilla válida
-        // Preparar el tempDraft con la estructura correcta para los componentes de formación
-        const formattedDraft = {
-          ...draftData,
-          id_plantilla: draftData.plantilla.id,
-          formation: draftData.plantilla.formation,
-          playerOptions: draftData.plantilla.playerOptions || draftData.players,
-          ligaId: ligaId,
-        }
-
-        return { found: true, data: formattedDraft }
-      } else {
-        console.log("No se encontró un draft completo")
-        return { found: false, data: null }
-      }
-    } catch (err) {
-      console.error("Error verificando draft existente:", err)
-      return { found: false, data: null, error: err.message }
-    }
-  }
-
-  // Función para verificar si hay un tempDraft
-  const checkTempDraft = async (ligaId, jornadaValue, token, userId = null) => {
-    try {
-      console.log(
-        `Verificando tempDraft para liga ${ligaId}, jornada ${jornadaValue}${userId ? `, usuario ${userId}` : ""}`,
-      )
-
-      // Construir la URL con los parámetros
-      let url = `http://localhost:3000/api/v1/draft/tempDraft/${ligaId}?roundName=${jornadaValue}`
-
-      // Añadir userId a la URL si está presente
-      if (userId) {
-        url += `&userId=${userId}`
-        console.log("Añadiendo userId a la petición tempDraft:", userId)
-      }
-
-      console.log("URL de petición tempDraft:", url)
-
-      const tempDraftRes = await fetch(url, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-
-      if (!tempDraftRes.ok) {
-        const status = tempDraftRes.status
-        console.warn(`Error en respuesta al verificar tempDraft: ${status}`)
-
-        let errorText = ""
-        try {
-          errorText = await tempDraftRes.text()
-        } catch (e) {
-          errorText = "No se pudo obtener el texto del error"
-        }
-
-        console.error("Detalle del error tempDraft:", errorText)
-
-        // Si el error indica que no se encontró el tempDraft, es un caso normal
-        if (errorText.includes("No se encontró") || status === 404) {
-          return { found: false, data: null, notFound: true }
-        }
-
-        return { found: false, data: null, error: { status, text: errorText } }
-      }
-
-      const tempDraftData = await tempDraftRes.json()
-      console.log("Respuesta del tempDraft:", tempDraftData)
-
-      if (tempDraftData?.tempDraft) {
-        console.log("Temp draft encontrado:", tempDraftData.tempDraft)
-
-        // Asegurarnos de que tempDraft tiene la información de formación
-        const draft = tempDraftData.tempDraft
-
-        // Si no tiene formación, intentamos extraerla de la cadena
-        if (!draft.formation && typeof draft === "object") {
-          // Buscar alguna propiedad que contenga información sobre la formación
-          console.log("Propiedades del tempDraft:", Object.keys(draft))
-
-          // Intenta buscar el patrón de formación (ej: 4-3-3, 4-4-2, 3-4-3) en el objeto
-          const formationPattern = /(\d-\d-\d)/
-          const formationStr = JSON.stringify(draft)
-          const match = formationStr.match(formationPattern)
-
-          if (match && match[0]) {
-            console.log("Formación detectada en el objeto:", match[0])
-            // Crear una copia con la formación detectada
-            const draftWithFormation = {
-              ...draft,
-              formation: match[0],
-            }
-            return { found: true, data: draftWithFormation }
-          } else {
-            console.log("No se pudo detectar la formación en el objeto")
-            return { found: true, data: draft }
-          }
-        } else {
-          return { found: true, data: draft }
-        }
-      } else {
-        console.log("No se encontró un tempDraft")
-        return { found: false, data: null }
-      }
-    } catch (err) {
-      console.error("Error verificando tempDraft:", err)
-      return { found: false, data: null, error: err.message }
-    }
-  }
-
-  // Función para crear un nuevo draft
-  const createNewDraft = async (formation, ligaId, token, userId = null) => {
-    try {
-      console.log(
-        `Creando nuevo draft con formación ${formation} para liga ${ligaId}${userId ? `, usuario ${userId}` : ""}`,
-      )
-
-      const requestBody = {
-        formation: formation,
-        ligaId: ligaId,
-      }
-
-      // Añadir userId al cuerpo de la petición si está presente
-      if (userId) {
-        requestBody.userId = userId
-        console.log("Añadiendo userId al cuerpo de la petición:", userId)
-      }
-
-      console.log("Cuerpo de la petición:", requestBody)
-
-      const res = await fetch("http://localhost:3000/api/v1/draft/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(requestBody),
-      })
-
-      if (!res.ok) {
-        const errorText = await res.text()
-        console.error("Error response:", errorText)
-
-        // Verificar si el error es porque ya existe un draft
-        if (errorText.includes("Ya existe un draft creado para esta liga y jornada")) {
-          return { success: false, error: "already_exists", message: "Ya existe un draft para esta liga y jornada" }
-        }
-
-        return {
-          success: false,
-          error: "create_failed",
-          message: `Error al crear el draft: ${res.status} ${res.statusText}`,
-          details: errorText,
-        }
-      }
-
-      const data = await res.json()
-      console.log("Respuesta de creación de draft:", data)
-
-      if (data.tempDraft) {
-        // Asegurarnos de que el tempDraft tenga la formación seleccionada
-        const enhancedTempDraft = {
-          ...data.tempDraft,
-          formation: formation,
-          formationSelected: formation,
-        }
-        return { success: true, data: enhancedTempDraft }
-      } else {
-        return { success: false, error: "no_data", message: "No se recibió el draft temporal" }
-      }
-    } catch (err) {
-      console.error("Error creando draft:", err)
-      return { success: false, error: "exception", message: err.message }
-    }
-  }
-
-  // Efecto para cargar la jornada actual y el usuario
   useEffect(() => {
-    const fetchInitialData = async () => {
-      if (!currentLiga || !currentLiga.id) {
-        console.warn("No hay una liga seleccionada.")
+    const fetchUserDraft = async () => {
+      if (!currentLiga?.id) {
+        setError("No hay una liga seleccionada")
         setLoading(false)
         return
       }
 
       try {
-        // Obtener el token de autenticación
         const token = localStorage.getItem("webToken")
         if (!token) {
-          console.warn("No se encontró el token de autenticación")
+          setError("No estás autenticado")
           setLoading(false)
           return
         }
 
-        // Obtener información del usuario actual
-        const user = await fetchCurrentUser(token)
-        if (user) {
-          setCurrentUser(user)
-          console.log("Usuario actual establecido:", user)
-        } else {
-          console.warn("No se pudo obtener la información del usuario")
-          // Continue with default user or anonymous mode
-          console.log("Continuando sin información de usuario específica")
+        const response = await fetch(`http://localhost:3000/api/v1/draft/getuserDraft?ligaId=${currentLiga.id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+
+        if (!response.ok) {
+          // Para cualquier error (404, 500, etc.), permitir crear un nuevo draft
+          console.log(`Error al obtener draft: ${response.status}`)
+          setPlantilla(null)
+          setLoading(false)
+          return
         }
 
-        // Obtener la jornada actual
-        console.log("Obteniendo jornada actual...")
-        const jornadaRes = await fetch("http://localhost:3000/api/v1/sportmonks/jornadaActual")
-
-        if (!jornadaRes.ok) {
-          const errorText = await jornadaRes.text()
-          console.error(`Error obteniendo jornada: ${jornadaRes.status}`, errorText)
-          throw new Error(`Error obteniendo jornada: ${jornadaRes.status}`)
-        }
-
-        const responseData = await jornadaRes.json()
-        console.log("Respuesta completa de jornada:", responseData)
-
-        // Extraer la jornada del objeto anidado
-        let jornadaData = null
-
-        if (responseData && responseData.jornadaActual) {
-          jornadaData = responseData.jornadaActual
-          console.log("Datos de jornada encontrados en jornadaActual:", jornadaData)
-        } else {
-          jornadaData = responseData
-          console.log("Usando datos de respuesta directamente:", jornadaData)
-        }
-
-        // Verificar si tenemos datos válidos
-        if (!jornadaData) {
-          console.error("No se encontraron datos de jornada en la respuesta")
-          throw new Error("No se encontraron datos de jornada en la respuesta")
-        }
-
-        // Extraer el nombre/número de la jornada
-        let jornadaValue = null
-
-        if (jornadaData.name) {
-          jornadaValue = jornadaData.name
-          console.log("Usando name como valor de jornada:", jornadaValue)
-        } else if (jornadaData.id) {
-          jornadaValue = jornadaData.id
-          console.log("Usando id como valor de jornada:", jornadaValue)
-        } else {
-          console.error("No se encontró name o id en los datos de jornada:", jornadaData)
-          throw new Error("No se pudo obtener el número de la jornada actual")
-        }
-
-        // Crear un objeto jornada con el valor extraído
-        const jornadaObj = {
-          value: jornadaValue,
-          name: jornadaValue.toString(),
-          // Incluir otros datos que puedan ser útiles
-          id: jornadaData.id,
-          is_current: jornadaData.is_current,
-          starting_at: jornadaData.starting_at,
-          ending_at: jornadaData.ending_at,
-        }
-
-        setJornada(jornadaObj)
-        console.log("Jornada establecida:", jornadaObj)
-
-        // Obtener el ID del usuario si está disponible
-        const userId = user?.id
-        console.log("ID de usuario para verificar draft:", userId || "No disponible")
-
-        // Verificar si ya existe un draft
-        const existingDraft = await checkExistingDraft(currentLiga.id, jornadaValue, token, userId)
-
-        if (existingDraft.found) {
-          setHasDraft(true)
-          setTempDraft(existingDraft.data)
-          console.log("Draft existente encontrado y establecido")
-        } else if (existingDraft.notFound) {
-          // Si no se encontró el draft (error 500 pero realmente es un 404), verificamos el tempDraft
-          console.log("No se encontró draft existente, verificando tempDraft...")
-          const tempDraftResult = await checkTempDraft(currentLiga.id, jornadaValue, token, userId)
-
-          if (tempDraftResult.found) {
-            setHasDraft(true)
-            setTempDraft(tempDraftResult.data)
-            console.log("TempDraft encontrado y establecido")
-          } else {
-            setHasDraft(false)
-            console.log("No se encontró ningún draft ni tempDraft")
-          }
-        } else if (existingDraft.error) {
-          console.error("Error al verificar draft existente:", existingDraft.error)
-          // Si hay un error real (no un 404 disfrazado), verificamos el tempDraft de todos modos
-          const tempDraftResult = await checkTempDraft(currentLiga.id, jornadaValue, token, userId)
-
-          if (tempDraftResult.found) {
-            setHasDraft(true)
-            setTempDraft(tempDraftResult.data)
-            console.log("TempDraft encontrado y establecido después de error")
-          } else {
-            setHasDraft(false)
-            console.log("No se encontró ningún draft después de error")
-          }
-        } else {
-          // Si no hay draft completo, verificar tempDraft
-          const tempDraftResult = await checkTempDraft(currentLiga.id, jornadaValue, token, userId)
-
-          if (tempDraftResult.found) {
-            setHasDraft(true)
-            setTempDraft(tempDraftResult.data)
-            console.log("TempDraft encontrado y establecido")
-          } else {
-            setHasDraft(false)
-            console.log("No se encontró ningún draft")
-          }
-        }
-      } catch (error) {
-        console.error("Error obteniendo datos iniciales:", error)
-        setError("No se pudo cargar la jornada actual. Por favor, intenta de nuevo más tarde.")
+        const data = await response.json()
+        setPlantilla(data.plantilla)
+        setPlayers(data.players)
+      } catch (err) {
+        console.error("Error al obtener el draft:", err)
+        // En caso de cualquier error, permitir crear un nuevo draft
+        setPlantilla(null)
+        setError(null) // Limpiamos el error para mostrar la opción de crear draft
       } finally {
         setLoading(false)
       }
     }
 
-    fetchInitialData()
-  }, [currentLiga])
+    fetchUserDraft()
+  }, [currentLiga, draftGuardado])
 
-  const handleFormationSelect = async (formation) => {
-    const token = localStorage.getItem("webToken")
-
-    if (!formation || !currentLiga?.id || !jornada?.value) {
-      alert("Faltan datos para crear el draft")
+  const handleCrearDraft = async (formacion) => {
+    if (!currentLiga?.id) {
+      setError("No hay una liga seleccionada")
       return
     }
 
+    setFormacionSeleccionada(formacion)
+    setCreandoDraft(true)
+    setLoading(true)
+    setError(null) // Limpiar errores anteriores
+
     try {
-      setLoading(true)
-
-      // Obtener el ID del usuario si está disponible
-      const userId = currentUser?.id
-      console.log("ID de usuario para crear draft:", userId || "No disponible")
-
-      // Primero verificamos si ya existe un draft para esta liga y jornada
-      const existingDraft = await checkExistingDraft(currentLiga.id, jornada.value, token, userId)
-
-      if (existingDraft.found) {
-        // Si ya existe un draft, lo usamos en lugar de crear uno nuevo
-        setHasDraft(true)
-        setTempDraft(existingDraft.data)
-        setLoading(false)
-        alert("Ya tienes un draft creado para esta jornada. Se ha cargado correctamente.")
-        return
+      const token = localStorage.getItem("webToken")
+      if (!token) {
+        throw new Error("No estás autenticado")
       }
 
-      // Si no existe o es un 404 disfrazado de 500, creamos uno nuevo
-      if (existingDraft.notFound || (existingDraft.error && existingDraft.error.status === 500)) {
-        console.log("No existe un draft, creando uno nuevo...")
-        const createResult = await createNewDraft(formation, currentLiga.id, token, userId)
+      console.log("Creando draft con formación:", formacion, "para liga:", currentLiga.id)
 
-        if (createResult.success) {
-          setTempDraft(createResult.data)
-          setHasDraft(true)
-          alert("Draft creado correctamente. ¡Ya puedes seleccionar jugadores!")
-        } else if (createResult.error === "already_exists") {
-          // Si ya existe, intentamos obtenerlo de nuevo
-          const retryDraft = await checkExistingDraft(currentLiga.id, jornada.value, token, userId)
+      // 1. Crear el draft con la formación seleccionada
+      const createResponse = await fetch("http://localhost:3000/api/v1/draft/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          formation: formacion,
+          ligaId: currentLiga.id,
+        }),
+      })
 
-          if (retryDraft.found) {
-            setHasDraft(true)
-            setTempDraft(retryDraft.data)
-            alert("Ya tienes un draft creado para esta jornada. Se ha cargado correctamente.")
-          } else {
-            // Si no podemos obtener el draft existente, intentamos con tempDraft
-            const tempDraftResult = await checkTempDraft(currentLiga.id, jornada.value, token, userId)
-
-            if (tempDraftResult.found) {
-              setHasDraft(true)
-              setTempDraft(tempDraftResult.data)
-              alert("Se ha cargado un borrador existente para esta jornada.")
-            } else {
-              throw new Error("No se pudo cargar el draft existente")
-            }
-          }
-        } else {
-          throw new Error(createResult.message || "Error al crear el draft")
-        }
-      } else {
-        throw new Error("Error al verificar si existe un draft")
+      if (!createResponse.ok) {
+        const errorData = await createResponse.json().catch(() => ({}))
+        throw new Error(errorData.error || `Error ${createResponse.status}: No se pudo crear el draft`)
       }
-    } catch (error) {
-      console.error("Error en el proceso de draft:", error)
-      alert(`No se pudo crear o cargar el draft. ${error.message}`)
+
+      console.log("Draft creado correctamente, obteniendo jugadores disponibles...")
+
+      // 2. Obtener los jugadores disponibles para el draft temporal
+      const tempDraftResponse = await fetch(`http://localhost:3000/api/v1/draft/tempDraft/${currentLiga.id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      if (!tempDraftResponse.ok) {
+        const errorData = await tempDraftResponse.json().catch(() => ({}))
+        throw new Error(errorData.error || `Error ${tempDraftResponse.status}: No se pudo obtener el draft temporal`)
+      }
+
+      const tempDraftData = await tempDraftResponse.json()
+      console.log("Draft temporal obtenido:", tempDraftData)
+      setTempDraft(tempDraftData.tempDraft)
+    } catch (err) {
+      console.error("Error al crear el draft:", err)
+      setError(err.message || "Error al crear el draft")
+      setCreandoDraft(false)
     } finally {
       setLoading(false)
     }
   }
 
-  const renderFormationOptions = () => (
-    <div className="flex flex-col items-center justify-center gap-6 pt-12">
-      <h2 className="text-xl font-semibold text-gray-800">Elige una formación para comenzar tu draft</h2>
-      <div className="flex gap-4">
-        {["4-4-2", "4-3-3", "3-4-3"].map((formacion) => (
-          <button
-            key={formacion}
-            onClick={() => handleFormationSelect(formacion)}
-            className="px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition"
-            disabled={loading}
-          >
-            {formacion}
-          </button>
-        ))}
-      </div>
-    </div>
-  )
+  // Función actualizada para gestionar correctamente la actualización del draft
+  const handleUpdateDraft = async (posicion, jugadorIndex, posicionIndex) => {
+    if (!currentLiga?.id || !tempDraft) return
 
-  const renderFormationComponent = () => {
-    if (!tempDraft) return null
+    try {
+      const token = localStorage.getItem("webToken")
 
-    // Debugging para ver la estructura completa del tempDraft
-    console.log("Renderizando formación con tempDraft:", tempDraft)
-
-    // Intentar determinar la formación a partir del objeto tempDraft
-    let formation = null
-
-    // Método 1: Buscar directamente en las propiedades principales
-    if (tempDraft.formation) {
-      formation = tempDraft.formation
-      console.log("Formación encontrada en tempDraft.formation:", formation)
-    } else if (tempDraft.formacion) {
-      formation = tempDraft.formacion
-      console.log("Formación encontrada en tempDraft.formacion:", formation)
-    } else if (tempDraft.formation_id) {
-      // Mapear IDs a formaciones si es necesario
-      const formationMap = {
-        1: "4-3-3",
-        2: "4-4-2",
-        3: "3-4-3",
+      // Obtener las opciones de jugadores actuales
+      let playerOptions
+      try {
+        playerOptions =
+          typeof tempDraft.playerOptions === "string" ? JSON.parse(tempDraft.playerOptions) : tempDraft.playerOptions
+      } catch (err) {
+        console.error("Error al parsear playerOptions:", err)
+        setError("Error al procesar los datos del draft")
+        return
       }
-      formation = formationMap[tempDraft.formation_id] || "desconocida"
-      console.log("Formación mapeada desde formation_id:", formation)
-    }
 
-    // Método 2: Si no se encontró en las propiedades principales, buscar en propiedades anidadas
-    if (!formation && tempDraft.tempDraft) {
-      const nestedDraft = tempDraft.tempDraft
-      console.log("Buscando en tempDraft.tempDraft:", nestedDraft)
-
-      if (nestedDraft.formation) {
-        formation = nestedDraft.formation
-        console.log("Formación encontrada en tempDraft.tempDraft.formation:", formation)
-      } else if (nestedDraft.formacion) {
-        formation = nestedDraft.formacion
-        console.log("Formación encontrada en tempDraft.tempDraft.formacion:", formation)
+      // Mapear IDs de posición a nombres
+      const posicionToId = {
+        portero: "24",
+        defensa: "25",
+        mediocampista: "26",
+        delantero: "27",
       }
-    }
 
-    // Método 3: Buscar en el cuerpo del objeto completo
-    if (!formation) {
-      console.log("Buscando formación en todo el objeto...")
-      const formationPattern = /(\d-\d-\d)/
-      const tempDraftStr = JSON.stringify(tempDraft)
-      const match = tempDraftStr.match(formationPattern)
+      // Filtrar grupos por el tipo de posición que nos interesa
+      const gruposPorPosicion = playerOptions.filter(
+        (grupo) => grupo.length > 0 && grupo[0] && grupo[0].positionId === posicionToId[posicion]
+      )
 
-      if (match && match[0]) {
-        formation = match[0]
-        console.log("Formación detectada en el string:", formation)
+      // Si no hay suficientes grupos para esta posición
+      if (posicionIndex >= gruposPorPosicion.length) {
+        throw new Error(`Índice de posición ${posicionIndex} fuera de rango para ${posicion}`)
       }
-    }
 
-    // Método 4: Si hay playerOptions, intentar determinar la formación por la estructura
-    if (!formation && tempDraft.playerOptions) {
-      console.log("Intentando determinar formación por estructura de playerOptions")
-
-      // Contar jugadores por posición
-      let defenders = 0
-      let midfielders = 0
-      let forwards = 0
-
-      tempDraft.playerOptions.forEach((group) => {
-        group.forEach((player) => {
-          if (player && player.positionId) {
-            if (player.positionId === "25") defenders++
-            else if (player.positionId === "26") midfielders++
-            else if (player.positionId === "27") forwards++
-          }
-        })
+      // Encontrar el grupo correcto en el array original
+      const indiceGrupoOriginal = playerOptions.findIndex((grupo) => {
+        return JSON.stringify(grupo.slice(0, 4)) === JSON.stringify(gruposPorPosicion[posicionIndex].slice(0, 4))
       })
 
-      console.log(`Conteo por posición: DEF=${defenders}, MID=${midfielders}, FWD=${forwards}`)
-
-      // Determinar formación basada en el conteo
-      if (defenders === 4 && midfielders === 3 && forwards === 3) {
-        formation = "4-3-3"
-      } else if (defenders === 4 && midfielders === 4 && forwards === 2) {
-        formation = "4-4-2"
-      } else if (defenders === 3 && midfielders === 4 && forwards === 3) {
-        formation = "3-4-3"
+      if (indiceGrupoOriginal === -1) {
+        throw new Error(`No se encontró el grupo para la posición ${posicion} índice ${posicionIndex}`)
       }
 
-      if (formation) {
-        console.log("Formación determinada por conteo de jugadores:", formation)
+      // Actualizar la selección en el grupo correcto
+      playerOptions[indiceGrupoOriginal][4] = jugadorIndex
+
+      console.log("Actualizando draft con playerOptions:", playerOptions)
+
+      const updateResponse = await fetch(`http://localhost:3000/api/v1/draft/update/${currentLiga.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          playerOptions: playerOptions,
+          ligaId: currentLiga.id,
+        }),
+      })
+
+      if (!updateResponse.ok) {
+        const errorData = await updateResponse.json().catch(() => ({}))
+        throw new Error(errorData.error || `Error ${updateResponse.status}: No se pudo actualizar el draft`)
       }
-    }
 
-    // Método 5: Último recurso - usar la formación del botón que se presionó
-    if (!formation && tempDraft.formationSelected) {
-      formation = tempDraft.formationSelected
-      console.log("Usando formación seleccionada:", formation)
-    }
+      const updatedData = await updateResponse.json()
+      console.log("Draft actualizado:", updatedData)
 
-    // Si aún no tenemos formación, usar una por defecto
-    if (!formation) {
-      // Verificar si hay alguna propiedad que contenga "4-3-3", "4-4-2" o "3-4-3"
-      const tempDraftStr = JSON.stringify(tempDraft)
-      if (tempDraftStr.includes("4-3-3")) {
-        formation = "4-3-3"
-        console.log("Formación 4-3-3 encontrada en el string")
-      } else if (tempDraftStr.includes("4-4-2")) {
-        formation = "4-4-2"
-        console.log("Formación 4-4-2 encontrada en el string")
-      } else if (tempDraftStr.includes("3-4-3")) {
-        formation = "3-4-3"
-        console.log("Formación 3-4-3 encontrada en el string")
+      // Si la respuesta incluye el tempDraft actualizado, actualizamos el estado
+      if (updatedData.tempDraft) {
+        setTempDraft(updatedData.tempDraft)
       } else {
-        // Si todo falla, usar 4-3-3 como predeterminado
-        formation = "4-3-3"
-        console.log("Usando formación predeterminada 4-3-3")
+        // Si no, actualizamos manualmente el estado con los datos que enviamos
+        setTempDraft({
+          ...tempDraft,
+          playerOptions: playerOptions,
+        })
       }
-    }
-
-    console.log("Formación final determinada:", formation)
-
-    // Renderizar el componente de formación correspondiente
-    switch (formation) {
-      case "4-3-3":
-        return (
-          <Formation433 tempDraft={tempDraft} setTempDraft={setTempDraft} jornada={jornada} userId={currentUser?.id} />
-        )
-      case "4-4-2":
-        return (
-          <Formation442 tempDraft={tempDraft} setTempDraft={setTempDraft} jornada={jornada} userId={currentUser?.id} />
-        )
-      case "3-4-3":
-        return (
-          <Formation343 tempDraft={tempDraft} setTempDraft={setTempDraft} jornada={jornada} userId={currentUser?.id} />
-        )
-      default:
-        // Si no podemos determinar la formación, mostramos todo el tempDraft en modo desarrollo
-        return (
-          <div className="text-center p-8 bg-white bg-opacity-70 rounded-lg">
-            <p>La visualización para la formación {formation || "desconocida"} está en desarrollo.</p>
-            <div className="mt-4">
-              <details>
-                <summary className="cursor-pointer text-blue-600 hover:text-blue-800">
-                  Ver datos del draft (Debug)
-                </summary>
-                <pre className="mt-2 p-4 bg-gray-100 text-gray-800 rounded overflow-auto text-sm max-h-96">
-                  {JSON.stringify(tempDraft, null, 2)}
-                </pre>
-              </details>
-            </div>
-          </div>
-        )
+    } catch (err) {
+      console.error("Error al actualizar el draft:", err)
+      setError(err.message || "Error al actualizar el draft")
     }
   }
 
-  const renderDraftContent = () => {
-    return (
-      <div className="pt-6 pb-16">
-        <div className="text-center mb-6">
-          <p className="text-green-600 text-lg">Ya tienes un draft creado para esta jornada.</p>
-          {currentUser && (
-            <p className="text-gray-600">
-              Usuario: {currentUser.name || currentUser.username} (ID: {currentUser.id})
-            </p>
-          )}
-          {tempDraft && (
-            <div className="mt-2">
-              <p className="font-semibold">
-                Formación:{" "}
-                {tempDraft.formation ||
-                  tempDraft.formacion ||
-                  (tempDraft.formation_id &&
-                    (tempDraft.formation_id === 1
-                      ? "4-3-3"
-                      : tempDraft.formation_id === 2
-                        ? "4-4-2"
-                        : tempDraft.formation_id === 3
-                          ? "3-4-3"
-                          : "Desconocida"))}
-              </p>
-            </div>
-          )}
-        </div>
+  const handleSaveDraft = async () => {
+    if (!currentLiga?.id || !tempDraft) return
 
-        {/* Render appropriate formation component based on selected formation */}
-        <div className="mt-4 h-full">
-          {tempDraft ? (
-            renderFormationComponent()
-          ) : (
-            <div className="text-center p-8 bg-white bg-opacity-70 rounded-lg">
-              <p>No se pudo cargar la información del draft</p>
-            </div>
-          )}
-        </div>
-      </div>
-    )
+    setGuardandoDraft(true)
+
+    try {
+      const token = localStorage.getItem("webToken")
+
+      const saveResponse = await fetch("http://localhost:3000/api/v1/draft/saveDraft", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          ligaId: currentLiga.id,
+        }),
+      })
+
+      if (!saveResponse.ok) {
+        const errorData = await saveResponse.json().catch(() => ({}))
+        throw new Error(errorData.error || `Error ${saveResponse.status}: No se pudo guardar el draft`)
+      }
+
+      // Reiniciar estados y recargar el draft guardado
+      setCreandoDraft(false)
+      setFormacionSeleccionada(null)
+      setTempDraft(null)
+      setDraftGuardado(true)
+    } catch (err) {
+      console.error("Error al guardar el draft:", err)
+      setError(err.message || "Error al guardar el draft")
+    } finally {
+      setGuardandoDraft(false)
+    }
+  }
+
+  const handleCancelarCreacion = () => {
+    setCreandoDraft(false)
+    setFormacionSeleccionada(null)
+    setTempDraft(null)
+  }
+
+  // Función para renderizar la formación correcta según el valor de plantilla.formation
+  const renderFormacion = () => {
+    if (!plantilla || !players.length) return null
+
+    // Organizar jugadores por posición
+    const jugadoresPorPosicion = {
+      // Portero (24)
+      portero: players.filter((player) => player.positionId === "24"),
+      // Defensas (25)
+      defensas: players.filter((player) => player.positionId === "25"),
+      // Mediocampistas (26)
+      mediocampistas: players.filter((player) => player.positionId === "26"),
+      // Delanteros (27)
+      delanteros: players.filter((player) => player.positionId === "27"),
+    }
+
+    switch (plantilla.formation) {
+      case "4-3-3":
+        return <Formacion433 jugadores={jugadoresPorPosicion} />
+      case "3-4-3":
+        return <Formacion343 jugadores={jugadoresPorPosicion} />
+      case "4-4-2":
+        return <Formacion442 jugadores={jugadoresPorPosicion} />
+      default:
+        return <div className="text-center text-red-500">Formación no reconocida: {plantilla.formation}</div>
+    }
   }
 
   return (
     <AuthGuard>
-      <Layout currentPage="Jornada">
-        <div
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen bg-cover bg-center"
-          style={{
-            backgroundImage: 'url("/images/campo.png")',
-            backgroundSize: "contain",
-            backgroundRepeat: "no-repeat",
-            minHeight: "100%",
-          }}
-        >
+      <Layout currentPage={t("menu.matchday")}>
+        <div className="container mx-auto px-4 py-6">
+          <h1 className="text-2xl font-bold mb-6 text-center">{t("menu.matchday")}</h1>
+
           {loading ? (
-            <div className="text-center pt-10">
-              <p className="text-lg text-gray-700">Cargando datos...</p>
-              <div className="mt-4 inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-blue-600 border-r-transparent"></div>
+            <div className="flex justify-center items-center h-64">
+              <div className="w-8 h-8 border-4 border-t-blue-500 border-blue-200 rounded-full animate-spin"></div>
             </div>
-          ) : error ? (
-            <div className="text-center pt-10">
-              <p className="text-lg text-red-600 mb-4">{error}</p>
-              <button
-                onClick={() => window.location.reload()}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition mt-4"
-              >
-                Reintentar
-              </button>
+          ) : error && currentLiga ? (
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-center mb-6">
+                <p>{error}</p>
+                <p className="mt-2">Hubo un problema al cargar tu draft. Puedes intentar crear uno nuevo.</p>
+              </div>
+              <h2 className="text-xl font-semibold text-center mb-6">Crear un nuevo draft para esta jornada</h2>
+              <SeleccionFormacion onSeleccionarFormacion={handleCrearDraft} />
             </div>
-          ) : hasDraft ? (
-            renderDraftContent()
+          ) : !currentLiga ? (
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-center">
+              <p>No hay una liga seleccionada</p>
+              <p className="mt-2">
+                <a href="/components/choose-league" className="underline">
+                  Selecciona una liga primero
+                </a>
+              </p>
+            </div>
+          ) : creandoDraft ? (
+            <div className="bg-white rounded-lg shadow-md p-4">
+              <div className="mb-4 text-center">
+                <h2 className="text-xl font-semibold">
+                  Creando Draft: <span className="text-blue-600">{formacionSeleccionada}</span>
+                </h2>
+              </div>
+
+              {tempDraft ? (
+                <EditorFormacion
+                  tempDraft={tempDraft}
+                  formacion={formacionSeleccionada}
+                  onUpdateDraft={handleUpdateDraft}
+                  onSaveDraft={handleSaveDraft}
+                  onCancel={handleCancelarCreacion}
+                  guardando={guardandoDraft}
+                />
+              ) : (
+                <div className="flex justify-center items-center h-64">
+                  <div className="w-8 h-8 border-4 border-t-blue-500 border-blue-200 rounded-full animate-spin"></div>
+                </div>
+              )}
+            </div>
+          ) : !plantilla ? (
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <h2 className="text-xl font-semibold text-center mb-6">No tienes un draft creado para esta jornada</h2>
+              <SeleccionFormacion onSeleccionarFormacion={handleCrearDraft} />
+            </div>
           ) : (
-            renderFormationOptions()
+            <div className="bg-white rounded-lg shadow-md p-4">
+              <div className="mb-4 text-center">
+                <h2 className="text-xl font-semibold">
+                  Formación: <span className="text-blue-600">{plantilla.formation}</span>
+                </h2>
+                <p className="text-sm text-gray-600">
+                  Jornada ID: {plantilla.jornada_id} • {plantilla.finalized ? "Finalizado" : "En progreso"}
+                </p>
+              </div>
+
+              <div className="mt-6">{renderFormacion()}</div>
+            </div>
           )}
         </div>
       </Layout>
