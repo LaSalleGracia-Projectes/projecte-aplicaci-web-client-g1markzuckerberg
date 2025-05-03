@@ -1,25 +1,25 @@
+'use client';
+
 import { useState } from "react";
 import Layout from "@/components/layout";
 import AuthGuard from "@/components/authGuard/authGuard";
+import { useRouter } from "next/navigation";
 
-export default function Contact() {
+export default function ContactForm() {
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const router = useRouter();
 
-  const handleSubmit = async (e) => {
-    if (e && e.preventDefault) {
-      e.preventDefault();
-    }
-    
+  const handleSubmit = async () => {
     setIsSubmitting(true);
     setError("");
     setSuccess("");
 
     try {
-      // Get token from localStorage
-      const token = localStorage.getItem("authToken");
+      // Get token from localStorage - using webToken as in the BurgerMenuContent component
+      const token = localStorage.getItem("webToken");
       
       if (!token) {
         setError("No estás autenticado. Por favor, inicia sesión primero.");
@@ -53,10 +53,14 @@ export default function Contact() {
     }
   };
 
+  const handleBack = () => {
+    router.back();
+  };
+
   return (
     <Layout>
       <main className="flex flex-col items-center justify-center min-h-screen py-2">
-        <h1 className="text-4xl font-bold mb-4">Formulario de Contacto</h1>
+        <h1 className="text-4xl font-bold mb-4">Información y Ayuda</h1>
         
         {success && (
           <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4 w-full max-w-lg">
@@ -72,6 +76,10 @@ export default function Contact() {
         
         <div className="w-full max-w-lg bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <div className="mb-6">
+            <p className="text-gray-700 mb-4">
+              Si tienes alguna duda, problema o sugerencia sobre la aplicación, por favor envíanos un mensaje a través de este formulario:
+            </p>
+            
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="message">
               Mensaje
             </label>
@@ -84,11 +92,20 @@ export default function Contact() {
               onChange={(e) => setMessage(e.target.value)}
             ></textarea>
           </div>
+          
           <div className="flex items-center justify-between">
+            <button 
+              className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
+              type="button"
+              onClick={handleBack}
+            >
+              Volver
+            </button>
+            
             <button 
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
               type="button"
-              disabled={isSubmitting}
+              disabled={isSubmitting || !message.trim()}
               onClick={handleSubmit}
             >
               {isSubmitting ? "Enviando..." : "Enviar"}
