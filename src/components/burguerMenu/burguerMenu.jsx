@@ -1,31 +1,31 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { useLiga } from "@/context/ligaContext"
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useLiga } from "@/context/ligaContext";
 
 export default function BurgerMenuContent({ onClose }) {
-  const router = useRouter()
-  const { setLiga: cambiarLiga, currentLiga } = useLiga()
+  const router = useRouter();
+  const { setLiga: cambiarLiga, currentLiga } = useLiga();
 
-  const [user, setUser] = useState(null)
-  const [leagues, setLeagues] = useState([])
-  const [userImageUrl, setUserImageUrl] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const [user, setUser] = useState(null); // Datos del usuario
+  const [leagues, setLeagues] = useState([]); // Ligas del usuario
+  const [userImageUrl, setUserImageUrl] = useState(null); // Imagen del usuario
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const token = localStorage.getItem("webToken")
+    const token = localStorage.getItem("webToken");
     if (!token) {
-      setError("No se encontró token de autenticación")
-      setLoading(false)
-      return
+      setError("No se encontró token de autenticación");
+      setLoading(false);
+      return;
     }
 
     const fetchUserData = async () => {
       try {
-        setLoading(true)
+        setLoading(true);
 
         // Fetch user data and leagues in parallel
         const [userRes, leaguesRes] = await Promise.all([
@@ -35,76 +35,76 @@ export default function BurgerMenuContent({ onClose }) {
           fetch("http://localhost:3000/api/v1/user/leagues", {
             headers: { Authorization: `Bearer ${token}` },
           }),
-        ])
+        ]);
 
         // Check for errors in responses
         if (!userRes.ok) {
-          const errorData = await userRes.json()
-          throw new Error(errorData.error || "Error al obtener datos del usuario")
+          const errorData = await userRes.json();
+          throw new Error(errorData.error || "Error al obtener datos del usuario");
         }
 
         if (!leaguesRes.ok) {
-          const errorData = await leaguesRes.json()
-          throw new Error(errorData.error || "Error al obtener ligas del usuario")
+          const errorData = await leaguesRes.json();
+          throw new Error(errorData.error || "Error al obtener ligas del usuario");
         }
 
         // Parse response data
-        const userData = await userRes.json()
-        const leaguesData = await leaguesRes.json()
+        const userData = await userRes.json();
+        const leaguesData = await leaguesRes.json();
 
-        setUser(userData.user)
+        setUser(userData.user);
 
         // Ensure leagues is always an array
-        const leaguesList = leaguesData.leagues || []
-        console.log("Leagues loaded:", leaguesList)
-        setLeagues(leaguesList)
+        const leaguesList = leaguesData.leagues || [];
+        console.log("Leagues loaded:", leaguesList);
+        setLeagues(leaguesList);
 
         // Try to fetch user image
         try {
           const imageRes = await fetch("http://localhost:3000/api/v1/user/get-image", {
             headers: { Authorization: `Bearer ${token}` },
-          })
+          });
 
           if (imageRes.ok) {
-            const imageBlob = await imageRes.blob()
-            const imageObjectUrl = URL.createObjectURL(imageBlob)
-            setUserImageUrl(imageObjectUrl)
+            const imageBlob = await imageRes.blob();
+            const imageObjectUrl = URL.createObjectURL(imageBlob);
+            setUserImageUrl(imageObjectUrl);
           }
         } catch (imageError) {
-          console.error("Error al obtener imagen del usuario:", imageError)
+          console.error("Error al obtener imagen del usuario:", imageError);
           // Don't fail the whole component if image loading fails
         }
       } catch (error) {
-        console.error("Error al obtener datos del usuario:", error)
-        setError(error.message)
+        console.error("Error al obtener datos del usuario:", error);
+        setError(error.message);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    fetchUserData()
-  }, [])
+    fetchUserData();
+  }, []);
 
   const handleSelectLeague = (league) => {
     if (!league?.id) {
-      console.warn("Liga sin ID:", league)
-      return
+      console.warn("Liga sin ID:", league);
+      return;
     }
 
-    console.log("Selecting league:", league)
+    console.log("Selecting league:", league);
 
     // Store the complete league object to avoid needing to fetch it again
-    cambiarLiga(league)
+    cambiarLiga(league);
 
-    onClose?.()
+    onClose?.();
 
     // Navigate to the classification page to see the league info
-    router.push("/components/clasificacion")
-  }
+    router.push("/components/clasificacion");
+  };
 
   const handleLogout = async () => {
     try {
-      const token = localStorage.getItem("webToken")
+      const token = localStorage.getItem("webToken");
 
       // Try to call logout API, but don't wait for it
       try {
@@ -114,41 +114,44 @@ export default function BurgerMenuContent({ onClose }) {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-        })
+        });
       } catch (logoutError) {
-        console.error("Error al llamar API de logout:", logoutError)
+        console.error("Error al llamar API de logout:", logoutError);
         // Continue with local logout even if API call fails
       }
 
       // Clear all local storage items
-      localStorage.removeItem("webToken")
-      localStorage.removeItem("refreshWebToken")
-      localStorage.removeItem("currentLigaId")
-      localStorage.removeItem("currentLigaData")
+      localStorage.removeItem("webToken");
+      localStorage.removeItem("refreshWebToken");
+      localStorage.removeItem("currentLigaId");
+      localStorage.removeItem("currentLigaData");
 
-      router.push("/")
+      router.push("/");
     } catch (error) {
-      console.error("Error en el proceso de logout:", error)
+      console.error("Error en el proceso de logout:", error);
     }
-  }
+  };
 
   if (loading) {
     return (
       <div className="w-64 bg-gray-900 text-white p-4 rounded-lg shadow-lg">
         <p className="text-center">Cargando usuario...</p>
       </div>
-    )
+    );
   }
 
   if (error) {
     return (
       <div className="w-64 bg-gray-900 text-white p-4 rounded-lg shadow-lg">
         <p className="text-red-400 text-center">Error: {error}</p>
-        <button className="w-full bg-red-500 text-white py-2 rounded-md mt-4 hover:bg-red-700" onClick={handleLogout}>
+        <button
+          className="w-full bg-red-500 text-white py-2 rounded-md mt-4 hover:bg-red-700"
+          onClick={handleLogout}
+        >
           Cerrar sesión
         </button>
       </div>
-    )
+    );
   }
 
   return (
@@ -202,23 +205,28 @@ export default function BurgerMenuContent({ onClose }) {
         + Añadir Liga
       </button>
 
-      <Link href="/components/backoffice">
-        <button
-          className="w-full bg-green-600 text-white py-2 rounded-md mt-4 hover:bg-green-800"
-          onClick={onClose}
-        >
-          Back Office
-        </button>
-      </Link>
-
+      {/* Botón del Back Office (visible solo para administradores) */}
+      {user?.is_admin && (
+        <Link href="/components/backoffice">
+          <button
+            className="w-full bg-green-600 text-white py-2 rounded-md mt-4 hover:bg-green-800"
+            onClick={onClose}
+          >
+            Back Office
+          </button>
+        </Link>
+      )}
 
       <Link href="/info-ayuda" className="block text-center text-sm text-blue-400 mt-3 hover:underline">
         Información y Ayuda
       </Link>
 
-      <button className="w-full bg-red-500 text-white py-2 rounded-md mt-4 hover:bg-red-700" onClick={handleLogout}>
+      <button
+        className="w-full bg-red-500 text-white py-2 rounded-md mt-4 hover:bg-red-700"
+        onClick={handleLogout}
+      >
         Cerrar sesión
       </button>
     </div>
-  )
+  );
 }
