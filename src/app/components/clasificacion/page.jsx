@@ -316,7 +316,8 @@ function ClasificacionContent() {
                 </Button>
               </>
             )}
-            <Button backgroundcolor="red" variant="destructive" size="sm" className="gap-2" onClick={handleLeaveLeague}>
+            <Button backgroundcolor
+            ="red" variant="destructive" size="sm" className="gap-2" onClick={handleLeaveLeague}>
               Abandonar Liga
             </Button>
           </div>
