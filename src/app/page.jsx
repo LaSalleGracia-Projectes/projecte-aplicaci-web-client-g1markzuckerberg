@@ -1,293 +1,318 @@
 'use client';
 
-import React from 'react';
-import { 
-  Box, 
-  Typography, 
-  Button, 
-  Container, 
-  Grid, 
-  Paper, 
+import React, { useEffect, useState } from 'react';
+import {
+  Box,
+  Typography,
+  Button,
+  Container,
   Divider,
+  Grid,
+  styled,
   Avatar,
-  IconButton,
-  styled
+  CardMedia,
+  Paper // Asegúrate de importar Paper
 } from '@mui/material';
-import PersonIcon from '@mui/icons-material/Person';
+import { useRouter } from 'next/navigation';
 import Layout from '@/components/layout2';
 
-import { useRouter } from 'next/navigation';
+// Animaciones CSS
+const fadeIn = `
+  @keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+`;
+const bounce = `
+  @keyframes bounce {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+  }
+`;
+const slideIn = `
+  @keyframes slideIn {
+    0% { opacity: 0; transform: translateX(-20px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+`;
 
 // Componentes estilizados
-const TeamLogo = styled(Box)(({ theme }) => ({
-  width: 40,
-  height: 40,
-  border: '1px solid #d9d9d9',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  position: 'relative',
-  '&::before, &::after': {
-    content: '""',
-    position: 'absolute',
-    width: '100%',
-    height: 1,
-    backgroundColor: '#d9d9d9',
-  },
-  '&::before': {
-    transform: 'rotate(45deg)',
-  },
-  '&::after': {
-    transform: 'rotate(-45deg)',
-  }
-}));
-
-const PlaceholderImage = styled(Box)(({ theme }) => ({
+const BannerImage = styled(Box)({
   width: '100%',
-  height: 130,
-  border: '1px solid #c4c4c4',
-  position: 'relative',
-  '&::before, &::after': {
-    content: '""',
-    position: 'absolute',
-    width: '100%',
-    height: 1,
-    backgroundColor: '#c4c4c4',
-    top: '50%',
-    left: 0,
-  },
-  '&::before': {
-    transform: 'rotate(45deg)',
-  },
-  '&::after': {
-    transform: 'rotate(-45deg)',
-  }
-}));
-
-const NavButton = styled(Button)(({ theme, active }) => ({
-  textTransform: 'none',
-  padding: '8px 4px',
-  backgroundColor: active ? '#eeeeee' : 'transparent',
-  color: '#000000',
-  '&:hover': {
-    backgroundColor: active ? '#eeeeee' : 'rgba(0, 0, 0, 0.04)',
-  },
-  borderRadius: 0,
-  fontSize: '0.75rem',
-}));
-
-const LanguageButton = styled(Button)(({ theme }) => ({
-  backgroundColor: '#787878',
+  height: 250,
+  backgroundImage: 'url(https://via.placeholder.com/1200x400)',
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  animation: 'fadeIn 1s ease-out',
+});
+const ButtonPrimary = styled(Button)({
+  padding: '12px 40px',
+  fontSize: '1rem',
+  backgroundColor: '#ff6200',
   color: 'white',
   textTransform: 'none',
-  padding: '4px 8px',
-  '&:hover': {
-    backgroundColor: '#666666',
-  },
-  borderRadius: 4,
-  fontSize: '0.75rem',
-}));
-
-const FooterLink = styled(Typography)(({ theme }) => ({
-  color: 'white',
-  fontSize: '0.75rem',
-  cursor: 'pointer',
-  '&:hover': {
-    textDecoration: 'underline',
-  },
-}));
+  '&:hover': { backgroundColor: '#e55e00' },
+  animation: 'bounce 1s infinite',
+});
+const SectionTitle = styled(Typography)({
+  fontSize: '1.25rem',
+  fontWeight: 600,
+  textAlign: 'center',
+  marginBottom: 16,
+  animation: 'slideIn 1s ease-out',
+});
+const MatchCard = styled(Paper)({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  padding: 16,
+  marginBottom: 8,
+  backgroundColor: '#f5f5f5',
+  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+  borderRadius: 8,
+  animation: 'fadeIn 1s ease-out',
+});
+const StatsCard = styled(Paper)({
+  padding: 16,
+  backgroundColor: '#f9f9f9',
+  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+  borderRadius: 8,
+  marginBottom: 16,
+  animation: 'slideIn 1s ease-out',
+});
 
 export default function Page() {
-  const router = useRouter(); 
-  
-  // Datos de ejemplo
-  const leftMatches = [
-    { team1: "Equipo 1", team2: "Equipo 2" },
-    { team1: "Equipo 3", team2: "Equipo 4" },
-    { team1: "Equipo 5", team2: "Equipo 6" },
-    { team1: "Equipo 7", team2: "Equipo 8" },
-    { team1: "Equipo 9", team2: "Equipo 10" },
-  ];
+  const router = useRouter();
+  const [topPlayers, setTopPlayers] = useState([]);
+  const [matches, setMatches] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const rightMatches = [
-    { team1: "Equipo 11", team2: "Equipo 12" },
-    { team1: "Equipo 13", team2: "Equipo 14" },
-    { team1: "Equipo 15", team2: "Equipo 16" },
-    { team1: "Equipo 17", team2: "Equipo 18" },
-    { team1: "Equipo 19", team2: "Equipo 20" },
-  ];
+  useEffect(() => {
+    // Función para obtener la jornada actual
+    const fetchCurrentRound = async () => {
+      try {
+        const res = await fetch('http://localhost:3000/api/v1/sportmonks/jornadaActual', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('webToken')}`,
+          },
+        });
+        if (!res.ok) throw new Error('Error al obtener la jornada actual');
+        const data = await res.json();
+        return data.jornadaActual.name; // Obtenemos el nombre de la jornada actual
+      } catch (err) {
+        setError('Error al cargar la jornada actual.');
+        console.error(err);
+        return null;
+      }
+    };
 
-  const goalScorers = [
-    { name: "Jugador1", value: 14 },
-    { name: "Jugador2", value: 8 },
-    { name: "Jugador3", value: 7 },
-  ];
+    // Función para obtener los partidos de la jornada actual
+    const fetchMatches = async (roundNumber) => {
+      try {
+        const res = await fetch(`http://localhost:3000/api/v1/sportmonks/jornadas/${roundNumber}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('webToken')}`,
+          },
+        });
+        if (!res.ok) throw new Error('Error al obtener los partidos');
+        const data = await res.json();
+        setMatches(data.fixtures || []); // Suponemos que la respuesta tiene un campo "fixtures"
+      } catch (err) {
+        setError('Error al cargar los partidos.');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const assistProviders = [
-    { name: "Jugador1", value: 7 },
-    { name: "Jugador2", value: 6 },
-    { name: "Jugador3", value: 5 },
-  ];
+    // Función para obtener el top 10 de jugadores
+    const fetchTopPlayers = async () => {
+      try {
+        const res = await fetch("http://localhost:3000/api/v1/player/?points=down&limit=20", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('webToken')}`,
+          },
+        });
+        if (!res.ok) throw new Error('Error al obtener el top 10 de jugadores');
+        const data = await res.json();
+        setTopPlayers(data.players.slice(0, 20)); // Nos aseguramos de tomar solo los 10 primeros
+      } catch (err) {
+        setError('Error al cargar el top de jugadores.');
+        console.error(err);
+      }
+    };
+
+    // Función principal
+    const fetchData = async () => {
+      const roundNumber = await fetchCurrentRound();
+      if (roundNumber) {
+        await Promise.all([fetchMatches(roundNumber), fetchTopPlayers()]);
+      } else {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <Typography>Cargando...</Typography>;
+  }
+
+  if (error) {
+    return <Typography>Error: {error}</Typography>;
+  }
 
   return (
     <Layout>
-        <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', bgcolor: '#eeeeee' }}>
-          {/* Banner */}
-          <Box sx={{ position: 'relative', bgcolor: 'white', width: '100%', height: 250, borderBottom: '1px solid #d9d9d9' }}>
-            <Box sx={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Box sx={{ width: '100%', height: '100%', position: 'relative' }}>
-                <Box sx={{ 
-                  position: 'absolute', 
-                  inset: 0, 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'center',
-                  '&::before, &::after': {
-                    content: '""',
-                    position: 'absolute',
-                    width: '100%',
-                    height: 1,
-                    backgroundColor: '#d9d9d9',
-                  },
-                  '&::before': {
-                    transform: 'rotate(45deg)',
-                  },
-                  '&::after': {
-                    transform: 'rotate(-45deg)',
-                  }
-                }} />
-              </Box>
-            </Box>
-          </Box>
+      <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', bgcolor: '#eeeeee' }}>
+        <BannerImage>
+          <Typography variant="h3" color="black" fontWeight="600">¡Bienvenidos a Fantasy Draft!</Typography>
+        </BannerImage>
 
-          {/* Call to action */}
-          <Box sx={{ bgcolor: '#d9d9d9', py: 6, display: 'flex', justifyContent: 'center' }}>
-            <Button 
-              variant="contained" 
-              sx={{ 
-                bgcolor: 'white', 
-                color: '#000000', 
-                px: 4, 
-                py: 1.5, 
-                borderRadius: 1,
-                border: '1px solid #c4c4c4',
-                boxShadow: 'none',
-                '&:hover': {
-                  bgcolor: '#f5f5f5',
-                  boxShadow: 'none',
-                }
-              }}
-              onClick={() => router.push("/components/login")}
-            >
-              COMENZAR A JUGAR
-            </Button>
-          </Box>
-
-          {/* Next matchday section */}
-          <Box sx={{ py: 4, px: 2, bgcolor: 'white' }}>
-            <Typography variant="h6" fontWeight="600" textAlign="center" mb={1}>
-              PRÓXIMA JORNADA
-            </Typography>
-            <Divider sx={{ maxWidth: '600px', mx: 'auto', mb: 3 }} />
-
-            {/* Matches grid */}
-            <Container maxWidth="lg">
-              <Grid container spacing={2}>
-                {/* Left column */}
-                <Grid item xs={12} md={6}>
-                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                    {leftMatches.map((match, index) => (
-                      <Paper key={index} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', p: 1.5, bgcolor: '#f5f5f5', boxShadow: 'none' }}>
-                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                          <TeamLogo />
-                          <Typography sx={{ ml: 1, fontWeight: 500 }}>{match.team1}</Typography>
-                        </Box>
-                        <Typography sx={{ mx: 1, fontSize: '0.875rem', fontWeight: 500 }}>vs</Typography>
-                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                          <Typography sx={{ mr: 1, fontWeight: 500 }}>{match.team2}</Typography>
-                          <TeamLogo />
-                        </Box>
-                      </Paper>
-                    ))}
-                  </Box>
-                </Grid>
-
-                {/* Right column */}
-                <Grid item xs={12} md={6}>
-                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                    {rightMatches.map((match, index) => (
-                      <Paper key={index} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', p: 1.5, bgcolor: '#f5f5f5', boxShadow: 'none' }}>
-                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                          <TeamLogo />
-                          <Typography sx={{ ml: 1, fontWeight: 500 }}>{match.team1}</Typography>
-                        </Box>
-                        <Typography sx={{ mx: 1, fontSize: '0.875rem', fontWeight: 500 }}>vs</Typography>
-                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                          <Typography sx={{ mr: 1, fontWeight: 500 }}>{match.team2}</Typography>
-                          <TeamLogo />
-                        </Box>
-                      </Paper>
-                    ))}
-                  </Box>
-                </Grid>
-              </Grid>
-            </Container>
-          </Box>
-
-          {/* Stats section */}
-          <Box sx={{ bgcolor: '#d9d9d9', py: 4, px: 2 }}>
-            <Container maxWidth="lg">
-              <Grid container spacing={3}>
-                {/* Goal scorers */}
-                <Grid item xs={12} md={4}>
-                  <Typography variant="h6" fontWeight="600" mb={2}>
-                    Goleadores
-                  </Typography>
-                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-                    {goalScorers.map((player, index) => (
-                      <Paper key={index} sx={{ display: 'flex', alignItems: 'center', p: 1, bgcolor: '#eeeeee', boxShadow: 'none', borderRadius: 1 }}>
-                        <Avatar sx={{ width: 32, height: 32, mr: 1, bgcolor: '#c4c4c4' }}>
-                          <PersonIcon sx={{ color: '#787878', fontSize: 16 }} />
-                        </Avatar>
-                        <Typography sx={{ flexGrow: 1 }}>{player.name}</Typography>
-                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                          <Typography sx={{ fontSize: '0.75rem', mr: 0.5, color: '#787878' }}>G</Typography>
-                          <Typography fontWeight="600">{player.value}</Typography>
-                        </Box>
-                      </Paper>
-                    ))}
-                  </Box>
-                </Grid>
-
-                {/* Center image */}
-                <Grid item xs={12} md={4} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <PlaceholderImage />
-                </Grid>
-
-                {/* Assist providers */}
-                <Grid item xs={12} md={4}>
-                  <Typography variant="h6" fontWeight="600" mb={2}>
-                    Asistidores
-                  </Typography>
-                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-                    {assistProviders.map((player, index) => (
-                      <Paper key={index} sx={{ display: 'flex', alignItems: 'center', p: 1, bgcolor: '#eeeeee', boxShadow: 'none', borderRadius: 1 }}>
-                        <Avatar sx={{ width: 32, height: 32, mr: 1, bgcolor: '#c4c4c4' }}>
-                          <PersonIcon sx={{ color: '#787878', fontSize: 16 }} />
-                        </Avatar>
-                        <Typography sx={{ flexGrow: 1 }}>{player.name}</Typography>
-                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                          <Typography sx={{ fontSize: '0.75rem', mr: 0.5, color: '#787878' }}>A</Typography>
-                          <Typography fontWeight="600">{player.value}</Typography>
-                        </Box>
-                      </Paper>
-                    ))}
-                  </Box>
-                </Grid>
-              </Grid>
-            </Container>
-          </Box>
+        <Box sx={{ bgcolor: '#00d7ff', py: 6, display: 'flex', justifyContent: 'center' }}>
+          <ButtonPrimary onClick={() => router.push("/components/login")}>
+            COMENZAR A JUGAR
+          </ButtonPrimary>
         </Box>
+
+        {/* PRÓXIMA JORNADA */}
+        <Box sx={{ py: 4, px: 2, bgcolor: 'white' }}>
+          <SectionTitle>PRÓXIMA JORNADA</SectionTitle>
+          <Divider sx={{ maxWidth: '600px', mx: 'auto', mb: 3 }} />
+
+          <Container maxWidth="lg">
+            <Grid container spacing={2}>
+              {matches.length > 0 ? (
+                matches.map((match, index) => {
+                  // Dividimos el campo "name" para obtener los nombres de los equipos
+                  const [team1, team2] = match.name.split(' vs ');
+                  // Convertimos el timestamp a una fecha legible
+                  const date = new Date(match.starting_at_timestamp * 1000).toLocaleString();
+
+                  // Determinamos el resultado del partido
+                  let resultText = '';
+                  if (match.result_info) {
+                    if (match.result_info.includes('Game ended in draw')) {
+                      resultText = <strong>Empate</strong>;
+                    } else if (match.result_info.includes('won after full-time')) {
+                      const winner = match.result_info.split(' ')[0]; // Extraemos el equipo ganador
+                      resultText = <strong style={{ color: 'green' }}>{winner} ganó</strong>;
+                    }
+                  }
+
+                  return (
+                    <Grid item xs={12} md={6} key={index}>
+                      <MatchCard>
+                        {/* Equipo local */}
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 1 }}>
+                          <CardMedia
+                            component="img"
+                            src={match.local_team_image}
+                            alt={team1}
+                            sx={{
+                              width: 40,
+                              height: 40,
+                              objectFit: 'contain',
+                              borderRadius: '50%',
+                            }}
+                            onError={(e) => { e.target.src = "/default-team.png"; }}
+                          />
+                          <Typography sx={{ fontWeight: 500 }}>{team1}</Typography>
+                        </Box>
+
+                        {/* Versus y resultado */}
+                        <Typography sx={{ fontWeight: 500 }}>
+                          {resultText ? resultText : 'vs'}
+                        </Typography>
+
+                        {/* Equipo visitante */}
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mt: 1 }}>
+                          <CardMedia
+                            component="img"
+                            src={match.visitant_team_image}
+                            alt={team2}
+                            sx={{
+                              width: 40,
+                              height: 40,
+                              objectFit: 'contain',
+                              borderRadius: '50%',
+                            }}
+                            onError={(e) => { e.target.src = "/default-team.png"; }}
+                          />
+                          <Typography sx={{ fontWeight: 500 }}>{team2}</Typography>
+                        </Box>
+
+                        {/* Fecha del partido */}
+                        <Typography variant="caption" color="textSecondary" mt={2}>
+                          Fecha: {date}
+                        </Typography>
+                      </MatchCard>
+                    </Grid>
+                  );
+                })
+              ) : (
+                <Typography>No hay partidos disponibles.</Typography>
+              )}
+            </Grid>
+          </Container>
+        </Box>
+
+        {/* TOP 10 JUGADORES */}
+        <Box sx={{ py: 6, px: 2, bgcolor: '#f0f8ff' }}>
+          <SectionTitle>🏆 Jugadores con más puntos 🏆</SectionTitle>
+          <Divider sx={{ maxWidth: '600px', mx: 'auto', mb: 3 }} />
+
+          <Container maxWidth="lg">
+            <Box sx={{
+              display: 'flex',
+              overflowX: 'auto', // Habilita desplazamiento horizontal si no cabe
+              gap: 2,
+              pb: 2, // Espaciado inferior para evitar que los jugadores queden cortados
+            }}>
+              {topPlayers.map((player, index) => (
+                <Box
+                  key={player.id}
+                  sx={{
+                    flex: '0 0 auto', // Evita que los elementos se ajusten automáticamente
+                    minWidth: 150, // Ancho mínimo para cada jugador
+                    maxWidth: 200, // Ancho máximo para cada jugador
+                    textAlign: 'center',
+                  }}
+                >
+                  <StatsCard>
+                    <Typography variant="body2" color="textSecondary" fontWeight={600}>
+                      #{index + 1}
+                    </Typography>
+                    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 1 }}>
+                      <Avatar
+                        src={player.playerImage || "/default-player.png"}
+                        alt={player.displayName}
+                        sx={{ width: 64, height: 64, mb: 1 }}
+                        onError={(e) => { e.target.src = "/default-player.png"; }}
+                      />
+                      <Typography variant="subtitle1" fontWeight={600}>
+                        {player.displayName}
+                      </Typography>
+                      <Typography variant="body2" color="textSecondary">
+                        {player.teamName}
+                      </Typography>
+                      <Typography variant="h6" color="primary" mt={1}>
+                        {player.points} pts
+                      </Typography>
+                    </Box>
+                  </StatsCard>
+                </Box>
+              ))}
+            </Box>
+          </Container>
+        </Box>
+      </Box>
     </Layout>
   );
 }
