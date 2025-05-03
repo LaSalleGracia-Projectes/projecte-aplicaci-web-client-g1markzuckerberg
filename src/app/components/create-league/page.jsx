@@ -78,19 +78,14 @@ function CreateLeagueContent() {
             <label htmlFor="name" className="text-sm font-medium">
               Nombre de la liga:
             </label>
-            <Input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} disabled={loading} />
-          </div>
-
-          <div className="space-y-2">
-            <label className="text-sm font-medium block">Subir imagen de perfil de la liga:</label>
-            <div className="bg-[#e5e5ea] p-4 text-center rounded-lg">
-              <p className="text-sm mb-2">Arrastrar imagen</p>
-              <p className="text-sm mb-4">o</p>
-              <Button variant="outline" size="sm" className="gap-2">
-                <Download className="h-4 w-4" />
-                Seleccionar imagen
-              </Button>
-            </div>
+            <Input
+              id="name"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              disabled={loading}
+              className="w-full"
+            />
           </div>
         </div>
 

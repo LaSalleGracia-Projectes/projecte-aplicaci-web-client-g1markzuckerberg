@@ -61,7 +61,7 @@ export default function ForgotPassword() {
 
   if (success) {
     return (
-      <Layout2>
+    <Layout2>
         <div className="flex flex-col items-center justify-center p-4 min-h-[calc(100vh-128px)]">
           <div className="w-full max-w-md space-y-6 bg-white p-6 rounded-lg shadow-sm text-center">
             <h2 className="text-xl font-semibold">¡Correo enviado!</h2>

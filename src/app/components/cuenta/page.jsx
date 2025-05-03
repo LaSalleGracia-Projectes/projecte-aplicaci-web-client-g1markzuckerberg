@@ -147,7 +147,7 @@ export default function Cuenta() {
       if (res.ok) {
         alert("Cuenta eliminada exitosamente.")
         localStorage.removeItem("webToken")
-        window.location.href = "/" // Redirigir al home
+        window.location.href = "/"
       } else {
         const error = await res.json()
         alert(error.error || "Error al eliminar la cuenta")
@@ -162,9 +162,9 @@ export default function Cuenta() {
     <AuthGuard>
       <Layout>
         <div className="flex flex-col items-center justify-center min-h-screen p-4">
-          <div className="w-full max-w-4xl grid md:grid-cols-2 gap-6">
+          <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Información */}
-            <Card>
+            <Card className="w-full">
               <CardHeader className="bg-black text-white p-4 rounded-t-lg">
                 <Typography variant="h6">Información</Typography>
               </CardHeader>
@@ -176,6 +176,7 @@ export default function Cuenta() {
                     name="username"
                     value={form.username}
                     onChange={handleInputChange}
+                    className="w-full"
                   />
                 </div>
                 <div>
@@ -185,6 +186,7 @@ export default function Cuenta() {
                     name="birthDate"
                     value={form.birthDate}
                     onChange={handleInputChange}
+                    className="w-full"
                   />
                 </div>
                 <div className="pt-4">
@@ -203,7 +205,7 @@ export default function Cuenta() {
                     placeholder="Confirma tu correo"
                     value={correoConfirmacion}
                     onChange={(e) => setCorreoConfirmacion(e.target.value)}
-                    className="mt-2"
+                    className="mt-2 w-full"
                   />
                   <Button
                     color="red"
@@ -217,7 +219,7 @@ export default function Cuenta() {
             </Card>
 
             {/* Acceso */}
-            <Card>
+            <Card className="w-full">
               <CardHeader className="bg-black text-white p-4 rounded-t-lg">
                 <Typography variant="h6">Acceso</Typography>
               </CardHeader>
@@ -228,6 +230,7 @@ export default function Cuenta() {
                     type="email"
                     value={form.email}
                     disabled
+                    className="w-full"
                   />
                 </div>
                 <div>
@@ -237,6 +240,7 @@ export default function Cuenta() {
                     name="password"
                     value={form.password}
                     onChange={handleInputChange}
+                    className="w-full"
                   />
                 </div>
                 <div>
@@ -246,6 +250,7 @@ export default function Cuenta() {
                     name="newPassword"
                     value={form.newPassword}
                     onChange={handleInputChange}
+                    className="w-full"
                   />
                 </div>
                 <div>
@@ -255,6 +260,7 @@ export default function Cuenta() {
                     name="confirmPassword"
                     value={form.confirmPassword}
                     onChange={handleInputChange}
+                    className="w-full"
                   />
                 </div>
               </CardBody>

@@ -123,43 +123,6 @@ export default function Ajustes() {
     }
   }
 
-  const handleLeaveLeague = async (leagueId) => {
-    const confirmed = confirm("¿Estás seguro de que deseas abandonar esta liga?")
-    if (!confirmed) return
-
-    try {
-      setLoadingLeagueId(leagueId)
-      setErrorMessage("")
-
-      if (!token) throw new Error("No estás autenticado")
-      if (!leagueId) throw new Error("ID de liga no válido")
-
-      const res = await fetch(`${API_BASE_URL}/ligas/leave/${leagueId}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      })
-
-      const data = await res.json()
-
-      if (!res.ok) {
-        throw new Error(data.message || `Error ${res.status}: No se pudo abandonar la liga`)
-      }
-
-      // Filtra correctamente usando id o _id
-      setLeagues((prev) => prev.filter((l) => (l.id || l._id) !== leagueId))
-
-      alert("Has abandonado la liga correctamente.")
-    } catch (err) {
-      console.error("Error al abandonar la liga:", err)
-      setErrorMessage(err.message || "No se pudo abandonar la liga.")
-    } finally {
-      setLoadingLeagueId(null)
-    }
-  }
-
   const opciones = [
     {
       img: "/images/user.png",
@@ -186,36 +149,44 @@ export default function Ajustes() {
   return (
     <AuthGuard>
       <Layout currentPage="Ajustes">
-        <div className="h-screen flex items-center justify-center">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full max-w-2xl h-[90vh] p-4">
+        <div className="min-h-screen flex items-center justify-center p-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-4xl">
             {opciones.map((opcion, index) =>
               typeof opcion.action === "string" ? (
                 <Link
                   key={index}
                   href={opcion.action}
-                  className="flex flex-col items-center justify-center bg-gray-200 p-6 rounded-2xl shadow-lg cursor-pointer hover:bg-gray-300"
+                  className="flex flex-col items-center justify-center bg-gray-200 p-6 rounded-2xl shadow-lg cursor-pointer hover:bg-gray-300 transition"
                 >
-                  <img src={opcion.img || "/placeholder.svg"} alt={opcion.text} className="w-24 h-24 mb-2" />
-                  <p className="text-lg font-semibold">{opcion.text}</p>
+                  <img
+                    src={opcion.img || "/placeholder.svg"}
+                    alt={opcion.text}
+                    className="w-20 h-20 sm:w-24 sm:h-24 mb-2"
+                  />
+                  <p className="text-base sm:text-lg font-semibold text-center">{opcion.text}</p>
                 </Link>
               ) : (
                 <div
                   key={index}
                   onClick={opcion.action}
-                  className="flex flex-col items-center justify-center bg-gray-200 p-6 rounded-2xl shadow-lg cursor-pointer hover:bg-gray-300"
+                  className="flex flex-col items-center justify-center bg-gray-200 p-6 rounded-2xl shadow-lg cursor-pointer hover:bg-gray-300 transition"
                 >
-                  <img src={opcion.img || "/placeholder.svg"} alt={opcion.text} className="w-24 h-24 mb-2" />
-                  <p className="text-lg font-semibold">{opcion.text}</p>
+                  <img
+                    src={opcion.img || "/placeholder.svg"}
+                    alt={opcion.text}
+                    className="w-20 h-20 sm:w-24 sm:h-24 mb-2"
+                  />
+                  <p className="text-base sm:text-lg font-semibold text-center">{opcion.text}</p>
                 </div>
               )
             )}
           </div>
         </div>
-
+  
         {/* POPUP */}
         {isOpen && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-            <div className="relative bg-white p-6 rounded-lg shadow-lg w-[90%] max-w-lg">
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 px-4">
+            <div className="relative bg-white p-6 rounded-lg shadow-lg w-full max-w-lg max-h-[90vh] overflow-y-auto">
               <button
                 onClick={() => setIsOpen(false)}
                 className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-xl"
@@ -223,11 +194,11 @@ export default function Ajustes() {
               >
                 &times;
               </button>
-
+  
               {popupType === "team" ? (
                 <div>
                   <h2 className="text-xl font-bold mb-4">Información del Equipo</h2>
-
+  
                   <div className="mb-4">
                     <label htmlFor="team-name" className="block text-sm font-medium mb-1">
                       Nombre del equipo
@@ -240,10 +211,10 @@ export default function Ajustes() {
                       className="w-full p-2 border border-gray-300 rounded-md"
                     />
                   </div>
-
+  
                   <div className="mb-6">
                     <label className="block text-sm font-medium mb-1">Imagen del equipo</label>
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-4 flex-wrap">
                       <div className="h-24 w-24 rounded-lg bg-gray-100 flex items-center justify-center overflow-hidden">
                         {teamImage ? (
                           <img src={teamImage} alt="Team logo" className="h-full w-full object-cover" />
@@ -254,13 +225,13 @@ export default function Ajustes() {
                       <input type="file" accept="image/*" onChange={handleImageChange} />
                     </div>
                   </div>
-
+  
                   {errorMessage && (
                     <div className="mb-4 p-2 bg-red-100 text-red-700 rounded-md">
                       {errorMessage}
                     </div>
                   )}
-
+  
                   <button
                     onClick={handleSaveTeam}
                     disabled={isLoading}
@@ -274,39 +245,31 @@ export default function Ajustes() {
               ) : popupType === "ligas" ? (
                 <div>
                   <h2 className="text-xl font-bold mb-4">Gestión de Ligas</h2>
-
+  
                   {errorMessage && (
                     <div className="mb-4 p-2 bg-red-100 text-red-700 rounded-md">
                       {errorMessage}
                     </div>
                   )}
-
+  
                   <div className="space-y-2 max-h-64 overflow-y-auto">
                     {leagues.length > 0 ? (
                       leagues.map((league) => (
-                        <div key={league.id || league._id} className="flex items-center bg-gray-100 rounded-md p-2">
-                          <div className="flex-1">
-                            <p className="font-semibold">{league.name || league.nombre}</p>
-                            <p className="text-sm text-gray-600">{league.points || 0} pts</p>
-                          </div>
-                          <button
-                            onClick={() => handleLeaveLeague(league.id || league._id)}
-                            disabled={loadingLeagueId === (league.id || league._id)}
-                            className={`${
-                              loadingLeagueId === (league.id || league._id)
-                                ? "bg-red-300"
-                                : "bg-red-500 hover:bg-red-600"
-                            } text-white text-sm px-3 py-1 rounded`}
-                          >
-                            {loadingLeagueId === (league.id || league._id) ? "..." : "Abandonar"}
-                          </button>
+                      <div
+                        key={league.id || league._id}
+                        className="flex items-center bg-gray-100 rounded-md p-2"
+                      >
+                        <div className="flex-1">
+                          <p className="font-semibold">{league.name || league.nombre}</p>
+                          <p className="text-sm text-gray-600">{league.points || 0} pts</p>
                         </div>
+                      </div>
                       ))
                     ) : (
                       <p className="text-gray-500">No estás en ninguna liga actualmente.</p>
                     )}
                   </div>
-
+  
                   <div className="mt-6 flex justify-end">
                     <button
                       onClick={() => setIsOpen(false)}
@@ -323,4 +286,5 @@ export default function Ajustes() {
       </Layout>
     </AuthGuard>
   )
+  
 }
