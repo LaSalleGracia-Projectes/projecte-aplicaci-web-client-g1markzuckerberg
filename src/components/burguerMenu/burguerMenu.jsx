@@ -212,8 +212,8 @@ export default function BurgerMenuContent({ onClose }) {
       </Link>
 
 
-      <Link href="/info-ayuda" className="block text-center text-sm text-blue-400 mt-3 hover:underline">
-        Información y Ayuda
+      <Link href="/components/contactForm" className="block text-center text-sm text-blue-400 mt-3 hover:underline">
+        Formulario de contacto
       </Link>
 
       <button className="w-full bg-red-500 text-white py-2 rounded-md mt-4 hover:bg-red-700" onClick={handleLogout}>
