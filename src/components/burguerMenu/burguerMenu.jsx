@@ -217,8 +217,11 @@ export default function BurgerMenuContent({ onClose }) {
         </Link>
       )}
 
-      <Link href="/info-ayuda" className="block text-center text-sm text-blue-400 mt-3 hover:underline">
-        Información y Ayuda
+      <Link
+        href="/components/contactForm"
+        className="block text-center text-sm text-blue-400 mt-3 hover:underline"
+      >
+        Formulario de contacto
       </Link>
 
       <button

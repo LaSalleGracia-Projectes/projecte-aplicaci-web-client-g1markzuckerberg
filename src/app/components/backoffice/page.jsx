@@ -1,21 +1,26 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 export default function BackOfficePage() {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
-  const [editedUser, setEditedUser] = useState({});
+  const [editedUser, setEditedUser] = useState({
+    username: "",
+    password: "",
+    is_admin: false,
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
-
   const [currentPage, setCurrentPage] = useState(1); // Estado para la página actual
-  const usersPerPage = 15; // Número de usuarios por página
+  const usersPerPage = 10; // Número de usuarios por página
 
   const token = typeof window !== "undefined" ? localStorage.getItem("webToken") : null;
+  const router = useRouter();
 
   useEffect(() => {
     if (!token) return;
@@ -67,20 +72,33 @@ export default function BackOfficePage() {
 
   const handleEditClick = async (userId) => {
     try {
+      console.log("ID del usuario seleccionado:", userId); // Depuración
+  
+      if (!userId || typeof userId !== "number") {
+        throw new Error("ID de usuario inválido");
+      }
+  
       const res = await fetch(`http://localhost:3000/api/v1/admin/user/${userId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
+  
       if (!res.ok) throw new Error("Error al obtener datos del usuario");
+  
       const data = await res.json();
-
-      console.log("Datos del usuario seleccionado:", data.user); // Depuración
-      setSelectedUser(data.user);
-      setEditedUser(data.user);
+      console.log("Datos del usuario seleccionado:", data.user); // Verifica que data.user tenga un id
+  
+      setSelectedUser(data.user); // Asegúrate de que selectedUser tenga un id
+      setEditedUser({
+        id: data.user.id, // Asegúrate de incluir el id aquí
+        username: data.user.username || "",
+        password: "", // Inicialmente vacío para evitar mostrar la contraseña anterior
+        is_admin: data.user.is_admin || false,
+      });
     } catch (err) {
       alert(err.message);
     }
   };
-
+  
   const handleInputChange = (field, value) => {
     setEditedUser((prev) => {
       const updatedUser = { ...prev, [field]: value };
@@ -88,43 +106,47 @@ export default function BackOfficePage() {
       return updatedUser;
     });
   };
-
+  
   const handleUpdateUser = async () => {
-    if (!selectedUser?.id) {
+    if (!editedUser.id) {
       alert("No se ha seleccionado ningún usuario para actualizar.");
       return;
     }
-
+  
     // Validar campos obligatorios
-    if (!editedUser.username || !editedUser.correo || !editedUser.role) {
+    if (!editedUser.username || !editedUser.password) {
       alert("Por favor, completa todos los campos.");
       return;
     }
-
+  
     try {
       console.log("Datos enviados para actualizar:", editedUser); // Depuración
-
-      const res = await fetch(`http://localhost:3000/api/v1/admin/update-user/${selectedUser.id}`, {
+  
+      const res = await fetch(`http://localhost:3000/api/v1/admin/update-user/${editedUser.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(editedUser),
+        body: JSON.stringify({
+          username: editedUser.username,
+          password: editedUser.password,
+          is_admin: editedUser.is_admin,
+        }),
       });
-
+  
       if (!res.ok) {
         const errorData = await res.json();
         throw new Error(errorData.message || "Error desconocido");
       }
-
+  
       alert("Usuario actualizado correctamente");
-
+  
       const updated = users.map((u) =>
-        u.id === selectedUser.id ? { ...u, ...editedUser } : u
+        u.id === editedUser.id ? { ...u, ...editedUser } : u
       );
       setUsers(updated);
-
+  
       setSelectedUser(null);
       setEditedUser({});
     } catch (err) {
@@ -184,34 +206,32 @@ export default function BackOfficePage() {
               <tr>
                 <th className="p-2">ID</th>
                 <th className="p-2">Usuario</th>
-                <th className="p-2">Correo</th>
-                <th className="p-2">Rol</th>
+                <th className="p-2">Administrador</th>
                 <th className="p-2">Acciones</th>
               </tr>
             </thead>
             <tbody>
-              {currentUsers.map((user) => (
-                <tr key={user.id} className="border-b hover:bg-gray-100">
-                  <td className="p-2">{user.id}</td>
-                  <td className="p-2">{user.username}</td>
-                  <td className="p-2">{user.correo}</td>
-                  <td className="p-2">{user.role === "admin" ? "Administrador" : "Usuario"}</td>
-                  <td className="p-2 flex gap-2">
-                    <button
-                      className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-700"
-                      onClick={() => handleEditClick(user.id)}
-                    >
-                      Editar
-                    </button>
-                    <button
-                      className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-700"
-                      onClick={() => handleDeleteUser(user.id)}
-                    >
-                      Eliminar
-                    </button>
-                  </td>
-                </tr>
-              ))}
+            {currentUsers.map((user) => (
+              <tr key={user.id} className="border-b hover:bg-gray-100">
+                <td className="p-2">{user.id}</td>
+                <td className="p-2">{user.username}</td>
+                <td className="p-2">{user.is_admin ? "Sí" : "No"}</td>
+                <td className="p-2 flex gap-2">
+                  <button
+                    className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-700"
+                    onClick={() => handleEditClick(user.id)} // Asegúrate de que user.id sea válido
+                  >
+                    Editar
+                  </button>
+                  <button
+                    className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-700"
+                    onClick={() => handleDeleteUser(user.id)}
+                  >
+                    Eliminar
+                  </button>
+                </td>
+              </tr>
+            ))}
             </tbody>
           </table>
 
@@ -229,7 +249,9 @@ export default function BackOfficePage() {
             </span>
             <button
               className="bg-gray-300 px-4 py-2 rounded"
-              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, Math.ceil(users.length / usersPerPage)))}
+              onClick={() =>
+                setCurrentPage((prev) => Math.min(prev + 1, Math.ceil(users.length / usersPerPage)))
+              }
               disabled={currentPage === Math.ceil(users.length / usersPerPage)}
             >
               Siguiente
@@ -251,23 +273,23 @@ export default function BackOfficePage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium">Correo</label>
+              <label className="block text-sm font-medium">Password</label>
               <input
+                type="password"
                 className="w-full p-1 border rounded"
-                value={editedUser.correo || ""}
-                onChange={(e) => handleInputChange("correo", e.target.value)}
+                value={editedUser.password || ""}
+                onChange={(e) => handleInputChange("password", e.target.value)}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium">Rol</label>
-              <select
-                className="w-full p-1 border rounded"
-                value={editedUser.role || ""}
-                onChange={(e) => handleInputChange("role", e.target.value)}
-              >
-                <option value="user">Usuario</option>
-                <option value="admin">Administrador</option>
-              </select>
+              <label className="block text-sm font-medium">Administrador</label>
+              <input
+                type="checkbox"
+                checked={editedUser.is_admin || false}
+                onChange={(e) => handleInputChange("is_admin", e.target.checked)}
+                className="mr-2"
+              />
+              <span>{editedUser.is_admin ? "Sí" : "No"}</span>
             </div>
           </div>
           <div className="mt-4 flex gap-2">
