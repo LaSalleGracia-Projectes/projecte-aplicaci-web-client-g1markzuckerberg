@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google'
 import { Button, Input } from "@/components/ui"
 import { Eye, EyeOff } from "lucide-react"
 import Layout2 from "@/components/layout2"
@@ -50,85 +51,113 @@ export default function Login() {
     }
   }
 
+  const onGoogleSuccess = async ({ credential }) => {
+    if (!credential) {
+      setError('No se recibió credencial de Google')
+      return
+    }
+    try {
+      const res = await fetch('http://localhost:3000/api/v1/auth/google/web/token', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ idToken: credential }),
+      })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || 'Error en login con Google')
+
+      localStorage.setItem("webToken", data.webToken)
+      localStorage.setItem("refreshWebToken", data.refreshWebToken)
+      router.push("/components/home_logged")
+    } catch (err) {
+      setError(err.message)
+    }
+  }
+
   return (
-    <Layout2>
-      <div className="flex flex-col items-center justify-center p-4 min-h-[calc(100vh-128px)]">
-        <div className="w-full max-w-md space-y-6 bg-white p-6 rounded-lg shadow-sm">
-          <div className="w-full aspect-[4/3] bg-[#e5e5ea] mb-6" />
+    <GoogleOAuthProvider
+      clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}
+      autoSelect={false}
+    >
+      <Layout2>
+        <div className="flex flex-col items-center justify-center p-4 min-h-[calc(100vh-128px)]">
+          <div className="w-full max-w-md space-y-6 bg-white p-6 rounded-lg shadow-sm">
+            <div className="w-full aspect-[4/3] bg-[#e5e5ea] mb-6" />
 
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <label htmlFor="correo" className="text-sm font-medium">Correo</label>
-              <Input
-                id="correo"
-                type="email"
-                value={correo}
-                onChange={(e) => setCorreo(e.target.value)}
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label htmlFor="password" className="text-sm font-medium">Contraseña</label>
-              <div className="relative">
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <label htmlFor="correo" className="text-sm font-medium">Correo</label>
                 <Input
-                  id="password"
-                  type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  id="correo"
+                  type="email"
+                  value={correo}
+                  onChange={(e) => setCorreo(e.target.value)}
                 />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2"
-                >
-                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                </button>
+              </div>
+
+              <div className="space-y-2">
+                <label htmlFor="password" className="text-sm font-medium">Contraseña</label>
+                <div className="relative">
+                  <Input
+                    id="password"
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2"
+                  >
+                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
 
-          {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+            {error && <p className="text-red-500 text-sm text-center">{error}</p>}
 
-          <Button
-            className="w-full bg-[#e5e5ea] text-black hover:bg-[#d2d2d2]"
-            onClick={handleLogin}
-            disabled={loading}
-          >
-            {loading ? "Iniciando sesión..." : "INICIAR SESIÓN"}
-          </Button>
-
-          <div className="text-center">
-            <button className="text-sm hover:underline">Olvidé mi contraseña</button>
-          </div>
-
-          <div className="text-center space-y-4">
-            <div className="flex items-center gap-2 justify-center">
-              <div className="h-px bg-[#7d7d7d] flex-1" />
-              <span>o</span>
-              <div className="h-px bg-[#7d7d7d] flex-1" />
-            </div>
-            <p>Inicia sesión con:</p>
-            <button className="p-2 border rounded-md mx-auto block">
-              <Image
-                src="/images/google.png"
-                alt="Google Sign In"
-                width={32}
-                height={32}
-                className="mx-auto"
-              />
-            </button>
-          </div>
-
-          <div className="text-center text-sm">
-            <button
-              className="text-blue-600 hover:underline"
-              onClick={() => router.push("/components/register")}
+            <Button
+              className="w-full bg-[#e5e5ea] text-black hover:bg-[#d2d2d2]"
+              onClick={handleLogin}
+              disabled={loading}
             >
-              ¿No tienes cuenta? Regístrate
-            </button>
+              {loading ? "Iniciando sesión..." : "INICIAR SESIÓN"}
+            </Button>
+
+            <div className="text-center">
+              <button 
+                className="text-sm hover:underline"
+                onClick={() => router.push("/components/forgot-password")}
+              >
+                Olvidé mi contraseña
+              </button>
+            </div>
+
+            <div className="text-center space-y-4">
+              <div className="flex items-center gap-2 justify-center">
+                <div className="h-px bg-[#7d7d7d] flex-1" />
+                <span>o</span>
+                <div className="h-px bg-[#7d7d7d] flex-1" />
+              </div>
+              <p>Inicia sesión con:</p>
+              <GoogleLogin
+                onSuccess={onGoogleSuccess}
+                onError={() => setError('Error al iniciar sesión con Google')}
+                prompt="select_account"
+              />
+            </div>
+
+            <div className="text-center text-sm">
+              <button
+                className="text-blue-600 hover:underline"
+                onClick={() => router.push("/components/register")}
+              >
+                ¿No tienes cuenta? Regístrate
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </Layout2>
+      </Layout2>
+    </GoogleOAuthProvider>
   )
 }
