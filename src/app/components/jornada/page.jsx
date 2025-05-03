@@ -27,7 +27,7 @@ export default function Jornada() {
   const [draftGuardado, setDraftGuardado] = useState(false)
 
   useEffect(() => {
-    const fetchUserDraft = async () => {
+    const fetchDraftData = async () => {
       if (!currentLiga?.id) {
         setError("No hay una liga seleccionada")
         setLoading(false)
@@ -42,34 +42,82 @@ export default function Jornada() {
           return
         }
 
-        const response = await fetch(`http://localhost:3000/api/v1/draft/getuserDraft?ligaId=${currentLiga.id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
+        // 1. Primero intentamos obtener un draft finalizado
+        try {
+          const response = await fetch(`http://localhost:3000/api/v1/draft/getuserDraft?ligaId=${currentLiga.id}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
 
-        if (!response.ok) {
-          // Para cualquier error (404, 500, etc.), permitir crear un nuevo draft
-          console.log(`Error al obtener draft: ${response.status}`)
-          setPlantilla(null)
-          setLoading(false)
-          return
+          if (response.ok) {
+            // Si hay un draft finalizado, lo usamos
+            const data = await response.json()
+            setPlantilla(data.plantilla)
+            setPlayers(data.players)
+            setLoading(false)
+            return
+          }
+
+          // Si no hay draft finalizado (404), continuamos al siguiente paso
+          console.log("No se encontró draft finalizado, verificando tempDraft...")
+        } catch (err) {
+          console.error("Error al obtener draft finalizado:", err)
+          // Continuamos al siguiente paso
         }
 
-        const data = await response.json()
-        setPlantilla(data.plantilla)
-        setPlayers(data.players)
-      } catch (err) {
-        console.error("Error al obtener el draft:", err)
-        // En caso de cualquier error, permitir crear un nuevo draft
+        // 2. Si no hay draft finalizado, intentamos obtener un tempDraft existente
+        try {
+          const tempDraftResponse = await fetch(`http://localhost:3000/api/v1/draft/tempDraft/${currentLiga.id}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+
+          if (tempDraftResponse.ok) {
+            // Si hay un tempDraft, lo recuperamos y mostramos el editor
+            const tempDraftData = await tempDraftResponse.json()
+            console.log("Se encontró un tempDraft existente:", tempDraftData)
+
+            // Obtener la formación del tempDraft
+            const formacionResponse = await fetch(`http://localhost:3000/api/v1/draft/formation/${currentLiga.id}`, {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            })
+
+            if (formacionResponse.ok) {
+              const formacionData = await formacionResponse.json()
+              setFormacionSeleccionada(formacionData.formation)
+            } else {
+              // Si no podemos obtener la formación, usamos una por defecto
+              setFormacionSeleccionada("4-3-3")
+            }
+
+            setTempDraft(tempDraftData.tempDraft)
+            setCreandoDraft(true)
+            setLoading(false)
+            return
+          }
+
+          // Si no hay tempDraft (404), mostramos la opción de crear uno nuevo
+          console.log("No se encontró tempDraft existente, mostrando opción de crear nuevo...")
+        } catch (err) {
+          console.error("Error al obtener tempDraft:", err)
+          // Continuamos y mostramos la opción de crear uno nuevo
+        }
+
+        // 3. Si no hay ni draft finalizado ni tempDraft, mostramos la opción de crear uno nuevo
         setPlantilla(null)
-        setError(null) // Limpiamos el error para mostrar la opción de crear draft
-      } finally {
+        setLoading(false)
+      } catch (err) {
+        console.error("Error general al obtener datos del draft:", err)
+        setError("Error al cargar los datos del draft")
         setLoading(false)
       }
     }
 
-    fetchUserDraft()
+    fetchDraftData()
   }, [currentLiga, draftGuardado])
 
   const handleCrearDraft = async (formacion) => {
@@ -163,7 +211,7 @@ export default function Jornada() {
 
       // Filtrar grupos por el tipo de posición que nos interesa
       const gruposPorPosicion = playerOptions.filter(
-        (grupo) => grupo.length > 0 && grupo[0] && grupo[0].positionId === posicionToId[posicion]
+        (grupo) => grupo.length > 0 && grupo[0] && grupo[0].positionId === posicionToId[posicion],
       )
 
       // Si no hay suficientes grupos para esta posición
@@ -222,12 +270,22 @@ export default function Jornada() {
   }
 
   const handleSaveDraft = async () => {
-    if (!currentLiga?.id || !tempDraft) return
+    if (!currentLiga?.id || !tempDraft) {
+      setError("No hay una liga seleccionada o no hay draft temporal")
+      return
+    }
 
     setGuardandoDraft(true)
 
     try {
       const token = localStorage.getItem("webToken")
+
+      // Asegurarse de que tempDraft tiene todas las propiedades necesarias
+      if (!tempDraft.id_plantilla) {
+        throw new Error("El draft temporal no tiene un ID de plantilla")
+      }
+
+      console.log("Enviando tempDraft para guardar:", tempDraft)
 
       const saveResponse = await fetch("http://localhost:3000/api/v1/draft/saveDraft", {
         method: "POST",
@@ -236,7 +294,7 @@ export default function Jornada() {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          ligaId: currentLiga.id,
+          tempDraft: tempDraft,
         }),
       })
 
@@ -324,7 +382,8 @@ export default function Jornada() {
             <div className="bg-white rounded-lg shadow-md p-4">
               <div className="mb-4 text-center">
                 <h2 className="text-xl font-semibold">
-                  Creando Draft: <span className="text-blue-600">{formacionSeleccionada}</span>
+                  {tempDraft?.id_plantilla ? "Continuando Draft: " : "Creando Draft: "}
+                  <span className="text-blue-600">{formacionSeleccionada}</span>
                 </h2>
               </div>
 
