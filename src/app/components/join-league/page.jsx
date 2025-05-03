@@ -4,6 +4,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Input, Button } from "@/components/ui"
 import Layout2 from "@/components/layout2"
+import { ArrowLeft } from "lucide-react";
 
 export default function JoinLeague() {
   const [ligaCode, setLigaCode] = useState("")
@@ -71,14 +72,25 @@ export default function JoinLeague() {
   return (
     <Layout2>
       <div className="flex flex-col items-center justify-center min-h-[calc(100vh-128px)] p-4">
-        <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-sm space-y-4">
-          <h2 className="text-xl font-semibold text-center">Unirse a una Liga</h2>
-          
+        <div className="w-full max-w-md sm:max-w-lg bg-white p-6 rounded-lg shadow-sm space-y-4">
+          {/* Flecha de volver */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => router.back()}
+              className="text-gray-600 hover:text-black transition"
+              aria-label="Volver"
+            >
+              <ArrowLeft className="h-6 w-6" />
+            </button>
+            <h2 className="text-xl font-semibold sm:text-2xl">Unirse a una Liga</h2>
+          </div>
+
           <Input
             type="text"
             placeholder="Código de la liga"
             value={ligaCode}
             onChange={(e) => setLigaCode(e.target.value)}
+            className="w-full py-2 px-4 border rounded-md shadow-sm text-sm sm:text-base"
           />
 
           {error && <p className="text-red-500 text-sm text-center">{error}</p>}

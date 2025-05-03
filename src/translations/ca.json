@@ -1,0 +1,110 @@
+{
+    "common": {
+      "login": "Iniciar sessió",
+      "register": "Registrar-se",
+      "logout": "Tancar sessió",
+      "save": "Desar",
+      "cancel": "Cancel·lar",
+      "back": "Tornar",
+      "loading": "Carregant...",
+      "error": "Error",
+      "success": "Èxit",
+      "startPlaying": "COMENÇAR A JUGAR",
+      "saveChanges": "DESAR CANVIS",
+      "changePassword": "CANVIAR CONTRASENYA",
+      "information": "Informació",
+      "access": "Accés",
+      "retry": "Tornar a provar",
+      "user": "Usuari",
+      "unknown": "Desconegut",
+      "notAuthenticated": "No estàs autenticat",
+      "notAvailable": "No disponible"
+    },
+    "footer": {
+      "privacyPolicy": "Política de privacitat",
+      "contact": "Contacte",
+      "cookieSettings": "Configuració de cookies",
+      "copyright": "Novembre 2024 | Mark Zuckerberg S.L"
+    },
+    "header": {
+      "title": "Fantasy Draft"
+    },
+    "menu": {
+      "home": "Inici",
+      "classification": "Classificació",
+      "matchday": "Jornada",
+      "players": "Jugadors"
+    },
+    "home": {
+      "nextMatchday": "PROPERA JORNADA",
+      "vs": "vs",
+      "goalScorers": "Golejadors",
+      "assistProviders": "Assistents",
+      "notifications": "Notificacions",
+      "noNotifications": "No hi ha notificacions.",
+      "showingRecentNotifications": "Mostrant només les 10 notificacions més recents."
+    },
+    "league": {
+      "createLeague": "Crear una lliga",
+      "joinLeague": "Unir-se a una lliga",
+      "leagueCode": "Codi:",
+      "leaveLeague": "Abandonar Lliga",
+      "editLeague": "Editar Lliga",
+      "manageUsers": "Gestionar Jugadors",
+      "currentMatchday": "Jornada actual:",
+      "classification": "Classificació",
+      "totalPlayers": "Total de jugadors",
+      "maxPoints": "Punts màxims",
+      "avgPoints": "Mitja de punts",
+      "managePlayers": "Gestió de jugadors"
+    },
+    "formation": {
+      "selectFormation": "Tria una formació per començar el teu draft",
+      "formation": "Formació:",
+      "saveLineup": "Desar Alineació",
+      "selectPlayer": "Seleccionar Jugador",
+      "noPlayersAvailable": "No hi ha jugadors disponibles per a aquesta posició",
+      "draftCreated": "Ja tens un draft creat per a aquesta jornada."
+    },
+    "account": {
+      "team": "Equip",
+      "leagueManagement": "Gestió de lligues",
+      "user": "Usuari",
+      "interface": "Interfície",
+      "settings": "Configuració",
+      "deleteAccount": "Eliminar compte",
+      "deleteAccountWarning": "Aquesta acció és irreversible. Per eliminar el teu compte, introdueix el teu correu electrònic i confirma."
+    },
+    "interface": {
+      "contact": "Contacte",
+      "phone": "Telèfon",
+      "address": "Adreça",
+      "officeHours": "Horari d'atenció",
+      "mondayToFriday": "Dilluns a Divendres",
+      "saturday": "Dissabtes",
+      "privacyPolicy": "Política de privacitat",
+      "privacyDescription": "En compliment del RGPD, les teves dades personals seran tractades per gestionar el teu compte i proporcionar-te els nostres serveis.",
+      "dataUsage": "Ús de dades",
+      "accountManagement": "Gestió de compte d'usuari",
+      "serviceComms": "Comunicacions sobre el servei",
+      "userExperience": "Millora de l'experiència d'usuari",
+      "statistics": "Anàlisi estadística",
+      "aboutUs": "Sobre nosaltres",
+      "companyDescription": "Som una empresa en creixement en el sector esportiu i de fantasy.",
+      "ourMission": "La nostra missió",
+      "values": "Valors",
+      "innovation": "Innovació contínua",
+      "sportCommitment": "Compromís amb l'esport",
+      "serviceExcellence": "Excel·lència en el servei",
+      "transparency": "Transparència",
+      "ourAPI": "Coneix la nostra API",
+      "mainFeatures": "Característiques principals",
+      "authentication": "Autenticació",
+      "fullDocumentation": "Documentació completa",
+      "support": "Suport",
+      "moreInfo": "Més informació a",
+      "collapse": "Replegar",
+      "expand": "Desplegar"
+    }
+  }
+  

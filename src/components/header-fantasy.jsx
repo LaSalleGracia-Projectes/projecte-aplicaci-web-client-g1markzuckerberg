@@ -1,24 +1,32 @@
-'use client';
-import { useState } from "react";
-import { IconButton, Drawer } from "@/components/ui";
-import Image from "next/image";
-import BurgerMenuContent from "@/components/burguerMenu/burguerMenu";
+"use client"
+import { useState } from "react"
+import { IconButton, Drawer } from "@/components/ui"
+import Image from "next/image"
+import BurgerMenuContent from "@/components/burguerMenu/burguerMenu"
+import { useLanguage } from "@/context/languageContext"
 
 export default function Header() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
+  const { t } = useLanguage()
 
-  const toggleDrawer = () => setOpen(!open);
+  const toggleDrawer = () => setOpen(!open)
 
   return (
-    <header className="flex justify-between items-center p-4 bg-blue-500 text-white shadow-md">
-      <h1 className="text-xl font-bold text-center flex-1">Fantasy Draft</h1>
-      <IconButton variant="text" onClick={toggleDrawer} className="ml-auto">
-        <Image src="/images/vector.png" alt="Menu" width={30} height={30} />
+    <header className="relative flex items-center justify-between px-4 py-3 bg-blue-500 text-white shadow-md w-full max-w-screen">
+      {/* Título centrado en móviles */}
+      <div className="absolute left-1/2 transform -translate-x-1/2">
+        <h1 className="text-lg sm:text-xl font-bold text-center whitespace-nowrap">{t("header.title")}</h1>
+      </div>
+
+      {/* Botón de menú */}
+      <IconButton variant="text" onClick={toggleDrawer} className="ml-auto z-10">
+        <Image src="/images/vector.png" alt="Menu" width={28} height={28} className="sm:w-8 sm:h-8" />
       </IconButton>
-      <Drawer open={open} onClose={toggleDrawer} className="p-4 w-70 bg-white shadow-lg">
-      <BurgerMenuContent onClose={toggleDrawer} />
+
+      {/* Drawer lateral */}
+      <Drawer open={open} onClose={toggleDrawer} className="p-4 w-64 sm:w-72 bg-white text-black shadow-lg">
+        <BurgerMenuContent onClose={toggleDrawer} />
       </Drawer>
     </header>
-  );
+  )
 }
-
