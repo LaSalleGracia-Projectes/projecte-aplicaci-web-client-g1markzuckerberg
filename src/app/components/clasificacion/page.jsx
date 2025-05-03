@@ -4,9 +4,10 @@ import { useState, useEffect } from "react"
 import Layout from "@/components/layout"
 import AuthGuard from "@/components/authGuard/authGuard"
 import { useLiga } from "@/context/ligaContext"
-import { Share2, Copy, Trophy, ArrowUp, ArrowDown, Minus, Edit, UserX } from "lucide-react"
+import { Share2, Copy, Trophy, ArrowUp, ArrowDown, Minus, Edit, UserX, Users } from "lucide-react"
 import { Button } from "@/components/ui"
 import EditLigaDialog from "@/components/clasificacion/editLigaDialog"
+import KickUserDialog from "@/components/clasificacion/kickUserDialog"
 
 export default function Clasificacion() {
   return (
@@ -26,6 +27,7 @@ function ClasificacionContent() {
   const [copied, setCopied] = useState(false)
   const [leaveError, setLeaveError] = useState(null)
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
+  const [isKickDialogOpen, setIsKickDialogOpen] = useState(false)
   const [isCaptain, setIsCaptain] = useState(false)
   const [currentUserId, setCurrentUserId] = useState(null)
   const [leagueImageUrl, setLeagueImageUrl] = useState(null)
@@ -182,6 +184,47 @@ function ClasificacionContent() {
       refreshLiga()
     }
   }
+  
+  const handleKickSuccess = () => {
+    // Actualizar la lista de usuarios después de expulsar a alguien
+    if (refreshLiga) {
+      refreshLiga()
+    }
+    
+    // Re-fetch users
+    const fetchUsers = async () => {
+      setLoading(true)
+      try {
+        const token = localStorage.getItem("webToken")
+        if (!token || !currentLiga?.code) return
+        
+        const res = await fetch(`http://localhost:3000/api/v1/liga/users/${currentLiga.code}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        
+        if (!res.ok) {
+          throw new Error("No se pudieron obtener los usuarios actualizados")
+        }
+        
+        const data = await res.json()
+        const sortedUsers = (data.users || []).sort((a, b) => (b.points || 0) - (a.points || 0))
+        
+        const usersWithPosition = sortedUsers.map((user, index) => ({
+          ...user,
+          position: index + 1,
+          trend: Math.floor(Math.random() * 3) - 1,
+        }))
+        
+        setUsers(usersWithPosition)
+      } catch (err) {
+        console.error("Error actualizando usuarios:", err)
+      } finally {
+        setLoading(false)
+      }
+    }
+    
+    fetchUsers()
+  }
 
   // Imagen placeholder por defecto
   const defaultPlaceholder = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%23f0f0f0'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='8' text-anchor='middle' dominant-baseline='middle' fill='%23999'%3EUser%3C/text%3E%3C/svg%3E"
@@ -250,10 +293,16 @@ function ClasificacionContent() {
           </div>
           <div className="flex items-center gap-2">
             {isCaptain && (
-              <Button variant="outline" size="sm" className="gap-2" onClick={() => setIsEditDialogOpen(true)}>
-                <Edit className="h-4 w-4" />
-                Editar Liga
-              </Button>
+              <>
+                <Button variant="outline" size="sm" className="gap-2" onClick={() => setIsEditDialogOpen(true)}>
+                  <Edit className="h-4 w-4" />
+                  Editar Liga
+                </Button>
+                <Button variant="outline" size="sm" className="gap-2" onClick={() => setIsKickDialogOpen(true)}>
+                  <Users className="h-4 w-4" />
+                  Gestionar Jugadores
+                </Button>
+              </>
             )}
             <Button variant="destructive" size="sm" className="gap-2" onClick={handleLeaveLeague}>
               Abandonar Liga
@@ -351,6 +400,9 @@ function ClasificacionContent() {
                         <button 
                           className="text-red-500 hover:text-red-700" 
                           title="Expulsar de la liga"
+                          onClick={() => {
+                            setIsKickDialogOpen(true)
+                          }}
                         >
                           <UserX className="h-5 w-5" />
                         </button>
@@ -397,6 +449,17 @@ function ClasificacionContent() {
           currentLiga={currentLiga}
           onClose={() => setIsEditDialogOpen(false)}
           onSuccess={handleEditSuccess}
+        />
+      )}
+      
+      {/* Kick Users Dialog Component */}
+      {isKickDialogOpen && (
+        <KickUserDialog 
+          users={users}
+          currentUserId={currentUserId}
+          ligaId={currentLiga.id}
+          onClose={() => setIsKickDialogOpen(false)}
+          onSuccess={handleKickSuccess}
         />
       )}
     </div>
