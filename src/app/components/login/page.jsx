@@ -98,7 +98,12 @@ export default function Login() {
           </Button>
 
           <div className="text-center">
-            <button className="text-sm hover:underline">Olvidé mi contraseña</button>
+            <button 
+              className="text-sm hover:underline"
+              onClick={() => router.push("/components/forgot-password")}
+            >
+              Olvidé mi contraseña
+            </button>
           </div>
 
           <div className="text-center space-y-4">
