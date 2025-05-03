@@ -217,8 +217,8 @@ export default function BurgerMenuContent({ onClose }) {
         </Link>
       )}
 
-      <Link href="/info-ayuda" className="block text-center text-sm text-blue-400 mt-3 hover:underline">
-        Información y Ayuda
+      <Link href="/components/contactForm" className="block text-center text-sm text-blue-400 mt-3 hover:underline">
+        Formulario de contacto
       </Link>
 
       <button
@@ -228,5 +228,9 @@ export default function BurgerMenuContent({ onClose }) {
         Cerrar sesión
       </button>
     </div>
+<<<<<<< HEAD
   );
+=======
+  )
+>>>>>>> 7c9e8a9c9b6d5c66acd5513e7a62405bf181af92
 }
