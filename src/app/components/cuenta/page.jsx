@@ -5,6 +5,8 @@ import Layout from "@/components/layout"
 import { Card, CardHeader, CardBody, CardFooter, Input, Button, Typography } from "@/components/ui"
 import AuthGuard from "@/components/authGuard/authGuard"
 import { useLanguage } from "@/context/languageContext"
+// Importar el servicio de cookies
+import { getAuthToken } from "@/components/auth/cookie-service"
 
 export default function Cuenta() {
   const { t } = useLanguage()
@@ -20,7 +22,8 @@ export default function Cuenta() {
 
   const [correoConfirmacion, setCorreoConfirmacion] = useState("")
 
-  const token = typeof window !== "undefined" ? localStorage.getItem("webToken") : null
+  // Usar getAuthToken en lugar de localStorage
+  const token = typeof window !== "undefined" ? getAuthToken() : null
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -140,8 +143,11 @@ export default function Cuenta() {
 
       if (res.ok) {
         alert("Cuenta eliminada exitosamente.")
-        localStorage.removeItem("webToken")
-        window.location.href = "/"
+        // Limpiar cookies en lugar de localStorage
+        import("@/components/auth/cookie-service").then(({ clearAuthCookies }) => {
+          clearAuthCookies()
+          window.location.href = "/"
+        })
       } else {
         const error = await res.json()
         alert(error.error || "Error al eliminar la cuenta")

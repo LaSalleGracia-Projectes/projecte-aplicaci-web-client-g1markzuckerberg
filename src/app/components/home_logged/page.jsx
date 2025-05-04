@@ -5,6 +5,8 @@ import Layout from "@/components/layout"
 import AuthGuard from "@/components/authGuard/authGuard"
 import LeagueMessage from "@/components/home_log/mensajes"
 import { useLanguage } from "@/context/languageContext"
+// Importar el servicio de cookies al principio del archivo
+import { getAuthToken } from "@/components/auth/cookie-service"
 
 export default function Notificaciones() {
   const { t } = useLanguage()
@@ -15,7 +17,8 @@ export default function Notificaciones() {
       try {
         if (typeof window === "undefined") return
 
-        const token = localStorage.getItem("webToken")
+        // Reemplazar localStorage.getItem("webToken") con getAuthToken()
+        const token = getAuthToken()
         if (!token) {
           console.error("No auth token found")
           return

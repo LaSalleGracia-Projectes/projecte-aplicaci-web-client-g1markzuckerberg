@@ -3,12 +3,14 @@
 import Link from "next/link"
 import { Button } from "@/components/ui"
 import { Input } from "@/components/ui"
-import { ArrowLeft, Download } from "lucide-react"
+import { ArrowLeft } from "lucide-react"
 import Layout2 from "@/components/layout2"
 import { useRouter } from "next/navigation"
 import AuthGuard from "@/components/authGuard/authGuard"
 import { useState } from "react"
 import { LigaProvider, useLiga } from "@/context/ligaContext"
+// Importar el servicio de cookies
+import { getAuthToken } from "@/components/auth/cookie-service"
 
 // Separate the inner component that will use the hook
 function CreateLeagueContent() {
@@ -23,7 +25,8 @@ function CreateLeagueContent() {
     setLoading(true)
 
     try {
-      const token = localStorage.getItem("webToken")
+      // Usar getAuthToken en lugar de localStorage
+      const token = getAuthToken()
       if (!token) {
         setError("No estás autenticado.")
         setLoading(false)

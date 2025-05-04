@@ -2,11 +2,12 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import Image from "next/image"
-import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google'
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google"
 import { Button, Input } from "@/components/ui"
 import { Eye, EyeOff } from "lucide-react"
 import Layout2 from "@/components/layout2"
+// Importar el servicio de cookies al principio del archivo
+import { setAuthToken, setRefreshToken } from "@/components/auth/cookie-service"
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false)
@@ -16,6 +17,7 @@ export default function Login() {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
+  // Modificar la función handleLogin para usar cookies en lugar de localStorage
   const handleLogin = async () => {
     if (!correo || !password) {
       setError("Por favor completa todos los campos")
@@ -40,8 +42,9 @@ export default function Login() {
         return
       }
 
-      localStorage.setItem("webToken", data.tokens.webToken)
-      localStorage.setItem("refreshWebToken", data.tokens.refreshWebToken)
+      // Guardar tokens en cookies en lugar de localStorage
+      setAuthToken(data.tokens.webToken)
+      setRefreshToken(data.tokens.refreshWebToken)
 
       router.push("/components/home_logged")
     } catch (error) {
@@ -53,17 +56,17 @@ export default function Login() {
 
   const onGoogleSuccess = async ({ credential }) => {
     if (!credential) {
-      setError('No se recibió credencial de Google')
+      setError("No se recibió credencial de Google")
       return
     }
     try {
-      const res = await fetch('http://localhost:3000/api/v1/auth/google/web/token', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const res = await fetch("http://localhost:3000/api/v1/auth/google/web/token", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ idToken: credential }),
       })
       const data = await res.json()
-      if (!res.ok) throw new Error(data.error || 'Error en login con Google')
+      if (!res.ok) throw new Error(data.error || "Error en login con Google")
 
       localStorage.setItem("webToken", data.webToken)
       localStorage.setItem("refreshWebToken", data.refreshWebToken)
@@ -74,10 +77,7 @@ export default function Login() {
   }
 
   return (
-    <GoogleOAuthProvider
-      clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}
-      autoSelect={false}
-    >
+    <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID} autoSelect={false}>
       <Layout2>
         <div className="flex flex-col items-center justify-center p-4 min-h-[calc(100vh-128px)]">
           <div className="w-full max-w-md space-y-6 bg-white p-6 rounded-lg shadow-sm">
@@ -85,17 +85,16 @@ export default function Login() {
 
             <div className="space-y-4">
               <div className="space-y-2">
-                <label htmlFor="correo" className="text-sm font-medium">Correo</label>
-                <Input
-                  id="correo"
-                  type="email"
-                  value={correo}
-                  onChange={(e) => setCorreo(e.target.value)}
-                />
+                <label htmlFor="correo" className="text-sm font-medium">
+                  Correo
+                </label>
+                <Input id="correo" type="email" value={correo} onChange={(e) => setCorreo(e.target.value)} />
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="password" className="text-sm font-medium">Contraseña</label>
+                <label htmlFor="password" className="text-sm font-medium">
+                  Contraseña
+                </label>
                 <div className="relative">
                   <Input
                     id="password"
@@ -125,10 +124,7 @@ export default function Login() {
             </Button>
 
             <div className="text-center">
-              <button 
-                className="text-sm hover:underline"
-                onClick={() => router.push("/components/forgot-password")}
-              >
+              <button className="text-sm hover:underline" onClick={() => router.push("/components/forgot-password")}>
                 Olvidé mi contraseña
               </button>
             </div>
@@ -142,16 +138,13 @@ export default function Login() {
               <p>Inicia sesión con:</p>
               <GoogleLogin
                 onSuccess={onGoogleSuccess}
-                onError={() => setError('Error al iniciar sesión con Google')}
+                onError={() => setError("Error al iniciar sesión con Google")}
                 prompt="select_account"
               />
             </div>
 
             <div className="text-center text-sm">
-              <button
-                className="text-blue-600 hover:underline"
-                onClick={() => router.push("/components/register")}
-              >
+              <button className="text-blue-600 hover:underline" onClick={() => router.push("/components/register")}>
                 ¿No tienes cuenta? Regístrate
               </button>
             </div>

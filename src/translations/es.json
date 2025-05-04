@@ -56,7 +56,13 @@
       "totalPlayers": "Total de jugadores",
       "maxPoints": "Puntos máximos",
       "avgPoints": "Puntos promedios",
-      "managePlayers": "Gestionar jugadores"
+      "managePlayers": "Gestionar jugadores",
+      "position": "Posición",
+      "player": "Jugador",
+      "totalPoints": "Puntos totales",
+      "matchdayPoints": "Puntos de jornada",
+      "actions": "Acciones",
+      "captain": "Capitan"
     },
     "formation": {
       "selectFormation": "Elige una formación para comenzar tu draft",

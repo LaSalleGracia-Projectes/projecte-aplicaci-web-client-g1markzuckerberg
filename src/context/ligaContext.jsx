@@ -1,6 +1,7 @@
 "use client"
 
 import { createContext, useContext, useState, useEffect } from "react"
+import { getAuthToken } from "@/components/auth/cookie-service"
 
 const LigaContext = createContext()
 
@@ -35,7 +36,7 @@ export function LigaProvider({ children }) {
           // Continue to API fetch even if cache fails
         }
 
-        const token = localStorage.getItem("webToken")
+        const token = getAuthToken()
         if (!token) {
           setLoading(false)
           return
@@ -125,7 +126,7 @@ export function LigaProvider({ children }) {
     try {
       setLoading(true)
 
-      const token = localStorage.getItem("webToken")
+      const token = getAuthToken()
       if (!token) throw new Error("No autenticado")
 
       console.log("Fetching liga by ID:", id)

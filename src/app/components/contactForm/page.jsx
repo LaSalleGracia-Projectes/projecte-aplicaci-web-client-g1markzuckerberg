@@ -1,61 +1,63 @@
-'use client';
+"use client"
 
-import { useState } from "react";
-import Layout from "@/components/layout";
-import AuthGuard from "@/components/authGuard/authGuard";
-import { useRouter } from "next/navigation";
+import { useState } from "react"
+import Layout from "@/components/layout"
+import AuthGuard from "@/components/authGuard/authGuard"
+import { useRouter } from "next/navigation"
+// Importar el servicio de cookies
+import { getAuthToken } from "@/components/auth/cookie-service"
 
 export default function ContactForm() {
-  const [message, setMessage] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-  const router = useRouter();
+  const [message, setMessage] = useState("")
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [error, setError] = useState("")
+  const [success, setSuccess] = useState("")
+  const router = useRouter()
 
   const handleSubmit = async () => {
-    setIsSubmitting(true);
-    setError("");
-    setSuccess("");
+    setIsSubmitting(true)
+    setError("")
+    setSuccess("")
 
     try {
-      // Get token from localStorage - using webToken as in the BurgerMenuContent component
-      const token = localStorage.getItem("webToken");
-      
+      // Usar getAuthToken en lugar de localStorage
+      const token = getAuthToken()
+
       if (!token) {
-        setError("No estás autenticado. Por favor, inicia sesión primero.");
-        setIsSubmitting(false);
-        return;
+        setError("No estás autenticado. Por favor, inicia sesión primero.")
+        setIsSubmitting(false)
+        return
       }
 
       const response = await fetch("http://localhost:3000/api/v1/contactForm/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ 
-          mensaje: message 
-        })
-      });
+        body: JSON.stringify({
+          mensaje: message,
+        }),
+      })
 
-      const data = await response.json();
+      const data = await response.json()
 
       if (!response.ok) {
-        throw new Error(data.error || "Ha ocurrido un error al enviar el formulario");
+        throw new Error(data.error || "Ha ocurrido un error al enviar el formulario")
       }
 
-      setSuccess("¡Mensaje enviado correctamente!");
-      setMessage("");
+      setSuccess("¡Mensaje enviado correctamente!")
+      setMessage("")
     } catch (error) {
-      setError(error.message || "Ha ocurrido un error al enviar el formulario");
+      setError(error.message || "Ha ocurrido un error al enviar el formulario")
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
-  };
+  }
 
   const handleBack = () => {
-    router.back();
-  };
+    router.back()
+  }
 
   return (
     <Layout>
@@ -76,11 +78,14 @@ export default function ContactForm() {
 
         <div className="w-full max-w-lg bg-white shadow-md rounded-lg px-6 py-6 sm:px-8 sm:py-8 space-y-4">
           <p className="text-gray-700 text-sm sm:text-base mb-4">
-            Si tienes alguna duda, problema o sugerencia sobre la aplicación, por favor envíanos un mensaje a través de este formulario:
+            Si tienes alguna duda, problema o sugerencia sobre la aplicación, por favor envíanos un mensaje a través de
+            este formulario:
           </p>
 
           <div>
-            <label htmlFor="message" className="block text-sm font-bold text-gray-700 mb-2">Mensaje</label>
+            <label htmlFor="message" className="block text-sm font-bold text-gray-700 mb-2">
+              Mensaje
+            </label>
             <textarea
               id="message"
               placeholder="Escribe tu mensaje aquí..."
@@ -113,5 +118,5 @@ export default function ContactForm() {
         <AuthGuard />
       </main>
     </Layout>
-  );
+  )
 }

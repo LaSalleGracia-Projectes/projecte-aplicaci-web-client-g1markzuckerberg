@@ -4,6 +4,8 @@ import { useEffect, useState } from "react"
 
 import Layout from "@/components/layout"
 import AuthGuard from "@/components/authGuard/authGuard"
+// Importar el servicio de cookies al principio del archivo
+import { getAuthToken } from "@/components/auth/cookie-service"
 
 const PLAYERS_PER_PAGE = 20
 
@@ -55,21 +57,16 @@ export default function Jugadores() {
 
   // Filter by name
   useEffect(() => {
-    const filtered = players.filter(player =>
-      player.displayName.toLowerCase().includes(searchTerm.toLowerCase())
-    )
+    const filtered = players.filter((player) => player.displayName.toLowerCase().includes(searchTerm.toLowerCase()))
     setFilteredPlayers(filtered)
     setCurrentPage(1)
   }, [searchTerm, players])
 
   const totalPages = Math.ceil(filteredPlayers.length / PLAYERS_PER_PAGE)
-  const currentPlayers = filteredPlayers.slice(
-    (currentPage - 1) * PLAYERS_PER_PAGE,
-    currentPage * PLAYERS_PER_PAGE
-  )
+  const currentPlayers = filteredPlayers.slice((currentPage - 1) * PLAYERS_PER_PAGE, currentPage * PLAYERS_PER_PAGE)
 
-  const handlePrev = () => setCurrentPage(prev => Math.max(prev - 1, 1))
-  const handleNext = () => setCurrentPage(prev => Math.min(prev + 1, totalPages))
+  const handlePrev = () => setCurrentPage((prev) => Math.max(prev - 1, 1))
+  const handleNext = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages))
 
   const openModal = (playerId) => {
     setSelectedPlayerId(playerId)
@@ -94,13 +91,13 @@ export default function Jugadores() {
             >
               Todos
             </button>
-            {teams.map(team => (
+            {teams.map((team) => (
               <button
                 key={team.id}
                 onClick={() => setSelectedTeam(team.name)}
                 className={`flex items-center space-x-2 px-3 py-2 rounded-full text-sm ${selectedTeam === team.name ? "bg-blue-500 text-white" : "bg-gray-200"}`}
               >
-                <img src={team.imagePath} alt={team.name} className="w-5 h-5" />
+                <img src={team.imagePath || "/placeholder.svg"} alt={team.name} className="w-5 h-5" />
                 <span>{team.name}</span>
               </button>
             ))}
@@ -119,16 +116,15 @@ export default function Jugadores() {
 
           {/* Grid de jugadores */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {currentPlayers.map(player => (
-              <div
-                key={player.id}
-                className="bg-white shadow rounded-2xl p-4 flex flex-col items-center text-center"
-              >
+            {currentPlayers.map((player) => (
+              <div key={player.id} className="bg-white shadow rounded-2xl p-4 flex flex-col items-center text-center">
                 <img
-                  src={player.playerImage}
+                  src={player.playerImage || "/placeholder.svg"}
                   alt={player.displayName}
                   className="w-24 h-24 object-cover rounded-full mb-4"
-                  onError={(e) => { e.target.src = "/default-player.png" }}
+                  onError={(e) => {
+                    e.target.src = "/default-player.png"
+                  }}
                 />
                 <h2 className="text-lg font-semibold">{player.displayName}</h2>
                 <p className="text-gray-500">{player.teamName}</p>
@@ -190,7 +186,7 @@ export default function Jugadores() {
 
               {/* Gráfico iframe */}
               <iframe
-                src={`http://localhost:3000/api/v1/grafana/grafico/${selectedPlayerId}?theme=light&token=${localStorage.getItem("webToken")}`}
+                src={`http://localhost:3000/api/v1/grafana/grafico/${selectedPlayerId}?theme=light&token=${getAuthToken()}`}
                 title="Grafico de puntos"
                 className={`w-full h-[500px] rounded-lg transition-opacity duration-300 ${iframeLoaded ? "opacity-100" : "opacity-0"}`}
                 onLoad={() => setIframeLoaded(true)}

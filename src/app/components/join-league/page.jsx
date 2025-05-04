@@ -4,7 +4,9 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Input, Button } from "@/components/ui"
 import Layout2 from "@/components/layout2"
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react"
+// Importar el servicio de cookies
+import { getAuthToken } from "@/components/auth/cookie-service"
 
 export default function JoinLeague() {
   const [ligaCode, setLigaCode] = useState("")
@@ -25,7 +27,8 @@ export default function JoinLeague() {
     setLoading(true)
 
     try {
-      const token = localStorage.getItem("webToken")
+      // Usar getAuthToken en lugar de localStorage
+      const token = getAuthToken()
 
       if (!token) {
         setError("No estás autenticado")
@@ -40,7 +43,6 @@ export default function JoinLeague() {
           Authorization: `Bearer ${token}`,
         },
       })
-      
 
       const data = await response.json()
 
@@ -48,20 +50,18 @@ export default function JoinLeague() {
         setError(data.error || "No se pudo unir a la liga")
         return
       }
-      
+
       setSuccess(data.message)
       setLigaCode("")
-      
+
       setTimeout(() => {
         router.push("/components/home_logged")
       }, 1500)
-      
 
       setSuccess(data.message)
       setLigaCode("")
       // opcional: redirigir al usuario a la liga
       // router.push(`/ligas/${data.liga.id}`)
-
     } catch (err) {
       setError("Error del servidor")
     } finally {

@@ -9,6 +9,8 @@ import { Button } from "@/components/ui"
 import EditLigaDialog from "@/components/clasificacion/editLigaDialog"
 import KickUserDialog from "@/components/clasificacion/kickUserDialog"
 import { useLanguage } from "@/context/languageContext"
+// Importar el servicio de cookies al principio del archivo
+import { getAuthToken } from "@/components/auth/cookie-service"
 
 export default function Clasificacion() {
   return (
@@ -38,7 +40,8 @@ function ClasificacionContent() {
   useEffect(() => {
     const fetchCurrentUser = async () => {
       try {
-        const token = localStorage.getItem("webToken")
+        // Reemplazar localStorage.getItem("webToken") con getAuthToken()
+        const token = getAuthToken()
         if (!token) return
 
         // Get current user ID from token
@@ -102,7 +105,8 @@ function ClasificacionContent() {
       }
 
       try {
-        const token = localStorage.getItem("webToken")
+        // También actualizar fetchUsers y otras funciones que usan el token
+        const token = getAuthToken()
         if (!token) {
           setError(t("common.notAuthenticated"))
           setLoading(false)
@@ -164,7 +168,7 @@ function ClasificacionContent() {
     }
 
     try {
-      const token = localStorage.getItem("webToken")
+      const token = getAuthToken()
       if (!token) {
         setLeaveError(t("common.notAuthenticated"))
         return
@@ -207,7 +211,7 @@ function ClasificacionContent() {
     const fetchUsers = async () => {
       setLoading(true)
       try {
-        const token = localStorage.getItem("webToken")
+        const token = getAuthToken()
         if (!token || !currentLiga?.code) return
 
         const res = await fetch(`http://localhost:3000/api/v1/liga/users/${currentLiga.code}`, {
