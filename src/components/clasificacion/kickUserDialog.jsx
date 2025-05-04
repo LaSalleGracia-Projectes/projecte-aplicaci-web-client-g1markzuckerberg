@@ -3,6 +3,8 @@
 import { useState } from "react"
 import { UserX, X, AlertTriangle } from "lucide-react"
 import { Button } from "@/components/ui"
+// Import the cookie service
+import { getAuthToken } from "@/components/auth/cookie-service"
 
 export default function KickUserDialog({ users, currentUserId, onClose, onSuccess, ligaId }) {
   const [loading, setLoading] = useState(false)
@@ -13,6 +15,7 @@ export default function KickUserDialog({ users, currentUserId, onClose, onSucces
   // Filter out the current user (captain)
   const kickableUsers = users.filter((user) => user.id !== currentUserId)
 
+  // Modificar la función handleKickUser para asegurarnos de que se envía correctamente
   const handleKickUser = async () => {
     if (!selectedUser) return
 
@@ -20,17 +23,19 @@ export default function KickUserDialog({ users, currentUserId, onClose, onSucces
     setError(null)
 
     try {
-      const token = localStorage.getItem("webToken")
+      // Use getAuthToken() instead of localStorage
+      const token = getAuthToken()
       if (!token) {
         throw new Error("No estás autenticado")
       }
+
+      console.log(`Intentando expulsar al usuario ${selectedUser.id} de la liga ${ligaId}`)
 
       // Fix: Use the correct API endpoint format and ensure proper error handling
       const res = await fetch(`http://localhost:3000/api/v1/liga/kickUser/${ligaId}/${selectedUser.id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
         },
       })
 

@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react"
 import { X } from "lucide-react"
 import { Button } from "@/components/ui"
+// Import the cookie service
+import { getAuthToken } from "@/components/auth/cookie-service"
 
 export default function EditLigaDialog({ currentLiga, onClose, onSuccess }) {
   const [newLigaName, setNewLigaName] = useState("")
@@ -30,7 +32,8 @@ export default function EditLigaDialog({ currentLiga, onClose, onSuccess }) {
     if (!currentLiga?.id || !newLigaName.trim()) return
 
     try {
-      const token = localStorage.getItem("webToken")
+      // Use getAuthToken() instead of localStorage
+      const token = getAuthToken()
       if (!token) {
         throw new Error("No estás autenticado")
       }
@@ -60,22 +63,31 @@ export default function EditLigaDialog({ currentLiga, onClose, onSuccess }) {
     }
   }
 
+  // Modificar la función uploadLigaImage para usar el nombre de campo correcto 'image'
   const uploadLigaImage = async () => {
     if (!currentLiga?.id || !ligaImage) return
 
     try {
-      const token = localStorage.getItem("webToken")
+      // Use getAuthToken() instead of localStorage
+      const token = getAuthToken()
       if (!token) {
         throw new Error("No estás autenticado")
       }
 
       const formData = new FormData()
+      // Cambiar el nombre del campo a 'image' para que coincida con lo que espera el backend
       formData.append("image", ligaImage)
 
+      // Debug - check what's being sent
+      console.log("Uploading image:", ligaImage.name, "Size:", ligaImage.size)
+
+      // Don't set Content-Type header when sending FormData
+      // The browser will automatically set the correct Content-Type with boundary
       const res = await fetch(`http://localhost:3000/api/v1/liga/${currentLiga.id}/upload-image`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,
+          // Remove Content-Type header - let browser set it automatically for FormData
         },
         body: formData,
       })
