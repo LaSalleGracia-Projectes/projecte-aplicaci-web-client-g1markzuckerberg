@@ -8,18 +8,17 @@ import { getAuthToken } from "@/components/auth/cookie-service"
 export const dynamic = "force-dynamic"
 
 export default function BackOfficePage() {
-  const [users, setUsers] = useState([])
-  const [selectedUser, setSelectedUser] = useState(null)
-  const [editedUser, setEditedUser] = useState({
-    username: "",
-    password: "",
-    is_admin: false,
-  })
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
-  const [isAdmin, setIsAdmin] = useState(false)
-  const [currentPage, setCurrentPage] = useState(1) // Estado para la página actual
-  const usersPerPage = 10 // Número de usuarios por página
+
+  const [users, setUsers] = useState([]);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [editedUser, setEditedUser] = useState({});
+  const [supportMessages, setSupportMessages] = useState([]); // Estado para los mensajes de soporte
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1); // Estado para la página actual
+  const usersPerPage = 10; // Número de usuarios por página
+
 
   // Usar getAuthToken en lugar de localStorage
   const token = typeof window !== "undefined" ? getAuthToken() : null
@@ -32,11 +31,11 @@ export default function BackOfficePage() {
       try {
         const res = await fetch("http://localhost:3000/api/v1/user/me", {
           headers: { Authorization: `Bearer ${token}` },
-        })
-        if (!res.ok) throw new Error("Error al obtener información del usuario")
-        const data = await res.json()
+        });
+        if (!res.ok) throw new Error("Error al obtener información del usuario");
+        const data = await res.json();
+        console.log("Respuesta del backend (/me):", data); // Depuración
 
-        console.log("Respuesta del backend (/me):", data) // Depuración
 
         if (data.user && data.user.is_admin) {
           setIsAdmin(true)
@@ -70,45 +69,60 @@ export default function BackOfficePage() {
       }
     }
 
-    fetchUsers()
-  }, [isAdmin, token])
+    const fetchSupportMessages = async () => {
+      try {
+        const res = await fetch("http://localhost:3000/api/v1/contactForm/getAll", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (!res.ok) throw new Error("Error al obtener mensajes de soporte");
+        const data = await res.json();
+        console.log("Mensajes de soporte obtenidos:", data); // Depuración
+
+        // Mapea _id a id para mantener consistencia en el frontend
+        if (Array.isArray(data)) {
+          setSupportMessages(data.map((msg) => ({ ...msg, id: msg._id })));
+        } else {
+          throw new Error("Respuesta del backend no es un array");
+        }
+      } catch (err) {
+        setError(err.message);
+        console.error("Error al obtener mensajes de soporte:", err.message); // Depuración
+      }
+    };
+
+    fetchUsers();
+    fetchSupportMessages();
+  }, [isAdmin, token]);
 
   const handleEditClick = async (userId) => {
     try {
-      console.log("ID del usuario seleccionado:", userId) // Depuración
-
-      if (!userId || typeof userId !== "number") {
-        throw new Error("ID de usuario inválido")
-      }
-
       const res = await fetch(`http://localhost:3000/api/v1/admin/user/${userId}`, {
         headers: { Authorization: `Bearer ${token}` },
-      })
+      });
 
-      if (!res.ok) throw new Error("Error al obtener datos del usuario")
+      if (!res.ok) throw new Error("Error al obtener datos del usuario");
+      const data = await res.json();
+      console.log("Datos del usuario seleccionado:", data.user); // Verifica que data.user tenga un id
 
-      const data = await res.json()
-      console.log("Datos del usuario seleccionado:", data.user) // Verifica que data.user tenga un id
-
-      setSelectedUser(data.user) // Asegúrate de que selectedUser tenga un id
+      setSelectedUser(data.user); // Asegúrate de que selectedUser tenga un id
       setEditedUser({
-        id: data.user.id, // Asegúrate de incluir el id aquí
-        username: data.user.username || "",
-        password: "", // Inicialmente vacío para evitar mostrar la contraseña anterior
-        is_admin: data.user.is_admin || false,
-      })
+        ...data.user, // Incluye automáticamente birthDate si existe
+        password: "", // Sobreescribe la contraseña para seguridad
+      });
+
     } catch (err) {
       alert(err.message)
     }
-  }
+  };
 
   const handleInputChange = (field, value) => {
     setEditedUser((prev) => {
-      const updatedUser = { ...prev, [field]: value }
-      console.log("Estado editedUser actualizado:", updatedUser) // Depuración
-      return updatedUser
-    })
-  }
+      const updatedUser = { ...prev, [field]: value };
+      console.log("Estado editedUser actualizado:", updatedUser); // Depuración
+      return updatedUser;
+    });
+  };
+
 
   const handleUpdateUser = async () => {
     if (!editedUser.id) {
@@ -123,14 +137,22 @@ export default function BackOfficePage() {
     }
 
     try {
-      console.log("Datos enviados para actualizar:", editedUser) // Depuración
+      console.log("Datos enviados para actualizar:", editedUser); // Depuración
+  
+      // Formatear birthDate al enviarlo al backend
+      const formattedUser = {
+        ...editedUser,
+        birthDate: editedUser.birthDate ? new Date(editedUser.birthDate).toISOString().split('T')[0] : null,
+      };
+  
+      const res = await fetch(`http://localhost:3000/api/v1/admin/update-user/${formattedUser.id}`, {
 
-      const res = await fetch(`http://localhost:3000/api/v1/admin/update-user/${editedUser.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
+
         body: JSON.stringify({
           username: editedUser.username,
           password: editedUser.password,
@@ -142,14 +164,17 @@ export default function BackOfficePage() {
         const errorData = await res.json()
         throw new Error(errorData.message || "Error desconocido")
       }
+  
+      alert("Usuario actualizado correctamente");
+  
+      const updated = users.map((u) =>
+        u.id === formattedUser.id ? { ...u, ...formattedUser } : u
+      );
+      setUsers(updated);
+  
+      setSelectedUser(null);
+      setEditedUser({});
 
-      alert("Usuario actualizado correctamente")
-
-      const updated = users.map((u) => (u.id === editedUser.id ? { ...u, ...editedUser } : u))
-      setUsers(updated)
-
-      setSelectedUser(null)
-      setEditedUser({})
     } catch (err) {
       console.error("Error al actualizar usuario:", err.message) // Depuración
       alert(err.message)
@@ -178,6 +203,33 @@ export default function BackOfficePage() {
       alert(err.message)
     }
   }
+
+  const handleUpdateSupportMessage = async (messageId, resolved) => {
+    try {
+      const res = await fetch(`http://localhost:3000/api/v1/contactForm/update/${messageId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ resolved }),
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message || "Error desconocido");
+      }
+
+      // Actualiza el estado local para reflejar el cambio
+      setSupportMessages((prev) =>
+        prev.map((msg) => (msg.id === messageId ? { ...msg, resolved } : msg))
+      );
+      alert("Estado del mensaje actualizado correctamente");
+    } catch (err) {
+      console.error("Error al actualizar mensaje de soporte:", err.message); // Depuración
+      alert(err.message);
+    }
+  };
 
   if (error) {
     return <p className="text-red-500">{error}</p>
@@ -220,7 +272,8 @@ export default function BackOfficePage() {
                   <td className="p-2 flex gap-2">
                     <button
                       className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-700"
-                      onClick={() => handleEditClick(user.id)} // Asegúrate de que user.id sea válido
+                      onClick={() => handleEditClick(user.id)}
+
                     >
                       Editar
                     </button>
@@ -263,6 +316,18 @@ export default function BackOfficePage() {
         <div className="mt-6 p-4 border bg-gray-100 rounded">
           <h2 className="text-lg font-bold mb-2">Editar Usuario</h2>
           <div className="grid grid-cols-2 gap-4">
+            {/* Campo Fecha de Nacimiento */}
+            <div>
+              <label className="block text-sm font-medium">Fecha de Nacimiento</label>
+              <input
+                type="date"
+                className="w-full p-1 border rounded"
+                value={editedUser.birthDate ? editedUser.birthDate.split("T")[0] : ""}
+                onChange={(e) => handleInputChange("birthDate", e.target.value)}
+              />
+            </div>
+
+            {/* Campo Username */}
             <div>
               <label className="block text-sm font-medium">Username</label>
               <input
@@ -271,6 +336,8 @@ export default function BackOfficePage() {
                 onChange={(e) => handleInputChange("username", e.target.value)}
               />
             </div>
+
+            {/* Campo Password */}
             <div>
               <label className="block text-sm font-medium">Password</label>
               <input
@@ -280,6 +347,8 @@ export default function BackOfficePage() {
                 onChange={(e) => handleInputChange("password", e.target.value)}
               />
             </div>
+
+            {/* Campo Administrador */}
             <div>
               <label className="block text-sm font-medium">Administrador</label>
               <input
@@ -301,6 +370,50 @@ export default function BackOfficePage() {
           </div>
         </div>
       )}
+
+      {/* Sección de mensajes de soporte */}
+      <div className="mt-6 p-4 border bg-gray-100 rounded">
+        <h2 className="text-lg font-bold mb-2">Mensajes de Soporte</h2>
+        <table className="w-full border text-left">
+          <thead className="bg-gray-800 text-white">
+            <tr>
+              <th className="p-2">ID</th>
+              <th className="p-2">Correo</th>
+              <th className="p-2">Mensaje</th>
+              <th className="p-2">Estado</th>
+              <th className="p-2">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {supportMessages.length > 0 ? (
+              supportMessages.map((message) => (
+                <tr key={message.id} className="border-b hover:bg-gray-100">
+                  <td className="p-2">{message.id}</td>
+                  <td className="p-2">{message.correo}</td>
+                  <td className="p-2">{message.mensaje}</td>
+                  <td className="p-2">{message.resolved ? "Resuelto" : "Pendiente"}</td>
+                  <td className="p-2">
+                    <button
+                      className={`px-2 py-1 rounded ${
+                        message.resolved ? "bg-green-500" : "bg-red-500"
+                      } text-white`}
+                      onClick={() => handleUpdateSupportMessage(message.id, !message.resolved)}
+                    >
+                      {message.resolved ? "Marcar como pendiente" : "Marcar como resuelto"}
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="5" className="p-2 text-center">
+                  No hay mensajes de soporte disponibles.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }
