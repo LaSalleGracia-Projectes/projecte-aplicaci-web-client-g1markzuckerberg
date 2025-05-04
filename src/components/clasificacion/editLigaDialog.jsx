@@ -15,8 +15,8 @@ export default function EditLigaDialog({ currentLiga, onClose, onSuccess }) {
   useEffect(() => {
     if (currentLiga) {
       // Comprobar todas las posibles propiedades para el nombre
-      const ligaName = currentLiga.name || currentLiga.nombre || "";
-      setNewLigaName(ligaName);
+      const ligaName = currentLiga.name || currentLiga.nombre || ""
+      setNewLigaName(ligaName)
     }
   }, [currentLiga])
 
@@ -28,15 +28,15 @@ export default function EditLigaDialog({ currentLiga, onClose, onSuccess }) {
 
   const updateLigaName = async () => {
     if (!currentLiga?.id || !newLigaName.trim()) return
-    
+
     try {
       const token = localStorage.getItem("webToken")
       if (!token) {
         throw new Error("No estás autenticado")
       }
-      
+
       console.log(`Actualizando nombre de liga: ${newLigaName}`)
-      
+
       // IMPORTANTE: Cambié el cuerpo de la solicitud para enviar 'newName' en lugar de 'name'
       // para que coincida con lo que espera el controlador del backend
       const res = await fetch(`http://localhost:3000/api/v1/liga/update-name/${currentLiga.id}`, {
@@ -47,12 +47,12 @@ export default function EditLigaDialog({ currentLiga, onClose, onSuccess }) {
         },
         body: JSON.stringify({ newName: newLigaName }),
       })
-      
+
       if (!res.ok) {
         const errorData = await res.json().catch(() => ({}))
         throw new Error(errorData.error || `Error ${res.status}: No se pudo actualizar el nombre de la liga`)
       }
-      
+
       return true
     } catch (err) {
       console.error("Error al actualizar nombre:", err)
@@ -62,16 +62,16 @@ export default function EditLigaDialog({ currentLiga, onClose, onSuccess }) {
 
   const uploadLigaImage = async () => {
     if (!currentLiga?.id || !ligaImage) return
-    
+
     try {
       const token = localStorage.getItem("webToken")
       if (!token) {
         throw new Error("No estás autenticado")
       }
-      
+
       const formData = new FormData()
       formData.append("image", ligaImage)
-      
+
       const res = await fetch(`http://localhost:3000/api/v1/liga/${currentLiga.id}/upload-image`, {
         method: "PUT",
         headers: {
@@ -79,12 +79,12 @@ export default function EditLigaDialog({ currentLiga, onClose, onSuccess }) {
         },
         body: formData,
       })
-      
+
       if (!res.ok) {
         const errorData = await res.json().catch(() => ({}))
         throw new Error(errorData.error || `Error ${res.status}: No se pudo subir la imagen de la liga`)
       }
-      
+
       return true
     } catch (err) {
       console.error("Error al subir imagen:", err)
@@ -92,41 +92,42 @@ export default function EditLigaDialog({ currentLiga, onClose, onSuccess }) {
     }
   }
 
+  // Modificar la función handleSaveChanges para recargar la página después de guardar cambios
   const handleSaveChanges = async () => {
     setUpdateError(null)
     setUpdateSuccess(false)
     setLoading(true)
-    
+
     try {
       // Actualizaciones a realizar
       const updates = []
-      
+
       // Actualizar nombre si ha cambiado
       if (newLigaName !== (currentLiga?.name || currentLiga?.nombre)) {
         updates.push(updateLigaName())
       }
-      
+
       // Subir imagen si se ha seleccionado
       if (ligaImage) {
         updates.push(uploadLigaImage())
       }
-      
+
       // Si no hay actualizaciones, simplemente cerrar
       if (updates.length === 0) {
         onClose()
         return
       }
-      
+
       // Ejecutar todas las actualizaciones
       await Promise.all(updates)
-      
+
       setUpdateSuccess(true)
       // Llamar a onSuccess inmediatamente para actualizar el contexto
       if (onSuccess) onSuccess()
-      
-      // Cerrar el diálogo después de un breve retraso para mostrar el mensaje de éxito
+
+      // Recargar la página después de un breve retraso para mostrar el mensaje de éxito
       setTimeout(() => {
-        onClose()
+        window.location.reload()
       }, 1500)
     } catch (err) {
       setUpdateError(err.message || "Error al actualizar la liga")
@@ -140,16 +141,11 @@ export default function EditLigaDialog({ currentLiga, onClose, onSuccess }) {
       <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-lg font-medium">Editar Liga</h3>
-          <button 
-            onClick={onClose}
-            className="text-gray-500 hover:text-gray-700"
-          >
+          <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
             <X className="h-5 w-5" />
           </button>
         </div>
-        <p className="text-sm text-gray-500 mb-4">
-          Modifica la información de tu liga
-        </p>
+        <p className="text-sm text-gray-500 mb-4">Modifica la información de tu liga</p>
         <div className="space-y-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <label htmlFor="name" className="text-right text-sm font-medium">
@@ -171,21 +167,11 @@ export default function EditLigaDialog({ currentLiga, onClose, onSuccess }) {
               Imagen
             </label>
             <div className="col-span-3">
-              <input
-                id="image"
-                type="file"
-                accept="image/*"
-                onChange={handleImageChange}
-                className="w-full text-sm"
-              />
+              <input id="image" type="file" accept="image/*" onChange={handleImageChange} className="w-full text-sm" />
             </div>
           </div>
-          {updateError && (
-            <div className="text-red-500 text-sm mt-2">{updateError}</div>
-          )}
-          {updateSuccess && (
-            <div className="text-green-500 text-sm mt-2">¡Cambios guardados con éxito!</div>
-          )}
+          {updateError && <div className="text-red-500 text-sm mt-2">{updateError}</div>}
+          {updateSuccess && <div className="text-green-500 text-sm mt-2">¡Cambios guardados con éxito!</div>}
         </div>
         <div className="flex justify-end gap-2 mt-6">
           <Button variant="outline" onClick={onClose} disabled={loading}>

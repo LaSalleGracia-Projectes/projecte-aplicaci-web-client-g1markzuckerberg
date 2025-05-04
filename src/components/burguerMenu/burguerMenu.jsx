@@ -131,13 +131,21 @@ export default function BurgerMenuContent({ onClose }) {
 
     console.log("Selecting league:", league)
 
+    // Verificar si estamos en la página de jornada
+    const isJornadaPage = window.location.pathname.includes("/components/jornada")
+
     // Store the complete league object to avoid needing to fetch it again
     cambiarLiga(league)
 
     onClose?.()
 
-    // Navigate to the classification page to see the league info
-    router.push("/components/clasificacion")
+    // Si estamos en la página de jornada, recargar la página para actualizar los datos
+    if (isJornadaPage) {
+      window.location.reload()
+    } else {
+      // Si no estamos en la página de jornada, navegar a la clasificación
+      router.push("/components/clasificacion")
+    }
   }
 
   if (loading) {

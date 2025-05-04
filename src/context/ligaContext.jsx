@@ -108,6 +108,9 @@ export function LigaProvider({ children }) {
       // Store the entire liga object for immediate access on page loads
       try {
         localStorage.setItem("currentLigaData", JSON.stringify(liga))
+
+        // Recargar la página después de actualizar el estado y localStorage
+        window.location.reload()
       } catch (e) {
         console.error("Error storing liga data in localStorage:", e)
       }
