@@ -8,11 +8,20 @@ export default function Navbar({ currentPage }) {
   const { t } = useLanguage()
 
   const menuItems = [
-    { label: t("menu.home"), key: "Inicio", href: "/components/home_logged" },
-    { label: t("menu.classification"), key: "Clasificacion", href: "/components/clasificacion" },
-    { label: t("menu.matchday"), key: "Jornada", href: "/components/jornada" },
-    { label: t("menu.players"), key: "Jugadores", href: "/components/jugadores" },
+    { label: t("menu.home"), key: "home", href: "/components/home_logged" },
+    { label: t("menu.classification"), key: "clasificacion", href: "/components/clasificacion" },
+    { label: t("menu.matchday"), key: "jornada", href: "/components/jornada" },
+    { label: t("menu.players"), key: "jugadores", href: "/components/jugadores" },
   ]
+
+  // Función para determinar si un elemento del menú está activo
+  const isActive = (itemKey) => {
+    // Normalizar currentPage a minúsculas para comparación
+    const normalizedCurrentPage = currentPage ? currentPage.toLowerCase() : ""
+
+    // Verificar si el key del elemento coincide con la página actual
+    return itemKey.toLowerCase() === normalizedCurrentPage
+  }
 
   return (
     <nav className="bg-gray-800 text-white px-4 py-3">
@@ -22,7 +31,7 @@ export default function Navbar({ currentPage }) {
             <Link
               href={item.href}
               className={`flex flex-col sm:flex-row items-center gap-1 sm:gap-2 transition-all duration-200 ${
-                item.key === currentPage ? "font-bold border-b-2 border-white pb-1" : "hover:text-gray-300"
+                isActive(item.key) ? "font-bold border-b-2 border-white pb-1" : "hover:text-gray-300"
               }`}
             >
               <Image

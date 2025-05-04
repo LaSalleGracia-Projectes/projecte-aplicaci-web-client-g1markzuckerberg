@@ -10,6 +10,8 @@ import Formacion442 from "@/components/formaciones/formacion-442"
 import SeleccionFormacion from "@/components/jornada/seleccion-formacion"
 import EditorFormacion from "@/components/jornada/editor-formacion"
 import { useLanguage } from "@/context/languageContext"
+// Importar el servicio de cookies al principio del archivo
+import { getAuthToken } from "@/components/auth/cookie-service"
 
 export default function Jornada() {
   const { t } = useLanguage()
@@ -26,6 +28,25 @@ export default function Jornada() {
   const [guardandoDraft, setGuardandoDraft] = useState(false)
   const [draftGuardado, setDraftGuardado] = useState(false)
 
+  // Añadir un estado para controlar la liga actual y detectar cambios
+  const [currentLigaId, setCurrentLigaId] = useState(null)
+
+  // Efecto para detectar cambios en la liga seleccionada
+  useEffect(() => {
+    if (currentLiga?.id !== currentLigaId) {
+      // Si la liga ha cambiado, resetear los estados y forzar una recarga de datos
+      setCurrentLigaId(currentLiga?.id)
+      setPlantilla(null)
+      setPlayers([])
+      setCreandoDraft(false)
+      setFormacionSeleccionada(null)
+      setTempDraft(null)
+      setDraftGuardado(false)
+      setLoading(true)
+      setError(null)
+    }
+  }, [currentLiga, currentLigaId])
+
   useEffect(() => {
     const fetchDraftData = async () => {
       if (!currentLiga?.id) {
@@ -35,12 +56,14 @@ export default function Jornada() {
       }
 
       try {
-        const token = localStorage.getItem("webToken")
+        const token = getAuthToken()
         if (!token) {
           setError("No estás autenticado")
           setLoading(false)
           return
         }
+
+        console.log(`Cargando datos de draft para liga ID: ${currentLiga.id}`)
 
         // 1. Primero intentamos obtener un draft finalizado
         try {
@@ -117,7 +140,9 @@ export default function Jornada() {
       }
     }
 
-    fetchDraftData()
+    if (currentLiga?.id) {
+      fetchDraftData()
+    }
   }, [currentLiga, draftGuardado])
 
   const handleCrearDraft = async (formacion) => {
@@ -132,7 +157,7 @@ export default function Jornada() {
     setError(null) // Limpiar errores anteriores
 
     try {
-      const token = localStorage.getItem("webToken")
+      const token = getAuthToken()
       if (!token) {
         throw new Error("No estás autenticado")
       }
@@ -188,7 +213,7 @@ export default function Jornada() {
     if (!currentLiga?.id || !tempDraft) return
 
     try {
-      const token = localStorage.getItem("webToken")
+      const token = getAuthToken()
 
       // Obtener las opciones de jugadores actuales
       let playerOptions
@@ -278,7 +303,7 @@ export default function Jornada() {
     setGuardandoDraft(true)
 
     try {
-      const token = localStorage.getItem("webToken")
+      const token = getAuthToken()
 
       // Asegurarse de que tempDraft tiene todas las propiedades necesarias
       if (!tempDraft.id_plantilla) {
@@ -308,6 +333,9 @@ export default function Jornada() {
       setFormacionSeleccionada(null)
       setTempDraft(null)
       setDraftGuardado(true)
+
+      // Recargar la página para mostrar el draft guardado
+      window.location.reload()
     } catch (err) {
       console.error("Error al guardar el draft:", err)
       setError(err.message || "Error al guardar el draft")

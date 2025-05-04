@@ -1,17 +1,24 @@
 "use client"
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Input, Button } from "@/components/ui"
+import Link from "next/link"
+import { Button } from "@/components/ui"
+import { Input } from "@/components/ui"
+import { ArrowLeft } from "lucide-react"
 import Layout2 from "@/components/layout2"
-import { ArrowLeft } from "lucide-react";
+import { useRouter } from "next/navigation"
+import AuthGuard from "@/components/authGuard/authGuard"
+import { useState } from "react"
+import { useLiga } from "@/context/ligaContext"
+// Importar el servicio de cookies
+import { getAuthToken } from "@/components/auth/cookie-service"
 
 export default function JoinLeague() {
+  const router = useRouter()
+  const { setLiga } = useLiga() // Usar el contexto para actualizar la liga actual
   const [ligaCode, setLigaCode] = useState("")
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
   const [loading, setLoading] = useState(false)
-  const router = useRouter()
 
   const handleJoinLeague = async () => {
     setError("")
@@ -25,7 +32,7 @@ export default function JoinLeague() {
     setLoading(true)
 
     try {
-      const token = localStorage.getItem("webToken")
+      const token = getAuthToken()
 
       if (!token) {
         setError("No estás autenticado")
@@ -33,36 +40,34 @@ export default function JoinLeague() {
         return
       }
 
-      const response = await fetch(`/api/league/join/${ligaCode}`, {
+      // Llamar directamente al endpoint del backend
+      const response = await fetch(`http://localhost:3000/api/v1/liga/join/${ligaCode}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       })
-      
 
       const data = await response.json()
 
       if (!response.ok) {
         setError(data.error || "No se pudo unir a la liga")
+        setLoading(false)
         return
       }
-      
-      setSuccess(data.message)
-      setLigaCode("")
-      
-      setTimeout(() => {
-        router.push("/components/home_logged")
-      }, 1500)
-      
 
-      setSuccess(data.message)
-      setLigaCode("")
-      // opcional: redirigir al usuario a la liga
-      // router.push(`/ligas/${data.liga.id}`)
+      setSuccess(data.message || "Te has unido a la liga con éxito")
 
+      // Si la respuesta incluye la liga, actualizamos el contexto
+      if (data.liga) {
+        setLiga(data.liga)
+      }
+
+      // Redirigir inmediatamente usando window.location.href para forzar una recarga completa
+      window.location.href = "/components/clasificacion"
     } catch (err) {
+      console.error("Error al unirse a la liga:", err)
       setError("Error del servidor")
     } finally {
       setLoading(false)
@@ -70,41 +75,46 @@ export default function JoinLeague() {
   }
 
   return (
-    <Layout2>
-      <div className="flex flex-col items-center justify-center min-h-[calc(100vh-128px)] p-4">
-        <div className="w-full max-w-md sm:max-w-lg bg-white p-6 rounded-lg shadow-sm space-y-4">
-          {/* Flecha de volver */}
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => router.back()}
-              className="text-gray-600 hover:text-black transition"
-              aria-label="Volver"
+    <AuthGuard>
+      <Layout2>
+        <div className="flex flex-col items-center justify-center p-4 min-h-[calc(100vh-128px)]">
+          <div className="w-full max-w-md space-y-6 bg-white p-6 rounded-lg shadow-sm">
+            <div className="flex items-center gap-4">
+              <Link href="/components/choose-league" className="text-gray-600 hover:text-gray-900">
+                <ArrowLeft className="h-6 w-6" />
+              </Link>
+              <h2 className="text-xl font-medium">UNIRSE A LIGA</h2>
+            </div>
+
+            {error && <p className="text-red-500 text-sm">{error}</p>}
+            {success && <p className="text-green-500 text-sm">{success}</p>}
+
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <label htmlFor="liga-code" className="text-sm font-medium">
+                  Código de la liga:
+                </label>
+                <Input
+                  id="liga-code"
+                  type="text"
+                  value={ligaCode}
+                  onChange={(e) => setLigaCode(e.target.value)}
+                  disabled={loading}
+                  className="w-full"
+                />
+              </div>
+            </div>
+
+            <Button
+              className="w-full bg-[#e5e5ea] text-black hover:bg-[#d2d2d2]"
+              onClick={handleJoinLeague}
+              disabled={loading}
             >
-              <ArrowLeft className="h-6 w-6" />
-            </button>
-            <h2 className="text-xl font-semibold sm:text-2xl">Unirse a una Liga</h2>
+              {loading ? "Uniéndose..." : "UNIRSE A LIGA"}
+            </Button>
           </div>
-
-          <Input
-            type="text"
-            placeholder="Código de la liga"
-            value={ligaCode}
-            onChange={(e) => setLigaCode(e.target.value)}
-            className="w-full py-2 px-4 border rounded-md shadow-sm text-sm sm:text-base"
-          />
-
-          {error && <p className="text-red-500 text-sm text-center">{error}</p>}
-          {success && <p className="text-green-600 text-sm text-center">{success}</p>}
-
-          <Button
-            onClick={handleJoinLeague}
-            className="w-full bg-[#e5e5ea] text-black hover:bg-[#d2d2d2]"
-            disabled={loading}
-          >
-            {loading ? "Uniendo..." : "UNIRSE"}
-          </Button>
         </div>
-      </div>
-    </Layout2>
+      </Layout2>
+    </AuthGuard>
   )
 }

@@ -1,11 +1,14 @@
-"use client";
+"use client"
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
+// Importar el servicio de cookies
+import { getAuthToken } from "@/components/auth/cookie-service"
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic"
 
 export default function BackOfficePage() {
+
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [editedUser, setEditedUser] = useState({});
@@ -16,11 +19,13 @@ export default function BackOfficePage() {
   const [currentPage, setCurrentPage] = useState(1); // Estado para la página actual
   const usersPerPage = 10; // Número de usuarios por página
 
-  const token = typeof window !== "undefined" ? localStorage.getItem("webToken") : null;
-  const router = useRouter();
+
+  // Usar getAuthToken en lugar de localStorage
+  const token = typeof window !== "undefined" ? getAuthToken() : null
+  const router = useRouter()
 
   useEffect(() => {
-    if (!token) return;
+    if (!token) return
 
     const fetchUserInfo = async () => {
       try {
@@ -31,37 +36,38 @@ export default function BackOfficePage() {
         const data = await res.json();
         console.log("Respuesta del backend (/me):", data); // Depuración
 
+
         if (data.user && data.user.is_admin) {
-          setIsAdmin(true);
+          setIsAdmin(true)
         } else {
-          setError("Acceso denegado. No tienes permisos de administrador.");
+          setError("Acceso denegado. No tienes permisos de administrador.")
         }
       } catch (err) {
-        setError(err.message);
+        setError(err.message)
       }
-    };
+    }
 
-    fetchUserInfo();
-  }, [token]);
+    fetchUserInfo()
+  }, [token])
 
   useEffect(() => {
-    if (!isAdmin || !token) return;
+    if (!isAdmin || !token) return
 
     const fetchUsers = async () => {
       try {
-        setLoading(true);
+        setLoading(true)
         const res = await fetch("http://localhost:3000/api/v1/admin/users", {
           headers: { Authorization: `Bearer ${token}` },
-        });
-        if (!res.ok) throw new Error("Error al obtener usuarios");
-        const data = await res.json();
-        setUsers(data.users || []);
+        })
+        if (!res.ok) throw new Error("Error al obtener usuarios")
+        const data = await res.json()
+        setUsers(data.users || [])
       } catch (err) {
-        setError(err.message);
+        setError(err.message)
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
+    }
 
     const fetchSupportMessages = async () => {
       try {
@@ -103,8 +109,9 @@ export default function BackOfficePage() {
         ...data.user, // Incluye automáticamente birthDate si existe
         password: "", // Sobreescribe la contraseña para seguridad
       });
+
     } catch (err) {
-      alert(err.message);
+      alert(err.message)
     }
   };
 
@@ -116,18 +123,19 @@ export default function BackOfficePage() {
     });
   };
 
+
   const handleUpdateUser = async () => {
     if (!editedUser.id) {
-      alert("No se ha seleccionado ningún usuario para actualizar.");
-      return;
+      alert("No se ha seleccionado ningún usuario para actualizar.")
+      return
     }
-  
+
     // Validar campos obligatorios
     if (!editedUser.username || !editedUser.password) {
-      alert("Por favor, completa todos los campos.");
-      return;
+      alert("Por favor, completa todos los campos.")
+      return
     }
-  
+
     try {
       console.log("Datos enviados para actualizar:", editedUser); // Depuración
   
@@ -138,17 +146,23 @@ export default function BackOfficePage() {
       };
   
       const res = await fetch(`http://localhost:3000/api/v1/admin/update-user/${formattedUser.id}`, {
+
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(formattedUser),
-      });
-  
+
+        body: JSON.stringify({
+          username: editedUser.username,
+          password: editedUser.password,
+          is_admin: editedUser.is_admin,
+        }),
+      })
+
       if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.message || "Error desconocido");
+        const errorData = await res.json()
+        throw new Error(errorData.message || "Error desconocido")
       }
   
       alert("Usuario actualizado correctamente");
@@ -160,34 +174,35 @@ export default function BackOfficePage() {
   
       setSelectedUser(null);
       setEditedUser({});
+
     } catch (err) {
-      console.error("Error al actualizar usuario:", err.message); // Depuración
-      alert(err.message);
+      console.error("Error al actualizar usuario:", err.message) // Depuración
+      alert(err.message)
     }
-  };
+  }
 
   const handleDeleteUser = async (userId) => {
-    const confirm = window.confirm("¿Estás seguro de eliminar este usuario?");
-    if (!confirm) return;
+    const confirm = window.confirm("¿Estás seguro de eliminar este usuario?")
+    if (!confirm) return
 
     try {
       const res = await fetch(`http://localhost:3000/api/v1/admin/delete-user/${userId}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
-      });
+      })
 
       if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.message || "Error desconocido");
+        const errorData = await res.json()
+        throw new Error(errorData.message || "Error desconocido")
       }
 
-      setUsers((prev) => prev.filter((u) => u.id !== userId));
-      alert("Usuario eliminado correctamente");
+      setUsers((prev) => prev.filter((u) => u.id !== userId))
+      alert("Usuario eliminado correctamente")
     } catch (err) {
-      console.error("Error al eliminar usuario:", err.message); // Depuración
-      alert(err.message);
+      console.error("Error al eliminar usuario:", err.message) // Depuración
+      alert(err.message)
     }
-  };
+  }
 
   const handleUpdateSupportMessage = async (messageId, resolved) => {
     try {
@@ -217,17 +232,17 @@ export default function BackOfficePage() {
   };
 
   if (error) {
-    return <p className="text-red-500">{error}</p>;
+    return <p className="text-red-500">{error}</p>
   }
 
   if (!isAdmin) {
-    return <p>Cargando...</p>;
+    return <p>Cargando...</p>
   }
 
   // Calcular los usuarios visibles según la página actual
-  const indexOfLastUser = currentPage * usersPerPage;
-  const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+  const indexOfLastUser = currentPage * usersPerPage
+  const indexOfFirstUser = indexOfLastUser - usersPerPage
+  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser)
 
   return (
     <div className="p-6">
@@ -258,6 +273,7 @@ export default function BackOfficePage() {
                     <button
                       className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-700"
                       onClick={() => handleEditClick(user.id)}
+
                     >
                       Editar
                     </button>
@@ -287,9 +303,7 @@ export default function BackOfficePage() {
             </span>
             <button
               className="bg-gray-300 px-4 py-2 rounded"
-              onClick={() =>
-                setCurrentPage((prev) => Math.min(prev + 1, Math.ceil(users.length / usersPerPage)))
-              }
+              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, Math.ceil(users.length / usersPerPage)))}
               disabled={currentPage === Math.ceil(users.length / usersPerPage)}
             >
               Siguiente
@@ -347,16 +361,10 @@ export default function BackOfficePage() {
             </div>
           </div>
           <div className="mt-4 flex gap-2">
-            <button
-              className="bg-green-600 text-white px-4 py-2 rounded"
-              onClick={handleUpdateUser}
-            >
+            <button className="bg-green-600 text-white px-4 py-2 rounded" onClick={handleUpdateUser}>
               Guardar cambios
             </button>
-            <button
-              className="bg-gray-400 px-4 py-2 rounded"
-              onClick={() => setSelectedUser(null)}
-            >
+            <button className="bg-gray-400 px-4 py-2 rounded" onClick={() => setSelectedUser(null)}>
               Cancelar
             </button>
           </div>
@@ -407,5 +415,5 @@ export default function BackOfficePage() {
         </table>
       </div>
     </div>
-  );
+  )
 }

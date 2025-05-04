@@ -12,6 +12,15 @@ export default function EditorFormacion({ tempDraft, formacion, onUpdateDraft, o
   const [selecciones, setSelecciones] = useState({})
   const [todasPosicionesCompletas, setTodasPosicionesCompletas] = useState(false)
   const [formacionDetails, setFormacionDetails] = useState({ defensas: 0, mediocampistas: 0, delanteros: 0 })
+  const [currentLiga, setCurrentLiga] = useState(null) // Added currentLiga state
+  const [error, setError] = useState(null) // Added error state
+  const [guardandoDraft, setGuardandoDraft] = useState(false) // Added guardandoDraft state
+
+  // Function to simulate getting the auth token (replace with your actual implementation)
+  const getAuthToken = () => {
+    return "your_auth_token_here"
+    
+  }
 
   // Extraer los números de jugadores por posición según la formación
   useEffect(() => {
@@ -181,6 +190,51 @@ export default function EditorFormacion({ tempDraft, formacion, onUpdateDraft, o
     if (!posicionSeleccionada || indiceSeleccionado === null) return null
 
     return selecciones[posicionSeleccionada]?.[indiceSeleccionado] || null
+  }
+
+  // Modificar la función handleSaveDraft para recargar la página después de guardar
+  const handleSaveDraft = async () => {
+    if (!currentLiga?.id || !tempDraft) {
+      setError("No hay una liga seleccionada o no hay draft temporal")
+      return
+    }
+
+    setGuardandoDraft(true)
+
+    try {
+      const token = getAuthToken()
+
+      // Asegurarse de que tempDraft tiene todas las propiedades necesarias
+      if (!tempDraft.id_plantilla) {
+        throw new Error("El draft temporal no tiene un ID de plantilla")
+      }
+
+      console.log("Enviando tempDraft para guardar:", tempDraft)
+
+      const saveResponse = await fetch("http://localhost:3000/api/v1/draft/saveDraft", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          tempDraft: tempDraft,
+        }),
+      })
+
+      if (!saveResponse.ok) {
+        const errorData = await saveResponse.json().catch(() => ({}))
+        throw new Error(errorData.error || `Error ${saveResponse.status}: No se pudo guardar el draft`)
+      }
+
+      // Recargar la página después de guardar exitosamente
+      window.location.reload()
+    } catch (err) {
+      console.error("Error al guardar el draft:", err)
+      setError(err.message || "Error al guardar el draft")
+    } finally {
+      setGuardandoDraft(false)
+    }
   }
 
   return (
