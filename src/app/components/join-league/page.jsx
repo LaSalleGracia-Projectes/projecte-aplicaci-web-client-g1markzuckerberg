@@ -2,19 +2,20 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { Input, Button } from "@/components/ui"
-import Layout2 from "@/components/layout2"
-import { ArrowLeft } from "lucide-react"
-// Importar el servicio de cookies
-import { getAuthToken } from "@/components/auth/cookie-service"
+import { getAuthToken } from "../../utils/auth"
 
-export default function JoinLeague() {
+const JoinLeaguePage = () => {
   const [ligaCode, setLigaCode] = useState("")
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
+  const handleLigaCodeChange = (e) => {
+    setLigaCode(e.target.value)
+  }
+
+  // Modificar la función handleJoinLeague para recargar la página después de unirse a una liga
   const handleJoinLeague = async () => {
     setError("")
     setSuccess("")
@@ -54,14 +55,8 @@ export default function JoinLeague() {
       setSuccess(data.message)
       setLigaCode("")
 
-      setTimeout(() => {
-        router.push("/components/home_logged")
-      }, 1500)
-
-      setSuccess(data.message)
-      setLigaCode("")
-      // opcional: redirigir al usuario a la liga
-      // router.push(`/ligas/${data.liga.id}`)
+      // Recargar la página en lugar de usar setTimeout y router.push
+      window.location.href = "/components/home_logged"
     } catch (err) {
       setError("Error del servidor")
     } finally {
@@ -70,41 +65,44 @@ export default function JoinLeague() {
   }
 
   return (
-    <Layout2>
-      <div className="flex flex-col items-center justify-center min-h-[calc(100vh-128px)] p-4">
-        <div className="w-full max-w-md sm:max-w-lg bg-white p-6 rounded-lg shadow-sm space-y-4">
-          {/* Flecha de volver */}
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => router.back()}
-              className="text-gray-600 hover:text-black transition"
-              aria-label="Volver"
-            >
-              <ArrowLeft className="h-6 w-6" />
-            </button>
-            <h2 className="text-xl font-semibold sm:text-2xl">Unirse a una Liga</h2>
-          </div>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-md">
+        <h2 className="text-2xl font-bold mb-6 text-center">Unirse a una Liga</h2>
 
-          <Input
+        {error && <div className="bg-red-200 text-red-700 border border-red-700 rounded p-3 mb-4">{error}</div>}
+
+        {success && (
+          <div className="bg-green-200 text-green-700 border border-green-700 rounded p-3 mb-4">{success}</div>
+        )}
+
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="ligaCode">
+            Código de la Liga:
+          </label>
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="ligaCode"
             type="text"
-            placeholder="Código de la liga"
+            placeholder="Ingresa el código de la liga"
             value={ligaCode}
-            onChange={(e) => setLigaCode(e.target.value)}
-            className="w-full py-2 px-4 border rounded-md shadow-sm text-sm sm:text-base"
+            onChange={handleLigaCodeChange}
+            disabled={loading}
           />
+        </div>
 
-          {error && <p className="text-red-500 text-sm text-center">{error}</p>}
-          {success && <p className="text-green-600 text-sm text-center">{success}</p>}
-
-          <Button
+        <div className="flex items-center justify-between">
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="button"
             onClick={handleJoinLeague}
-            className="w-full bg-[#e5e5ea] text-black hover:bg-[#d2d2d2]"
             disabled={loading}
           >
-            {loading ? "Uniendo..." : "UNIRSE"}
-          </Button>
+            {loading ? "Uniendo..." : "Unirse"}
+          </button>
         </div>
       </div>
-    </Layout2>
+    </div>
   )
 }
+
+export default JoinLeaguePage

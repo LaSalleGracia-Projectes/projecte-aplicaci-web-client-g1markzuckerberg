@@ -82,6 +82,7 @@ export default function Ajustes() {
     setErrorMessage("")
   }
 
+  // Modificar la función handleSaveTeam para recargar la página después de guardar
   const handleSaveTeam = async () => {
     try {
       setIsLoading(true)
@@ -112,6 +113,9 @@ export default function Ajustes() {
 
       alert("Cambios guardados correctamente")
       setIsOpen(false)
+
+      // Recargar la página después de guardar exitosamente
+      window.location.reload()
     } catch (err) {
       console.error(err)
       setErrorMessage("Ocurrió un error al guardar los cambios")

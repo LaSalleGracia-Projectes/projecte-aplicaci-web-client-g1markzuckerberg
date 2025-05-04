@@ -28,6 +28,25 @@ export default function Jornada() {
   const [guardandoDraft, setGuardandoDraft] = useState(false)
   const [draftGuardado, setDraftGuardado] = useState(false)
 
+  // Añadir un estado para controlar la liga actual y detectar cambios
+  const [currentLigaId, setCurrentLigaId] = useState(null)
+
+  // Efecto para detectar cambios en la liga seleccionada
+  useEffect(() => {
+    if (currentLiga?.id !== currentLigaId) {
+      // Si la liga ha cambiado, resetear los estados y forzar una recarga de datos
+      setCurrentLigaId(currentLiga?.id)
+      setPlantilla(null)
+      setPlayers([])
+      setCreandoDraft(false)
+      setFormacionSeleccionada(null)
+      setTempDraft(null)
+      setDraftGuardado(false)
+      setLoading(true)
+      setError(null)
+    }
+  }, [currentLiga, currentLigaId])
+
   useEffect(() => {
     const fetchDraftData = async () => {
       if (!currentLiga?.id) {
@@ -43,6 +62,8 @@ export default function Jornada() {
           setLoading(false)
           return
         }
+
+        console.log(`Cargando datos de draft para liga ID: ${currentLiga.id}`)
 
         // 1. Primero intentamos obtener un draft finalizado
         try {
@@ -119,7 +140,9 @@ export default function Jornada() {
       }
     }
 
-    fetchDraftData()
+    if (currentLiga?.id) {
+      fetchDraftData()
+    }
   }, [currentLiga, draftGuardado])
 
   const handleCrearDraft = async (formacion) => {
@@ -310,6 +333,9 @@ export default function Jornada() {
       setFormacionSeleccionada(null)
       setTempDraft(null)
       setDraftGuardado(true)
+
+      // Recargar la página para mostrar el draft guardado
+      window.location.reload()
     } catch (err) {
       console.error("Error al guardar el draft:", err)
       setError(err.message || "Error al guardar el draft")

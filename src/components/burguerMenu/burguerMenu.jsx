@@ -6,10 +6,13 @@ import { useRouter } from "next/navigation"
 import { useLiga } from "@/context/ligaContext"
 // Importar el servicio de cookies al principio del archivo
 import { getAuthToken, clearAuthCookies } from "@/components/auth/cookie-service"
+// Importar el hook de idioma
+import { useLanguage } from "@/context/languageContext"
 
 export default function BurgerMenuContent({ onClose }) {
   const router = useRouter()
   const { setLiga: cambiarLiga, currentLiga } = useLiga()
+  const { t } = useLanguage() // Añadir el hook de idioma
 
   const [user, setUser] = useState(null) // Datos del usuario
   const [leagues, setLeagues] = useState([]) // Ligas del usuario
@@ -128,19 +131,27 @@ export default function BurgerMenuContent({ onClose }) {
 
     console.log("Selecting league:", league)
 
+    // Verificar si estamos en la página de jornada
+    const isJornadaPage = window.location.pathname.includes("/components/jornada")
+
     // Store the complete league object to avoid needing to fetch it again
     cambiarLiga(league)
 
     onClose?.()
 
-    // Navigate to the classification page to see the league info
-    router.push("/components/clasificacion")
+    // Si estamos en la página de jornada, recargar la página para actualizar los datos
+    if (isJornadaPage) {
+      window.location.reload()
+    } else {
+      // Si no estamos en la página de jornada, navegar a la clasificación
+      router.push("/components/clasificacion")
+    }
   }
 
   if (loading) {
     return (
       <div className="w-64 bg-gray-900 text-white p-4 rounded-lg shadow-lg">
-        <p className="text-center">Cargando usuario...</p>
+        <p className="text-center">{t("burger.loading")}</p>
       </div>
     )
   }
@@ -148,9 +159,11 @@ export default function BurgerMenuContent({ onClose }) {
   if (error) {
     return (
       <div className="w-64 bg-gray-900 text-white p-4 rounded-lg shadow-lg">
-        <p className="text-red-400 text-center">Error: {error}</p>
+        <p className="text-red-400 text-center">
+          {t("burger.error")} {error}
+        </p>
         <button className="w-full bg-red-500 text-white py-2 rounded-md mt-4 hover:bg-red-700" onClick={handleLogout}>
-          Cerrar sesión
+          {t("burger.logout")}
         </button>
       </div>
     )
@@ -171,7 +184,7 @@ export default function BurgerMenuContent({ onClose }) {
           </div>
         )}
         <div>
-          <p className="text-lg font-semibold">{user?.username || "Usuario"}</p>
+          <p className="text-lg font-semibold">{user?.username || t("common.user")}</p>
           <p className="text-sm text-gray-400">{user?.correo || ""}</p>
         </div>
         <Link href="/components/ajustes" className="ml-auto">
@@ -180,7 +193,7 @@ export default function BurgerMenuContent({ onClose }) {
       </div>
 
       <div className="mb-4">
-        <p className="font-semibold mb-2">Ligas:</p>
+        <p className="font-semibold mb-2">{t("burger.leagues")}:</p>
         {leagues.length > 0 ? (
           <ul className="space-y-1">
             {leagues.map((league, index) => (
@@ -196,7 +209,7 @@ export default function BurgerMenuContent({ onClose }) {
             ))}
           </ul>
         ) : (
-          <p className="text-sm text-gray-400">No hay ligas registradas.</p>
+          <p className="text-sm text-gray-400">{t("burger.noLeaguesRegistered")}</p>
         )}
       </div>
 
@@ -204,24 +217,24 @@ export default function BurgerMenuContent({ onClose }) {
         className="w-full bg-blue-500 text-white py-2 rounded-md mt-4 hover:bg-blue-700"
         onClick={() => router.push("/components/choose-league")}
       >
-        + Añadir Liga
+        {t("league.addLeague")}
       </button>
 
       {/* Botón del Back Office (visible solo para administradores) */}
       {user?.is_admin && (
         <Link href="/components/backoffice">
           <button className="w-full bg-green-600 text-white py-2 rounded-md mt-4 hover:bg-green-800" onClick={onClose}>
-            Back Office
+            {t("burger.backOffice")}
           </button>
         </Link>
       )}
 
       <Link href="/components/contactForm" className="block text-center text-sm text-blue-400 mt-3 hover:underline">
-        Formulario de contacto
+        {t("burger.contactForm")}
       </Link>
 
       <button className="w-full bg-red-500 text-white py-2 rounded-md mt-4 hover:bg-red-700" onClick={handleLogout}>
-        Cerrar sesión
+        {t("burger.logout")}
       </button>
     </div>
   )

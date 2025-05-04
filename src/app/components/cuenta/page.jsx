@@ -57,6 +57,7 @@ export default function Cuenta() {
     setForm((prev) => ({ ...prev, [name]: value }))
   }
 
+  // Modificar la función handleUpdateGeneral para recargar la página después de guardar
   const handleUpdateGeneral = async () => {
     try {
       const nameRes = await fetch("http://localhost:3000/api/v1/user/update-username", {
@@ -79,6 +80,9 @@ export default function Cuenta() {
 
       if (nameRes.ok && birthRes.ok) {
         alert("Datos actualizados correctamente")
+
+        // Recargar la página después de actualizar correctamente
+        window.location.reload()
       } else {
         alert("Ocurrió un error actualizando la información")
       }
@@ -88,6 +92,7 @@ export default function Cuenta() {
     }
   }
 
+  // Modificar la función handleUpdatePassword para recargar la página después de guardar
   const handleUpdatePassword = async () => {
     if (form.newPassword !== form.confirmPassword) {
       alert("Las contraseñas no coinciden")
@@ -116,6 +121,9 @@ export default function Cuenta() {
           newPassword: "",
           confirmPassword: "",
         }))
+
+        // Recargar la página después de actualizar correctamente
+        window.location.reload()
       } else {
         const error = await res.json()
         alert(error.message || "Error al cambiar la contraseña")

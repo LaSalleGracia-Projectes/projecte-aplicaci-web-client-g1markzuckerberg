@@ -71,8 +71,8 @@ export function LanguageProvider({ children }) {
   useEffect(() => {
     if (language) {
       console.log(`Probando traducciones para ${language}:`, {
-        "common.all": t("common.all"),
-        "contact.title": t("contact.title"),
+        "menu.home": t("menu.home"),
+        "menu.players": t("menu.players"),
         "burger.noLeaguesRegistered": t("burger.noLeaguesRegistered"),
         "players.searchPlaceholder": t("players.searchPlaceholder"),
       })
