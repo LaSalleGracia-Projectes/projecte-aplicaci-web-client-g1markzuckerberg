@@ -6,10 +6,13 @@ import Layout from "@/components/layout"
 import AuthGuard from "@/components/authGuard/authGuard"
 // Importar el servicio de cookies al principio del archivo
 import { getAuthToken } from "@/components/auth/cookie-service"
+// Importar el hook de idioma
+import { useLanguage } from "@/context/languageContext"
 
 const PLAYERS_PER_PAGE = 20
 
 export default function Jugadores() {
+  const { t } = useLanguage() // Añadir el hook de idioma
   const [players, setPlayers] = useState([])
   const [filteredPlayers, setFilteredPlayers] = useState([])
   const [teams, setTeams] = useState([])
@@ -81,7 +84,7 @@ export default function Jugadores() {
 
   return (
     <AuthGuard>
-      <Layout currentPage="Jugadores">
+      <Layout currentPage={t("players.title")}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Filtro por equipo */}
           <div className="flex flex-wrap gap-4 mb-6">
@@ -89,7 +92,7 @@ export default function Jugadores() {
               onClick={() => setSelectedTeam(null)}
               className={`px-3 py-2 rounded-full text-sm ${selectedTeam === null ? "bg-blue-500 text-white" : "bg-gray-200"}`}
             >
-              Todos
+              {t("players.all")}
             </button>
             {teams.map((team) => (
               <button
@@ -107,7 +110,7 @@ export default function Jugadores() {
           <div className="mb-6">
             <input
               type="text"
-              placeholder="Buscar jugador..."
+              placeholder={t("players.searchPlaceholder")}
               className="w-full md:w-1/2 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -128,14 +131,16 @@ export default function Jugadores() {
                 />
                 <h2 className="text-lg font-semibold">{player.displayName}</h2>
                 <p className="text-gray-500">{player.teamName}</p>
-                <span className="mt-2 text-blue-600 font-bold">{player.points} pts</span>
+                <span className="mt-2 text-blue-600 font-bold">
+                  {player.points} {t("players.points")}
+                </span>
 
                 {/* Botón para abrir gráfico en popup */}
                 <button
                   onClick={() => openModal(player.id)}
                   className="mt-3 inline-block text-blue-500 hover:underline text-sm"
                 >
-                  Ver puntos por jornada
+                  {t("players.viewPointsByMatchday")}
                 </button>
               </div>
             ))}
@@ -149,17 +154,17 @@ export default function Jugadores() {
                 disabled={currentPage === 1}
                 className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 disabled:opacity-50"
               >
-                Anterior
+                {t("players.previous")}
               </button>
               <span className="px-4 py-2 text-gray-700">
-                Página {currentPage} de {totalPages}
+                {t("players.page")} {currentPage} {t("players.of")} {totalPages}
               </span>
               <button
                 onClick={handleNext}
                 disabled={currentPage === totalPages}
                 className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 disabled:opacity-50"
               >
-                Siguiente
+                {t("players.next")}
               </button>
             </div>
           )}
@@ -180,7 +185,7 @@ export default function Jugadores() {
               {!iframeLoaded && (
                 <div className="flex flex-col items-center justify-center py-10">
                   <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mb-3"></div>
-                  <p className="text-gray-600 font-medium">Cargando gráfico...</p>
+                  <p className="text-gray-600 font-medium">{t("players.loadingChart")}</p>
                 </div>
               )}
 

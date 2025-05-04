@@ -6,8 +6,11 @@ import AuthGuard from "@/components/authGuard/authGuard"
 import { useRouter } from "next/navigation"
 // Importar el servicio de cookies
 import { getAuthToken } from "@/components/auth/cookie-service"
+// Importar el hook de idioma
+import { useLanguage } from "@/context/languageContext"
 
 export default function ContactForm() {
+  const { t } = useLanguage() // Añadir el hook de idioma
   const [message, setMessage] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState("")
@@ -24,7 +27,7 @@ export default function ContactForm() {
       const token = getAuthToken()
 
       if (!token) {
-        setError("No estás autenticado. Por favor, inicia sesión primero.")
+        setError(t("common.notAuthenticated"))
         setIsSubmitting(false)
         return
       }
@@ -46,7 +49,7 @@ export default function ContactForm() {
         throw new Error(data.error || "Ha ocurrido un error al enviar el formulario")
       }
 
-      setSuccess("¡Mensaje enviado correctamente!")
+      setSuccess(t("common.success"))
       setMessage("")
     } catch (error) {
       setError(error.message || "Ha ocurrido un error al enviar el formulario")
@@ -62,7 +65,7 @@ export default function ContactForm() {
   return (
     <Layout>
       <main className="flex flex-col items-center justify-center min-h-screen py-4 px-6 sm:px-8 md:px-12">
-        <h1 className="text-3xl sm:text-4xl font-bold mb-6 text-center">Información y Ayuda</h1>
+        <h1 className="text-3xl sm:text-4xl font-bold mb-6 text-center">{t("contactForm.title")}</h1>
 
         {success && (
           <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4 w-full max-w-lg">
@@ -77,18 +80,15 @@ export default function ContactForm() {
         )}
 
         <div className="w-full max-w-lg bg-white shadow-md rounded-lg px-6 py-6 sm:px-8 sm:py-8 space-y-4">
-          <p className="text-gray-700 text-sm sm:text-base mb-4">
-            Si tienes alguna duda, problema o sugerencia sobre la aplicación, por favor envíanos un mensaje a través de
-            este formulario:
-          </p>
+          <p className="text-gray-700 text-sm sm:text-base mb-4">{t("contactForm.description")}</p>
 
           <div>
             <label htmlFor="message" className="block text-sm font-bold text-gray-700 mb-2">
-              Mensaje
+              {t("contactForm.messageLabel")}
             </label>
             <textarea
               id="message"
-              placeholder="Escribe tu mensaje aquí..."
+              placeholder={t("contactForm.messagePlaceholder")}
               rows={4}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
@@ -102,7 +102,7 @@ export default function ContactForm() {
               onClick={handleBack}
               className="bg-gray-500 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded w-full sm:w-auto"
             >
-              Volver
+              {t("contactForm.back")}
             </button>
 
             <button
@@ -111,7 +111,7 @@ export default function ContactForm() {
               onClick={handleSubmit}
               className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded w-full sm:w-auto disabled:opacity-50"
             >
-              {isSubmitting ? "Enviando..." : "Enviar"}
+              {isSubmitting ? t("contactForm.sending") : t("contactForm.send")}
             </button>
           </div>
         </div>
