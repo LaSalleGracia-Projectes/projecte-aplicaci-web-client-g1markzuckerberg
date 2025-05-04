@@ -20,7 +20,12 @@
     "notAuthenticated": "No estás autenticado",
     "notAvailable": "No disponible",
     "saving": "Guardando...",
-    "close": "Cerrar"
+    "close": "Cerrar",
+    "all": "Todos"
+  },
+  "contact": {
+    "title": "Contacto",
+    "description": "Ponte en contacto con nosotros"
   },
   "footer": {
     "privacyPolicy": "Política de privacidad",

@@ -20,7 +20,12 @@
     "notAuthenticated": "No estàs autenticat",
     "notAvailable": "No disponible",
     "saving": "Desant...",
-    "close": "Tancar"
+    "close": "Tancar",
+    "all": "Tots"
+  },
+  "contact": {
+    "title": "Contacte",
+    "description": "Posa't en contacte amb nosaltres"
   },
   "footer": {
     "privacyPolicy": "Política de privacitat",

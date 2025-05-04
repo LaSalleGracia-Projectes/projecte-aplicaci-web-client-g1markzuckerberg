@@ -20,7 +20,12 @@
     "notAuthenticated": "You are not authenticated",
     "notAvailable": "Not available",
     "saving": "Saving...",
-    "close": "Close"
+    "close": "Close",
+    "all": "All"
+  },
+  "contact": {
+    "title": "Contact",
+    "description": "Get in touch with us"
   },
   "footer": {
     "privacyPolicy": "Privacy Policy",
