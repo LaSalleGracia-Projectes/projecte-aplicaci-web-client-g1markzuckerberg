@@ -3,9 +3,11 @@
 import { useState, useEffect } from "react"
 import Layout from "@/components/layout"
 import Link from "next/link"
-import { ImageIcon } from 'lucide-react'
+import { ImageIcon } from "lucide-react"
 import AuthGuard from "@/components/authGuard/authGuard"
 import { useLanguage } from "@/context/languageContext"
+// Importar el servicio de cookies
+import { getAuthToken } from "@/components/auth/cookie-service"
 
 export default function Ajustes() {
   const { t } = useLanguage()
@@ -22,7 +24,8 @@ export default function Ajustes() {
 
   const [leagues, setLeagues] = useState([])
 
-  const token = typeof window !== "undefined" ? localStorage.getItem("webToken") : null
+  // Usar getAuthToken en lugar de localStorage
+  const token = typeof window !== "undefined" ? getAuthToken() : null
   const API_BASE_URL = "http://localhost:3000/api/v1"
 
   useEffect(() => {
@@ -219,7 +222,11 @@ export default function Ajustes() {
                     <div className="flex items-center gap-4 flex-wrap">
                       <div className="h-24 w-24 rounded-lg bg-gray-100 flex items-center justify-center overflow-hidden">
                         {teamImage ? (
-                          <img src={teamImage || "/placeholder.svg"} alt={t("account.teamLogo")} className="h-full w-full object-cover" />
+                          <img
+                            src={teamImage || "/placeholder.svg"}
+                            alt={t("account.teamLogo")}
+                            className="h-full w-full object-cover"
+                          />
                         ) : (
                           <ImageIcon className="h-12 w-12 text-gray-400" />
                         )}

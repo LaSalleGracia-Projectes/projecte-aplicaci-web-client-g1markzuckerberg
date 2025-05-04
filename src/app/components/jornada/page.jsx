@@ -10,6 +10,8 @@ import Formacion442 from "@/components/formaciones/formacion-442"
 import SeleccionFormacion from "@/components/jornada/seleccion-formacion"
 import EditorFormacion from "@/components/jornada/editor-formacion"
 import { useLanguage } from "@/context/languageContext"
+// Importar el servicio de cookies al principio del archivo
+import { getAuthToken } from "@/components/auth/cookie-service"
 
 export default function Jornada() {
   const { t } = useLanguage()
@@ -35,7 +37,7 @@ export default function Jornada() {
       }
 
       try {
-        const token = localStorage.getItem("webToken")
+        const token = getAuthToken()
         if (!token) {
           setError("No estás autenticado")
           setLoading(false)
@@ -132,7 +134,7 @@ export default function Jornada() {
     setError(null) // Limpiar errores anteriores
 
     try {
-      const token = localStorage.getItem("webToken")
+      const token = getAuthToken()
       if (!token) {
         throw new Error("No estás autenticado")
       }
@@ -188,7 +190,7 @@ export default function Jornada() {
     if (!currentLiga?.id || !tempDraft) return
 
     try {
-      const token = localStorage.getItem("webToken")
+      const token = getAuthToken()
 
       // Obtener las opciones de jugadores actuales
       let playerOptions
@@ -278,7 +280,7 @@ export default function Jornada() {
     setGuardandoDraft(true)
 
     try {
-      const token = localStorage.getItem("webToken")
+      const token = getAuthToken()
 
       // Asegurarse de que tempDraft tiene todas las propiedades necesarias
       if (!tempDraft.id_plantilla) {

@@ -56,7 +56,13 @@
       "totalPlayers": "Total players",
       "maxPoints": "Max points",
       "avgPoints": "Average points",
-      "managePlayers": "Manage players"
+      "managePlayers": "Manage players",
+      "position": "Position",
+      "player": "Player",
+      "totalPoints": "Total points",
+      "matchdayPoints": "Matchday points",
+      "actions": "Actions",
+      "captain": "Captain"
     },
     "formation": {
       "selectFormation": "Choose a formation to start your draft",

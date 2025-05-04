@@ -8,6 +8,13 @@ import ca from "@/translations/ca.json"
 // Objeto con todas las traducciones disponibles
 const translations = { es, en, ca }
 
+// Verificar que las traducciones se carguen correctamente
+console.log("Traducciones cargadas:", {
+  es: Object.keys(es),
+  en: Object.keys(en),
+  ca: Object.keys(ca),
+})
+
 // Crear el contexto
 const LanguageContext = createContext()
 
@@ -20,11 +27,13 @@ export function LanguageProvider({ children }) {
     if (typeof window !== "undefined") {
       const savedLanguage = localStorage.getItem("language") || "es"
       setLanguage(savedLanguage)
+      console.log("Idioma cargado:", savedLanguage)
     }
   }, [])
 
   // Función para cambiar el idioma
   const changeLanguage = (newLanguage) => {
+    console.log("Cambiando idioma a:", newLanguage)
     setLanguage(newLanguage)
     // Guardar en localStorage para persistencia
     if (typeof window !== "undefined") {
@@ -38,18 +47,37 @@ export function LanguageProvider({ children }) {
     const keys = key.split(".")
     let value = translations[language]
 
+    // Verificar si tenemos traducciones para el idioma actual
+    if (!value) {
+      console.error(`No hay traducciones para el idioma: ${language}`)
+      return key
+    }
+
     // Navegar por el objeto de traducciones
     for (const k of keys) {
-      if (value && value[k]) {
+      if (value && value[k] !== undefined) {
         value = value[k]
       } else {
-        // Si no se encuentra la clave, devolver la clave original
+        // Si no se encuentra la clave, registrar un error y devolver la clave original
+        console.error(`Clave de traducción no encontrada: ${key} (parte: ${k})`)
         return key
       }
     }
 
     return value
   }
+
+  // Para depuración - verificar que las traducciones funcionen
+  useEffect(() => {
+    if (language) {
+      console.log(`Probando traducciones para ${language}:`, {
+        "common.all": t("common.all"),
+        "contact.title": t("contact.title"),
+        "burger.noLeaguesRegistered": t("burger.noLeaguesRegistered"),
+        "players.searchPlaceholder": t("players.searchPlaceholder"),
+      })
+    }
+  }, [language])
 
   return <LanguageContext.Provider value={{ language, changeLanguage, t }}>{children}</LanguageContext.Provider>
 }

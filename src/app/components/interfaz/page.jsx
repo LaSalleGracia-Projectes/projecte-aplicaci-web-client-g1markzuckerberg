@@ -6,6 +6,8 @@ import { useState } from "react"
 import AuthGuard from "@/components/authGuard/authGuard"
 import { useRouter } from "next/navigation"
 import { useLanguage } from "@/context/languageContext"
+// Importar el servicio de cookies
+import { clearAuthCookies } from "@/components/auth/cookie-service"
 
 export default function Info() {
   const { t } = useLanguage()
@@ -17,7 +19,8 @@ export default function Info() {
   }
 
   const handleLogout = () => {
-    localStorage.removeItem("user") // o sessionStorage si es lo que usas
+    // Usar clearAuthCookies en lugar de localStorage.removeItem
+    clearAuthCookies()
     router.push("/") // Redirige a la página principal
   }
 

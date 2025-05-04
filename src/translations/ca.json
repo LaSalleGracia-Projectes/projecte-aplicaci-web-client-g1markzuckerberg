@@ -56,7 +56,13 @@
       "totalPlayers": "Total de jugadors",
       "maxPoints": "Punts màxims",
       "avgPoints": "Mitja de punts",
-      "managePlayers": "Gestió de jugadors"
+      "managePlayers": "Gestió de jugadors",
+      "position": "Posició",
+      "player": "Jugador",
+      "totalPoints": "Punts totals",
+      "matchdayPoints": "Punts de jornada",
+      "actions": "Accions",
+      "captain": "Capità"
     },
     "formation": {
       "selectFormation": "Tria una formació per començar el teu draft",
