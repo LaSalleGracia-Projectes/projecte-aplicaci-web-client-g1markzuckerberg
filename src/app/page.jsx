@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useEffect, useState } from 'react';
 import {
   Box,
@@ -41,7 +40,7 @@ const slideIn = `
 const BannerImage = styled(Box)({
   width: '100%',
   height: 250,
-  backgroundImage: 'url(https://via.placeholder.com/1200x400)',
+  backgroundImage: 'url(/images/bannerf.jpg)', // Ruta relativa a la imagen local
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   display: 'flex',
@@ -49,6 +48,7 @@ const BannerImage = styled(Box)({
   alignItems: 'center',
   animation: 'fadeIn 1s ease-out',
 });
+
 const ButtonPrimary = styled(Button)({
   padding: '12px 40px',
   fontSize: '1rem',
@@ -58,6 +58,7 @@ const ButtonPrimary = styled(Button)({
   '&:hover': { backgroundColor: '#e55e00' },
   animation: 'bounce 1s infinite',
 });
+
 const SectionTitle = styled(Typography)({
   fontSize: '1.25rem',
   fontWeight: 600,
@@ -65,6 +66,7 @@ const SectionTitle = styled(Typography)({
   marginBottom: 16,
   animation: 'slideIn 1s ease-out',
 });
+
 const MatchCard = styled(Paper)({
   display: 'flex',
   flexDirection: 'column',
@@ -76,6 +78,7 @@ const MatchCard = styled(Paper)({
   borderRadius: 8,
   animation: 'fadeIn 1s ease-out',
 });
+
 const StatsCard = styled(Paper)({
   padding: 16,
   backgroundColor: '#f9f9f9',
@@ -156,14 +159,12 @@ export default function Page() {
         setLoading(false);
       }
     };
-
     fetchData();
   }, []);
 
   if (loading) {
     return <Typography>Cargando...</Typography>;
   }
-
   if (error) {
     return <Typography>Error: {error}</Typography>;
   }
@@ -171,11 +172,23 @@ export default function Page() {
   return (
     <Layout>
       <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', bgcolor: '#eeeeee' }}>
+        {/* BANNER CON IMAGEN DE FÚTBOL */}
         <BannerImage>
-          <Typography variant="h3" color="black" fontWeight="600">¡Bienvenidos a Fantasy Draft!</Typography>
+          <Typography variant="h3" color="white" fontWeight="600">
+            ¡Bienvenidos a Fantasy Draft!
+          </Typography>
         </BannerImage>
 
-        <Box sx={{ bgcolor: '#00d7ff', py: 6, display: 'flex', justifyContent: 'center' }}>
+        {/* BOTÓN "COMENZAR A JUGAR" CON GRADIENTE COMO EL HEADER */}
+        <Box
+          sx={{
+            bgcolor: 'transparent', // Fondo transparente para que el gradiente sea visible
+            py: 6,
+            display: 'flex',
+            justifyContent: 'center',
+            background: 'linear-gradient(90deg, #082FB9 0%, #021149 100%)', // Gradiente igual al header
+          }}
+        >
           <ButtonPrimary onClick={() => router.push("/components/login")}>
             COMENZAR A JUGAR
           </ButtonPrimary>
@@ -185,7 +198,6 @@ export default function Page() {
         <Box sx={{ py: 4, px: 2, bgcolor: 'white' }}>
           <SectionTitle>PRÓXIMA JORNADA</SectionTitle>
           <Divider sx={{ maxWidth: '600px', mx: 'auto', mb: 3 }} />
-
           <Container maxWidth="lg">
             <Grid container spacing={2}>
               {matches.length > 0 ? (
@@ -194,7 +206,6 @@ export default function Page() {
                   const [team1, team2] = match.name.split(' vs ');
                   // Convertimos el timestamp a una fecha legible
                   const date = new Date(match.starting_at_timestamp * 1000).toLocaleString();
-
                   // Determinamos el resultado del partido
                   let resultText = '';
                   if (match.result_info) {
@@ -205,7 +216,6 @@ export default function Page() {
                       resultText = <strong style={{ color: 'green' }}>{winner} ganó</strong>;
                     }
                   }
-
                   return (
                     <Grid item xs={12} md={6} key={index}>
                       <MatchCard>
@@ -225,12 +235,10 @@ export default function Page() {
                           />
                           <Typography sx={{ fontWeight: 500 }}>{team1}</Typography>
                         </Box>
-
                         {/* Versus y resultado */}
                         <Typography sx={{ fontWeight: 500 }}>
                           {resultText ? resultText : 'vs'}
                         </Typography>
-
                         {/* Equipo visitante */}
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mt: 1 }}>
                           <CardMedia
@@ -247,7 +255,6 @@ export default function Page() {
                           />
                           <Typography sx={{ fontWeight: 500 }}>{team2}</Typography>
                         </Box>
-
                         {/* Fecha del partido */}
                         <Typography variant="caption" color="textSecondary" mt={2}>
                           Fecha: {date}
@@ -267,7 +274,6 @@ export default function Page() {
         <Box sx={{ py: 6, px: 2, bgcolor: '#f0f8ff' }}>
           <SectionTitle>🏆 Jugadores con más puntos 🏆</SectionTitle>
           <Divider sx={{ maxWidth: '600px', mx: 'auto', mb: 3 }} />
-
           <Container maxWidth="lg">
             <Box sx={{
               display: 'flex',
@@ -314,5 +320,5 @@ export default function Page() {
         </Box>
       </Box>
     </Layout>
-  )
+  );
 }
