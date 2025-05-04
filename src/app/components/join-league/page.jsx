@@ -1,21 +1,25 @@
 "use client"
 
-import { useState } from "react"
+import Link from "next/link"
+import { Button } from "@/components/ui"
+import { Input } from "@/components/ui"
+import { ArrowLeft } from "lucide-react"
+import Layout2 from "@/components/layout2"
 import { useRouter } from "next/navigation"
-import { getAuthToken } from "../../utils/auth"
+import AuthGuard from "@/components/authGuard/authGuard"
+import { useState } from "react"
+import { useLiga } from "@/context/ligaContext"
+// Importar el servicio de cookies
+import { getAuthToken } from "@/components/auth/cookie-service"
 
-const JoinLeaguePage = () => {
+export default function JoinLeague() {
+  const router = useRouter()
+  const { setLiga } = useLiga() // Usar el contexto para actualizar la liga actual
   const [ligaCode, setLigaCode] = useState("")
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
   const [loading, setLoading] = useState(false)
-  const router = useRouter()
 
-  const handleLigaCodeChange = (e) => {
-    setLigaCode(e.target.value)
-  }
-
-  // Modificar la función handleJoinLeague para recargar la página después de unirse a una liga
   const handleJoinLeague = async () => {
     setError("")
     setSuccess("")
@@ -28,7 +32,6 @@ const JoinLeaguePage = () => {
     setLoading(true)
 
     try {
-      // Usar getAuthToken en lugar de localStorage
       const token = getAuthToken()
 
       if (!token) {
@@ -37,7 +40,8 @@ const JoinLeaguePage = () => {
         return
       }
 
-      const response = await fetch(`/api/league/join/${ligaCode}`, {
+      // Llamar directamente al endpoint del backend
+      const response = await fetch(`http://localhost:3000/api/v1/liga/join/${ligaCode}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -49,15 +53,21 @@ const JoinLeaguePage = () => {
 
       if (!response.ok) {
         setError(data.error || "No se pudo unir a la liga")
+        setLoading(false)
         return
       }
 
-      setSuccess(data.message)
-      setLigaCode("")
+      setSuccess(data.message || "Te has unido a la liga con éxito")
 
-      // Recargar la página en lugar de usar setTimeout y router.push
-      window.location.href = "/components/home_logged"
+      // Si la respuesta incluye la liga, actualizamos el contexto
+      if (data.liga) {
+        setLiga(data.liga)
+      }
+
+      // Redirigir inmediatamente usando window.location.href para forzar una recarga completa
+      window.location.href = "/components/clasificacion"
     } catch (err) {
+      console.error("Error al unirse a la liga:", err)
       setError("Error del servidor")
     } finally {
       setLoading(false)
@@ -65,44 +75,46 @@ const JoinLeaguePage = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-center">Unirse a una Liga</h2>
+    <AuthGuard>
+      <Layout2>
+        <div className="flex flex-col items-center justify-center p-4 min-h-[calc(100vh-128px)]">
+          <div className="w-full max-w-md space-y-6 bg-white p-6 rounded-lg shadow-sm">
+            <div className="flex items-center gap-4">
+              <Link href="/components/choose-league" className="text-gray-600 hover:text-gray-900">
+                <ArrowLeft className="h-6 w-6" />
+              </Link>
+              <h2 className="text-xl font-medium">UNIRSE A LIGA</h2>
+            </div>
 
-        {error && <div className="bg-red-200 text-red-700 border border-red-700 rounded p-3 mb-4">{error}</div>}
+            {error && <p className="text-red-500 text-sm">{error}</p>}
+            {success && <p className="text-green-500 text-sm">{success}</p>}
 
-        {success && (
-          <div className="bg-green-200 text-green-700 border border-green-700 rounded p-3 mb-4">{success}</div>
-        )}
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <label htmlFor="liga-code" className="text-sm font-medium">
+                  Código de la liga:
+                </label>
+                <Input
+                  id="liga-code"
+                  type="text"
+                  value={ligaCode}
+                  onChange={(e) => setLigaCode(e.target.value)}
+                  disabled={loading}
+                  className="w-full"
+                />
+              </div>
+            </div>
 
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="ligaCode">
-            Código de la Liga:
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="ligaCode"
-            type="text"
-            placeholder="Ingresa el código de la liga"
-            value={ligaCode}
-            onChange={handleLigaCodeChange}
-            disabled={loading}
-          />
+            <Button
+              className="w-full bg-[#e5e5ea] text-black hover:bg-[#d2d2d2]"
+              onClick={handleJoinLeague}
+              disabled={loading}
+            >
+              {loading ? "Uniéndose..." : "UNIRSE A LIGA"}
+            </Button>
+          </div>
         </div>
-
-        <div className="flex items-center justify-between">
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="button"
-            onClick={handleJoinLeague}
-            disabled={loading}
-          >
-            {loading ? "Uniendo..." : "Unirse"}
-          </button>
-        </div>
-      </div>
-    </div>
+      </Layout2>
+    </AuthGuard>
   )
 }
-
-export default JoinLeaguePage

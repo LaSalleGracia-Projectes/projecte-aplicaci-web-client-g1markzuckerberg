@@ -18,7 +18,8 @@ export default function EditorFormacion({ tempDraft, formacion, onUpdateDraft, o
 
   // Function to simulate getting the auth token (replace with your actual implementation)
   const getAuthToken = () => {
-    return "your_auth_token_here" // Replace with your actual token retrieval logic
+    return "your_auth_token_here"
+    
   }
 
   // Extraer los números de jugadores por posición según la formación
