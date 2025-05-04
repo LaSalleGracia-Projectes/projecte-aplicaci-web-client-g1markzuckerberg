@@ -42,7 +42,7 @@ export function LanguageProvider({ children }) {
   }
 
   // Obtener las traducciones para el idioma actual
-  const t = (key) => {
+  const t = (key, variables = {}) => {
     // Dividir la clave por puntos para acceder a objetos anidados
     const keys = key.split(".")
     let value = translations[language]
@@ -62,6 +62,13 @@ export function LanguageProvider({ children }) {
         console.error(`Clave de traducción no encontrada: ${key} (parte: ${k})`)
         return key
       }
+    }
+
+    // Si hay variables, reemplazarlas en el texto
+    if (variables && typeof value === "string") {
+      return value.replace(/\{\{(\w+)\}\}/g, (match, name) => {
+        return variables[name] !== undefined ? variables[name] : match
+      })
     }
 
     return value

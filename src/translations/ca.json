@@ -169,5 +169,10 @@
     "points": "pts",
     "viewPointsByMatchday": "Veure punts per jornada",
     "loadingChart": "Carregant gràfic..."
+  },
+  "notifications": {
+    "leagueCreated": "Has creat la lliga {{leagueName}} correctament",
+    "leagueJoined": "T'has unit a la lliga {{leagueName}} amb èxit",
+    "playerKicked": "Has expulsat a {{playerName}} de la lliga {{leagueName}}"
   }
 }

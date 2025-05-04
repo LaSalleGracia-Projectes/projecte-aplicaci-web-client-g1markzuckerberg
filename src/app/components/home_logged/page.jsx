@@ -56,6 +56,53 @@ export default function Notificaciones() {
     return "kick"
   }
 
+  // Then, add a new function to translate notification messages
+  const translateNotificationMessage = (message) => {
+    // Get the original message in Spanish
+    const originalMessage = message
+
+    // Create patterns to match different types of notifications
+    const patterns = {
+      leagueCreated: {
+        regex: /Has creado la liga (.*) correctamente/,
+        translationKey: "notifications.leagueCreated",
+      },
+      leagueJoined: {
+        regex: /Te has unido a la liga (.*) con éxito/,
+        translationKey: "notifications.leagueJoined",
+      },
+      playerKicked: {
+        regex: /Has expulsado a (.*) de la liga (.*)/,
+        translationKey: "notifications.playerKicked",
+      },
+      // Add more patterns as needed
+    }
+
+    // Try to match the message with one of our patterns
+    for (const [type, pattern] of Object.entries(patterns)) {
+      const match = message.match(pattern.regex)
+
+      if (match) {
+        // If we have a match, get the dynamic parts (like league name)
+        if (type === "leagueCreated") {
+          const leagueName = match[1]
+          return t(pattern.translationKey, { leagueName })
+        } else if (type === "leagueJoined") {
+          const leagueName = match[1]
+          return t(pattern.translationKey, { leagueName })
+        } else if (type === "playerKicked") {
+          const playerName = match[1]
+          const leagueName = match[2]
+          return t(pattern.translationKey, { playerName, leagueName })
+        }
+      }
+    }
+
+    // If no pattern matches, return the original message
+    return message
+  }
+
+  // Now modify the return statement to use the translation function
   return (
     <AuthGuard>
       <Layout currentPage={t("menu.home")}>
@@ -66,7 +113,11 @@ export default function Notificaciones() {
           ) : (
             <div className="space-y-3">
               {notifications.slice(0, 10).map((n) => (
-                <LeagueMessage key={n.id} type={parseNotificationType(n.mensaje)} message={n.mensaje} />
+                <LeagueMessage
+                  key={n.id}
+                  type={parseNotificationType(n.mensaje)}
+                  message={translateNotificationMessage(n.mensaje)}
+                />
               ))}
               {notifications.length > 10 && (
                 <p className="text-sm text-gray-400">{t("home.showingRecentNotifications")}</p>
