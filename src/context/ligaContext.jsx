@@ -51,9 +51,29 @@ export function LigaProvider({ children }) {
         console.log("Fetching liga with ID:", savedLigaId)
 
         try {
+          // Añadir un timeout a la solicitud fetch para evitar que se quede colgada indefinidamente
+          const controller = new AbortController()
+          const timeoutId = setTimeout(() => controller.abort(), 10000) // 10 segundos de timeout
+
           const res = await fetch(`http://localhost:3000/api/v1/liga/${savedLigaId}`, {
             headers: { Authorization: `Bearer ${token}` },
+            signal: controller.signal,
+          }).catch((err) => {
+            console.error("Network error when fetching liga:", err)
+            // Si ya tenemos datos en caché, no mostramos error
+            if (!currentLiga) {
+              setError("Error de conexión al servidor. Usando datos en caché si están disponibles.")
+            }
+            return null
           })
+
+          clearTimeout(timeoutId)
+
+          // Si la solicitud falló completamente
+          if (!res) {
+            setLoading(false)
+            return
+          }
 
           if (!res.ok) {
             console.error("Liga no encontrada, status:", res.status)
@@ -76,7 +96,10 @@ export function LigaProvider({ children }) {
           }
         } catch (fetchError) {
           console.error("Error fetching liga:", fetchError)
-          // If we have cached data, continue using it and don't show error
+          // Si tenemos datos en caché, seguimos usándolos sin mostrar error
+          if (!currentLiga) {
+            setError("Error al cargar datos de la liga. Usando datos en caché si están disponibles.")
+          }
         }
       } catch (err) {
         console.error("Error cargando liga:", err)
@@ -125,6 +148,7 @@ export function LigaProvider({ children }) {
     }
   }
 
+  // Modificar la función getLigaById para manejar mejor los errores de conexión
   const getLigaById = async (id) => {
     try {
       setLoading(true)
@@ -134,9 +158,19 @@ export function LigaProvider({ children }) {
 
       console.log("Fetching liga by ID:", id)
 
+      // Añadir un timeout a la solicitud fetch
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 10000) // 10 segundos de timeout
+
       const res = await fetch(`http://localhost:3000/api/v1/liga/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
+        signal: controller.signal,
+      }).catch((err) => {
+        console.error("Network error when fetching liga by ID:", err)
+        throw new Error("Error de conexión al servidor")
       })
+
+      clearTimeout(timeoutId)
 
       if (!res.ok) throw new Error("No se pudo obtener la liga")
 
