@@ -299,11 +299,11 @@ Se muestra de forma predeterminada una vez inicias sesión y ya permanece en la 
 ### 2. Burger menu
 - Sección que muestra un listado horizontal o en grid de las ligas en las que participa el usuario.
 - Si no hay ligas, aparece un mensaje como: "Todavía no estás en ninguna liga." con un botón para crear o unirse a una.
-- **Añadir liga**:
-- **BackOffice**:
-- **Cerrar sesion**:
-- **Contacto**:
-- **Settings icon**
+- **Añadir liga**: Añade ligas, uniendose o creandola
+- **BackOffice**: Gestión de usuarios.
+- **Cerrar sesion**: Abandonar la sesión
+- **Contacto**: Ponerse en contacto con los creadores a traves de un form y el problema
+- **Settings icon**: Para acceder a la página de ajustes
 
 ### 3. Lista de notificaciones
 - Cada `NotificationItem` recibe un objeto `Notifications` y muestra:
@@ -340,24 +340,39 @@ Se muestra de forma predeterminada una vez inicias sesión y ya permanece en la 
 - **Interficie**: Información acerca de la app
   
 ### 2. Equipo
-- **Nombre**: 
+- **Nombre**: Muestra el nombre del equipo actual y permite cambiarlo.
+- **Imagen**: Permite cambiar la imagen del jugador siempre que sea png
 
 ### 3. Gestion de ligas
-
+- **Lista de ligas**: Permite ver una lista de ligas en las que estás.
+  
 ### 4. Usuario
+- **Nombre**: Nombre del usuario, se puede cambiar
+- **Fecha de nacimiento**: Fecha de nacimiento introducida
+- **Guardar cambios**:  Botón para guardar cambios en fecha y nombre
+- **Email**: Correo, no se puede cambiar
+- **Password actual**: Introducir la contraseña actual
+- **New password**: Introducir nueva contraseña si la quieres cambiar
+- **Repeat new password**: Introducir la misma nueva contraseña que la previa
+- **Delete account**: Botón para eliminar la cuenta siempre que el correo sea el mismo que el que se introdujo
+- **Cambiar password**: Botón para cambiar contraseña, revisa que se los campos sean correctos
 
 ### 5. Interficie
-
+- **Contacto**: Muestra email, teléfono, calle, y horario para atender
+- **Política de privacidad**: Información sobre los datos y demás
+- **Sobre nosotross**: Información acerca de nuestra empresa
+- **Conoce nuestra API**: Información y requisitos de nuestra API
+- **Cerrar sesión**: Boton para cerrar sesión
 
 
 ## 🚀 Acciones disponibles desde **Settings**
 
-- **Ver autores**: desplegar/cerrar tarjeta de creadores.
-- **Enviar mensaje**: abrir formulario de contacto y enviar al backend.
-- **Alternar modo oscuro**: guarda la preferencia en `DataStore`.
-- **Leer política**: abrir modal con texto legal.
-- **Ver detalles de la API**: desplegar/cerrar tarjeta de info.
+- **Sobre nosotros**: Abrir un harmonioc menu para mostrar info sobre nosotros.
+- **Leer política**: Abrir un harmonioc menu para mostrar info de la api.
+- **Ver detalles de la API**: Abrir un harmonioc menu para mostrar info de la api.
+- **Información de contacto**: Abrir un harmonic menú para mostrar información de contacto.
 - **Cerrar sesión**: invocar logout y volver a la pantalla de inicio.
+- **Información de usuarios**: abrir modal con texto legal.
 
 
 ## 🔗 Módulo API / Retrofit – Resumen
@@ -383,14 +398,6 @@ Este módulo agrupa toda la configuración de red de la aplicación:
     - Parámetros en ruta (`@Path`), consulta (`@Query`) o cuerpo (`@Body`).
     - Respuestas tipadas como `Response<Modelo>` para manejar errores/excepciones.
 
-3. **Flujo de petición**
-    1. **ViewModel** solicita datos a su **Repository**.
-    2. **Repository** invoca el método Retrofit correspondiente.
-    3. **AuthInterceptor** añade el header `Authorization: Bearer <token>`.
-    4. **Retrofit** envía la petición y parsea la respuesta JSON a objetos Kotlin.
-    5. **Repository** devuelve el resultado o lanza excepción.
-    6. **ViewModel** actualiza su estado (`LiveData`/`StateFlow`).
-    7. **Compose UI** se re-renderiza con los nuevos datos o muestra errores.
 
 ## 🎨 Color Reference
 
@@ -408,5 +415,5 @@ Este módulo agrupa toda la configuración de red de la aplicación:
 ---
 ## 👥 Authors
 
-- [@Albert Garrido](https://github.com/albertgarrido4)
-- [@Joan Linares](https://github.com/JoanLinares)
+- [@Roger Bustos](https://github.com/rogerbj43)
+- [@Nico Vehi](https://github.com/yzwnike)
