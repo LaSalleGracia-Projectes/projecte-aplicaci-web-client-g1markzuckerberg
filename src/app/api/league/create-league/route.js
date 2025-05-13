@@ -1,6 +1,4 @@
 import { NextResponse } from "next/server";
-import authMiddleware from "@/middlewares/authMiddleware";
-import { createLigaService, addUserToLigaService, getCurrentJornada } from "@/services/ligaService";
 
 export async function POST(req) {
   try {
