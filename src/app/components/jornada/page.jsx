@@ -447,6 +447,34 @@ export default function Jornada() {
               </div>
 
               <div className="mt-6">{renderFormacion()}</div>
+
+              {/* Nuevo botón para crear un draft */}
+              <div className="mt-8 flex justify-center">
+                <button
+                  onClick={() => {
+                    setPlantilla(null)
+                    setCreandoDraft(false)
+                  }}
+                  className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg flex items-center gap-2"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="16"></line>
+                    <line x1="8" y1="12" x2="16" y2="12"></line>
+                  </svg>
+                  Crear nuevo draft
+                </button>
+              </div>
             </div>
           )}
         </div>

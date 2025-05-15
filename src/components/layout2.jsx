@@ -1,4 +1,4 @@
-import Header from "@/components/header-fantasy";
+import Header from "@/components/header2";
 import Footer from "@/components/footer-fantasy";
 
 export default function Layout({ children, currentPage }) {

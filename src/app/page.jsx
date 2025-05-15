@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react"
 import { Box, Typography, Button, Container, Divider, Grid, styled, Avatar, CardMedia, Paper } from "@mui/material"
 import { useRouter } from "next/navigation"
-import Layout from "@/components/layout"
+import Layout from "@/components/layout2"
 import { useLanguage } from "@/context/languageContext" // Importar el contexto de idioma
 
 // Animaciones CSS
