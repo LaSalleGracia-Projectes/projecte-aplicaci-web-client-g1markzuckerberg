@@ -11,28 +11,30 @@ export default function Footer() {
     changeLanguage(value)
   }
 
+  // Arreglar el selector de idiomas en el footer
   return (
     <footer className="flex flex-col sm:flex-row sm:justify-between items-center p-4 bg-gray-900 text-white text-sm w-full">
       {/* Recuadro de idioma (alineado a la izquierda) */}
-      <div className="flex items-center justify-center sm:justify-start space-x-2 mb-4 sm:mb-0">
+      <div className="flex items-center justify-center sm:justify-start mb-4 sm:mb-0">
         <Select
           variant="outlined"
           color="white"
-          className="text-white w-32"
+          className="text-white min-w-[120px]"
           value={language}
           onChange={handleLanguageChange}
+          label={t("footer.language")}
         >
-          <Option value="es" className="flex items-center">
-            <Image src="/images/spain-flag.png" alt="Español" width={20} height={15} />
-            <span className="ml-2">ES</span>
+          <Option value="es" className="flex items-center gap-2">
+            <Image src="/images/españa.png" alt="Español" width={20} height={15} />
+            <span>ES</span>
           </Option>
-          <Option value="ca" className="flex items-center">
-            <Image src="/images/catalonia-flag.png" alt="Català" width={20} height={15} />
-            <span className="ml-2">CA</span>
+          <Option value="ca" className="flex items-center gap-2">
+            <Image src="/images/catalan.png" alt="Català" width={20} height={15} />
+            <span>CA</span>
           </Option>
-          <Option value="en" className="flex items-center">
-            <Image src="/images/uk-flag.png" alt="English" width={20} height={15} />
-            <span className="ml-2">EN</span>
+          <Option value="en" className="flex items-center gap-2">
+            <Image src="/images/english.png" alt="English" width={20} height={15} />
+            <span>EN</span>
           </Option>
         </Select>
       </div>

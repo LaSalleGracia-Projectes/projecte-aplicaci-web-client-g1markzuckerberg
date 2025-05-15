@@ -31,7 +31,8 @@
     "privacyPolicy": "Política de privacitat",
     "contact": "Contacte",
     "cookieSettings": "Configuració de cookies",
-    "copyright": "Novembre 2024 | Mark Zuckerberg S.L"
+    "copyright": "Novembre 2024 | Mark Zuckerberg S.L",
+    "language": "Idioma"
   },
   "header": {
     "title": "Fantasy Draft"
@@ -49,7 +50,13 @@
     "assistProviders": "Assistents",
     "notifications": "Notificacions",
     "noNotifications": "No hi ha notificacions.",
-    "showingRecentNotifications": "Mostrant només les 10 notificacions més recents."
+    "showingRecentNotifications": "Mostrant només les 10 notificacions més recents.",
+    "welcomeMessage": "Benvinguts a Fantasy Draft!",
+    "draw": "Empat",
+    "won": "va guanyar",
+    "date": "Data",
+    "noMatchesAvailable": "No hi ha partits disponibles.",
+    "topScoringPlayers": "Jugadors amb més punts"
   },
   "league": {
     "createLeague": "Crear una lliga",

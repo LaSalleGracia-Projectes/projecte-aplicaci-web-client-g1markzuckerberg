@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google"
 import { Button, Input } from "@/components/ui"
 import { Eye, EyeOff } from "lucide-react"
-import Layout2 from "@/components/layout2"
+import Layout2 from "@/components/layout"
 // Importar el servicio de cookies al principio del archivo
 import { setAuthToken, setRefreshToken } from "@/components/auth/cookie-service"
 
