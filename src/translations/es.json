@@ -44,7 +44,7 @@
     "players": "Jugadores"
   },
   "home": {
-    "nextMatchday": "PRÓXIMA JORNADA",
+    "nextMatchday": "JORNADA ACTUAL",
     "vs": "vs",
     "goalScorers": "Goleadores",
     "assistProviders": "Asistidores",
