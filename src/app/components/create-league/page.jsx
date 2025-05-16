@@ -34,7 +34,7 @@ function CreateLeagueContent() {
         return
       }
 
-      const res = await fetch("http://localhost:3000/api/v1/liga/create", {
+      const res = await fetch("https://subirfantasydraftbackend.onrender.com/api/v1/liga/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

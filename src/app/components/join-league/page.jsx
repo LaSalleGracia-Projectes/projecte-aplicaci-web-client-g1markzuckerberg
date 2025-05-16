@@ -42,7 +42,7 @@ export default function JoinLeague() {
       }
 
       // Llamar directamente al endpoint del backend
-      const response = await fetch(`http://localhost:3000/api/v1/liga/join/${ligaCode}`, {
+      const response = await fetch(`https://subirfantasydraftbackend.onrender.com/api/v1/liga/join/${ligaCode}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -113,7 +113,7 @@ export default function JoinLeague() {
             >
               {loading ? "Uniéndose..." : "UNIRSE A LIGA"}
             </Button>
-            
+
           </div>
         </div>
       </Layout2>
