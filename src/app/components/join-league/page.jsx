@@ -113,6 +113,7 @@ export default function JoinLeague() {
             >
               {loading ? "Uniéndose..." : "UNIRSE A LIGA"}
             </Button>
+            
           </div>
         </div>
       </Layout2>
