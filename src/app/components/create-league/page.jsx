@@ -1,59 +1,80 @@
+
 "use client"
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Input } from "@/components/ui"
+import Link from "next/link"
 import { Button } from "@/components/ui"
+import { Input } from "@/components/ui"
 import { ArrowLeft } from "lucide-react"
+import Layout2 from "@/components/layout2"
+import { useRouter } from "next/navigation"
+import AuthGuard from "@/components/authGuard/authGuard"
+import { useState } from "react"
+import { useLiga } from "@/context/ligaContext"
+// Importar el servicio de cookies correctamente
+import { getAuthToken } from "@/components/auth/cookie-service"
 
-export default function CreateLeague() {
-  const [name, setName] = useState("")
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
+// Separate the inner component that will use the hook
+function CreateLeagueContent() {
   const router = useRouter()
+  const { setLiga } = useLiga() // Use the context hook to access setLiga
+  const [name, setName] = useState("")
+  const [error, setError] = useState("")
+  const [loading, setLoading] = useState(false)
 
   const handleCreateLeague = async () => {
+    setError("")
     setLoading(true)
-    setError(null)
 
     try {
-      const response = await fetch("/api/create-league", {
+      // Usar getAuthToken en lugar de localStorage
+      const token = getAuthToken()
+      if (!token) {
+        setError("No estás autenticado.")
+        setLoading(false)
+        return
+      }
+
+      const res = await fetch("http://localhost:3000/api/v1/liga/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ name }),
       })
 
-      const data = await response.json()
-
-      if (response.ok) {
-        router.push(`/league/${data.leagueId}`)
-      } else {
-        setError(data.message || "Error al crear la liga")
+      if (!res.ok) {
+        const data = await res.json()
+        throw new Error(data.error || "Error al crear la liga")
       }
+
+      // Get the created liga data with the code
+      const responseData = await res.json()
+
+      // Save the liga to context using setLiga
+      if (responseData.liga) {
+        // This will set currentLiga in context and save the ID to localStorage
+        setLiga(responseData.liga)
+      }
+
+      // Redirigir a la página de clasificación
+      // Usar window.location.href para forzar una recarga completa de la página
+      window.location.href = "/components/clasificacion"
     } catch (err) {
-      setError("Error al crear la liga")
-      console.error(err)
+      setError(err.message)
     } finally {
       setLoading(false)
     }
   }
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      {/* Reemplazar el div gris vacío con la imagen del logo */}
+    <div className="flex flex-col items-center justify-center p-4 min-h-[calc(100vh-128px)]">
       <div className="w-full max-w-md space-y-6 bg-white p-6 rounded-lg shadow-sm">
-        <div className="flex items-center mb-6">
-          <button
-            onClick={() => router.push("/components/choose-league")}
-            className="text-gray-600 hover:text-gray-900 mr-4"
-          >
+        <div className="flex items-center gap-4">
+          <Link href="/components/choose-league" className="text-gray-600 hover:text-gray-900">
             <ArrowLeft className="h-6 w-6" />
-          </button>
-          <div className="flex-1 flex justify-center">
-            <img src="/images/Logo_fantasyDraft.png" alt="Fantasy Draft Logo" className="w-full max-w-[250px]" />
-          </div>
+          </Link>
+          <h2 className="text-xl font-medium">CREAR LIGA</h2>
         </div>
 
         {error && <p className="text-red-500 text-sm">{error}</p>}
@@ -83,5 +104,16 @@ export default function CreateLeague() {
         </Button>
       </div>
     </div>
+  )
+}
+
+// Main component that provides the context
+export default function CreateLeague() {
+  return (
+    <AuthGuard>
+      <Layout2>
+        <CreateLeagueContent />
+      </Layout2>
+    </AuthGuard>
   )
 }
