@@ -11,7 +11,7 @@ export async function POST(request) {
       )
     }
 
-    const backendResponse = await fetch("http://localhost:3000/api/v1/auth/login", {
+    const backendResponse = await fetch("https://subirfantasydraftbackend.onrender.com/api/v1/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ correo, password }),

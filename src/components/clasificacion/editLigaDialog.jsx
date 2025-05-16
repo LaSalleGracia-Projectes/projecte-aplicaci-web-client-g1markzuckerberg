@@ -42,7 +42,7 @@ export default function EditLigaDialog({ currentLiga, onClose, onSuccess }) {
 
       // IMPORTANTE: Cambié el cuerpo de la solicitud para enviar 'newName' en lugar de 'name'
       // para que coincida con lo que espera el controlador del backend
-      const res = await fetch(`http://localhost:3000/api/v1/liga/update-name/${currentLiga.id}`, {
+      const res = await fetch(`https://subirfantasydraftbackend.onrender.com/api/v1/liga/update-name/${currentLiga.id}`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -83,7 +83,7 @@ export default function EditLigaDialog({ currentLiga, onClose, onSuccess }) {
 
       // Don't set Content-Type header when sending FormData
       // The browser will automatically set the correct Content-Type with boundary
-      const res = await fetch(`http://localhost:3000/api/v1/liga/${currentLiga.id}/upload-image`, {
+      const res = await fetch(`https://subirfantasydraftbackend.onrender.com/api/v1/liga/${currentLiga.id}/upload-image`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,

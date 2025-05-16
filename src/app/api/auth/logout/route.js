@@ -8,7 +8,7 @@ export async function POST(req) {
       return NextResponse.json({ error: "No autorizado" }, { status: 401 });
     }
 
-    const response = await fetch("http://localhost:3000/api/v1/auth/logout", {
+    const response = await fetch("https://subirfantasydraftbackend.onrender.com/api/v1/auth/logout", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

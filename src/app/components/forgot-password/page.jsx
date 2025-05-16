@@ -25,7 +25,7 @@ export default function ForgotPassword() {
       console.log("Enviando solicitud con correo:", correo)
       
       // Hacer la solicitud exactamente como lo haces en Thunder Client
-      const response = await fetch("http://localhost:3000/api/v1/user/forgot-password", {
+      const response = await fetch("https://subirfantasydraftbackend.onrender.com/api/v1/user/forgot-password", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

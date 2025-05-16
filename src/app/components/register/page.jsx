@@ -2,134 +2,184 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { useSearchParams } from "next/navigation"
-import { Icons } from "@/components/icons"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { useToast } from "@/components/ui/use-toast"
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google"
+import Link from "next/link"
+import { Button } from "@/components/ui"
+import { Input } from "@/components/ui"
 import { Eye, EyeOff } from "lucide-react"
+import Layout2 from "@/components/layout2"
+// Modificar el componente de registro para usar cookies
+// Importar el servicio de cookies al principio del archivo
+import { setAuthToken, setRefreshToken } from "@/components/auth/cookie-service"
 
-import { useRegister } from "@/hooks/use-register"
-
-export default function Register() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [confirmPassword, setConfirmPassword] = useState("")
+export default function RegisterPage() {
+  const router = useRouter()
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const callbackUrl = searchParams.get("callbackUrl") || "/"
-  const { toast } = useToast()
-  const { register, isLoading } = useRegister({
-    onSuccess: () => {
-      toast({
-        title: "Registro exitoso",
-        description: "Te hemos enviado un correo electrónico para que verifiques tu cuenta.",
-      })
-      router.push(callbackUrl)
-    },
-    onError: (error) => {
-      toast({
-        title: "Error al registrarse",
-        description: error || "Ha ocurrido un error al registrarse.",
-        variant: "destructive",
-      })
-    },
-  })
+  const [email, setEmail] = useState("")
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
+  const [error, setError] = useState("")
+  const [loading, setLoading] = useState(false)
 
-  const onSubmit = async (event) => {
-    event.preventDefault()
-
+  // Reemplazar la parte donde se guarda el token en localStorage with:
+  const handleRegister = async () => {
+    setError("")
     if (password !== confirmPassword) {
-      toast({
-        title: "Error",
-        description: "Las contraseñas no coinciden.",
-        variant: "destructive",
-      })
+      setError("Las contraseñas no coinciden.")
       return
     }
+    try {
+      setLoading(true)
+      const res = await fetch("http://localhost:3000/api/v1/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          correo: email,
+          username,
+          password,
+          repeatPassword: confirmPassword,
+        }),
+      })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || "Error al registrar usuario")
 
-    register({ email, password })
+      // Guardar tokens en cookies en lugar de localStorage
+      setAuthToken(data.tokens.webToken)
+      setRefreshToken(data.tokens.refreshWebToken)
+
+      router.push("/components/home_logged")
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  // También actualizar onGoogleSuccess
+  const onGoogleSuccess = async ({ credential }) => {
+    if (!credential) {
+      setError("No se recibió credencial de Google")
+      return
+    }
+    try {
+      const res = await fetch("http://localhost:3000/api/v1/auth/google/web/token", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ idToken: credential }),
+      })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || "Error en login con Google")
+
+      // Guardar tokens en cookies en lugar de localStorage
+      setAuthToken(data.webToken)
+      setRefreshToken(data.refreshWebToken)
+
+      router.push("/components/home_logged")
+    } catch (err) {
+      setError(err.message)
+    }
   }
 
   return (
-    <div className="grid gap-6">
-      <div>
-        <h1 className="text-2xl font-semibold tracking-tight">Crear una cuenta</h1>
-        <p className="text-sm text-muted-foreground">
-          Ingresa tu correo electrónico y contraseña para crear una cuenta
-        </p>
-      </div>
-      <div className="grid gap-2">
-        <Label htmlFor="email">Correo electrónico</Label>
-        <Input
-          id="email"
-          placeholder="name@example.com"
-          type="email"
-          autoCapitalize="none"
-          autoComplete="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          disabled={isLoading}
-        />
-      </div>
-      {/* Arreglar el ojo de las contraseñas en el componente register */}
-      <div className="space-y-2">
-        <label htmlFor="password" className="text-sm font-medium">
-          Contraseña
-        </label>
-        <div className="relative">
-          <Input
-            id="password"
-            type={showPassword ? "text" : "password"}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            disabled={isLoading}
-          />
-          <button
-            type="button"
-            onClick={() => setShowPassword((v) => !v)}
-            className="absolute right-3 top-3 transform -translate-y-1/2 disabled:cursor-not-allowed"
-            disabled={isLoading}
-          >
-            {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-          </button>
+    <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID} autoSelect={false}>
+      <Layout2>
+        <div className="flex flex-col items-center justify-center p-4 min-h-[calc(100vh-128px)]">
+          <div className="w-full max-w-md space-y-6 bg-white p-6 rounded-lg shadow-sm">
+            <div className="w-full aspect-[4/3] bg-[#e5e5ea] mb-6" />
+
+            {/* —– Registro estándar —– */}
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <label htmlFor="email" className="text-sm font-medium">
+                  Correo
+                </label>
+                <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="username" className="text-sm font-medium">
+                  Nombre de usuario
+                </label>
+                <Input id="username" type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="password" className="text-sm font-medium">
+                  Contraseña
+                </label>
+                <div className="relative">
+                  <Input
+                    id="password"
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="pr-10" // deja espacio para el ícono
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((v) => !v)}
+                    className="absolute inset-y-0 right-3 flex items-center"
+                  >
+                    {showPassword ? <EyeOff className="h-4 w-4 text-gray-600" /> : <Eye className="h-4 w-4 text-gray-600" />}
+                  </button>
+                </div>
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="confirm-password" className="text-sm font-medium">
+                  Repetir contraseña
+                </label>
+                <div className="relative">
+                  <Input
+                    id="confirm-password"
+                    type={showConfirmPassword ? "text" : "password"}
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    className="pr-10"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword((v) => !v)}
+                    className="absolute inset-y-0 right-3 flex items-center"
+                  >
+                    {showConfirmPassword ? <EyeOff className="h-4 w-4 text-gray-600" /> : <Eye className="h-4 w-4 text-gray-600" />}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {error && <p className="text-red-500 text-sm">{error}</p>}
+
+            <Button
+              className="w-full bg-[#e5e5ea] text-black hover:bg-[#d2d2d2]"
+              onClick={handleRegister}
+              disabled={loading}
+            >
+              {loading ? "Registrando..." : "REGÍSTRATE"}
+            </Button>
+
+            {/* —– OAuth con Google —– */}
+            <div className="text-center space-y-4">
+              <div className="flex items-center gap-2 justify-center">
+                <div className="h-px bg-[#7d7d7d] flex-1" />
+                <span>o</span>
+                <div className="h-px bg-[#7d7d7d] flex-1" />
+              </div>
+              <p>Regístrate con:</p>
+              <GoogleLogin
+                onSuccess={onGoogleSuccess}
+                onError={() => setError("Error al iniciar sesión con Google")}
+                prompt="select_account"
+              />
+            </div>
+
+            <div className="text-center text-sm">
+              <Link href="/components/login" className="text-blue-600 hover:underline">
+                Ya tengo cuenta
+              </Link>
+            </div>
+          </div>
         </div>
-        <div className="mt-2 text-xs text-gray-600 space-y-1">
-          <p className={password.length >= 8 ? "text-green-600" : "text-red-500"}>• Al menos 8 caracteres</p>
-          <p className={/[A-Z]/.test(password) ? "text-green-600" : "text-red-500"}>• Al menos una letra mayúscula</p>
-          <p className={/[a-z]/.test(password) ? "text-green-600" : "text-red-500"}>• Al menos una letra minúscula</p>
-          <p className={/\d/.test(password) ? "text-green-600" : "text-red-500"}>• Al menos un número</p>
-        </div>
-      </div>
-      <div className="space-y-2">
-        <label htmlFor="confirm-password" className="text-sm font-medium">
-          Repetir contraseña
-        </label>
-        <div className="relative">
-          <Input
-            id="confirm-password"
-            type={showConfirmPassword ? "text" : "password"}
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            disabled={isLoading}
-          />
-          <button
-            type="button"
-            onClick={() => setShowConfirmPassword((v) => !v)}
-            className="absolute right-3 top-3 transform -translate-y-1/2 disabled:cursor-not-allowed"
-            disabled={isLoading}
-          >
-            {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-          </button>
-        </div>
-      </div>
-      <Button disabled={isLoading} onClick={onSubmit}>
-        {isLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
-        Crear cuenta
-      </Button>
-    </div>
+      </Layout2>
+    </GoogleOAuthProvider>
   )
 }

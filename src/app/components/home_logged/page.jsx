@@ -24,7 +24,7 @@ export default function Notificaciones() {
           return
         }
 
-        const response = await fetch("http://localhost:3000/api/v1/user/notifications", {
+        const response = await fetch("https://subirfantasydraftbackend.onrender.com/api/v1/user/notifications", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

@@ -49,7 +49,7 @@ function ClasificacionContent() {
         setCurrentUserId(userId)
 
         if (userId && currentLiga?.id) {
-          const res = await fetch(`http://localhost:3000/api/v1/liga/${currentLiga.id}/user/${userId}`, {
+          const res = await fetch(`https://subirfantasydraftbackend.onrender.com/api/v1/liga/${currentLiga.id}/user/${userId}`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -71,7 +71,7 @@ function ClasificacionContent() {
   // Fetch league image
   useEffect(() => {
     if (currentLiga?.id) {
-      setLeagueImageUrl(`http://localhost:3000/api/v1/liga/image/${currentLiga.id}`)
+      setLeagueImageUrl(`https://subirfantasydraftbackend.onrender.com/api/v1/liga/image/${currentLiga.id}`)
     }
   }, [currentLiga])
 
@@ -115,7 +115,7 @@ function ClasificacionContent() {
 
         console.log("Fetching users for liga code:", currentLiga.code)
 
-        const res = await fetch(`http://localhost:3000/api/v1/liga/users/${currentLiga.code}`, {
+        const res = await fetch(`https://subirfantasydraftbackend.onrender.com/api/v1/liga/users/${currentLiga.code}`, {
           headers: { Authorization: `Bearer ${token}` },
         })
 
@@ -174,7 +174,7 @@ function ClasificacionContent() {
         return
       }
 
-      const res = await fetch(`http://localhost:3000/api/v1/liga/leave/${currentLiga.id}`, {
+      const res = await fetch(`https://subirfantasydraftbackend.onrender.com/api/v1/liga/leave/${currentLiga.id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -214,7 +214,7 @@ function ClasificacionContent() {
         const token = getAuthToken()
         if (!token || !currentLiga?.code) return
 
-        const res = await fetch(`http://localhost:3000/api/v1/liga/users/${currentLiga.code}`, {
+        const res = await fetch(`https://subirfantasydraftbackend.onrender.com/api/v1/liga/users/${currentLiga.code}`, {
           headers: { Authorization: `Bearer ${token}` },
         })
 

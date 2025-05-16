@@ -12,7 +12,7 @@ export async function POST(request) {
     }
 
     try {
-      const backendResponse = await fetch("http://localhost:3000/api/v1/user/forgot-password", {
+      const backendResponse = await fetch("https://subirfantasydraftbackend.onrender.com/api/v1/user/forgot-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ correo }),

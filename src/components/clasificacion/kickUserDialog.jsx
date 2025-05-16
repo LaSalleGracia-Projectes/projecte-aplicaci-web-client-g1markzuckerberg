@@ -32,7 +32,7 @@ export default function KickUserDialog({ users, currentUserId, onClose, onSucces
       console.log(`Intentando expulsar al usuario ${selectedUser.id} de la liga ${ligaId}`)
 
       // Fix: Use the correct API endpoint format and ensure proper error handling
-      const res = await fetch(`http://localhost:3000/api/v1/liga/kickUser/${ligaId}/${selectedUser.id}`, {
+      const res = await fetch(`https://subirfantasydraftbackend.onrender.com/api/v1/liga/kickUser/${ligaId}/${selectedUser.id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

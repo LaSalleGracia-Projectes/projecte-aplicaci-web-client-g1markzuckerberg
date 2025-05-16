@@ -55,7 +55,7 @@ export function LigaProvider({ children }) {
           const controller = new AbortController()
           const timeoutId = setTimeout(() => controller.abort(), 10000) // 10 segundos de timeout
 
-          const res = await fetch(`http://localhost:3000/api/v1/liga/${savedLigaId}`, {
+          const res = await fetch(`https://subirfantasydraftbackend.onrender.com/api/v1/liga/${savedLigaId}`, {
             headers: { Authorization: `Bearer ${token}` },
             signal: controller.signal,
           }).catch((err) => {
@@ -162,7 +162,7 @@ export function LigaProvider({ children }) {
       const controller = new AbortController()
       const timeoutId = setTimeout(() => controller.abort(), 10000) // 10 segundos de timeout
 
-      const res = await fetch(`http://localhost:3000/api/v1/liga/${id}`, {
+      const res = await fetch(`https://subirfantasydraftbackend.onrender.com/api/v1/liga/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
         signal: controller.signal,
       }).catch((err) => {

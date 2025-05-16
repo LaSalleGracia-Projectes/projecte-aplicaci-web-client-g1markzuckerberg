@@ -90,7 +90,7 @@ export default function Page() {
     // Función para obtener la jornada actual
     const fetchCurrentRound = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/v1/sportmonks/jornadaActual", {
+        const res = await fetch("https://subirfantasydraftbackend.onrender.com/api/v1/sportmonks/jornadaActual", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("webToken")}`,
           },
@@ -108,7 +108,7 @@ export default function Page() {
     // Función para obtener los partidos de la jornada actual
     const fetchMatches = async (roundNumber) => {
       try {
-        const res = await fetch(`http://localhost:3000/api/v1/sportmonks/jornadas/${roundNumber}`, {
+        const res = await fetch(`https://subirfantasydraftbackend.onrender.com/api/v1/sportmonks/jornadas/${roundNumber}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("webToken")}`,
           },
@@ -127,7 +127,7 @@ export default function Page() {
     // Función para obtener el top 10 de jugadores
     const fetchTopPlayers = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/v1/player/?points=down&limit=20", {
+        const res = await fetch("https://subirfantasydraftbackend.onrender.com/api/v1/player/?points=down&limit=20", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("webToken")}`,
           },

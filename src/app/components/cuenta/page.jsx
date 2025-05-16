@@ -28,7 +28,7 @@ export default function Cuenta() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/v1/user/me", {
+        const res = await fetch("https://subirfantasydraftbackend.onrender.com/api/v1/user/me", {
           headers: { Authorization: `Bearer ${token}` },
         })
 
@@ -60,7 +60,7 @@ export default function Cuenta() {
   // Modificar la función handleUpdateGeneral para recargar la página después de guardar
   const handleUpdateGeneral = async () => {
     try {
-      const nameRes = await fetch("http://localhost:3000/api/v1/user/update-username", {
+      const nameRes = await fetch("https://subirfantasydraftbackend.onrender.com/api/v1/user/update-username", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -69,7 +69,7 @@ export default function Cuenta() {
         body: JSON.stringify({ username: form.username }),
       })
 
-      const birthRes = await fetch("http://localhost:3000/api/v1/user/update-birthDate", {
+      const birthRes = await fetch("https://subirfantasydraftbackend.onrender.com/api/v1/user/update-birthDate", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -100,7 +100,7 @@ export default function Cuenta() {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/api/v1/user/update-password", {
+      const res = await fetch("https://subirfantasydraftbackend.onrender.com/api/v1/user/update-password", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -140,7 +140,7 @@ export default function Cuenta() {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/api/v1/auth/user/delete", {
+      const res = await fetch("https://subirfantasydraftbackend.onrender.com/api/v1/auth/user/delete", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

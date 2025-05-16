@@ -26,7 +26,7 @@ export default function Ajustes() {
 
   // Usar getAuthToken en lugar de localStorage
   const token = typeof window !== "undefined" ? getAuthToken() : null
-  const API_BASE_URL = "http://localhost:3000/api/v1"
+  const API_BASE_URL = "https://subirfantasydraftbackend.onrender.com/api/v1"
 
   useEffect(() => {
     if (token) fetchUserData()

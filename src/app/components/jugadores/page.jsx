@@ -28,7 +28,7 @@ export default function Jugadores() {
   useEffect(() => {
     const fetchTeams = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/v1/sportmonks/teams")
+        const res = await fetch("https://subirfantasydraftbackend.onrender.com/api/v1/sportmonks/teams")
         const data = await res.json()
         setTeams(data)
       } catch (error) {
@@ -43,8 +43,8 @@ export default function Jugadores() {
     const fetchPlayers = async () => {
       try {
         const url = selectedTeam
-          ? `http://localhost:3000/api/v1/player/?points=down&team=${selectedTeam}`
-          : "http://localhost:3000/api/v1/player/?points=down"
+          ? `https://subirfantasydraftbackend.onrender.com/api/v1/player/?points=down&team=${selectedTeam}`
+          : "https://subirfantasydraftbackend.onrender.com/api/v1/player/?points=down"
 
         const res = await fetch(url)
         const data = await res.json()
@@ -191,7 +191,7 @@ export default function Jugadores() {
 
               {/* Gráfico iframe */}
               <iframe
-                src={`http://localhost:3000/api/v1/grafana/grafico/${selectedPlayerId}?theme=light&token=${getAuthToken()}`}
+                src={`https://subirfantasydraftbackend.onrender.com/api/v1/grafana/grafico/${selectedPlayerId}?theme=light&token=${getAuthToken()}`}
                 title="Grafico de puntos"
                 className={`w-full h-[500px] rounded-lg transition-opacity duration-300 ${iframeLoaded ? "opacity-100" : "opacity-0"}`}
                 onLoad={() => setIframeLoaded(true)}

@@ -6,7 +6,7 @@ export async function POST(req, { params }) {
   const body = await req.text()
 
   try {
-    const backendResponse = await fetch(`http://localhost:3000/api/v1/liga/join/${ligaCode}`, {
+    const backendResponse = await fetch(`https://subirfantasydraftbackend.onrender.com/api/v1/liga/join/${ligaCode}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

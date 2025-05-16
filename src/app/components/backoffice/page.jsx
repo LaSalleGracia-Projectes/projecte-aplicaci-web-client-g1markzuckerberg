@@ -26,7 +26,7 @@ export default function BackOfficePage() {
 
   const token = typeof window !== "undefined" ? getAuthToken() : null
   const router = useRouter()
-  const API_BASE = "http://localhost:3000/api/v1"
+  const API_BASE = "https://subirfantasydraftbackend.onrender.com/api/v1"
 
   // 1) Verificar permisos de admin
   useEffect(() => {

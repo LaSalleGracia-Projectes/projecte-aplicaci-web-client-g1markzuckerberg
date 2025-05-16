@@ -35,10 +35,10 @@ export default function BurgerMenuContent({ onClose }) {
 
         // Fetch user data and leagues in parallel
         const [userRes, leaguesRes] = await Promise.all([
-          fetch("http://localhost:3000/api/v1/user/me", {
+          fetch("https://subirfantasydraftbackend.onrender.com/api/v1/user/me", {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          fetch("http://localhost:3000/api/v1/user/leagues", {
+          fetch("https://subirfantasydraftbackend.onrender.com/api/v1/user/leagues", {
             headers: { Authorization: `Bearer ${token}` },
           }),
         ])
@@ -67,7 +67,7 @@ export default function BurgerMenuContent({ onClose }) {
 
         // Try to fetch user image
         try {
-          const imageRes = await fetch("http://localhost:3000/api/v1/user/get-image", {
+          const imageRes = await fetch("https://subirfantasydraftbackend.onrender.com/api/v1/user/get-image", {
             headers: { Authorization: `Bearer ${token}` },
           })
 

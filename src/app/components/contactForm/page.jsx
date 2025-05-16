@@ -32,7 +32,7 @@ export default function ContactForm() {
         return
       }
 
-      const response = await fetch("http://localhost:3000/api/v1/contactForm/create", {
+      const response = await fetch("https://subirfantasydraftbackend.onrender.com/api/v1/contactForm/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

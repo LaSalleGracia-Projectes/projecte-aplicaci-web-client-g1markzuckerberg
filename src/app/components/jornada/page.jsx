@@ -67,7 +67,7 @@ export default function Jornada() {
 
         // 1. Primero intentamos obtener un draft finalizado
         try {
-          const response = await fetch(`http://localhost:3000/api/v1/draft/getuserDraft?ligaId=${currentLiga.id}`, {
+          const response = await fetch(`https://subirfantasydraftbackend.onrender.com/api/v1/draft/getuserDraft?ligaId=${currentLiga.id}`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -91,7 +91,7 @@ export default function Jornada() {
 
         // 2. Si no hay draft finalizado, intentamos obtener un tempDraft existente
         try {
-          const tempDraftResponse = await fetch(`http://localhost:3000/api/v1/draft/tempDraft/${currentLiga.id}`, {
+          const tempDraftResponse = await fetch(`https://subirfantasydraftbackend.onrender.com/api/v1/draft/tempDraft/${currentLiga.id}`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -103,7 +103,7 @@ export default function Jornada() {
             console.log("Se encontró un tempDraft existente:", tempDraftData)
 
             // Obtener la formación del tempDraft
-            const formacionResponse = await fetch(`http://localhost:3000/api/v1/draft/formation/${currentLiga.id}`, {
+            const formacionResponse = await fetch(`https://subirfantasydraftbackend.onrender.com/api/v1/draft/formation/${currentLiga.id}`, {
               headers: {
                 Authorization: `Bearer ${token}`,
               },
@@ -165,7 +165,7 @@ export default function Jornada() {
       console.log("Creando draft con formación:", formacion, "para liga:", currentLiga.id)
 
       // 1. Crear el draft con la formación seleccionada
-      const createResponse = await fetch("http://localhost:3000/api/v1/draft/create", {
+      const createResponse = await fetch("https://subirfantasydraftbackend.onrender.com/api/v1/draft/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -185,7 +185,7 @@ export default function Jornada() {
       console.log("Draft creado correctamente, obteniendo jugadores disponibles...")
 
       // 2. Obtener los jugadores disponibles para el draft temporal
-      const tempDraftResponse = await fetch(`http://localhost:3000/api/v1/draft/tempDraft/${currentLiga.id}`, {
+      const tempDraftResponse = await fetch(`https://subirfantasydraftbackend.onrender.com/api/v1/draft/tempDraft/${currentLiga.id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -258,7 +258,7 @@ export default function Jornada() {
 
       console.log("Actualizando draft con playerOptions:", playerOptions)
 
-      const updateResponse = await fetch(`http://localhost:3000/api/v1/draft/update/${currentLiga.id}`, {
+      const updateResponse = await fetch(`https://subirfantasydraftbackend.onrender.com/api/v1/draft/update/${currentLiga.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -312,7 +312,7 @@ export default function Jornada() {
 
       console.log("Enviando tempDraft para guardar:", tempDraft)
 
-      const saveResponse = await fetch("http://localhost:3000/api/v1/draft/saveDraft", {
+      const saveResponse = await fetch("https://subirfantasydraftbackend.onrender.com/api/v1/draft/saveDraft", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
