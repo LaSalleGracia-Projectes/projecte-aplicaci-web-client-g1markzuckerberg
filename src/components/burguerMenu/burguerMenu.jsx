@@ -233,6 +233,11 @@ export default function BurgerMenuContent({ onClose }) {
         {t("burger.contactForm")}
       </Link>
 
+      <Link href="/components/reportes"> <button className="w-full bg-orange-500 text-white py-2 rounded-md mt-4 hover:bg-yellow-600" onClick={onClose}> {t("burger.reports")} </button> </Link>
+
+
+      <Link href="/components/crud"> <button className="w-full bg-orange-500 text-white py-2 rounded-md mt-4 hover:bg-yellow-600" onClick={onClose}> {t("burger.reports")} </button> </Link>
+
       <button className="w-full bg-red-500 text-white py-2 rounded-md mt-4 hover:bg-red-700" onClick={handleLogout}>
         {t("burger.logout")}
       </button>
