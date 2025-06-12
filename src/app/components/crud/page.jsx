@@ -1,199 +1,297 @@
-"use client"
+"use client";
 
-import React, { useEffect, useState } from 'react';
-
-const API_URL = 'http://localhost:3000/api/v1/new-players'; 
+import React, { useEffect, useState } from "react";
 
 const initialForm = {
-  teamName: '',
-  positionId: '',
-  name: '',
-  imageUrl: ''
+  equipo_id: "",
+  position_id: "",
+  displayname: "",
+  imagepath: "",
 };
 
-const teams = [
-  'FC Barcelona',
-  'Rayo Vallecano'
+const TEAMS = [
+  { id: 36, name: "Celta de Vigo" },
+  { id: 83, name: "FC Barcelona" },
+  { id: 106, name: "Getafe" },
+  { id: 214, name: "Valencia" },
+  { id: 231, name: "Girona" },
+  { id: 844, name: "Leganés" },
+  { id: 3468, name: "Real Madrid" },
+  { id: 7980, name: "Atlético Madrid" },
+  { id: 13258, name: "Athletic Club" },
 ];
-const positions = [24, 25, 26, 27];
 
-function NewPlayersCrud() {
+const POSITIONS = [
+  { id: 24, name: "Portero" },
+  { id: 25, name: "Defensa" },
+  { id: 26, name: "Centrocampista" },
+  { id: 27, name: "Delantero" },
+];
+
+export default function NewPlayersCrud() {
   const [players, setPlayers] = useState([]);
   const [form, setForm] = useState(initialForm);
   const [editingId, setEditingId] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
-  // Obtener todos los jugadores
+  // Fetch all players
   const fetchPlayers = async () => {
     setLoading(true);
+    setError("");
     try {
-      const res = await fetch(`${API_URL}/`, { credentials: 'include' });
-      const data = await res.json();
-      // Asegura que siempre sea un array
+      const res = await fetch("http://localhost:3000/api/v1/new-players", {
+        credentials: "include",
+      });
+      if (!res.ok) throw new Error(`Error ${res.status}`);
+      const { players: data } = await res.json();
       setPlayers(Array.isArray(data) ? data : []);
     } catch (err) {
-      setError('Error al cargar jugadores');
-      setPlayers([]); // Evita errores si la petición falla
+      console.error(err);
+      setError("No se pudieron cargar los jugadores.");
+      setPlayers([]);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   useEffect(() => {
     fetchPlayers();
   }, []);
 
-  // Manejar cambios en el formulario
-  const handleChange = e => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+  // Handle form input changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((f) => ({ ...f, [name]: value }));
   };
 
-  // Crear o actualizar jugador
-  const handleSubmit = async e => {
+  // Create or update a player
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setError("");
     try {
-      const method = editingId ? 'PUT' : 'POST';
-      const url = editingId ? `${API_URL}/update/${editingId}` : `${API_URL}/create`;
+      const method = editingId ? "PUT" : "POST";
+      const url = editingId
+        ? `http://localhost:3000/api/v1/new-players/update/${editingId}`
+        : "http://localhost:3000/api/v1/new-players/create";
+
+      // Convert ids to numbers before sending
+      const payload = {
+        equipo_id: Number(form.equipo_id),
+        position_id: Number(form.position_id),
+        displayname: form.displayname,
+        imagepath: form.imagepath || undefined,
+      };
+
       const res = await fetch(url, {
         method,
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify(form)
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(payload),
       });
       if (!res.ok) {
-        let msg = 'Error en la petición';
-        try {
-          const errData = await res.json();
-          msg = errData.message || JSON.stringify(errData);
-        } catch {}
-        throw new Error(msg);
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error || err.message || "Petición fallida");
       }
+
       setForm(initialForm);
       setEditingId(null);
-      fetchPlayers();
+      await fetchPlayers();
     } catch (err) {
-      setError(err.message || 'Error al guardar jugador');
+      console.error(err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
-  // Editar jugador
-  const handleEdit = player => {
+  // Prefill form for editing
+  const handleEdit = (player) => {
     setForm({
-      teamName: player.teamName,
-      positionId: player.positionId,
-      name: player.name,
-      imageUrl: player.imageUrl || ''
+      equipo_id: String(player.equipo_id),
+      position_id: String(player.position_id),
+      displayname: player.displayname,
+      imagepath: player.imagepath || "",
     });
-    setEditingId(player._id);
+    setEditingId(player.id);
   };
 
-  // Eliminar jugador
-  const handleDelete = async id => {
-    if (!window.confirm('¿Eliminar jugador?')) return;
+  // Delete a player
+  const handleDelete = async (id) => {
+    if (!confirm("¿Seguro que quieres eliminar este jugador?")) return;
     setLoading(true);
-    setError('');
+    setError("");
     try {
-      const res = await fetch(`${API_URL}/delete/${id}`, {
-        method: 'DELETE',
-        credentials: 'include'
-      });
-      if (!res.ok) throw new Error('Error al eliminar');
-      fetchPlayers();
-    } catch (err) {
-      setError('Error al eliminar jugador');
+      const res = await fetch(
+        `http://localhost:3000/api/v1/new-players/delete/${id}`,
+        {
+          method: "DELETE",
+          credentials: "include",
+        }
+      );
+      if (!res.ok) throw new Error();
+      await fetchPlayers();
+    } catch {
+      setError("Error al eliminar jugador.");
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
-    <div style={{ maxWidth: 600, margin: 'auto' }}>
-      <h2>CRUD de Jugadores Manuales</h2>
-      {error && <div style={{ color: 'red' }}>{error}</div>}
-      <form onSubmit={handleSubmit} style={{ marginBottom: 20 }}>
-        <select
-          name="teamName"
-          value={form.teamName}
-          onChange={handleChange}
-          required
-        >
-          <option value="">Selecciona equipo</option>
-          {teams.map(team => (
-            <option key={team} value={team}>{team}</option>
-          ))}
-        </select>
-        <select
-          name="positionId"
-          value={form.positionId}
-          onChange={handleChange}
-          required
-        >
-          <option value="">Selecciona posición</option>
-          {positions.map(pos => (
-            <option key={pos} value={pos}>{pos}</option>
-          ))}
-        </select>
-        <input
-          name="name"
-          placeholder="Nombre"
-          value={form.name}
-          onChange={handleChange}
-          required
-        />
-        <input
-          name="imageUrl"
-          placeholder="URL Imagen (opcional)"
-          value={form.imageUrl}
-          onChange={handleChange}
-        />
-        <button type="submit" disabled={loading}>
-          {editingId ? 'Actualizar' : 'Crear'}
-        </button>
-        {editingId && (
-          <button type="button" onClick={() => { setForm(initialForm); setEditingId(null); }}>
-            Cancelar
+    <div className="max-w-2xl mx-auto p-6 space-y-6">
+      <h1 className="text-2xl font-bold text-center">Gestión de Jugadores</h1>
+
+      {error && (
+        <div className="bg-red-100 text-red-700 p-3 rounded">{error}</div>
+      )}
+
+      <form
+        onSubmit={handleSubmit}
+        className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-gray-50 p-4 rounded shadow"
+      >
+        <div>
+          <label className="block mb-1 font-medium">Equipo</label>
+          <select
+            name="equipo_id"
+            value={form.equipo_id}
+            onChange={handleChange}
+            required
+            className="w-full border px-3 py-2 rounded"
+          >
+            <option value="">— Selecciona —</option>
+            {TEAMS.map((t) => (
+              <option key={t.id} value={t.id}>
+                {t.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label className="block mb-1 font-medium">Posición</label>
+          <select
+            name="position_id"
+            value={form.position_id}
+            onChange={handleChange}
+            required
+            className="w-full border px-3 py-2 rounded"
+          >
+            <option value="">— Selecciona —</option>
+            {POSITIONS.map((p) => (
+              <option key={p.id} value={p.id}>
+                {p.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="sm:col-span-2">
+          <label className="block mb-1 font-medium">Nombre</label>
+          <input
+            name="displayname"
+            value={form.displayname}
+            onChange={handleChange}
+            required
+            className="w-full border px-3 py-2 rounded"
+            placeholder="Nombre del jugador"
+          />
+        </div>
+
+        <div className="sm:col-span-2">
+          <label className="block mb-1 font-medium">
+            URL Imagen (opcional)
+          </label>
+          <input
+            name="imagepath"
+            value={form.imagepath}
+            onChange={handleChange}
+            className="w-full border px-3 py-2 rounded"
+            placeholder="https://..."
+          />
+        </div>
+
+        <div className="sm:col-span-2 flex space-x-2">
+          <button
+            type="submit"
+            disabled={loading}
+            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
+          >
+            {editingId ? "Actualizar" : "Crear"}
           </button>
-        )}
+          {editingId && (
+            <button
+              type="button"
+              onClick={() => {
+                setForm(initialForm);
+                setEditingId(null);
+              }}
+              className="px-4 py-2 bg-gray-400 text-white rounded hover:bg-gray-500"
+            >
+              Cancelar
+            </button>
+          )}
+        </div>
       </form>
+
       {loading ? (
-        <div>Cargando...</div>
+        <div className="text-center">Cargando...</div>
       ) : (
-        <table border="1" cellPadding="8" style={{ width: '100%' }}>
+        <table className="w-full table-auto border-collapse">
           <thead>
             <tr>
-              <th>Nombre</th>
-              <th>Equipo</th>
-              <th>Posición</th>
-              <th>Imagen</th>
-              <th>Acciones</th>
+              <th className="border px-3 py-2 bg-gray-200">Nombre</th>
+              <th className="border px-3 py-2 bg-gray-200">Equipo</th>
+              <th className="border px-3 py-2 bg-gray-200">Posición</th>
+              <th className="border px-3 py-2 bg-gray-200">Imagen</th>
+              <th className="border px-3 py-2 bg-gray-200">Acciones</th>
             </tr>
           </thead>
           <tbody>
-            {players.map(player => (
-              <tr key={player._id}>
-                <td>{player.name}</td>
-                <td>{player.teamName}</td>
-                <td>{player.positionId}</td>
-                <td>
-                  {player.imageUrl ? (
-                    <img src={player.imageUrl} alt="img" width={40} />
-                  ) : (
-                    '—'
-                  )}
-                </td>
-                <td>
-                  <button onClick={() => handleEdit(player)}>Editar</button>
-                  <button onClick={() => handleDelete(player._id)} style={{ color: 'red' }}>Eliminar</button>
-                </td>
-              </tr>
-            ))}
+            {players.map((pl) => {
+              const equipo = TEAMS.find((t) => t.id === pl.equipo_id);
+              const posicion = POSITIONS.find((p) => p.id === pl.position_id);
+              return (
+                <tr key={pl.id}>
+                  <td className="border px-3 py-2">{pl.displayname}</td>
+                  <td className="border px-3 py-2">
+                    {equipo ? equipo.name : pl.equipo_id}
+                  </td>
+                  <td className="border px-3 py-2">
+                    {posicion ? posicion.name : pl.position_id}
+                  </td>
+                  <td className="border px-3 py-2 text-center">
+                    {pl.imagepath ? (
+                      <img
+                        src={pl.imagepath}
+                        alt={pl.displayname}
+                        className="w-10 h-10 object-cover rounded"
+                      />
+                    ) : (
+                      "—"
+                    )}
+                  </td>
+                  <td className="border px-3 py-2 space-x-1 text-center">
+                    <button
+                      onClick={() => handleEdit(pl)}
+                      className="px-2 py-1 bg-green-500 text-white rounded hover:bg-green-600"
+                    >
+                      Editar
+                    </button>
+                    <button
+                      onClick={() => handleDelete(pl.id)}
+                      className="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+                    >
+                      Eliminar
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       )}
     </div>
   );
 }
-
-export default NewPlayersCrud;
